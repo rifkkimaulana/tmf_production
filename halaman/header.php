@@ -20,8 +20,8 @@
                             <div class="menu-main-menu-container">
                                 <ul id="top-menu" class="navbar-nav ml-auto">
                                     <li class="menu-item"><a href="#">Home</a></li>
-                                    <li class="menu-item"><a href="#">Movies</a></li>
-                                    <li class="menu-item"><a href="#">Shows</a></li>
+                                    <li class="menu-item"><a href="#">Film</a></li>
+                                    <li class="menu-item"><a href="#">TV Shows</a></li>
                                     <li class="menu-item">
                                         <a href="#">Contact Us</a>
                                         <ul class="sub-menu">
