@@ -71,6 +71,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </nav>
         <!-- /.navbar -->
@@ -98,131 +99,236 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
+                        <div class="col-md-8">
 
-                        <div class="col-lg-3">
-                            <div class="card card-primary">
-                                <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 1</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-3">
-                            <div class="card card-primary">
-                                <img class="img-fluid rounded" src="assets/dist/img/photo4.jpg" alt="Movie 2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 2</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="card card-primary">
-                                <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 3</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-lg-3">
-
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">Search Movie</h5>
-                                </div>
-                                <div class="card-body">
-                                    <form action="#" method="GET">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="movieName" name="movieName"
-                                                placeholder="Judul film">
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control" id="movieType" name="movieType">
-                                                <option value="all">Semua Tipe</option>
-                                                <option value="movie">Film</option>
-                                                <option value="tvShow">TV Show</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control" id="sortBy" name="sortBy">
-                                                <option value="index">Berdasarkan Indeks</option>
-                                                <option value="name">Berdasarkan Nama</option>
-                                                <option value="year">Berdasarkan Tahun</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control" id="genre" name="genre">
-                                                <option value="all">Semua Genre</option>
-                                                <option value="action">Action</option>
-                                                <option value="adventure">Adventure</option>
-                                                <option value="comedy">Comedy</option>
-                                                <!-- Add more genre options as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="year" name="year"
-                                                placeholder="Tahun film">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="country" name="country"
-                                                placeholder="Negara film">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="quality" name="quality"
-                                                placeholder="Kualitas film">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Cari</button>
-                                    </form>
-                                </div>
-                            </div>
-
-
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">MOST VIEW MOVIES</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg"
-                                                alt="DR. Doctor Romantic Season 1">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <strong>DR. Doctor Romantic Season 1</strong><br>
-                                            <a style="font-size: 14px;" href="#">Crime, Drama, Kejahatan, Mystery, Korea
-                                            </a><br>
-                                            <p style="font-size: 14px;"><i class="fas fa-eye"></i> 144 </p>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 1">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 1</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img class="img-fluid rounded" src="assets/dist/img/photo4.jpg"
-                                                alt="Partners for Justice (2018) Investigation Team">
+                                </div>
+
+
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo4.jpg" alt="Movie 2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 2</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
                                         </div>
-                                        <div class="col-md-8">
-                                            <strong>Partners for Justice (2018) Investigation
-                                                Team</strong><br>
-                                            <a style="font-size: 14px;" href="">Crime, Drama, Kejahatan, Mystery,
-                                                Korea</a><br>
-                                            <p style="font-size: 14px;"><i class="fas fa-eye"></i> 144 </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 3</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 1">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 1</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo4.jpg" alt="Movie 2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 2</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 3</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 1">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 1</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo4.jpg" alt="Movie 2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 2</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="card card-primary">
+                                        <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg" alt="Movie 3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title 3</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of
+                                                the
+                                                card's content.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h5 class="card-title m-0">Search Movie</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="#" method="GET">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="movieName"
+                                                        name="movieName" placeholder="Judul film">
+                                                </div>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="movieType" name="movieType">
+                                                        <option value="all">Semua Tipe</option>
+                                                        <option value="movie">Film</option>
+                                                        <option value="tvShow">TV Show</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="sortBy" name="sortBy">
+                                                        <option value="index">Berdasarkan Indeks</option>
+                                                        <option value="name">Berdasarkan Nama</option>
+                                                        <option value="year">Berdasarkan Tahun</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="genre" name="genre">
+                                                        <option value="all">Semua Genre</option>
+                                                        <option value="action">Action</option>
+                                                        <option value="adventure">Adventure</option>
+                                                        <option value="comedy">Comedy</option>
+                                                        <!-- Add more genre options as needed -->
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="year" name="year"
+                                                        placeholder="Tahun film">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="country" name="country"
+                                                        placeholder="Negara film">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="quality" name="quality"
+                                                        placeholder="Kualitas film">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Cari</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h5 class="card-title m-0">MOST VIEW MOVIES</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img class="img-fluid rounded" src="assets/dist/img/photo3.jpg"
+                                                        alt="DR. Doctor Romantic Season 1">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <strong>DR. Doctor Romantic Season 1</strong><br>
+                                                    <a style="font-size: 14px;" href="#">Crime, Drama, Kejahatan,
+                                                        Mystery,
+                                                        Korea
+                                                    </a><br>
+                                                    <p style="font-size: 14px;"><i class="fas fa-eye"></i> 144 </p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <img class="img-fluid rounded" src="assets/dist/img/photo4.jpg"
+                                                        alt="Partners for Justice (2018) Investigation Team">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <strong>Partners for Justice (2018) Investigation
+                                                        Team</strong><br>
+                                                    <a style="font-size: 14px;" href="">Crime, Drama, Kejahatan,
+                                                        Mystery,
+                                                        Korea</a><br>
+                                                    <p style="font-size: 14px;"><i class="fas fa-eye"></i> 144 </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -242,8 +348,6 @@
         </strong>
         All rights reserved.
     </footer>
-
-    </div>
 
     <!-- jQuery -->
     <script src="<?php echo $base_url; ?>/assets/plugins/jquery/jquery.min.js"></script>
