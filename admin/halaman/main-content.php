@@ -113,23 +113,29 @@
                 case 'users':
                     include "users/index.php";
                     break;
-                case 'rekening_bank':
-                    include "rekening_bank/index.php";
+                case 'genre':
+                    include "genre/index.php";
                     break;
-                case 'ck_kategori':
-                    include "ck_kategori/index.php";
+                case 'tag':
+                    include "tag/index.php";
                     break;
-                case 'ck_transaksi':
-                    include "ck_transaksi/index.php";
+                case 'direksi':
+                    include "direksi/index.php";
                     break;
-                case 'ck_hutang':
-                    include "ck_hutang/index.php";
+                case 'pemain':
+                    include "pemain/index.php";
                     break;
-                case 'ck_piutang':
-                    include "ck_piutang/index.php";
+                case 'tahun':
+                    include "tahun/index.php";
                     break;
-                case 'laporan_keuangan':
-                    include "laporan_keuangan/index.php";
+                case 'negara':
+                    include "negara/index.php";
+                    break;
+                case 'jaringan':
+                    include "jaringan/index.php";
+                    break;
+                case 'kualitas':
+                    include "kualitas/index.php";
                     break;
                 case 'backup_restore':
                     include "backup_restore/index.php";

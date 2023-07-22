@@ -1,5 +1,5 @@
 <?php
-include '../base_url.php';
+include '../config/base_url.php';
 $page = isset($_GET['page']) ? $_GET['page'] : '';
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -51,61 +51,110 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         <p>Users</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=film"
+                        class="nav-link <?php echo ($page == 'film') ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-film"></i>
+                        <p>Film</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tv_show"
+                        class="nav-link <?php echo ($page == 'tv_show') ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-tv"></i>
+                        <p>TV Show</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=blog"
+                        class="nav-link <?php echo ($page == 'blog') ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Blog</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=komentar"
+                        class="nav-link <?php echo ($page == 'komentar') ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-comment"></i>
+                        <p>Komentar</p>
+                    </a>
+                </li>
+
                 <li
-                    class="nav-item <?php echo ($page == 'catat_keuangan' || $page == 'ck_kategori' || $page == 'ck_transaksi' || $page == 'ck_hutang' || $page == 'ck_piutang') ? 'menu-open' : ''; ?>">
-                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=catat_keuangan"
-                        class="nav-link <?php echo ($page == 'catat_keuangan' || $page == 'ck_kategori' || $page == 'ck_transaksi' || $page == 'ck_hutang' || $page == 'ck_piutang') ? 'active' : ''; ?>">
+                    class="nav-item <?php echo ($page == 'pengaturan' || $page == 'genre' || $page == 'tag' || $page == 'direksi' || $page == 'pemain' || $page == 'tahun' || $page == 'negara' || $page == 'jaringan' || $page == 'kualitas') ? 'menu-open' : ''; ?>">
+                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=pengaturan"
+                        class="nav-link <?php echo ($page == 'pengaturan' || $page == 'genre' || $page == 'tag' || $page == 'direksi' || $page == 'pemain' || $page == 'tahun' || $page == 'negara' || $page == 'jaringan' || $page == 'kualitas') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-money-check-alt"></i>
                         <p>
-                            Catat Keuangan
+                            Pengaturan
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview" style="padding-left: 20px;">
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=ck_kategori"
-                                class="nav-link <?php echo ($page == 'ck_kategori') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=genre"
+                                class="nav-link <?php echo ($page == 'genre') ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Data Kategori</p>
+                                <p>Genre</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=ck_transaksi"
-                                class="nav-link <?php echo ($page == 'ck_transaksi') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tag"
+                                class="nav-link <?php echo ($page == 'tag') ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Data Transaksi</p>
+                                <p>Tag</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=ck_hutang"
-                                class="nav-link <?php echo ($page == 'ck_hutang') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=direksi"
+                                class="nav-link <?php echo ($page == 'direksi') ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Data Hutang</p>
+                                <p>Direksi</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=ck_piutang"
-                                class="nav-link <?php echo ($page == 'ck_piutang') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=pemain"
+                                class="nav-link <?php echo ($page == 'pemain') ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Data Piutang</p>
+                                <p>Pemain</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tahun"
+                                class="nav-link <?php echo ($page == 'tahun') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tahun</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=negara"
+                                class="nav-link <?php echo ($page == 'negara') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Negara</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=jaringan"
+                                class="nav-link <?php echo ($page == 'jaringan') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Jaringan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=kualitas"
+                                class="nav-link <?php echo ($page == 'kualitas') ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kualitas</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=rekening_bank"
-                        class="nav-link <?php echo ($page == 'rekening_bank') ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-university"></i>
-                        <p>Rekening Bank</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=laporan_keuangan"
-                        class="nav-link <?php echo ($page == 'laporan_keuangan') ? 'active' : ''; ?>">
-                        <i class="nav-icon fa fa-file"></i>
-                        <p>Laporan Keuangan</p>
-                    </a>
-                </li>
+
+
+
                 <li
                     class="nav-item <?php echo ($page == 'backup_restore' || $page == 'reset_database') ? 'menu-open' : ''; ?>">
                     <a href="#" class="nav-link">

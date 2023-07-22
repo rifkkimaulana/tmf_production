@@ -1,6 +1,6 @@
 <?php
-include '../base_url.php';
-include '../koneksi.php';
+include '../config/base_url.php';
+include '../config/koneksi.php';
 session_start();
 if ($_SESSION['status'] != "administrator_logedin") {
     header("location:../index.php?alert=belum_login");
@@ -45,6 +45,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -63,6 +64,8 @@ if ($_SESSION['status'] != "administrator_logedin") {
         <!-- Tempusdominus Bootstrap 4 -->
         <script
             src="<?php echo $base_url; ?>/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="<?php echo $base_url; ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?php echo $base_url; ?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 
         <script>
             $(document).ready(function () {
