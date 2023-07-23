@@ -824,15 +824,52 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseGenre" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <select multiple class="form-control">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
-                                        <option>option 5</option>
-                                    </select>
+                                <div class="form-group" style="height: 100px; overflow-y: auto;">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox1">
+                                        <label class="form-check-label" for="checkbox1">Item 1</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label class="form-check-label" for="checkbox2">Item 2</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox3">
+                                        <label class="form-check-label" for="checkbox3">Item 3</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox1">
+                                        <label class="form-check-label" for="checkbox1">Item 1</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label class="form-check-label" for="checkbox2">Item 2</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox3">
+                                        <label class="form-check-label" for="checkbox3">Item 3</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox1">
+                                        <label class="form-check-label" for="checkbox1">Item 1</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label class="form-check-label" for="checkbox2">Item 2</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkbox3">
+                                        <label class="form-check-label" for="checkbox3">Item 3</label>
+                                    </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -848,8 +885,69 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseTag" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="tagInput" placeholder="Enter a tag">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick="addTag()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div id="tagList">
+                                    <!-- Display added tags here -->
+                                </div>
                             </div>
+                            <style>
+                                .tag {
+                                    display: inline-block;
+                                    background-color: #f0f0f0;
+                                    padding: 5px 10px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                }
+
+                                .tag i {
+                                    margin-left: 5px;
+                                    cursor: pointer;
+                                }
+                            </style>
+                            <script>
+                                function addTag() {
+                                    // Get the input value
+                                    const inputElement = document.getElementById("tagInput");
+                                    const tags = inputElement.value.split(',').map(tag => tag.trim());
+
+                                    // Check if there are any tags entered
+                                    if (tags.length > 0 && tags[0] !== "") {
+                                        // Get the tag container element
+                                        const tagContainerElement = document.getElementById("tagList");
+
+                                        // Add each tag as a separate element
+                                        tags.forEach(tag => {
+                                            // Create a new span element for the tag
+                                            const newTagElement = document.createElement("span");
+                                            newTagElement.textContent = tag;
+                                            newTagElement.classList.add("tag");
+
+                                            // Create a delete icon
+                                            const deleteIcon = document.createElement("i");
+                                            deleteIcon.classList.add("fas", "fa-times");
+                                            deleteIcon.addEventListener("click", function () {
+                                                tagContainerElement.removeChild(newTagElement);
+                                            });
+
+                                            // Append the delete icon and tag to the container
+                                            newTagElement.appendChild(deleteIcon);
+                                            tagContainerElement.appendChild(newTagElement);
+                                        });
+
+                                        // Clear the input field
+                                        inputElement.value = "";
+                                    }
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -864,8 +962,73 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseFirektur" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="directorInput"
+                                            placeholder="Enter a director's name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick="addDirector()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div id="directorList">
+                                    <!-- Display added directors here -->
+                                </div>
                             </div>
+
+                            <style>
+                                .director {
+                                    display: inline-block;
+                                    background-color: #f0f0f0;
+                                    padding: 5px 10px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                }
+
+                                .director i {
+                                    margin-left: 5px;
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                            <script>
+                                function addDirector() {
+                                    // Get the input value
+                                    const inputElement = document.getElementById("directorInput");
+                                    const directorNames = inputElement.value.split(',').map(director => director.trim());
+
+                                    // Check if there are any director names entered
+                                    if (directorNames.length > 0 && directorNames[0] !== "") {
+                                        // Get the director container element
+                                        const directorContainerElement = document.getElementById("directorList");
+
+                                        // Add each director name as a separate element
+                                        directorNames.forEach(directorName => {
+                                            // Create a new span element for the director name
+                                            const newDirectorElement = document.createElement("span");
+                                            newDirectorElement.textContent = directorName;
+                                            newDirectorElement.classList.add("director");
+
+                                            // Create a delete icon
+                                            const deleteIcon = document.createElement("i");
+                                            deleteIcon.classList.add("fas", "fa-times");
+                                            deleteIcon.addEventListener("click", function () {
+                                                directorContainerElement.removeChild(newDirectorElement);
+                                            });
+
+                                            // Append the delete icon and director name to the container
+                                            newDirectorElement.appendChild(deleteIcon);
+                                            directorContainerElement.appendChild(newDirectorElement);
+                                        });
+
+                                        // Clear the input field
+                                        inputElement.value = "";
+                                    }
+                                }
+                            </script>
+
                         </div>
                     </div>
                 </div>
@@ -880,8 +1043,73 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapsePemain" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="playerInput"
+                                            placeholder="Enter a player's name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick="addPlayer()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div id="playerList">
+                                    <!-- Display added players here -->
+                                </div>
                             </div>
+
+                            <style>
+                                .player {
+                                    display: inline-block;
+                                    background-color: #f0f0f0;
+                                    padding: 5px 10px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                }
+
+                                .player i {
+                                    margin-left: 5px;
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                            <script>
+                                function addPlayer() {
+                                    // Get the input value
+                                    const inputElement = document.getElementById("playerInput");
+                                    const playerNames = inputElement.value.split(',').map(player => player.trim());
+
+                                    // Check if there are any player names entered
+                                    if (playerNames.length > 0 && playerNames[0] !== "") {
+                                        // Get the player container element
+                                        const playerContainerElement = document.getElementById("playerList");
+
+                                        // Add each player name as a separate element
+                                        playerNames.forEach(playerName => {
+                                            // Create a new span element for the player name
+                                            const newPlayerElement = document.createElement("span");
+                                            newPlayerElement.textContent = playerName;
+                                            newPlayerElement.classList.add("player");
+
+                                            // Create a delete icon
+                                            const deleteIcon = document.createElement("i");
+                                            deleteIcon.classList.add("fas", "fa-times");
+                                            deleteIcon.addEventListener("click", function () {
+                                                playerContainerElement.removeChild(newPlayerElement);
+                                            });
+
+                                            // Append the delete icon and player name to the container
+                                            newPlayerElement.appendChild(deleteIcon);
+                                            playerContainerElement.appendChild(newPlayerElement);
+                                        });
+
+                                        // Clear the input field
+                                        inputElement.value = "";
+                                    }
+                                }
+                            </script>
+
                         </div>
                     </div>
                 </div>
@@ -896,8 +1124,73 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseTahun" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" id="yearInput"
+                                            placeholder="Enter a year">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick="addYear()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div id="yearList">
+                                    <!-- Display added years here -->
+                                </div>
                             </div>
+
+                            <style>
+                                .year {
+                                    display: inline-block;
+                                    background-color: #f0f0f0;
+                                    padding: 5px 10px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                }
+
+                                .year i {
+                                    margin-left: 5px;
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                            <script>
+                                function addYear() {
+                                    // Get the input value
+                                    const inputElement = document.getElementById("yearInput");
+                                    const years = inputElement.value.split(',').map(year => year.trim());
+
+                                    // Check if there are any years entered and they are valid numbers
+                                    if (years.length > 0 && years.every(year => !isNaN(year))) {
+                                        // Get the year container element
+                                        const yearContainerElement = document.getElementById("yearList");
+
+                                        // Add each year as a separate element
+                                        years.forEach(year => {
+                                            // Create a new span element for the year
+                                            const newYearElement = document.createElement("span");
+                                            newYearElement.textContent = year;
+                                            newYearElement.classList.add("year");
+
+                                            // Create a delete icon
+                                            const deleteIcon = document.createElement("i");
+                                            deleteIcon.classList.add("fas", "fa-times");
+                                            deleteIcon.addEventListener("click", function () {
+                                                yearContainerElement.removeChild(newYearElement);
+                                            });
+
+                                            // Append the delete icon and year to the container
+                                            newYearElement.appendChild(deleteIcon);
+                                            yearContainerElement.appendChild(newYearElement);
+                                        });
+
+                                        // Clear the input field
+                                        inputElement.value = "";
+                                    }
+                                }
+                            </script>
+
                         </div>
                     </div>
                 </div>
@@ -912,8 +1205,73 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseNegara" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="countryInput"
+                                            placeholder="Enter a country">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick="addCountry()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div id="countryList">
+                                    <!-- Display added countries here -->
+                                </div>
                             </div>
+
+                            <style>
+                                .country {
+                                    display: inline-block;
+                                    background-color: #f0f0f0;
+                                    padding: 5px 10px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                }
+
+                                .country i {
+                                    margin-left: 5px;
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                            <script>
+                                function addCountry() {
+                                    // Get the input value
+                                    const inputElement = document.getElementById("countryInput");
+                                    const countries = inputElement.value.split(',').map(country => country.trim());
+
+                                    // Check if there are any countries entered
+                                    if (countries.length > 0 && countries[0] !== "") {
+                                        // Get the country container element
+                                        const countryContainerElement = document.getElementById("countryList");
+
+                                        // Add each country as a separate element
+                                        countries.forEach(country => {
+                                            // Create a new span element for the country
+                                            const newCountryElement = document.createElement("span");
+                                            newCountryElement.textContent = country;
+                                            newCountryElement.classList.add("country");
+
+                                            // Create a delete icon
+                                            const deleteIcon = document.createElement("i");
+                                            deleteIcon.classList.add("fas", "fa-times");
+                                            deleteIcon.addEventListener("click", function () {
+                                                countryContainerElement.removeChild(newCountryElement);
+                                            });
+
+                                            // Append the delete icon and country name to the container
+                                            newCountryElement.appendChild(deleteIcon);
+                                            countryContainerElement.appendChild(newCountryElement);
+                                        });
+
+                                        // Clear the input field
+                                        inputElement.value = "";
+                                    }
+                                }
+                            </script>
+
                         </div>
                     </div>
                 </div>
@@ -928,8 +1286,73 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseKualitas" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="qualityInput"
+                                            placeholder="Enter a quality">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick="addQuality()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div id="qualityList">
+                                    <!-- Display added qualities here -->
+                                </div>
                             </div>
+
+                            <style>
+                                .quality {
+                                    display: inline-block;
+                                    background-color: #f0f0f0;
+                                    padding: 5px 10px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                }
+
+                                .quality i {
+                                    margin-left: 5px;
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                            <script>
+                                function addQuality() {
+                                    // Get the input value
+                                    const inputElement = document.getElementById("qualityInput");
+                                    const qualities = inputElement.value.split(',').map(quality => quality.trim());
+
+                                    // Check if there are any qualities entered
+                                    if (qualities.length > 0 && qualities[0] !== "") {
+                                        // Get the quality container element
+                                        const qualityContainerElement = document.getElementById("qualityList");
+
+                                        // Add each quality as a separate element
+                                        qualities.forEach(quality => {
+                                            // Create a new span element for the quality
+                                            const newQualityElement = document.createElement("span");
+                                            newQualityElement.textContent = quality;
+                                            newQualityElement.classList.add("quality");
+
+                                            // Create a delete icon
+                                            const deleteIcon = document.createElement("i");
+                                            deleteIcon.classList.add("fas", "fa-times");
+                                            deleteIcon.addEventListener("click", function () {
+                                                qualityContainerElement.removeChild(newQualityElement);
+                                            });
+
+                                            // Append the delete icon and quality name to the container
+                                            newQualityElement.appendChild(deleteIcon);
+                                            qualityContainerElement.appendChild(newQualityElement);
+                                        });
+
+                                        // Clear the input field
+                                        inputElement.value = "";
+                                    }
+                                }
+                            </script>
+
                         </div>
                     </div>
                 </div>
@@ -944,11 +1367,39 @@ include '../config/koneksi.php';
                         </div>
                         <div id="collapseGambar" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <label for="imageInput">Upload Image:</label>
+                                    <input type="file" class="form-control-file" id="imageInput" accept="image/*"
+                                        onchange="previewImage(event)">
+                                </div>
 
+                                <div class="form-group">
+                                    <label>Preview:</label><br>
+                                    <img src="#" id="imagePreview" alt="Preview"
+                                        style="max-width: 300px; max-height: 200px; display: none;">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    function previewImage(event) {
+                        const imagePreviewElement = document.getElementById("imagePreview");
+                        const imageFile = event.target.files[0];
+                        if (imageFile) {
+                            const reader = new FileReader();
+                            reader.onload = function () {
+                                imagePreviewElement.src = reader.result;
+                            }
+                            reader.readAsDataURL(imageFile);
+                            imagePreviewElement.style.display = "block"; // Show the image preview
+                        } else {
+                            imagePreviewElement.src = "#";
+                            imagePreviewElement.style.display = "none"; // Hide the image preview
+                        }
+                    }
+                </script>
             </div>
         </div>
 </section>
