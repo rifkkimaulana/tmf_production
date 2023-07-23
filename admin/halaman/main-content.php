@@ -137,6 +137,12 @@
                 case 'kualitas':
                     include "kualitas/index.php";
                     break;
+                case 'film':
+                    include "film/index.php";
+                    break;
+                case 'tv_show':
+                    include "tv_show/index.php";
+                    break;
                 case 'backup_restore':
                     include "backup_restore/index.php";
                     break;

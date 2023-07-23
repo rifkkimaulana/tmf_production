@@ -66,7 +66,8 @@ if ($_SESSION['status'] != "administrator_logedin") {
             src="<?php echo $base_url; ?>/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
         <script src="<?php echo $base_url; ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="<?php echo $base_url; ?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-
+        <link href="<?php echo $base_url; ?>/assets/summernote/summernote-bs4.css" rel="stylesheet">
+        <script src="<?php echo $base_url; ?>/assets/summernote/summernote-bs4.min.js"></script>
         <script>
             $(document).ready(function () {
                 // Initialize datepicker
@@ -87,6 +88,45 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 });
             });
         </script>
+        <!-- ... Your existing code ... -->
+        <script>
+            $(document).ready(function () {
+                // Initialize Datepicker for "Tanggal Rilis (TMDB)"
+                $('#tanggal_rilis').datetimepicker({
+                    format: 'DD MMM YYYY', // "dd mmm yyyy"
+                    icons: {
+                        time: 'fas fa-clock',
+                        date: 'fas fa-calendar-alt',
+                        up: 'fas fa-chevron-up',
+                        down: 'fas fa-chevron-down',
+                        previous: 'fas fa-chevron-left',
+                        next: 'fas fa-chevron-right',
+                        today: 'fas fa-calendar-check',
+                        clear: 'fas fa-trash',
+                        close: 'fas fa-times',
+                    }
+                });
+
+                // Initialize Datepicker for "Tahun Rilis (TMDB)"
+                $('#tahun_rilis').datetimepicker({
+                    format: 'YYYY', // "yyyy"
+                    viewMode: 'years',
+                    icons: {
+                        time: 'fas fa-clock',
+                        date: 'fas fa-calendar-alt',
+                        up: 'fas fa-chevron-up',
+                        down: 'fas fa-chevron-down',
+                        previous: 'fas fa-chevron-left',
+                        next: 'fas fa-chevron-right',
+                        today: 'fas fa-calendar-check',
+                        clear: 'fas fa-trash',
+                        close: 'fas fa-times',
+                    }
+                });
+            });
+        </script>
+
+
 
         <script>
             $(document).ready(function () {
