@@ -823,57 +823,87 @@ include '../config/koneksi.php';
                             </h4>
                         </div>
                         <div id="collapseGenre" class="collapse show" data-parent="#accordion">
+                            <?php
+                            $query = "SELECT id, nama_genre FROM tb_genre";
+                            $result = mysqli_query($koneksi, $query);
+
+                            // Periksa apakah query berhasil atau tidak
+                            if (!$result) {
+                                die("Query gagal: " . mysqli_error($koneksi));
+                            }
+                            ?>
+
+                            <!-- Langkah 3: Tampilkan data sebagai checkbox dalam div.form-check -->
                             <div class="card-body">
                                 <div class="form-group" style="height: 100px; overflow-y: auto;">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">Item 1</label>
-                                    </div>
+                                    <div id="genreContainer">
+                                        <?php
+                                        // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $id_genre = $row['id'];
+                                            $nama_genre = $row['nama_genre'];
 
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
-                                        <label class="form-check-label" for="checkbox2">Item 2</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox3">
-                                        <label class="form-check-label" for="checkbox3">Item 3</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">Item 1</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
-                                        <label class="form-check-label" for="checkbox2">Item 2</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox3">
-                                        <label class="form-check-label" for="checkbox3">Item 3</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">Item 1</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
-                                        <label class="form-check-label" for="checkbox2">Item 2</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox3">
-                                        <label class="form-check-label" for="checkbox3">Item 3</label>
+                                            echo '<div class="form-check">';
+                                            echo '<input type="checkbox" class="form-check-input" id="genre_' . $id_genre . '" value="' . $id_genre . '">';
+                                            echo '<label class="form-check-label" for="genre_' . $id_genre . '">' . $nama_genre . '</label>';
+                                            echo '</div>';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
-
-
+                                <form method="post" action="film/proses_tambah_genre.php" id="addGenreForm">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="newGenreInput" name="nama_genre"
+                                            placeholder="Masukkan genre baru">
+                                        <div class="input-group-append">
+                                            <!-- Ubah type tombol menjadi "button" -->
+                                            <button type="button" class="btn btn-primary" onclick="addGenre()">Tambah
+                                                Genre</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        // Fungsi untuk menambahkan genre baru secara dinamis
+                        function addGenre() {
+                            // Ambil data dari input genre baru
+                            let nama_genre = document.getElementById('newGenreInput').value;
+
+                            // Buat objek XMLHttpRequest
+                            let xhr = new XMLHttpRequest();
+
+                            // Definisikan callback untuk menangani hasil dari request
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === XMLHttpRequest.DONE) {
+                                    if (xhr.status === 200) {
+                                        // Berhasil menambahkan genre, perbarui tampilan genreContainer
+                                        let genreContainer = document.getElementById('genreContainer');
+                                        genreContainer.innerHTML = xhr.responseText;
+
+                                        // Hapus nilai pada input genre baru
+                                        document.getElementById('newGenreInput').value = '';
+                                    } else {
+                                        // Gagal menambahkan genre, tampilkan pesan error
+                                        console.error('Gagal menambahkan genre');
+                                    }
+                                }
+                            };
+
+                            // Buat data yang akan dikirimkan dalam format URL-encoded
+                            let data = "nama_genre=" + encodeURIComponent(nama_genre);
+
+                            // Buka koneksi ke server dan kirim data menggunakan metode POST
+                            xhr.open('POST', 'film/proses_tambah_genre.php', true);
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send(data);
+                        }
+                    </script>
+
                 </div>
+
                 <div id="accordion">
                     <div class="card">
                         <div class="card-header">
@@ -883,6 +913,15 @@ include '../config/koneksi.php';
                                 </a>
                             </h4>
                         </div>
+                        <?php
+                        $query_tag = "SELECT id, nama_tag FROM tb_tag";
+                        $result_tag = mysqli_query($koneksi, $query_tag);
+
+                        // Periksa apakah query berhasil atau tidak
+                        if (!$result) {
+                            die("Query gagal: " . mysqli_error($koneksi));
+                        }
+                        ?>
                         <div id="collapseTag" class="collapse show" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="form-group">
@@ -898,508 +937,694 @@ include '../config/koneksi.php';
                                 <div id="tagList">
                                     <!-- Display added tags here -->
                                 </div>
-                            </div>
-                            <style>
-                                .tag {
-                                    display: inline-block;
-                                    background-color: #f0f0f0;
-                                    padding: 5px 10px;
-                                    margin-right: 5px;
-                                    border-radius: 5px;
-                                }
 
-                                .tag i {
-                                    margin-left: 5px;
-                                    cursor: pointer;
-                                }
-                            </style>
-                            <script>
-                                function addTag() {
-                                    // Get the input value
-                                    const inputElement = document.getElementById("tagInput");
-                                    const tags = inputElement.value.split(',').map(tag => tag.trim());
+                                <small class="text-primary" style="cursor: pointer;"
+                                    onclick="toggleSavedTags()">Tampilkan
+                                    Tag Tersimpan di
+                                    database.</small>
 
-                                    // Check if there are any tags entered
-                                    if (tags.length > 0 && tags[0] !== "") {
-                                        // Get the tag container element
-                                        const tagContainerElement = document.getElementById("tagList");
+                                <div id="savedTagList" style="display: none;">
+                                    <!-- Display saved tags from database here -->
+                                    <hr>
+                                    <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                        <?php
+                                        // Koneksi ke database dan ambil data tag yang tersimpan
+                                        $query_tag = "SELECT id, nama_tag FROM tb_tag";
+                                        $result_tag = mysqli_query($koneksi, $query_tag);
 
-                                        // Add each tag as a separate element
-                                        tags.forEach(tag => {
-                                            // Create a new span element for the tag
-                                            const newTagElement = document.createElement("span");
-                                            newTagElement.textContent = tag;
-                                            newTagElement.classList.add("tag");
+                                        // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                        while ($row = mysqli_fetch_assoc($result_tag)) {
+                                            $id_tag = $row['id'];
+                                            $nama_tag = $row['nama_tag'];
 
-                                            // Create a delete icon
-                                            const deleteIcon = document.createElement("i");
-                                            deleteIcon.classList.add("fas", "fa-times");
-                                            deleteIcon.addEventListener("click", function () {
-                                                tagContainerElement.removeChild(newTagElement);
+                                            echo '<div class="form-check">';
+                                            echo '<input type="checkbox" class="form-check-input" id="tag_' . $id_tag . '" value="' . $id_tag . '">';
+                                            echo '<label class="form-check-label" for="tag_' . $id_tag . '">' . $nama_tag . '</label>';
+                                            echo '</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <style>
+                                    .tag {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
+
+                                    .tag i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
+                                <script>
+                                    function addTag() {
+                                        // Get the input value
+                                        const inputElement = document.getElementById("tagInput");
+                                        const tags = inputElement.value.split(',').map(tag => tag.trim());
+
+                                        // Check if there are any tags entered
+                                        if (tags.length > 0 && tags[0] !== "") {
+                                            // Get the tag container element
+                                            const tagContainerElement = document.getElementById("tagList");
+
+                                            // Add each tag as a separate element
+                                            tags.forEach(tag => {
+                                                // Create a new span element for the tag
+                                                const newTagElement = document.createElement("span");
+                                                newTagElement.textContent = tag;
+                                                newTagElement.classList.add("tag");
+
+                                                // Create a delete icon
+                                                const deleteIcon = document.createElement("i");
+                                                deleteIcon.classList.add("fas", "fa-times");
+                                                deleteIcon.addEventListener("click", function () {
+                                                    tagContainerElement.removeChild(newTagElement);
+                                                });
+
+                                                // Append the delete icon and tag to the container
+                                                newTagElement.appendChild(deleteIcon);
+                                                tagContainerElement.appendChild(newTagElement);
                                             });
 
-                                            // Append the delete icon and tag to the container
-                                            newTagElement.appendChild(deleteIcon);
-                                            tagContainerElement.appendChild(newTagElement);
-                                        });
-
-                                        // Clear the input field
-                                        inputElement.value = "";
+                                            // Clear the input field
+                                            inputElement.value = "";
+                                        }
                                     }
-                                }
-                            </script>
+                                    function toggleSavedTags() {
+                                        const savedTagList = document.getElementById("savedTagList");
+                                        savedTagList.style.display = savedTagList.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                <a class="d-block text-dark" data-toggle="collapse" href="#collapseFirektur">
-                                    Direktur
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseFirektur" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="directorInput"
-                                            placeholder="Enter a director's name">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button"
-                                                onclick="addDirector()">Add</button>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseFirektur">
+                                        Direktur
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFirektur" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="directorInput"
+                                                placeholder="Enter a director's name">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addDirector()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="directorList">
+                                        <!-- Display added directors here -->
+                                    </div>
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedDirector()">Tampilkan
+                                        Direktur Tersimpan di
+                                        database.</small>
+
+                                    <div id="savedDirectorList" style="display: none;">
+                                        <!-- Display saved tags from database here -->
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            // Koneksi ke database dan ambil data tag yang tersimpan
+                                            $query_direksi = "SELECT id, nama_direksi FROM tb_direksi";
+                                            $result_direksi = mysqli_query($koneksi, $query_direksi);
+
+                                            // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                            while ($row = mysqli_fetch_assoc($result_direksi)) {
+                                                $id_direksi = $row['id'];
+                                                $nama_direksi = $row['nama_direksi'];
+
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="tag_' . $id_direksi . '" value="' . $id_direksi . '">';
+                                                echo '<label class="form-check-label" for="tag_' . $id_direksi . '">' . $nama_direksi . '</label>';
+                                                echo '</div>';
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="directorList">
-                                    <!-- Display added directors here -->
-                                </div>
-                            </div>
+                                <style>
+                                    .director {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
 
-                            <style>
-                                .director {
-                                    display: inline-block;
-                                    background-color: #f0f0f0;
-                                    padding: 5px 10px;
-                                    margin-right: 5px;
-                                    border-radius: 5px;
-                                }
+                                    .director i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
 
-                                .director i {
-                                    margin-left: 5px;
-                                    cursor: pointer;
-                                }
-                            </style>
+                                <script>
+                                    function addDirector() {
+                                        // Get the input value
+                                        const inputElement = document.getElementById("directorInput");
+                                        const directorNames = inputElement.value.split(',').map(director => director.trim());
 
-                            <script>
-                                function addDirector() {
-                                    // Get the input value
-                                    const inputElement = document.getElementById("directorInput");
-                                    const directorNames = inputElement.value.split(',').map(director => director.trim());
+                                        // Check if there are any director names entered
+                                        if (directorNames.length > 0 && directorNames[0] !== "") {
+                                            // Get the director container element
+                                            const directorContainerElement = document.getElementById("directorList");
 
-                                    // Check if there are any director names entered
-                                    if (directorNames.length > 0 && directorNames[0] !== "") {
-                                        // Get the director container element
-                                        const directorContainerElement = document.getElementById("directorList");
+                                            // Add each director name as a separate element
+                                            directorNames.forEach(directorName => {
+                                                // Create a new span element for the director name
+                                                const newDirectorElement = document.createElement("span");
+                                                newDirectorElement.textContent = directorName;
+                                                newDirectorElement.classList.add("director");
 
-                                        // Add each director name as a separate element
-                                        directorNames.forEach(directorName => {
-                                            // Create a new span element for the director name
-                                            const newDirectorElement = document.createElement("span");
-                                            newDirectorElement.textContent = directorName;
-                                            newDirectorElement.classList.add("director");
+                                                // Create a delete icon
+                                                const deleteIcon = document.createElement("i");
+                                                deleteIcon.classList.add("fas", "fa-times");
+                                                deleteIcon.addEventListener("click", function () {
+                                                    directorContainerElement.removeChild(newDirectorElement);
+                                                });
 
-                                            // Create a delete icon
-                                            const deleteIcon = document.createElement("i");
-                                            deleteIcon.classList.add("fas", "fa-times");
-                                            deleteIcon.addEventListener("click", function () {
-                                                directorContainerElement.removeChild(newDirectorElement);
+                                                // Append the delete icon and director name to the container
+                                                newDirectorElement.appendChild(deleteIcon);
+                                                directorContainerElement.appendChild(newDirectorElement);
                                             });
 
-                                            // Append the delete icon and director name to the container
-                                            newDirectorElement.appendChild(deleteIcon);
-                                            directorContainerElement.appendChild(newDirectorElement);
-                                        });
-
-                                        // Clear the input field
-                                        inputElement.value = "";
+                                            // Clear the input field
+                                            inputElement.value = "";
+                                        }
                                     }
-                                }
-                            </script>
+                                    function toggleSavedDirector() {
+                                        const savedDirectorList = document.getElementById("savedDirectorList");
+                                        savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
-                                    Pemain
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapsePemain" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="playerInput"
-                                            placeholder="Enter a player's name">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button"
-                                                onclick="addPlayer()">Add</button>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
+                                        Pemain
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapsePemain" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="playerInput"
+                                                placeholder="Enter a player's name">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addPlayer()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="playerList">
+                                        <!-- Display added players here -->
+                                    </div>
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedPemain()">Tampilkan
+                                        Pemain Tersimpan di
+                                        database.</small>
+
+                                    <div id="toggleSavedPemain" style="display: none;">
+                                        <!-- Display saved tags from database here -->
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            // Koneksi ke database dan ambil data tag yang tersimpan
+                                            $query_pemain = "SELECT id, nama_pemain FROM tb_pemain";
+                                            $result_pemain = mysqli_query($koneksi, $query_pemain);
+
+                                            // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                            while ($row = mysqli_fetch_assoc($result_pemain)) {
+                                                $id_pemain = $row['id'];
+                                                $nama_pemain = $row['nama_pemain'];
+
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="tag_' . $id_pemain . '" value="' . $id_pemain . '">';
+                                                echo '<label class="form-check-label" for="tag_' . $id_pemain . '">' . $nama_pemain . '</label>';
+                                                echo '</div>';
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="playerList">
-                                    <!-- Display added players here -->
-                                </div>
-                            </div>
+                                <style>
+                                    .player {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
 
-                            <style>
-                                .player {
-                                    display: inline-block;
-                                    background-color: #f0f0f0;
-                                    padding: 5px 10px;
-                                    margin-right: 5px;
-                                    border-radius: 5px;
-                                }
+                                    .player i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
 
-                                .player i {
-                                    margin-left: 5px;
-                                    cursor: pointer;
-                                }
-                            </style>
+                                <script>
+                                    function addPlayer() {
+                                        // Get the input value
+                                        const inputElement = document.getElementById("playerInput");
+                                        const playerNames = inputElement.value.split(',').map(player => player.trim());
 
-                            <script>
-                                function addPlayer() {
-                                    // Get the input value
-                                    const inputElement = document.getElementById("playerInput");
-                                    const playerNames = inputElement.value.split(',').map(player => player.trim());
+                                        // Check if there are any player names entered
+                                        if (playerNames.length > 0 && playerNames[0] !== "") {
+                                            // Get the player container element
+                                            const playerContainerElement = document.getElementById("playerList");
 
-                                    // Check if there are any player names entered
-                                    if (playerNames.length > 0 && playerNames[0] !== "") {
-                                        // Get the player container element
-                                        const playerContainerElement = document.getElementById("playerList");
+                                            // Add each player name as a separate element
+                                            playerNames.forEach(playerName => {
+                                                // Create a new span element for the player name
+                                                const newPlayerElement = document.createElement("span");
+                                                newPlayerElement.textContent = playerName;
+                                                newPlayerElement.classList.add("player");
 
-                                        // Add each player name as a separate element
-                                        playerNames.forEach(playerName => {
-                                            // Create a new span element for the player name
-                                            const newPlayerElement = document.createElement("span");
-                                            newPlayerElement.textContent = playerName;
-                                            newPlayerElement.classList.add("player");
+                                                // Create a delete icon
+                                                const deleteIcon = document.createElement("i");
+                                                deleteIcon.classList.add("fas", "fa-times");
+                                                deleteIcon.addEventListener("click", function () {
+                                                    playerContainerElement.removeChild(newPlayerElement);
+                                                });
 
-                                            // Create a delete icon
-                                            const deleteIcon = document.createElement("i");
-                                            deleteIcon.classList.add("fas", "fa-times");
-                                            deleteIcon.addEventListener("click", function () {
-                                                playerContainerElement.removeChild(newPlayerElement);
+                                                // Append the delete icon and player name to the container
+                                                newPlayerElement.appendChild(deleteIcon);
+                                                playerContainerElement.appendChild(newPlayerElement);
                                             });
 
-                                            // Append the delete icon and player name to the container
-                                            newPlayerElement.appendChild(deleteIcon);
-                                            playerContainerElement.appendChild(newPlayerElement);
-                                        });
-
-                                        // Clear the input field
-                                        inputElement.value = "";
+                                            // Clear the input field
+                                            inputElement.value = "";
+                                        }
                                     }
-                                }
-                            </script>
+                                    function toggleSavedPemain() {
+                                        const toggleSavedPemain = document.getElementById("toggleSavedPemain");
+                                        toggleSavedPemain.style.display = toggleSavedPemain.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
-                                    Tahun
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTahun" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="number" class="form-control" id="yearInput"
-                                            placeholder="Enter a year">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button"
-                                                onclick="addYear()">Add</button>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
+                                        Tahun
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTahun" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" id="yearInput"
+                                                placeholder="Enter a year">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addYear()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="yearList">
+                                        <!-- Display added years here -->
+                                    </div>
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedTahun()">Tampilkan
+                                        Tahun Tersimpan di
+                                        database.</small>
+
+                                    <div id="toggleSavedTahun" style="display: none;">
+                                        <!-- Display saved tags from database here -->
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            // Koneksi ke database dan ambil data tag yang tersimpan
+                                            $query_tahun = "SELECT id, tahun_rilis FROM tb_tahun";
+                                            $result_tahun = mysqli_query($koneksi, $query_tahun);
+
+                                            // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                            while ($row = mysqli_fetch_assoc($result_tahun)) {
+                                                $id_tahun = $row['id'];
+                                                $nama_tahun = $row['tahun_rilis'];
+
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="tag_' . $id_tahun . '" value="' . $id_tahun . '">';
+                                                echo '<label class="form-check-label" for="tag_' . $id_tahun . '">' . $nama_tahun . '</label>';
+                                                echo '</div>';
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="yearList">
-                                    <!-- Display added years here -->
-                                </div>
-                            </div>
+                                <style>
+                                    .year {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
 
-                            <style>
-                                .year {
-                                    display: inline-block;
-                                    background-color: #f0f0f0;
-                                    padding: 5px 10px;
-                                    margin-right: 5px;
-                                    border-radius: 5px;
-                                }
+                                    .year i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
 
-                                .year i {
-                                    margin-left: 5px;
-                                    cursor: pointer;
-                                }
-                            </style>
+                                <script>
+                                    function addYear() {
+                                        // Get the input value
+                                        const inputElement = document.getElementById("yearInput");
+                                        const years = inputElement.value.split(',').map(year => year.trim());
 
-                            <script>
-                                function addYear() {
-                                    // Get the input value
-                                    const inputElement = document.getElementById("yearInput");
-                                    const years = inputElement.value.split(',').map(year => year.trim());
+                                        // Check if there are any years entered and they are valid numbers
+                                        if (years.length > 0 && years.every(year => !isNaN(year))) {
+                                            // Get the year container element
+                                            const yearContainerElement = document.getElementById("yearList");
 
-                                    // Check if there are any years entered and they are valid numbers
-                                    if (years.length > 0 && years.every(year => !isNaN(year))) {
-                                        // Get the year container element
-                                        const yearContainerElement = document.getElementById("yearList");
+                                            // Add each year as a separate element
+                                            years.forEach(year => {
+                                                // Create a new span element for the year
+                                                const newYearElement = document.createElement("span");
+                                                newYearElement.textContent = year;
+                                                newYearElement.classList.add("year");
 
-                                        // Add each year as a separate element
-                                        years.forEach(year => {
-                                            // Create a new span element for the year
-                                            const newYearElement = document.createElement("span");
-                                            newYearElement.textContent = year;
-                                            newYearElement.classList.add("year");
+                                                // Create a delete icon
+                                                const deleteIcon = document.createElement("i");
+                                                deleteIcon.classList.add("fas", "fa-times");
+                                                deleteIcon.addEventListener("click", function () {
+                                                    yearContainerElement.removeChild(newYearElement);
+                                                });
 
-                                            // Create a delete icon
-                                            const deleteIcon = document.createElement("i");
-                                            deleteIcon.classList.add("fas", "fa-times");
-                                            deleteIcon.addEventListener("click", function () {
-                                                yearContainerElement.removeChild(newYearElement);
+                                                // Append the delete icon and year to the container
+                                                newYearElement.appendChild(deleteIcon);
+                                                yearContainerElement.appendChild(newYearElement);
                                             });
 
-                                            // Append the delete icon and year to the container
-                                            newYearElement.appendChild(deleteIcon);
-                                            yearContainerElement.appendChild(newYearElement);
-                                        });
-
-                                        // Clear the input field
-                                        inputElement.value = "";
+                                            // Clear the input field
+                                            inputElement.value = "";
+                                        }
                                     }
-                                }
-                            </script>
+                                    function toggleSavedTahun() {
+                                        const toggleSavedTahun = document.getElementById("toggleSavedTahun");
+                                        toggleSavedTahun.style.display = toggleSavedTahun.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                <a class="d-block text-dark" data-toggle="collapse" href="#collapseNegara">
-                                    Negara
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseNegara" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="countryInput"
-                                            placeholder="Enter a country">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button"
-                                                onclick="addCountry()">Add</button>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseNegara">
+                                        Negara
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseNegara" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="countryInput"
+                                                placeholder="Enter a country">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addCountry()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="countryList">
+                                        <!-- Display added countries here -->
+                                    </div>
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedNegara()">Tampilkan
+                                        Negara Tersimpan di
+                                        database.</small>
+
+                                    <div id="savedNegaraList" style="display: none;">
+                                        <!-- Display saved tags from database here -->
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            // Koneksi ke database dan ambil data tag yang tersimpan
+                                            $query_negara = "SELECT id, nama_negara FROM tb_negara";
+                                            $result_negara = mysqli_query($koneksi, $query_negara);
+
+                                            // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                            while ($row = mysqli_fetch_assoc($result_negara)) {
+                                                $id_negara = $row['id'];
+                                                $nama_negara = $row['nama_negara'];
+
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="tag_' . $id_negara . '" value="' . $id_negara . '">';
+                                                echo '<label class="form-check-label" for="tag_' . $id_negara . '">' . $nama_negara . '</label>';
+                                                echo '</div>';
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="countryList">
-                                    <!-- Display added countries here -->
-                                </div>
-                            </div>
+                                <style>
+                                    .country {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
 
-                            <style>
-                                .country {
-                                    display: inline-block;
-                                    background-color: #f0f0f0;
-                                    padding: 5px 10px;
-                                    margin-right: 5px;
-                                    border-radius: 5px;
-                                }
+                                    .country i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
 
-                                .country i {
-                                    margin-left: 5px;
-                                    cursor: pointer;
-                                }
-                            </style>
+                                <script>
+                                    function addCountry() {
+                                        // Get the input value
+                                        const inputElement = document.getElementById("countryInput");
+                                        const countries = inputElement.value.split(',').map(country => country.trim());
 
-                            <script>
-                                function addCountry() {
-                                    // Get the input value
-                                    const inputElement = document.getElementById("countryInput");
-                                    const countries = inputElement.value.split(',').map(country => country.trim());
+                                        // Check if there are any countries entered
+                                        if (countries.length > 0 && countries[0] !== "") {
+                                            // Get the country container element
+                                            const countryContainerElement = document.getElementById("countryList");
 
-                                    // Check if there are any countries entered
-                                    if (countries.length > 0 && countries[0] !== "") {
-                                        // Get the country container element
-                                        const countryContainerElement = document.getElementById("countryList");
+                                            // Add each country as a separate element
+                                            countries.forEach(country => {
+                                                // Create a new span element for the country
+                                                const newCountryElement = document.createElement("span");
+                                                newCountryElement.textContent = country;
+                                                newCountryElement.classList.add("country");
 
-                                        // Add each country as a separate element
-                                        countries.forEach(country => {
-                                            // Create a new span element for the country
-                                            const newCountryElement = document.createElement("span");
-                                            newCountryElement.textContent = country;
-                                            newCountryElement.classList.add("country");
+                                                // Create a delete icon
+                                                const deleteIcon = document.createElement("i");
+                                                deleteIcon.classList.add("fas", "fa-times");
+                                                deleteIcon.addEventListener("click", function () {
+                                                    countryContainerElement.removeChild(newCountryElement);
+                                                });
 
-                                            // Create a delete icon
-                                            const deleteIcon = document.createElement("i");
-                                            deleteIcon.classList.add("fas", "fa-times");
-                                            deleteIcon.addEventListener("click", function () {
-                                                countryContainerElement.removeChild(newCountryElement);
+                                                // Append the delete icon and country name to the container
+                                                newCountryElement.appendChild(deleteIcon);
+                                                countryContainerElement.appendChild(newCountryElement);
                                             });
 
-                                            // Append the delete icon and country name to the container
-                                            newCountryElement.appendChild(deleteIcon);
-                                            countryContainerElement.appendChild(newCountryElement);
-                                        });
-
-                                        // Clear the input field
-                                        inputElement.value = "";
+                                            // Clear the input field
+                                            inputElement.value = "";
+                                        }
                                     }
-                                }
-                            </script>
+                                    function toggleSavedNegara() {
+                                        const savedNegaraList = document.getElementById("savedNegaraList");
+                                        savedNegaraList.style.display = savedNegaraList.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                <a class="d-block text-dark" data-toggle="collapse" href="#collapseKualitas">
-                                    Kualitas
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseKualitas" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="qualityInput"
-                                            placeholder="Enter a quality">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button"
-                                                onclick="addQuality()">Add</button>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseKualitas">
+                                        Kualitas
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseKualitas" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="qualityInput"
+                                                placeholder="Enter a quality">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addQuality()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="qualityList">
+                                        <!-- Display added qualities here -->
+                                    </div>
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedKualitas()">Tampilkan
+                                        Kualitas Tersimpan di
+                                        database.</small>
+
+                                    <div id="savedKualitasList" style="display: none;">
+                                        <!-- Display saved tags from database here -->
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            // Koneksi ke database dan ambil data tag yang tersimpan
+                                            $query_Kualitas = "SELECT id, nama_kualitas FROM tb_kualitas";
+                                            $result_kualitas = mysqli_query($koneksi, $query_Kualitas);
+
+                                            // Loop melalui hasil query dan tampilkan sebagai checkbox
+                                            while ($row = mysqli_fetch_assoc($result_kualitas)) {
+                                                $id_kualitas = $row['id'];
+                                                $nama_kualitas = $row['nama_kualitas'];
+
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="tag_' . $id_kualitas . '" value="' . $id_kualitas . '">';
+                                                echo '<label class="form-check-label" for="tag_' . $id_kualitas . '">' . $nama_kualitas . '</label>';
+                                                echo '</div>';
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="qualityList">
-                                    <!-- Display added qualities here -->
-                                </div>
-                            </div>
+                                <style>
+                                    .quality {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
 
-                            <style>
-                                .quality {
-                                    display: inline-block;
-                                    background-color: #f0f0f0;
-                                    padding: 5px 10px;
-                                    margin-right: 5px;
-                                    border-radius: 5px;
-                                }
+                                    .quality i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
 
-                                .quality i {
-                                    margin-left: 5px;
-                                    cursor: pointer;
-                                }
-                            </style>
+                                <script>
+                                    function addQuality() {
+                                        // Get the input value
+                                        const inputElement = document.getElementById("qualityInput");
+                                        const qualities = inputElement.value.split(',').map(quality => quality.trim());
 
-                            <script>
-                                function addQuality() {
-                                    // Get the input value
-                                    const inputElement = document.getElementById("qualityInput");
-                                    const qualities = inputElement.value.split(',').map(quality => quality.trim());
+                                        // Check if there are any qualities entered
+                                        if (qualities.length > 0 && qualities[0] !== "") {
+                                            // Get the quality container element
+                                            const qualityContainerElement = document.getElementById("qualityList");
 
-                                    // Check if there are any qualities entered
-                                    if (qualities.length > 0 && qualities[0] !== "") {
-                                        // Get the quality container element
-                                        const qualityContainerElement = document.getElementById("qualityList");
+                                            // Add each quality as a separate element
+                                            qualities.forEach(quality => {
+                                                // Create a new span element for the quality
+                                                const newQualityElement = document.createElement("span");
+                                                newQualityElement.textContent = quality;
+                                                newQualityElement.classList.add("quality");
 
-                                        // Add each quality as a separate element
-                                        qualities.forEach(quality => {
-                                            // Create a new span element for the quality
-                                            const newQualityElement = document.createElement("span");
-                                            newQualityElement.textContent = quality;
-                                            newQualityElement.classList.add("quality");
+                                                // Create a delete icon
+                                                const deleteIcon = document.createElement("i");
+                                                deleteIcon.classList.add("fas", "fa-times");
+                                                deleteIcon.addEventListener("click", function () {
+                                                    qualityContainerElement.removeChild(newQualityElement);
+                                                });
 
-                                            // Create a delete icon
-                                            const deleteIcon = document.createElement("i");
-                                            deleteIcon.classList.add("fas", "fa-times");
-                                            deleteIcon.addEventListener("click", function () {
-                                                qualityContainerElement.removeChild(newQualityElement);
+                                                // Append the delete icon and quality name to the container
+                                                newQualityElement.appendChild(deleteIcon);
+                                                qualityContainerElement.appendChild(newQualityElement);
                                             });
 
-                                            // Append the delete icon and quality name to the container
-                                            newQualityElement.appendChild(deleteIcon);
-                                            qualityContainerElement.appendChild(newQualityElement);
-                                        });
-
-                                        // Clear the input field
-                                        inputElement.value = "";
+                                            // Clear the input field
+                                            inputElement.value = "";
+                                        }
                                     }
-                                }
-                            </script>
+                                    function toggleSavedKualitas() {
+                                        const savedKualitasList = document.getElementById("savedKualitasList");
+                                        savedKualitasList.style.display = savedKualitasList.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                <a class="d-block text-dark" data-toggle="collapse" href="#collapseGambar">
-                                    Gambar Andalan
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseGambar" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="imageInput">Upload Image:</label>
-                                    <input type="file" class="form-control-file" id="imageInput" accept="image/*"
-                                        onchange="previewImage(event)">
-                                </div>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseGambar">
+                                        Gambar Andalan
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseGambar" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="imageInput">Upload Image:</label>
+                                        <input type="file" class="form-control-file" id="imageInput" accept="image/*"
+                                            onchange="previewImage(event)">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label>Preview:</label><br>
-                                    <img src="#" id="imagePreview" alt="Preview"
-                                        style="max-width: 300px; max-height: 200px; display: none;">
+                                    <div class="form-group">
+                                        <label>Preview:</label><br>
+                                        <img src="#" id="imagePreview" alt="Preview"
+                                            style="max-width: 300px; max-height: 200px; display: none;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <script>
-                    function previewImage(event) {
-                        const imagePreviewElement = document.getElementById("imagePreview");
-                        const imageFile = event.target.files[0];
-                        if (imageFile) {
-                            const reader = new FileReader();
-                            reader.onload = function () {
-                                imagePreviewElement.src = reader.result;
+                    <script>
+                        function previewImage(event) {
+                            const imagePreviewElement = document.getElementById("imagePreview");
+                            const imageFile = event.target.files[0];
+                            if (imageFile) {
+                                const reader = new FileReader();
+                                reader.onload = function () {
+                                    imagePreviewElement.src = reader.result;
+                                }
+                                reader.readAsDataURL(imageFile);
+                                imagePreviewElement.style.display = "block"; // Show the image preview
+                            } else {
+                                imagePreviewElement.src = "#";
+                                imagePreviewElement.style.display = "none"; // Hide the image preview
                             }
-                            reader.readAsDataURL(imageFile);
-                            imagePreviewElement.style.display = "block"; // Show the image preview
-                        } else {
-                            imagePreviewElement.src = "#";
-                            imagePreviewElement.style.display = "none"; // Hide the image preview
                         }
-                    }
-                </script>
+                    </script>
+                </div>
             </div>
-        </div>
 </section>
