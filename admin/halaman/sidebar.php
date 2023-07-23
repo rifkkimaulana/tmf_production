@@ -51,12 +51,31 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         <p>Users</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li
+                    class="nav-item <?php echo ($page == 'film' || $page == 'filim' || $page == 'add_film') ? 'menu-open' : ''; ?>">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=film"
-                        class="nav-link <?php echo ($page == 'film') ? 'active' : ''; ?>">
+                        class="nav-link <?php echo ($page == 'film' || $page == 'add_film') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-film"></i>
                         <p>Film</p>
+                        <i class="right fas fa-angle-left"></i>
                     </a>
+                    <!-- Submenu "Tambah Film" -->
+                    <ul class="nav nav-treeview" style="padding-left: 20px;">
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=film"
+                                class="nav-link <?php echo ($page == 'film') ? 'active' : ''; ?>">
+                                <i class="nav-icon fas fa-plus"></i>
+                                <p>Lihat Semua Film</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_film"
+                                class="nav-link <?php echo ($page == 'add_film') ? 'active' : ''; ?>">
+                                <i class="nav-icon fas fa-plus"></i>
+                                <p>Tambah Film</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">

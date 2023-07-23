@@ -140,6 +140,9 @@
                 case 'film':
                     include "film/index.php";
                     break;
+                case 'add_film':
+                    include "film/create.php";
+                    break;
                 case 'tv_show':
                     include "tv_show/index.php";
                     break;
