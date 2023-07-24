@@ -84,7 +84,7 @@ include '../config/koneksi.php';
                                                 $nama_genre = $row['nama_genre'];
 
                                                 echo '<div class="form-check">';
-                                                echo '<input type="checkbox" class="form-check-input" id="genre_' . $id_genre . '" value="' . $id_genre . '" >';
+                                                echo '<input type="checkbox" class="form-check-input" id="genre_' . $nama_genre . '" value="' . $nama_genre . '" >';
                                                 echo '<label class="form-check-label" for="genre_' . $id_genre . '">' . $nama_genre . '</label>';
                                                 echo '</div>';
                                             }
@@ -960,10 +960,8 @@ include '../config/koneksi.php';
                             }
                         }
                     </script>
-
                 </div>
             </div>
     </div>
     </form>
-
 </section>
