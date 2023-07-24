@@ -1,6 +1,7 @@
 <?php
 
 include '../../config/koneksi.php';
+$id_tmdb = $_POST['id'];
 
 //bagian 2 TMDB
 $judul = $_POST["judul"];
@@ -21,18 +22,15 @@ $url_poster = $_POST["url_poster"];
 $imdb_id = $_POST["imdb_id"];
 $tmdb_id = $_POST["tmdb_id"];
 
-// Query SQL untuk memasukkan data ke dalam tabel
-$sql = "INSERT INTO tb_tmdb (judul, bahasa, tagline, rating_mpaa, tanggal_rilis, tahun_rilis, waktu_jalan, rating1, rating2, anggaran, pendapatan, link_trailer, url_poster, imdb_id, tmdb_id, penerjemah) 
-        VALUES ('$judul', '$bahasa', '$tagline', '$rating_mpaa', '$tanggal_rilis', '$tahun_rilis', '$waktu_jalan', '$rating_tmdb', '$other_input', '$anggaran', '$pendapatan', '$youtube_id', '$url_poster', '$imdb_id', '$tmdb_id', '$penerjemah')";
-
-
+// Query SQL untuk melakukan update data di dalam tabel tb_tmdb
+$sql = "UPDATE tb_tmdb SET judul='$judul', bahasa='$bahasa', tagline='$tagline', rating_mpaa='$rating_mpaa', tanggal_rilis='$tanggal_rilis', tahun_rilis='$tahun_rilis', waktu_jalan='$waktu_jalan', rating1='$rating_tmdb', rating2='$other_input', anggaran='$anggaran', pendapatan='$pendapatan', link_trailer='$youtube_id', url_poster='$url_poster', imdb_id='$imdb_id', tmdb_id='$tmdb_id', penerjemah='$penerjemah' WHERE id = $id_tmdb";
 
 if (mysqli_query($koneksi, $sql)) {
-    $id_tmdb = mysqli_insert_id($koneksi);
-    echo "Data berhasil dimasukkan ke dalam t_tmdb.";
+    echo "Data berhasil diperbarui di tb_tmdb dengan ID: " . $id_tmdb;
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
+
 
 //bagian 3 - Player
 $notif_player = $_POST["notif_player"];
@@ -82,22 +80,34 @@ $kodeEmbed14 = $_POST["kodeEmbed-14"];
 $playerJudul15 = $_POST["playerJudul-15"];
 $kodeEmbed15 = $_POST["kodeEmbed-15"];
 
-$sql = "INSERT INTO tb_player (judul1, link1, judul2, link2, judul3, link3, judul4, link4, judul5, link5,
-                                judul6, link6, judul7, link7, judul8, link8, judul9, link9, judul10, link10,
-                                judul11, link11, judul12, link12, judul13, link13, judul14, link14, judul15, link15, pemberitahuan_player, created_at, updated_at)
-        VALUES ('$playerJudul1', '$kodeEmbed1', '$playerJudul2', '$kodeEmbed2', '$playerJudul3', '$kodeEmbed3',
-                '$playerJudul4', '$kodeEmbed4', '$playerJudul5', '$kodeEmbed5', '$playerJudul6', '$kodeEmbed6',
-                '$playerJudul7', '$kodeEmbed7', '$playerJudul8', '$kodeEmbed8', '$playerJudul9', '$kodeEmbed9',
-                '$playerJudul10', '$kodeEmbed10', '$playerJudul11', '$kodeEmbed11', '$playerJudul12', '$kodeEmbed12',
-                '$playerJudul13', '$kodeEmbed13', '$playerJudul14', '$kodeEmbed14', '$playerJudul15', '$kodeEmbed15', '$notif_player',
-                NOW(), NOW())";
+$id_player_to_update = $_POST['id_player_to_update'];
+
+$sql = "UPDATE tb_player SET 
+            judul1='$playerJudul1', link1='$kodeEmbed1',
+            judul2='$playerJudul2', link2='$kodeEmbed2',
+            judul3='$playerJudul3', link3='$kodeEmbed3',
+            judul4='$playerJudul4', link4='$kodeEmbed4',
+            judul5='$playerJudul5', link5='$kodeEmbed5',
+            judul6='$playerJudul6', link6='$kodeEmbed6',
+            judul7='$playerJudul7', link7='$kodeEmbed7',
+            judul8='$playerJudul8', link8='$kodeEmbed8',
+            judul9='$playerJudul9', link9='$kodeEmbed9',
+            judul10='$playerJudul10', link10='$kodeEmbed10',
+            judul11='$playerJudul11', link11='$kodeEmbed11',
+            judul12='$playerJudul12', link12='$kodeEmbed12',
+            judul13='$playerJudul13', link13='$kodeEmbed13',
+            judul14='$playerJudul14', link14='$kodeEmbed14',
+            judul15='$playerJudul15', link15='$kodeEmbed15',
+            pemberitahuan_player='$notif_player',
+            updated_at=NOW()
+        WHERE id = $id_player_to_update";
 
 if (mysqli_query($koneksi, $sql)) {
-    $id_player = mysqli_insert_id($koneksi);
-    echo "Data berhasil dimasukkan ke dalam tabel Player TB_PLAYER.";
+    echo "Data berhasil diperbarui di tabel Player TB_PLAYER dengan ID: " . $id_player_to_update;
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
+
 
 //bagian 4 - download
 $judulDownload1 = $_POST["judulDownload-1"];
@@ -145,23 +155,33 @@ $linkDownload14 = $_POST["linkDownload-14"];
 $judulDownload15 = $_POST["judulDownload-15"];
 $linkDownload15 = $_POST["linkDownload-15"];
 
-// Query SQL untuk memasukkan data ke dalam tabel
-$sql = "INSERT INTO tb_download (judul1, link1, judul2, link2, judul3, link3, judul4, link4, judul5, link5,
-                                judul6, link6, judul7, link7, judul8, link8, judul9, link9, judul10, link10,
-                                judul11, link11, judul12, link12, judul13, link13, judul14, link14, judul15, link15)
-        VALUES ('$judulDownload1', '$linkDownload1', '$judulDownload2', '$linkDownload2', '$judulDownload3', '$linkDownload3',
-                '$judulDownload4', '$linkDownload4', '$judulDownload5', '$linkDownload5', '$judulDownload6', '$linkDownload6',
-                '$judulDownload7', '$linkDownload7', '$judulDownload8', '$linkDownload8', '$judulDownload9', '$linkDownload9',
-                '$judulDownload10', '$linkDownload10', '$judulDownload11', '$linkDownload11', '$judulDownload12', '$linkDownload12',
-                '$judulDownload13', '$linkDownload13', '$judulDownload14', '$linkDownload14', '$judulDownload15', '$linkDownload15')";
+$id_download_to_update = $_POST['id_download_to_update'];
+
+$sql = "UPDATE tb_download SET 
+            judul1='$judulDownload1', link1='$linkDownload1',
+            judul2='$judulDownload2', link2='$linkDownload2',
+            judul3='$judulDownload3', link3='$linkDownload3',
+            judul4='$judulDownload4', link4='$linkDownload4',
+            judul5='$judulDownload5', link5='$linkDownload5',
+            judul6='$judulDownload6', link6='$linkDownload6',
+            judul7='$judulDownload7', link7='$linkDownload7',
+            judul8='$judulDownload8', link8='$linkDownload8',
+            judul9='$judulDownload9', link9='$linkDownload9',
+            judul10='$judulDownload10', link10='$linkDownload10',
+            judul11='$judulDownload11', link11='$linkDownload11',
+            judul12='$judulDownload12', link12='$linkDownload12',
+            judul13='$judulDownload13', link13='$linkDownload13',
+            judul14='$judulDownload14', link14='$linkDownload14',
+            judul15='$judulDownload15', link15='$linkDownload15'
+        WHERE id = $id_download_to_update";
 
 if (mysqli_query($koneksi, $sql)) {
-    $id_download = mysqli_insert_id($koneksi);
-    echo "Data berhasil dimasukkan ke dalam tabel tb_download.";
+    echo "Data berhasil diperbarui di tabel tb_download dengan ID: " . $id_download_to_update;
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
 
+//Genre
 $selectedGenres = $_POST['selectedGenres'];
 $genreArray = explode(',', $selectedGenres);
 $genreIds = array();
@@ -192,6 +212,7 @@ foreach ($genreArray as $genreName) {
 
 $string_genreIds = implode(',', $genreIds);
 
+//Tag
 $selectedTag = $_POST['selectedTag'];
 $tagArray = explode(',', $selectedTag);
 $tagIds = array();
@@ -220,10 +241,9 @@ foreach ($tagArray as $tagName) {
     }
 }
 
-// Sekarang, $tagIds berisi id-id dari data tag yang sudah ada atau baru saja diinsert.
-// Anda dapat menggabungkan id-id tersebut menjadi satu string menggunakan implode.
-
 $string_tagIds = implode(',', $tagIds);
+
+//Direksi
 $selectedDireksi = $_POST['selectedDireksi'];
 $direksiArray = explode(',', $selectedDireksi);
 $direksiIds = array();
@@ -252,10 +272,9 @@ foreach ($direksiArray as $direksiName) {
     }
 }
 
-// Sekarang, $direksiIds berisi id-id dari data direktur yang sudah ada atau baru saja diinsert.
-// Anda dapat menggabungkan id-id tersebut menjadi satu string menggunakan implode.
-
 $string_direksiIds = implode(',', $direksiIds);
+
+//Pemain
 $selectedPemain = $_POST['selectedPemain'];
 $pemainArray = explode(',', $selectedPemain);
 $pemainIds = array();
@@ -284,10 +303,9 @@ foreach ($pemainArray as $pemainName) {
     }
 }
 
-// Sekarang, $pemainIds berisi id-id dari data pemain yang sudah ada atau baru saja diinsert.
-// Anda dapat menggabungkan id-id tersebut menjadi satu string menggunakan implode.
-
 $string_pemainIds = implode(',', $pemainIds);
+
+//Tahun
 $selectedTahun = $_POST['selectedTahun'];
 $tahunArray = explode(',', $selectedTahun);
 $tahunIds = array();
@@ -316,10 +334,9 @@ foreach ($tahunArray as $tahunName) {
     }
 }
 
-// Sekarang, $tahunIds berisi id-id dari data tahun yang sudah ada atau baru saja diinsert.
-// Anda dapat menggabungkan id-id tersebut menjadi satu string menggunakan implode.
-
 $string_tahunIds = implode(',', $tahunIds);
+
+//Negara
 $selectedNegara = $_POST['selectedNegara'];
 $negaraArray = explode(',', $selectedNegara);
 $negaraIds = array();
@@ -348,10 +365,9 @@ foreach ($negaraArray as $negaraName) {
     }
 }
 
-// Sekarang, $negaraIds berisi id-id dari data negara yang sudah ada atau baru saja diinsert.
-// Anda dapat menggabungkan id-id tersebut menjadi satu string menggunakan implode.
-
 $string_negaraIds = implode(',', $negaraIds);
+
+//Kualitas
 $selectedKualitas = $_POST['selectedKualitas'];
 $kualitasArray = explode(',', $selectedKualitas);
 $kualitasIds = array();
@@ -380,13 +396,8 @@ foreach ($kualitasArray as $kualitasName) {
     }
 }
 
-// Sekarang, $kualitasIds berisi id-id dari data kualitas yang sudah ada atau baru saja diinsert.
-// Anda dapat menggabungkan id-id tersebut menjadi satu string menggunakan implode.
-
 $string_kualitasIds = implode(',', $kualitasIds);
 
-
-// Gunakan $genreIds, $tagIds, $direksiIds, $pemainIds, $tahunIds, $negaraIds, dan $kualitasIds sesuai kebutuhan Anda.
 
 //Bagian 1
 $judul_film = $_POST["judul_film"];

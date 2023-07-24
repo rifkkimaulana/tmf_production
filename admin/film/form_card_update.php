@@ -210,6 +210,8 @@
                     </br>
                     <div class="form-group">
                         <label for="playerJudul-1">Judul Player 1:</label>
+                        <input type="hidden" name="id_player_to_update" value="<?php echo $row['player_id']; ?>">
+
                         <input type="text" class="form-control" id="playerJudul-1" name="playerJudul-1"
                             value="<?php echo $row_play['judul1']; ?>">
                         <small class="text-muted">Isikan Judul Player</small>
@@ -508,6 +510,8 @@
                 <div class="tab-pane fade show active" id="donwload-1">
                     </br>
                     <div class="form-group">
+                        <input type="hidden" name="id_download_to_update" value="<?php echo $row['download_id']; ?>">
+
                         <label for="judulDownload-1">Judul Download 1:</label>
                         <input type="text" class="form-control" id="judulDownload-1" name="judulDownload-1"
                             value="<?php echo $row_download['judul1']; ?>">

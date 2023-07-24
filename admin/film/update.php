@@ -26,7 +26,7 @@ $row_download = mysqli_fetch_assoc($result_download);
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form action="film/proses_create.php" method="post" enctype="multipart/form-data">
+        <form action="film/proses_update.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-8">
                     <div class="card">
@@ -34,6 +34,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                             <h3 class="card-title">Tambah Film</h3>
                         </div>
                         <div class="card-body">
+                            <input type="hidden" name="id" value="<?php echo $row['tmdb_id']; ?>">
                             <div class="form-group">
                                 <label for="judul_film">Judul Film</label>
                                 <input type="text" class="form-control" id="judul_film" name="judul_film"
@@ -103,7 +104,9 @@ $row_download = mysqli_fetch_assoc($result_download);
                                 ?>
 
                                 <div class="card-body">
-                                    <input type="hidden" name="selectedGenres" id="selectedGenresInput" value="">
+                                    <input type="hidden" name="selectedGenres" id="selectedGenresInput"
+                                        value="<?php $id_tmdb = $row['genre_ids']; ?>">
+
                                     <div class="form-group" style="height: 100px; overflow-y: auto;">
                                         <div id="genreContainer">
                                             <?php
@@ -196,7 +199,8 @@ $row_download = mysqli_fetch_assoc($result_download);
 
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedTag" id="selectedTagInput" value="">
+                            <input type="hidden" name="selectedTag" id="selectedTagInput"
+                                value="<?php $id_tmdb = $row['tag_ids']; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTag">
@@ -362,7 +366,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedDireksi" id="selectedDireksiInput" value="">
+                            <input type="hidden" name="selectedDireksi" id="selectedDireksiInput"
+                                value="<?php $id_tmdb = $row['direksi_ids']; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseDirektur">
@@ -524,7 +529,8 @@ $row_download = mysqli_fetch_assoc($result_download);
 
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedPemain" id="selectedPemainInput" value="">
+                            <input type="hidden" name="selectedPemain" id="selectedPemainInput"
+                                value="<?php $id_tmdb = $row['pemain_ids']; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
@@ -687,7 +693,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedTahun" id="selectedTahunInput" value="">
+                            <input type="hidden" name="selectedTahun" id="selectedTahunInput"
+                                value="<?php $id_tmdb = $row['tahun_ids']; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
@@ -847,7 +854,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput" value="">
+                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput"
+                                value="<?php $id_tmdb = $row['negara_ids']; ?>">
 
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -1013,7 +1021,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput" value="">
+                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput"
+                                value="<?php $id_tmdb = $row['kualitas_ids']; ?>">
 
                             <div class="card-header">
                                 <h4 class="card-title">
