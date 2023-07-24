@@ -127,3 +127,46 @@ echo $selectedTag;
 //bagian 6 - Direktur
 $selectedDireksi = $_POST['selectedDireksi'];
 echo $selectedDireksi;
+
+//bagian 6 - Direktur
+$selectedPemain = $_POST['selectedPemain'];
+echo $selectedPemain;
+
+//bagian 6 - tahun
+$selectedTahun = $_POST['selectedTahun'];
+echo $selectedTahun;
+
+//bagian 6 - negara
+$selectedNegara = $_POST['selectedNegara'];
+echo $selectedNegara;
+
+//bagian 6 - negara
+$selectedKualitas = $_POST['selectedKualitas'];
+echo $selectedKualitas;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["image_banner"])) {
+    $targetDir = "../../gambar/film/";
+
+    // Pastikan folder sudah ada atau buat folder jika belum ada
+    if (!file_exists($targetDir)) {
+        mkdir($targetDir, 0755, true);
+    }
+
+    $imageFile = $_FILES["image_banner"];
+    $imageName = $imageFile["name"];
+    $imageTmpName = $imageFile["tmp_name"];
+    $imageError = $imageFile["error"];
+
+    if ($imageError === UPLOAD_ERR_OK) {
+        // Buat nama unik untuk gambar dengan menggunakan uniqid()
+        $uniqueName = uniqid() . '_' . $imageName;
+
+        // Pindahkan file dari temp folder ke folder yang ditentukan dengan nama unik
+        move_uploaded_file($imageTmpName, $targetDir . $uniqueName);
+        echo "Gambar berhasil diunggah ke server dengan nama unik: " . $uniqueName;
+    } else {
+        echo "Error dalam mengunggah gambar.";
+    }
+} else {
+    echo "Tidak ada gambar yang diunggah.";
+}

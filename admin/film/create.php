@@ -417,6 +417,7 @@ include '../config/koneksi.php';
 
                     <div id="accordion">
                         <div class="card">
+                            <input type="hidden" name="selectedPemain" id="selectedPemainInput" value="">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
@@ -457,7 +458,7 @@ include '../config/koneksi.php';
                                                 $nama_pemain = $row['nama_pemain'];
 
 
-                                                echo '<a href="#" class="tag-link" data-id="' . $id_pemain . '">' . $nama_pemain . '</a>';
+                                                echo '<a class="tag-link" onclick="handlePemainClick(\'' . $nama_pemain . '\')">' . $nama_pemain . '</a>';
                                                 echo ' ,';
                                             }
                                             ?>
@@ -481,6 +482,8 @@ include '../config/koneksi.php';
                                 </style>
 
                                 <script>
+                                    let selectedPemainArray = [];
+
                                     function addPlayer() {
                                         const inputElement = document.getElementById("playerInput");
                                         const playerNames = inputElement.value.split(',').map(player => player.trim());
@@ -489,34 +492,58 @@ include '../config/koneksi.php';
                                             const playerContainerElement = document.getElementById("playerList");
 
                                             playerNames.forEach(playerName => {
-                                                const newPlayerElement = document.createElement("span");
-                                                newPlayerElement.textContent = playerName;
-                                                newPlayerElement.classList.add("player");
+                                                const isPlayerExists = Array.from(playerContainerElement.children).some(playerElement => playerElement.textContent === playerName);
 
-                                                const deleteIcon = document.createElement("i");
-                                                deleteIcon.classList.add("fas", "fa-times");
-                                                deleteIcon.addEventListener("click", function () {
-                                                    playerContainerElement.removeChild(newPlayerElement);
-                                                });
+                                                if (!isPlayerExists) {
+                                                    const newPlayerElement = document.createElement("span");
+                                                    newPlayerElement.textContent = playerName;
+                                                    newPlayerElement.classList.add("player");
 
-                                                newPlayerElement.appendChild(deleteIcon);
-                                                playerContainerElement.appendChild(newPlayerElement);
+                                                    const deleteIcon = document.createElement("i");
+                                                    deleteIcon.classList.add("fas", "fa-times");
+                                                    deleteIcon.addEventListener("click", function () {
+                                                        playerContainerElement.removeChild(newPlayerElement);
+                                                        selectedPemainArray = selectedPemainArray.filter(pemain => pemain !== playerName);
+                                                        updateSelectedPemain(); // Update nilai input hidden
+                                                    });
+
+                                                    newPlayerElement.appendChild(deleteIcon);
+                                                    playerContainerElement.appendChild(newPlayerElement);
+
+                                                    // Tambahkan pemain ke dalam selectedPemainArray jika belum ada di dalamnya
+                                                    if (!selectedPemainArray.includes(playerName)) {
+                                                        selectedPemainArray.push(playerName);
+                                                    }
+
+                                                    updateSelectedPemain(); // Update nilai input hidden
+                                                }
                                             });
 
                                             inputElement.value = "";
                                         }
                                     }
+
+                                    function updateSelectedPemain() {
+                                        const selectedPemainInput = document.getElementById("selectedPemainInput");
+                                        selectedPemainInput.value = selectedPemainArray.join(',');
+                                    }
+
+                                    function handlePemainClick(pemainName) {
+                                        const pemainInputValue = document.getElementById("playerInput");
+                                        pemainInputValue.value = pemainName; // Isi input "playerInput" dengan nama pemain yang dipilih
+                                    }
+
                                     function toggleSavedPemain() {
                                         const toggleSavedPemain = document.getElementById("toggleSavedPemain");
                                         toggleSavedPemain.style.display = toggleSavedPemain.style.display === "none" ? "block" : "none";
                                     }
                                 </script>
-
                             </div>
                         </div>
                     </div>
                     <div id="accordion">
                         <div class="card">
+                            <input type="hidden" name="selectedTahun" id="selectedTahunInput" value="">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
@@ -555,7 +582,7 @@ include '../config/koneksi.php';
                                                 $id_tahun = $row['id'];
                                                 $nama_tahun = $row['tahun_rilis'];
 
-                                                echo '<a href="#" class="tag-link" data-id="' . $id_tahun . '">' . $nama_tahun . '</a>';
+                                                echo '<a class="tag-link" onclick="handleTahunClick(\'' . $nama_tahun . '\')">' . $nama_tahun . '</a>';
                                                 echo ' ,';
                                             }
                                             ?>
@@ -579,6 +606,8 @@ include '../config/koneksi.php';
                                 </style>
 
                                 <script>
+                                    let selectedTahunArray = [];
+
                                     function addYear() {
                                         const inputElement = document.getElementById("yearInput");
                                         const years = inputElement.value.split(',').map(year => year.trim());
@@ -587,22 +616,45 @@ include '../config/koneksi.php';
                                             const yearContainerElement = document.getElementById("yearList");
 
                                             years.forEach(year => {
-                                                const newYearElement = document.createElement("span");
-                                                newYearElement.textContent = year;
-                                                newYearElement.classList.add("year");
+                                                const isYearExists = Array.from(yearContainerElement.children).some(yearElement => yearElement.textContent === year);
 
-                                                const deleteIcon = document.createElement("i");
-                                                deleteIcon.classList.add("fas", "fa-times");
-                                                deleteIcon.addEventListener("click", function () {
-                                                    yearContainerElement.removeChild(newYearElement);
-                                                });
+                                                if (!isYearExists) {
+                                                    const newYearElement = document.createElement("span");
+                                                    newYearElement.textContent = year;
+                                                    newYearElement.classList.add("year");
 
-                                                newYearElement.appendChild(deleteIcon);
-                                                yearContainerElement.appendChild(newYearElement);
+                                                    const deleteIcon = document.createElement("i");
+                                                    deleteIcon.classList.add("fas", "fa-times");
+                                                    deleteIcon.addEventListener("click", function () {
+                                                        yearContainerElement.removeChild(newYearElement);
+                                                        selectedTahunArray = selectedTahunArray.filter(selectedYear => selectedYear !== year);
+                                                        updateSelectedTahun(); // Update nilai input hidden
+                                                    });
+
+                                                    newYearElement.appendChild(deleteIcon);
+                                                    yearContainerElement.appendChild(newYearElement);
+
+                                                    // Tambahkan tahun ke dalam selectedTahunArray jika belum ada di dalamnya
+                                                    if (!selectedTahunArray.includes(year)) {
+                                                        selectedTahunArray.push(year);
+                                                    }
+
+                                                    updateSelectedTahun(); // Update nilai input hidden
+                                                }
                                             });
 
                                             inputElement.value = "";
                                         }
+                                    }
+
+                                    function updateSelectedTahun() {
+                                        const selectedTahunInput = document.getElementById("selectedTahunInput");
+                                        selectedTahunInput.value = selectedTahunArray.join(',');
+                                    }
+
+                                    function handleTahunClick(tahunName) {
+                                        const tahunInputValue = document.getElementById("yearInput");
+                                        tahunInputValue.value = tahunName;
                                     }
                                     function toggleSavedTahun() {
                                         const toggleSavedTahun = document.getElementById("toggleSavedTahun");
@@ -615,6 +667,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
+                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput" value="">
+
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseNegara">
@@ -653,7 +707,7 @@ include '../config/koneksi.php';
                                                 $id_negara = $row['id'];
                                                 $nama_negara = $row['nama_negara'];
 
-                                                echo '<a href="#" class="tag-link" data-id="' . $id_tag . '">' . $nama_tag . '</a>';
+                                                echo '<a class="tag-link" onclick="handleNegaraClick(\'' . $nama_negara . '\')">' . $nama_negara . '</a>';
                                                 echo ' ,';
                                             }
                                             ?>
@@ -677,6 +731,8 @@ include '../config/koneksi.php';
                                 </style>
 
                                 <script>
+                                    let selectedNegaraArray = []; // Tambahkan deklarasi array untuk menyimpan negara yang dipilih
+
                                     function addCountry() {
                                         const inputElement = document.getElementById("countryInput");
                                         const countries = inputElement.value.split(',').map(country => country.trim());
@@ -685,23 +741,48 @@ include '../config/koneksi.php';
                                             const countryContainerElement = document.getElementById("countryList");
 
                                             countries.forEach(country => {
-                                                const newCountryElement = document.createElement("span");
-                                                newCountryElement.textContent = country;
-                                                newCountryElement.classList.add("country");
+                                                // Cek apakah negara sudah ada dalam daftar
+                                                const isCountryExists = Array.from(countryContainerElement.children).some(countryElement => countryElement.textContent === country);
 
-                                                const deleteIcon = document.createElement("i");
-                                                deleteIcon.classList.add("fas", "fa-times");
-                                                deleteIcon.addEventListener("click", function () {
-                                                    countryContainerElement.removeChild(newCountryElement);
-                                                });
+                                                if (!isCountryExists) {
+                                                    const newCountryElement = document.createElement("span");
+                                                    newCountryElement.textContent = country;
+                                                    newCountryElement.classList.add("country");
 
-                                                newCountryElement.appendChild(deleteIcon);
-                                                countryContainerElement.appendChild(newCountryElement);
+                                                    const deleteIcon = document.createElement("i");
+                                                    deleteIcon.classList.add("fas", "fa-times");
+                                                    deleteIcon.addEventListener("click", function () {
+                                                        countryContainerElement.removeChild(newCountryElement);
+                                                        selectedNegaraArray = selectedNegaraArray.filter(selectedCountry => selectedCountry !== country); // Hapus negara dari array saat dihapus dari daftar
+                                                        updateSelectedNegara(); // Update nilai input hidden
+                                                    });
+
+                                                    newCountryElement.appendChild(deleteIcon);
+                                                    countryContainerElement.appendChild(newCountryElement);
+
+                                                    // Tambahkan negara ke dalam selectedNegaraArray jika belum ada di dalamnya
+                                                    if (!selectedNegaraArray.includes(country)) {
+                                                        selectedNegaraArray.push(country);
+                                                    }
+                                                    updateSelectedNegara(); // Update nilai input hidden
+
+                                                }
                                             });
 
                                             inputElement.value = "";
                                         }
                                     }
+
+                                    function updateSelectedNegara() {
+                                        const selectedNegaraInput = document.getElementById("selectedNegaraInput");
+                                        selectedNegaraInput.value = selectedNegaraArray.join(',');
+                                    }
+
+                                    function handleNegaraClick(negaraName) {
+                                        const negaraInputValue = document.getElementById("countryInput");
+                                        negaraInputValue.value = negaraName;
+                                    }
+
                                     function toggleSavedNegara() {
                                         const savedNegaraList = document.getElementById("savedNegaraList");
                                         savedNegaraList.style.display = savedNegaraList.style.display === "none" ? "block" : "none";
@@ -713,6 +794,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
+                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput" value="">
+
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseKualitas">
@@ -751,7 +834,7 @@ include '../config/koneksi.php';
                                                 $id_kualitas = $row['id'];
                                                 $nama_kualitas = $row['nama_kualitas'];
 
-                                                echo '<a href="#" class="tag-link" data-id="' . $id_kualitas . '">' . $nama_kualitas . '</a>';
+                                                echo '<a class="tag-link" onclick="handleKualitasClick(\'' . $nama_kualitas . '\')">' . $nama_kualitas . '</a>';
                                                 echo ' ,';
                                             }
                                             ?>
@@ -775,6 +858,8 @@ include '../config/koneksi.php';
                                 </style>
 
                                 <script>
+                                    let selectedKualitasArray = [];
+
                                     function addQuality() {
                                         const inputElement = document.getElementById("qualityInput");
                                         const qualities = inputElement.value.split(',').map(quality => quality.trim());
@@ -783,23 +868,46 @@ include '../config/koneksi.php';
                                             const qualityContainerElement = document.getElementById("qualityList");
 
                                             qualities.forEach(quality => {
-                                                const newQualityElement = document.createElement("span");
-                                                newQualityElement.textContent = quality;
-                                                newQualityElement.classList.add("quality");
 
-                                                const deleteIcon = document.createElement("i");
-                                                deleteIcon.classList.add("fas", "fa-times");
-                                                deleteIcon.addEventListener("click", function () {
-                                                    qualityContainerElement.removeChild(newQualityElement);
-                                                });
+                                                const isQualityExists = Array.from(qualityContainerElement.children).some(qualityElement => qualityElement.textContent === quality);
 
-                                                newQualityElement.appendChild(deleteIcon);
-                                                qualityContainerElement.appendChild(newQualityElement);
+                                                if (!isQualityExists) {
+                                                    const newQualityElement = document.createElement("span");
+                                                    newQualityElement.textContent = quality;
+                                                    newQualityElement.classList.add("quality");
+
+                                                    const deleteIcon = document.createElement("i");
+                                                    deleteIcon.classList.add("fas", "fa-times");
+                                                    deleteIcon.addEventListener("click", function () {
+                                                        qualityContainerElement.removeChild(newQualityElement);
+                                                        selectedKualitasArray = selectedKualitasArray.filter(selectedQuality => selectedQuality !== quality); // Hapus kualitas dari array saat dihapus dari daftar
+                                                        updateSelectedKualitas();
+                                                    });
+
+                                                    newQualityElement.appendChild(deleteIcon);
+                                                    qualityContainerElement.appendChild(newQualityElement);
+
+                                                    if (!selectedKualitasArray.includes(quality)) {
+                                                        selectedKualitasArray.push(quality);
+                                                    }
+                                                    updateSelectedKualitas();
+                                                }
                                             });
 
                                             inputElement.value = "";
                                         }
                                     }
+
+                                    function updateSelectedKualitas() {
+                                        const selectedKualitasInput = document.getElementById("selectedKualitasInput");
+                                        selectedKualitasInput.value = selectedKualitasArray.join(',');
+                                    }
+
+                                    function handleKualitasClick(kualitasName) {
+                                        const kualitasInputValue = document.getElementById("qualityInput");
+                                        kualitasInputValue.value = kualitasName;
+                                    }
+
                                     function toggleSavedKualitas() {
                                         const savedKualitasList = document.getElementById("savedKualitasList");
                                         savedKualitasList.style.display = savedKualitasList.style.display === "none" ? "block" : "none";
@@ -822,10 +930,9 @@ include '../config/koneksi.php';
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="imageInput">Upload Image:</label>
-                                        <input type="file" class="form-control-file" id="imageInput" accept="image/*"
-                                            onchange="previewImage(event)">
+                                        <input type="file" class="form-control-file" id="imageInput" name="image_banner"
+                                            accept="image/*" onchange="previewImage(event)">
                                     </div>
-
                                     <div class="form-group">
                                         <label>Preview:</label><br>
                                         <img src="#" id="imagePreview" alt="Preview"
@@ -853,6 +960,7 @@ include '../config/koneksi.php';
                             }
                         }
                     </script>
+
                 </div>
             </div>
     </div>
