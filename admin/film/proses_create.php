@@ -123,3 +123,7 @@ echo $selectedGenres;
 //bagian 6 - Tag
 $selectedTag = $_POST['selectedTag'];
 echo $selectedTag;
+
+//bagian 6 - Direktur
+$selectedDireksi = $_POST['selectedDireksi'];
+echo $selectedDireksi;
