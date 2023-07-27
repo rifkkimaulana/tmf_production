@@ -83,12 +83,19 @@ include '../config/koneksi.php';
                                     <div class="form-group" style="height: 100px; overflow-y: auto;">
                                         <div id="categoryContainer">
                                             <?php
+                                            $query = "SELECT id, nama_kategori FROM tb_kategori_artikel";
+                                            $result = mysqli_query($koneksi, $query);
+
+                                            if (!$result) {
+                                                die("Query gagal: " . mysqli_error($koneksi));
+                                            }
+
                                             while ($row = mysqli_fetch_assoc($result)) {
                                                 $id_kategori = $row['id'];
                                                 $nama_kategori = $row['nama_kategori'];
 
                                                 echo '<div class="form-check">';
-                                                echo '<input type="checkbox" class="form-check-input" id="category_' . $nama_kategori . '" value="' . $nama_kategori . '" >';
+                                                echo '<input type="checkbox" class="form-check-input" id="category_' . $id_kategori . '" value="' . $nama_kategori . '">';
                                                 echo '<label class="form-check-label" for="category_' . $id_kategori . '">' . $nama_kategori . '</label>';
                                                 echo '</div>';
                                             }
@@ -102,8 +109,7 @@ include '../config/koneksi.php';
                                                 name="nama_kategori" placeholder="Masukkan kategori baru">
                                             <div class="input-group-append">
                                                 <button type="button" class="btn btn-primary"
-                                                    onclick="addCategory()">Tambah
-                                                    Kategori</button>
+                                                    onclick="addCategory()">Tambah Kategori</button>
                                             </div>
                                         </div>
                                     </form>
@@ -319,6 +325,9 @@ include '../config/koneksi.php';
                     categoryContainer.innerHTML = xhr.responseText;
 
                     document.getElementById('newCategoryInput').value = '';
+
+                    // Call updateSelectedCategories after adding a new category
+                    updateSelectedCategories();
                 } else {
                     console.error('Gagal menambahkan kategori');
                 }
@@ -351,5 +360,6 @@ include '../config/koneksi.php';
         checkboxes[i].addEventListener('change', updateSelectedCategories);
     }
 
+    // Call updateSelectedCategories when the page loads to update the selectedCategoriesInput
     updateSelectedCategories();
 </script>

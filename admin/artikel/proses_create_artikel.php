@@ -32,6 +32,7 @@ if (isset($_POST['selectedCategories']) && !empty($_POST['selectedCategories']))
     // Handle the case when $_POST['selectedCategories'] is not provided or empty
     echo "Error: No selected categories found.";
 }
+
 // Pastikan nilai $_POST['selectedTag'] ada dan tidak kosong
 if (isset($_POST['selectedTag']) && !empty($_POST['selectedTag'])) {
     $selectedTag = $_POST['selectedTag'];
@@ -98,5 +99,5 @@ if (mysqli_query($koneksi, $sql)) {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
 
-header("Location: ../dashboard.php?page=artikel&page=berhasil_ditambahkan");
+header("Location: ../dashboard.php?page=artikel&alert=berhasil_ditambahkan");
 exit;

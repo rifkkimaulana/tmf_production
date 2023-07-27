@@ -52,6 +52,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Tutup koneksi database
 mysqli_close($koneksi);
 
-header("Location: ../dashboard.php?page=kategori_artikel");
-exit;
 ?>
