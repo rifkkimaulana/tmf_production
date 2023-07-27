@@ -7,6 +7,8 @@ include '../config/koneksi.php';
     <div class="container-fluid">
         <form action="artikel/proses_create_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
+
+                <!--Bagian Kiri Row 8-->
                 <div class="col-8">
                     <div class="card">
                         <div class="card-header">
@@ -23,27 +25,14 @@ include '../config/koneksi.php';
                                 <textarea class="form-control summernote" id="isi_artikel"
                                     name="isi_artikel"></textarea>
                             </div>
-                            <script>
-                                $(document).ready(function () {
-                                    $('.summernote').summernote({
-                                        height: 300, // Atur tinggi editor teks (dalam pixel)
-                                        toolbar: [
-                                            // Atur toolbar yang ingin ditampilkan
-                                            ['style', ['bold', 'italic', 'underline', 'clear']],
-                                            ['para', ['ul', 'ol']],
-                                            ['insert', ['link', 'picture', 'video']],
-                                            ['view', ['fullscreen', 'codeview']]
-                                        ]
-                                    });
-                                });
-                            </script>
-
                         </div>
                     </div>
                 </div>
-
+                <!--Bagian Kanan Row 4-->
                 <div class="col-4">
                     <div id="accordion">
+
+                        <!--Button Submit Artikel-->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -69,6 +58,7 @@ include '../config/koneksi.php';
                             </div>
                         </div>
 
+                        <!--Form Kategori Artikel-->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -121,55 +111,7 @@ include '../config/koneksi.php';
                             </div>
                         </div>
 
-                        <script>
-                            function addCategory() {
-                                let nama_kategori = document.getElementById('newCategoryInput').value;
-
-                                let xhr = new XMLHttpRequest();
-
-                                xhr.onreadystatechange = function () {
-                                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                                        if (xhr.status === 200) {
-                                            let categoryContainer = document.getElementById('categoryContainer');
-                                            categoryContainer.innerHTML = xhr.responseText;
-
-                                            document.getElementById('newCategoryInput').value = '';
-                                        } else {
-                                            console.error('Gagal menambahkan kategori');
-                                        }
-                                    }
-                                };
-
-                                let data = "nama_kategori=" + encodeURIComponent(nama_kategori);
-
-                                xhr.open('POST', 'artikel/proses_create_kategori.php', true);
-                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                xhr.send(data);
-                            }
-
-                            function updateSelectedCategories() {
-                                var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]:checked');
-
-                                var selectedCategoriesArray = [];
-
-                                for (var i = 0; i < checkboxes.length; i++) {
-                                    selectedCategoriesArray.push(checkboxes[i].value);
-                                }
-
-                                var selectedCategoriesString = selectedCategoriesArray.join(',');
-
-                                document.getElementById('selectedCategoriesInput').value = selectedCategoriesString;
-                            }
-
-                            var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]');
-                            for (var i = 0; i < checkboxes.length; i++) {
-                                checkboxes[i].addEventListener('change', updateSelectedCategories);
-                            }
-
-                            updateSelectedCategories();
-                        </script>
-
-
+                        <!--Form Tag Artikel-->
                         <div class="card">
                             <input type="hidden" name="selectedTag" id="selectedTagInput" value="">
                             <div class="card-header">
@@ -221,83 +163,12 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .tag {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
 
-                                        .tag i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
-                                    <script>
-                                        // Variabel untuk menyimpan nilai tag yang sudah ditampilkan
-                                        let selectedTagsArray = [];
-
-                                        function addTag() {
-                                            const inputElement = document.getElementById("tagInput");
-                                            const tagNames = inputElement.value.split(',').map(tag => tag.trim());
-
-                                            if (tagNames.length > 0 && tagNames[0] !== "") {
-                                                const tagContainerElement = document.getElementById("tagList");
-
-                                                tagNames.forEach(tagName => {
-                                                    const isTagExists = Array.from(tagContainerElement.children).some(tagElement => tagElement.textContent === tagName);
-
-                                                    if (!isTagExists) {
-                                                        const newTagElement = document.createElement("span");
-                                                        newTagElement.textContent = tagName;
-                                                        newTagElement.classList.add("tag");
-
-                                                        const deleteIcon = document.createElement("i");
-                                                        deleteIcon.classList.add("fas", "fa-times");
-                                                        deleteIcon.addEventListener("click", function () {
-                                                            tagContainerElement.removeChild(newTagElement);
-                                                            // Saat tag dihapus, hapus juga dari selectedTagsArray
-                                                            selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
-                                                            updateSelectedTags(); // Update nilai input hidden
-                                                        });
-
-                                                        newTagElement.appendChild(deleteIcon);
-                                                        tagContainerElement.appendChild(newTagElement);
-
-                                                        // Tambahkan tag ke dalam selectedTagsArray jika belum ada di dalamnya
-                                                        if (!selectedTagsArray.includes(tagName)) {
-                                                            selectedTagsArray.push(tagName);
-                                                        }
-
-                                                        updateSelectedTags(); // Update nilai input hidden
-                                                    }
-                                                });
-
-                                                inputElement.value = "";
-                                            }
-                                        }
-
-                                        function updateSelectedTags() {
-                                            const selectedTagInput = document.getElementById("selectedTagInput");
-                                            selectedTagInput.value = selectedTagsArray.join(',');
-                                        }
-
-                                        function handleTagClick(tagName) {
-                                            const tagInputValue = document.getElementById("tagInput");
-                                            tagInputValue.value = tagName; // Isi input "tagInput" dengan nama tag yang dipilih
-                                        }
-
-                                        function toggleSavedTags() {
-                                            const savedDirectorList = document.getElementById("savedTagList");
-                                            savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
-                                        }
-                                    </script>
                                 </div>
                             </div>
                         </div>
 
+                        <!--Form Upload Gambar-->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -322,27 +193,163 @@ include '../config/koneksi.php';
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        function previewImage(event) {
-                            const imagePreviewElement = document.getElementById("imagePreview");
-                            const imageFile = event.target.files[0];
-                            if (imageFile) {
-                                const reader = new FileReader();
-                                reader.onload = function () {
-                                    imagePreviewElement.src = reader.result;
-                                }
-                                reader.readAsDataURL(imageFile);
-                                imagePreviewElement.style.display = "block";
-                            } else {
-                                imagePreviewElement.src = "#";
-                                imagePreviewElement.style.display = "none";
-                            }
-                        }
-                    </script>
-
                 </div>
             </div>
         </form>
     </div>
 </section>
+
+<!--Script Summernote untuk isi artikel-->
+<script>
+    $(document).ready(function () {
+        $('.summernote').summernote({
+            height: 300,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview']]
+            ]
+        });
+    });
+</script>
+
+<!--Script Preview Image -->
+<script>
+    function previewImage(event) {
+        const imagePreviewElement = document.getElementById("imagePreview");
+        const imageFile = event.target.files[0];
+        if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                imagePreviewElement.src = reader.result;
+            }
+            reader.readAsDataURL(imageFile);
+            imagePreviewElement.style.display = "block";
+        } else {
+            imagePreviewElement.src = "#";
+            imagePreviewElement.style.display = "none";
+        }
+    }
+</script>
+<!--Style Form Tag-->
+<style>
+    .tag {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        margin-right: 5px;
+        border-radius: 5px;
+    }
+
+    .tag i {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+</style>
+<!--Script Form TAG-->
+<script>
+    let selectedTagsArray = [];
+
+    function addTag() {
+        const inputElement = document.getElementById("tagInput");
+        const tagNames = inputElement.value.split(',').map(tag => tag.trim());
+
+        if (tagNames.length > 0 && tagNames[0] !== "") {
+            const tagContainerElement = document.getElementById("tagList");
+
+            tagNames.forEach(tagName => {
+                const isTagExists = Array.from(tagContainerElement.children).some(tagElement => tagElement.textContent === tagName);
+
+                if (!isTagExists) {
+                    const newTagElement = document.createElement("span");
+                    newTagElement.textContent = tagName;
+                    newTagElement.classList.add("tag");
+
+                    const deleteIcon = document.createElement("i");
+                    deleteIcon.classList.add("fas", "fa-times");
+                    deleteIcon.addEventListener("click", function () {
+                        tagContainerElement.removeChild(newTagElement);
+                        selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
+                        updateSelectedTags();
+                    });
+
+                    newTagElement.appendChild(deleteIcon);
+                    tagContainerElement.appendChild(newTagElement);
+
+                    if (!selectedTagsArray.includes(tagName)) {
+                        selectedTagsArray.push(tagName);
+                    }
+
+                    updateSelectedTags();
+                }
+            });
+
+            inputElement.value = "";
+        }
+    }
+
+    function updateSelectedTags() {
+        const selectedTagInput = document.getElementById("selectedTagInput");
+        selectedTagInput.value = selectedTagsArray.join(',');
+    }
+
+    function handleTagClick(tagName) {
+        const tagInputValue = document.getElementById("tagInput");
+        tagInputValue.value = tagName;
+    }
+
+    function toggleSavedTags() {
+        const savedDirectorList = document.getElementById("savedTagList");
+        savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
+    }
+</script>
+
+<!--Script Kategori Artikel-->
+<script>
+    function addCategory() {
+        let nama_kategori = document.getElementById('newCategoryInput').value;
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    let categoryContainer = document.getElementById('categoryContainer');
+                    categoryContainer.innerHTML = xhr.responseText;
+
+                    document.getElementById('newCategoryInput').value = '';
+                } else {
+                    console.error('Gagal menambahkan kategori');
+                }
+            }
+        };
+
+        let data = "nama_kategori=" + encodeURIComponent(nama_kategori);
+
+        xhr.open('POST', 'artikel/proses_create_kategori.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(data);
+    }
+
+    function updateSelectedCategories() {
+        var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]:checked');
+
+        var selectedCategoriesArray = [];
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            selectedCategoriesArray.push(checkboxes[i].value);
+        }
+
+        var selectedCategoriesString = selectedCategoriesArray.join(',');
+
+        document.getElementById('selectedCategoriesInput').value = selectedCategoriesString;
+    }
+
+    var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('change', updateSelectedCategories);
+    }
+
+    updateSelectedCategories();
+</script>

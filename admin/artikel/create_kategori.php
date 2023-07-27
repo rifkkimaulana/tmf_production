@@ -13,13 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $query = "INSERT INTO tb_kategori_artikel (nama_kategori, slug_kategori) VALUES ('$nama_kategori', '$slug_kategori')";
         $result = mysqli_query($koneksi, $query);
-
-        if ($result) {
-            header("Location: ../../admin/dashboard.php?page=kategori_artikel");
-            exit();
-        } else {
-            echo "Gagal menyimpan data kategori artikel.";
-        }
     }
 }
 

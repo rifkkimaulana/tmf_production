@@ -2,79 +2,77 @@
 
 include '../../config/koneksi.php';
 
-// ARRAY KATEGORI ARTIKEL
-$selectedCategories = $_POST['selectedCategories'];
-$categoryArray = explode(',', $selectedCategories);
-$categoryIds = array();
+// Pastikan nilai $_POST['selectedCategories'] ada dan tidak kosong
+if (isset($_POST['selectedCategories']) && !empty($_POST['selectedCategories'])) {
+    $selectedCategories = $_POST['selectedCategories'];
+    $categoryArray = explode(',', $selectedCategories);
+    $categoryIds = array();
 
-foreach ($categoryArray as $categoryName) {
-    $slug = strtolower(str_replace(' ', '-', $categoryName));
+    foreach ($categoryArray as $categoryName) {
+        $slug = strtolower(str_replace(' ', '-', $categoryName));
 
-    // Cek apakah data sudah ada di tabel tb_kategori_artikel
-    $sql = "SELECT id FROM tb_kategori_artikel WHERE nama_kategori = '$categoryName' AND slug_kategori = '$slug'";
-    $result = mysqli_query($koneksi, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        // Jika data sudah ada, ambil id dari data tersebut
-        $row = mysqli_fetch_assoc($result);
-        $categoryIds[] = $row['id'];
-    } else {
-        // Jika data belum ada, lakukan insert ke tabel tb_kategori_artikel
-        $insertSql = "INSERT INTO tb_kategori_artikel (nama_kategori, slug_kategori) VALUES ('$categoryName', '$slug')";
-
-        if (mysqli_query($koneksi, $insertSql)) {
-            // Ambil id dari data yang baru diinsert
-            $categoryIds[] = mysqli_insert_id($koneksi);
+        $sql = "SELECT id FROM tb_kategori_artikel WHERE nama_kategori = '$categoryName' AND slug_kategori = '$slug'";
+        $result = mysqli_query($koneksi, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $categoryIds[] = $row['id'];
         } else {
-            echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
+            $insertSql = "INSERT INTO tb_kategori_artikel (nama_kategori, slug_kategori) VALUES ('$categoryName', '$slug')";
+            if (mysqli_query($koneksi, $insertSql)) {
+                $categoryIds[] = mysqli_insert_id($koneksi);
+            } else {
+                echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
+            }
         }
     }
+
+    $string_categoryIds = implode(',', $categoryIds);
+} else {
+    // Handle the case when $_POST['selectedCategories'] is not provided or empty
+    echo "Error: No selected categories found.";
 }
+// Pastikan nilai $_POST['selectedTag'] ada dan tidak kosong
+if (isset($_POST['selectedTag']) && !empty($_POST['selectedTag'])) {
+    $selectedTag = $_POST['selectedTag'];
+    $tagArray = explode(',', $selectedTag);
+    $tagIds = array();
 
-$string_categoryIds = implode(',', $categoryIds);
+    foreach ($tagArray as $tagName) {
+        $slug = strtolower(str_replace(' ', '-', $tagName));
 
-// array tag artikel
-$selectedTag = $_POST['selectedTag'];
-$tagArray = explode(',', $selectedTag);
-$tagIds = array();
-
-foreach ($tagArray as $tagName) {
-    $slug = strtolower(str_replace(' ', '-', $tagName));
-
-    // Cek apakah data sudah ada di tabel tb_tag
-    $sql = "SELECT id FROM tb_tag_artikel WHERE nama_tag = '$tagName' AND slug_tag = '$slug'";
-    $result = mysqli_query($koneksi, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        // Jika data sudah ada, ambil id dari data tersebut
-        $row = mysqli_fetch_assoc($result);
-        $tagIds[] = $row['id'];
-    } else {
-        // Jika data belum ada, lakukan insert ke tabel tb_tag
-        $insertSql = "INSERT INTO tb_tag (nama_tag, slug_tag) VALUES ('$tagName', '$slug')";
-
-        if (mysqli_query($koneksi, $insertSql)) {
-            // Ambil id dari data yang baru diinsert
-            $tagIds[] = mysqli_insert_id($koneksi);
+        $sql = "SELECT id FROM tb_tag_artikel WHERE nama_tag = '$tagName' AND slug_tag = '$slug'";
+        $result = mysqli_query($koneksi, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $tagIds[] = $row['id'];
         } else {
-            echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
+            $insertSql = "INSERT INTO tb_tag_artikel (nama_tag, slug_tag) VALUES ('$tagName', '$slug')";
+            if (mysqli_query($koneksi, $insertSql)) {
+                $tagIds[] = mysqli_insert_id($koneksi);
+            } else {
+                echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
+            }
         }
     }
-}
 
-$string_tagIds = implode(',', $tagIds);
+    $string_tagIds = implode(',', $tagIds);
+} else {
+    // Handle the case when $_POST['selectedTag'] is not provided or empty
+    echo "Error: No selected tags found.";
+}
 
 
 $idArtikel = $_POST['id_artikel'];
+
 echo $idArtikel;
+
+
 $judulArtikel = $_POST['judul_artikel'];
 $isiArtikel = $_POST['isi_artikel'];
 $statusArtikel = $_POST['status'];
 
-// Format waktu saat ini
 $currentTime = date('Y-m-d H:i:s');
 
-// Lakukan proses untuk mengunggah gambar jika ada
 $targetDir = "../../gambar/artikel/";
 
 if (!file_exists($targetDir)) {
@@ -88,16 +86,13 @@ $imageError = $imageFile["error"];
 
 $uniqueName = "";
 
-// Periksa apakah ada file gambar baru yang diunggah
 if ($imageError === UPLOAD_ERR_OK) {
-    // Hapus gambar lama sebelum menyimpan gambar baru
     $queryArtikelThumbnail = "SELECT thumbnail FROM tb_artikel WHERE id = $idArtikel";
     $resultArtikelThumbnail = mysqli_query($koneksi, $queryArtikelThumbnail);
 
     if ($rowArtikelThumbnail = mysqli_fetch_assoc($resultArtikelThumbnail)) {
         $oldThumbnail = $rowArtikelThumbnail['thumbnail'];
         if (!empty($oldThumbnail)) {
-            // Hapus gambar lama dari direktori jika ada
             $oldFilePath = $targetDir . $oldThumbnail;
             if (file_exists($oldFilePath)) {
                 unlink($oldFilePath);
@@ -109,7 +104,6 @@ if ($imageError === UPLOAD_ERR_OK) {
     move_uploaded_file($imageTmpName, $targetDir . $uniqueName);
     echo "Gambar berhasil diunggah ke server dengan nama unik: " . $uniqueName;
 } else {
-    // Gambar tidak diubah, tetapkan gambar lama pada variabel $uniqueName
     $queryArtikelThumbnail = "SELECT thumbnail FROM tb_artikel WHERE id = $idArtikel";
     $resultArtikelThumbnail = mysqli_query($koneksi, $queryArtikelThumbnail);
 
@@ -118,9 +112,11 @@ if ($imageError === UPLOAD_ERR_OK) {
     }
 }
 
-// Update data artikel pada tabel tb_artikel
 $queryUpdateArtikel = "UPDATE tb_artikel 
                           SET judul_artikel = '$judulArtikel', isi_artikel = '$isiArtikel', status = '$statusArtikel', kategori_ids = '$string_categoryIds', tag_ids = '$string_tagIds', updated_at = '$currentTime', thumbnail = '$uniqueName'
                           WHERE id = $idArtikel";
 
 $resultUpdateArtikel = mysqli_query($koneksi, $queryUpdateArtikel);
+
+header("Location: ../dashboard.php?page=artikel&alert=berhasil_diupdate");
+exit;

@@ -194,3 +194,68 @@ if (isset($_GET['alert'])) {
     }
 }
 ?>
+
+<!-- Modal for Success Message -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Artikel Berhasil Diupdate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Artikel berhasil diupdate.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Check if the URL contains the success alert parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertParam = urlParams.get('alert');
+
+    // Show the success modal if the alert parameter is set to 'berhasil_diupdate'
+    if (alertParam === 'berhasil_diupdate') {
+        $('#successModal').modal('show');
+    }
+</script>
+
+<!-- Modal for Success Message -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Artikel Berhasil Ditambahkan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Artikel berhasil ditambahkan.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Check if the URL contains the success alert parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get('page');
+    const alertParam = urlParams.get('alert');
+
+    // Show the success modal if the alert parameter is set to 'berhasil_ditambahkan' and page parameter is 'artikel'
+    if (alertParam === 'berhasil_ditambahkan' && pageParam === 'artikel') {
+        $('#successModal').modal('show');
+    }
+</script>

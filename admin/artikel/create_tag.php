@@ -14,12 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO tb_tag_artikel (nama_tag, slug_tag) VALUES ('$nama_tag', '$slug_tag')";
         $result = mysqli_query($koneksi, $query);
 
-        if ($result) {
-            header("Location: ../../admin/dashboard.php?page=tag_artikel");
-            exit();
-        } else {
-            echo "Gagal menyimpan data tag artikel.";
-        }
     }
 }
 
