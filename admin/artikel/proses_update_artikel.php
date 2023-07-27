@@ -66,6 +66,7 @@ $string_tagIds = implode(',', $tagIds);
 
 
 $idArtikel = $_POST['id_artikel'];
+echo $idArtikel;
 $judulArtikel = $_POST['judul_artikel'];
 $isiArtikel = $_POST['isi_artikel'];
 $statusArtikel = $_POST['status'];
@@ -119,17 +120,7 @@ if ($imageError === UPLOAD_ERR_OK) {
 
 // Update data artikel pada tabel tb_artikel
 $queryUpdateArtikel = "UPDATE tb_artikel 
-                          SET judul_artikel = '$judulArtikel', isi_artikel = '$isiArtikel', status = '$statusArtikel', kategori_ids = '$selectedCategories', tag_ids = '$selectedTags', updated_at = '$currentTime', thumbnail = '$uniqueName'
+                          SET judul_artikel = '$judulArtikel', isi_artikel = '$isiArtikel', status = '$statusArtikel', kategori_ids = '$string_categoryIds', tag_ids = '$string_tagIds', updated_at = '$currentTime', thumbnail = '$uniqueName'
                           WHERE id = $idArtikel";
 
 $resultUpdateArtikel = mysqli_query($koneksi, $queryUpdateArtikel);
-
-if ($resultUpdateArtikel) {
-    // Jika berhasil memperbarui data artikel, kembalikan ke halaman sebelumnya dengan pesan sukses
-    header('Location: artikel/index_artikel.php?status=success');
-    exit();
-} else {
-    // Jika gagal memperbarui data artikel, kembalikan ke halaman sebelumnya dengan pesan error
-    header('Location: artikel/idnex_artikel.php?status=error');
-    exit();
-}

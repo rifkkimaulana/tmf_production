@@ -44,17 +44,17 @@ include '../config/koneksi.php';
                                     echo "<tr>";
                                     echo "<td>" . $nomorUrut . "</td>";
                                     echo "<td>" . $row['judul_artikel'] . "</td>";
-                                    echo "<td>" . $row['kategori_artikel'] . "</td>"; // Tampilkan kategori-kategori yang telah digabungkan
+                                    echo "<td>" . $row['kategori_artikel'] . "</td>";
                                     echo "<td>" . $row['nama_tag'] . "</td>";
                                     echo "<td>" . $row['created_at'] . "</td>";
                                     echo '<td style="text-align: center;">
-                <a href="dashboard.php?page=update_artikel&id=' . $row['id'] . '" class="btn btn-sm btn-warning" title="Ubah">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <a href="#" class="btn btn-sm btn-danger" title="Hapus" data-toggle="modal" data-target="#modalKonfirmasi" data-artikelid="' . $row['id'] . '">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </td>';
+                                            <a href="dashboard.php?page=update_artikel&id=' . $row['id'] . '" class="btn btn-sm btn-warning" title="Ubah">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-sm btn-danger" title="Hapus" data-toggle="modal" data-target="#modalKonfirmasiHapusArtikel" data-artikelid="' . $row['id'] . '" data-judulartikel="' . $row['judul_artikel'] . '">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        </td>';
                                     echo "</tr>";
 
                                     // Inkremen nomor urut setiap kali melakukan perulangan
@@ -106,33 +106,58 @@ include '../config/koneksi.php';
         });
     });
 </script>
+<!-- Modal Konfirmasi Hapus Artikel -->
+<div class="modal fade" id="modalKonfirmasiHapusArtikel" tabindex="-1" role="dialog"
+    aria-labelledby="modalKonfirmasiHapusArtikelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalKonfirmasiHapusArtikelLabel">Konfirmasi Hapus Artikel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus artikel dengan judul:
+                <span id="judulArtikelToDelete"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <a href="#" class="btn btn-danger" id="hapusArtikelLink">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Menangkap event saat modal dibuka
-    $('#modalKonfirmasi').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button yang membuka modal
-        var filmId = button.data('filmid'); // Mengambil data-filmid dari atribut data pada button
-        var filmTitle = button.closest('tr').find('td:eq(1)').text(); // Mengambil judul film dari kolom kedua pada baris yang dipilih
+    $(document).ready(function () {
+        // Event handler untuk saat modal ditampilkan
+        $('#modalKonfirmasiHapusArtikel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Tombol yang membuka modal
+            var artikelId = button.data('artikelid'); // Ambil data-artikelid dari tombol
+            var judulArtikel = button.data('judulartikel'); // Ambil data-judulartikel dari tombol
 
-        $('#filmTitle').text(filmTitle);
+            // Update konten modal dengan judul artikel yang akan dihapus
+            $('#judulArtikelToDelete').text(judulArtikel);
 
-        var hapusLink = 'film/delete.php?id=' + filmId;
-        $('#hapusFilmLink').attr('href', hapusLink);
+            // Buat link untuk menghapus artikel dengan mengambil ID artikel dari tombol
+            var hapusArtikelLink = 'artikel/proses_delete_artikel.php?id=' + artikelId;
+            $('#hapusArtikelLink').attr('href', hapusArtikelLink);
+        });
     });
 </script>
-
 <!-- Modal Berhasil Delete -->
 <div class="modal fade" id="modalBerhasilDelete">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Bagian Header Modal -->
             <div class="modal-header">
-                <h4 class="modal-title">Berhasil Menghapus Film</h4>
+                <h4 class="modal-title">Berhasil Menghapus Artikel</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Bagian Body Modal -->
             <div class="modal-body">
-                <p>Film berhasil dihapus dari database.</p>
+                <p>Artikel berhasil dihapus dari database.</p>
             </div>
             <!-- Bagian Footer Modal -->
             <div class="modal-footer">
@@ -147,11 +172,11 @@ include '../config/koneksi.php';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Gagal Menghapus Film</h4>
+                <h4 class="modal-title">Gagal Menghapus Artikel</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Gagal menghapus film dari database. Silakan coba lagi.</p>
+                <p>Gagal menghapus artikel dari database. Silakan coba lagi.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

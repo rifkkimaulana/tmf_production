@@ -21,10 +21,11 @@ mysqli_free_result($result);
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form action="artikel/proses_create_artikel.php" method="post" enctype="multipart/form-data">
+        <form action="artikel/proses_update_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-8">
                     <div class="card">
+                        <input type="hidden" name="id_artikel" id="id_artikel" value="<?php echo $artikelId; ?>">
                         <div class="card-header">
                             <h3 class="card-title">Ubah Artikel</h3>
                         </div>
