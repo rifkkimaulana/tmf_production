@@ -107,7 +107,58 @@ include '../config/koneksi.php';
     });
 </script>
 
-<!-- Tambahkan kode modal dan script JavaScript untuk menghapus artikel di sini -->
+<script>
+    // Menangkap event saat modal dibuka
+    $('#modalKonfirmasi').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button yang membuka modal
+        var filmId = button.data('filmid'); // Mengambil data-filmid dari atribut data pada button
+        var filmTitle = button.closest('tr').find('td:eq(1)').text(); // Mengambil judul film dari kolom kedua pada baris yang dipilih
+
+        $('#filmTitle').text(filmTitle);
+
+        var hapusLink = 'film/delete.php?id=' + filmId;
+        $('#hapusFilmLink').attr('href', hapusLink);
+    });
+</script>
+
+<!-- Modal Berhasil Delete -->
+<div class="modal fade" id="modalBerhasilDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Bagian Header Modal -->
+            <div class="modal-header">
+                <h4 class="modal-title">Berhasil Menghapus Film</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Bagian Body Modal -->
+            <div class="modal-body">
+                <p>Film berhasil dihapus dari database.</p>
+            </div>
+            <!-- Bagian Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Gagal Delete -->
+<div class="modal fade" id="modalGagalDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Gagal Menghapus Film</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Gagal menghapus film dari database. Silakan coba lagi.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 if (isset($_GET['alert'])) {

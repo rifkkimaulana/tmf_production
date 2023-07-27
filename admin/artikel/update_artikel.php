@@ -240,13 +240,19 @@ mysqli_free_result($result);
                                 </h4>
                             </div>
                             <?php
+
                             $query_tag = "SELECT nama_tag FROM tb_tag_artikel";
                             $result_tag = mysqli_query($koneksi, $query_tag);
 
-                            if (!$result_tag) {
-                                die("Query gagal: " . mysqli_error($koneksi));
+                            $queryArtikelTags = "SELECT tag_ids FROM tb_artikel WHERE id = $artikelId";
+                            $resultArtikelTags = mysqli_query($koneksi, $queryArtikelTags);
+                            $artikelTags = array();
+
+                            if ($rowArtikelTags = mysqli_fetch_assoc($resultArtikelTags)) {
+                                $artikelTags = explode(",", $rowArtikelTags['tag_ids']);
                             }
                             ?>
+
                             <div id="collapseTag" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
 
@@ -262,6 +268,17 @@ mysqli_free_result($result);
                                     </div>
 
                                     <div id="tagList">
+                                        <?php
+                                        foreach ($artikelTags as $tagId) {
+                                            $queryArtikelName = "SELECT nama_tag FROM tb_tag_artikel WHERE id = $tagId";
+                                            $resultTagName = mysqli_query($koneksi, $queryArtikelName);
+
+                                            if ($rowTagName = mysqli_fetch_assoc($resultTagName)) {
+                                                $tagName = $rowTagName['nama_tag'];
+                                                echo '<span class="tag">' . $tagName . '<i class="fas fa-times" onclick="removeTag(\'' . $tagName . '\')"></i></span>';
+                                            }
+                                        }
+                                        ?>
                                     </div>
 
                                     <small class="text-primary" style="cursor: pointer;"
@@ -338,7 +355,21 @@ mysqli_free_result($result);
                                                 inputElement.value = "";
                                             }
                                         }
+                                        function removeTag(tagName) {
+                                            const tagContainerElement = document.getElementById("tagList");
+                                            const tags = tagContainerElement.getElementsByClassName("tag");
 
+                                            for (let i = 0; i < tags.length; i++) {
+                                                if (tags[i].textContent === tagName) {
+                                                    tagContainerElement.removeChild(tags[i]);
+                                                    break;
+                                                }
+                                            }
+
+                                            // Hapus tag dari selectedTagsArray
+                                            selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
+                                            updateSelectedTags(); // Update nilai input hidden
+                                        }
                                         function updateSelectedTags() {
                                             const selectedTagInput = document.getElementById("selectedTagInput");
                                             selectedTagInput.value = selectedTagsArray.join(',');
