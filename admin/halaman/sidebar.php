@@ -78,17 +78,17 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                 </li>
 
                 <li
-                    class="nav-item <?php echo ($page == 'tvshow' || $page == 'add_tvshow' || $page == 'allepisodes' || $page == 'addepisode') ? 'menu-open' : ''; ?>">
+                    class="nav-item <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'allepisodes' || $page == 'addepisode') ? 'menu-open' : ''; ?>">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tvshow"
-                        class="nav-link <?php echo ($page == 'tvshow' || $page == 'add_tvshow' || $page == 'allepisodes' || $page == 'addepisode') ? 'active' : ''; ?>">
+                        class="nav-link <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'allepisodes' || $page == 'addepisode') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tv"></i>
                         <p>TV Show<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <!-- Submenu "Tambah TV Show" -->
                     <ul class="nav nav-treeview" style="padding-left: 20px;">
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tvshow"
-                                class="nav-link <?php echo ($page == 'tvshow') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tv_show"
+                                class="nav-link <?php echo ($page == 'tv_show') ? 'active' : ''; ?>">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Lihat Semua TV Show</p>
                             </a>
@@ -118,9 +118,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                 </li>
 
                 <li
-                    class="nav-item <?php echo ($page == 'artikel' || $page == 'add_artikel' || $page == 'kategori_artikel') ? 'menu-open' : ''; ?>">
+                    class="nav-item <?php echo ($page == 'artikel' || $page == 'add_artikel' || $page == 'kategori_artikel' || $page == 'tag_artikel') ? 'menu-open' : ''; ?>">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=artikel"
-                        class="nav-link <?php echo ($page == 'artikel' || $page == 'add_artikel' || $page == 'kategori_artikel') ? 'active' : ''; ?>">
+                        class="nav-link <?php echo ($page == 'artikel' || $page == 'add_artikel' || $page == 'kategori_artikel' || $page == 'tag_artikel') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>Artikel<i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -147,8 +147,16 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                                 <p>Kategori Artikel</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tag_artikel"
+                                class="nav-link <?php echo ($page == 'tag_artikel') ? 'active' : ''; ?>">
+                                <i class="nav-icon fas fa-tag"></i>
+                                <p>Tag Artikel</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
+
 
 
                 <li class="nav-item">

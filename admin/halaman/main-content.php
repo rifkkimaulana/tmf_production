@@ -137,6 +137,21 @@
                 case 'kualitas':
                     include "kualitas/index.php";
                     break;
+                case 'kategori_artikel':
+                    include "artikel/index_kategori.php";
+                    break;
+                case 'artikel':
+                    include "artikel/index_artikel.php";
+                    break;
+                case 'add_artikel':
+                    include "artikel/create_artikel.php";
+                    break;
+                case 'update_artikel':
+                    include "artikel/update_artikel.php";
+                    break;
+                case 'tag_artikel':
+                    include "artikel/index_tag.php";
+                    break;
                 case 'film':
                     include "film/index.php";
                     break;
@@ -148,6 +163,9 @@
                     break;
                 case 'tv_show':
                     include "tv_show/index.php";
+                    break;
+                case 'add_tvshow':
+                    include "tv_show/create.php";
                     break;
                 case 'backup_restore':
                     include "backup_restore/index.php";
