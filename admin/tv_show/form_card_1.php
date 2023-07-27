@@ -71,26 +71,6 @@
                     (Contoh: 2023-07-24).</small>
             </div>
 
-            <script>
-                $(function () {
-                    $('#tanggal_terakhir_mengudara').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        icons: {
-                            time: 'far fa-clock',
-                            date: 'far fa-calendar',
-                            up: 'fas fa-arrow-up',
-                            down: 'fas fa-arrow-down',
-                            previous: 'fas fa-chevron-left',
-                            next: 'fas fa-chevron-right',
-                            today: 'fas fa-calendar-day',
-                            clear: 'far fa-trash-alt',
-                            close: 'fas fa-times'
-                        }
-                    });
-                });
-            </script>
-
-
             <div class="form-group">
                 <label for="waktu_jalan">Waktu jalan dalam menit (TMDB):</label>
                 <input type="text" class="form-control" id="waktu_jalan" name="waktu_jalan">
@@ -163,3 +143,23 @@
         </div>
     </div>
 </div>
+
+<!--Script Style Callendar Terakhir mengudara-->
+<script>
+    $(function () {
+        $('#tanggal_terakhir_mengudara').datetimepicker({
+            format: 'YYYY-MM-DD',
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'fas fa-calendar-day',
+                clear: 'far fa-trash-alt',
+                close: 'fas fa-times'
+            }
+        });
+    });
+</script>

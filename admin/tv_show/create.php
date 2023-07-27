@@ -42,8 +42,8 @@ include '../config/koneksi.php';
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="statusFilm">Status</label>
-                                        <select class="form-control" id="statusFilm" name="statusFilm">
+                                        <label for="status">Status</label>
+                                        <select class="form-control" id="statusFilm" name="status">
                                             <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
                                             <option value="terbitkan">Terbitkan segera</option>

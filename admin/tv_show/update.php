@@ -1,11 +1,10 @@
 <?php
 include '../config/koneksi.php';
 
-$idFilm = $_GET['id'];
-
-$result = mysqli_query($koneksi, "SELECT judul_film, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, thumbnail, tmdb_id, player_id, download_id, created_at, updated_at FROM tb_film WHERE id = $idFilm");
+$idtvshow = $_GET['id'];
+$result = mysqli_query($koneksi, "SELECT judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
+ WHERE id = $idtvshow");
 $row = mysqli_fetch_assoc($result);
-
 
 // Ambil nama tag berdasarkan tag_ids
 $tagIds = explode(',', $row['tag_ids']);
@@ -79,41 +78,50 @@ foreach ($kualitasIds as $kualitasId) {
 }
 $kualitasNamesString = implode(', ', $kualitasNames);
 
-$id_tmdb = $row['tmdb_id'];
+// Ambil nama jaringan berdasarkan jaringan_ids
+$jaringanIds = explode(',', $row['jaringan_ids']);
+$jaringanNames = array();
 
-$result_tmdb = mysqli_query($koneksi, "SELECT judul, bahasa, tagline, rating_mpaa, tanggal_rilis, tahun_rilis, waktu_jalan, rating1, rating2, anggaran, pendapatan, link_trailer, url_poster, imdb_id, tmdb_id, penerjemah FROM tb_tmdb WHERE id = $id_tmdb");
+foreach ($jaringanIds as $jaringanId) {
+    $queryJaringanName = "SELECT nama_jaringan FROM tb_jaringan WHERE id = $jaringanId";
+    $resultJaringanName = mysqli_query($koneksi, $queryJaringanName);
+
+    if ($rowJaringanName = mysqli_fetch_assoc($resultJaringanName)) {
+        $jaringanNames[] = $rowJaringanName['nama_jaringan'];
+    }
+}
+
+$jaringanNamesString = implode(', ', $jaringanNames);
+
+$id_tmdb_post = $row['tmdb_id'];
+
+$result_tmdb = mysqli_query($koneksi, "SELECT judul, bahasa, tagline, rating_mpaa, tanggal_rilis, tahun_rilis, tanggal_terakhir_mengudara, waktu_jalan, jumlah_episode, rating1, rating2, anggaran, pendapatan, link_trailer, url_poster, imdb_id, tmdb_id, penerjemah FROM tb_tmdb WHERE id = $id_tmdb_post");
 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 
-$id_player = $row['player_id'];
-
-$result_player = mysqli_query($koneksi, "SELECT judul1, link1, judul2, link2, judul3, link3, judul4, link4, judul5, link5, judul6, link6, judul7, link7, judul8, link8, judul9, link9, judul10, link10, judul11, link11, judul12, link12, judul13, link13, judul14, link14, judul15, link15, pemberitahuan_player, created_at, updated_at FROM tb_player WHERE id = $id_player");
-$row_play = mysqli_fetch_assoc($result_player);
-
-$id_download = $row['download_id'];
-
-$result_download = mysqli_query($koneksi, "SELECT judul1, link1, judul2, link2, judul3, link3, judul4, link4, judul5, link5, judul6, link6, judul7, link7, judul8, link8, judul9, link9, judul10, link10, judul11, link11, judul12, link12, judul13, link13, judul14, link14, judul15, link15 FROM tb_download WHERE id = $id_download");
-$row_download = mysqli_fetch_assoc($result_download);
 ?>
 
-
+<?php
+include '../config/koneksi.php';
+?>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form action="film/proses_update.php" method="post" enctype="multipart/form-data">
+        <form action="tv_show/proses_update.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-8">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Film</h3>
+                            <h3 class="card-title">Tambah TV Show</h3>
                         </div>
                         <div class="card-body">
+                            <input type="hidden" name="tv_show_id" id="tv_show_id" value="<?php echo $idtvshow; ?>">
+
                             <div class="form-group">
-                                <input type="hidden" name="id_for_film" value="<?php echo $_GET['id']; ?>">
-                                <label for="judul_film">Judul Film</label>
-                                <input type="text" class="form-control" id="judul_film" name="judul_film"
-                                    value="<?php echo $row['judul_film']; ?>" required>
+                                <label for="judul_tv_show">Judul TV Show</label>
+                                <input type="text" class="form-control" id="judul_tv_show" name="judul_tv_show"
+                                    value="<?php echo $row['judul_tv_show']; ?>" required>
                             </div>
-                            <div class="form-group">
+                            <div class=" form-group">
                                 <label for="deskripsi">Deskripsi</label>
                                 <textarea class="form-control" id="deskripsi"
                                     name="deskripsi"><?php echo $row['deskripsi']; ?></textarea>
@@ -121,8 +129,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                         </div>
                     </div>
 
-                    <div class=" card">
-                        <?php include 'film/form_card_update.php'; ?>
+                    <div class="card">
+                        <?php include 'tv_show/form_card_update.php'; ?>
                     </div>
                 </div>
 
@@ -139,11 +147,11 @@ $row_download = mysqli_fetch_assoc($result_download);
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="statusFilm">Status</label>
-                                        <select class="form-control" id="statusFilm" name="statusFilm">
-                                            <option value="draf" <?php echo ($row['status'] == 'draf') ? 'selected' : ''; ?>>Draf</option>
-                                            <option value="publik" <?php echo ($row['status'] == 'publik') ? 'selected' : ''; ?>>Publik</option>
-                                            <option value="terbitkan" <?php echo ($row['status'] == 'terbitkan') ? 'selected' : ''; ?>>Terbitkan segera</option>
+                                        <label for="status">Status</label>
+                                        <select class="form-control" id="status" name="status">
+                                            <option value="draf">Draf</option>
+                                            <option value="publik">Publik</option>
+                                            <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
                                 </div>
@@ -164,8 +172,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                             </div>
                             <div id="collapseGenre" class="collapse show" data-parent="#accordion">
                                 <?php
-                                // Mendapatkan data genre aktif dari tb_film
-                                $queryActiveGenres = "SELECT DISTINCT genre_ids FROM tb_film";
+                                $queryActiveGenres = "SELECT DISTINCT genre_ids FROM tb_tv_show";
                                 $resultActiveGenres = mysqli_query($koneksi, $queryActiveGenres);
                                 $activeGenres = array();
 
@@ -206,7 +213,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                                             ?>
                                         </div>
                                     </div>
-                                    <form method="post" action="film/proses_tambah_genre.php" id="addGenreForm">
+                                    <form method="post" action="tv_show/proses_tambah_genre.php" id="addGenreForm">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="newGenreInput" name="nama_genre"
                                                 placeholder="Masukkan genre baru">
@@ -242,7 +249,7 @@ $row_download = mysqli_fetch_assoc($result_download);
 
                                 let data = "nama_genre=" + encodeURIComponent(nama_genre);
 
-                                xhr.open('POST', 'film/proses_tambah_genre.php', true);
+                                xhr.open('POST', 'tv_Show/proses_tambah_genre.php', true);
                                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                 xhr.send(data);
                             }
@@ -284,7 +291,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                             $query_tag = "SELECT nama_tag FROM tb_tag";
                             $result_tag = mysqli_query($koneksi, $query_tag);
 
-                            $queryFilmTags = "SELECT tag_ids FROM tb_film WHERE id = $idFilm";
+                            $queryFilmTags = "SELECT tag_ids FROM tb_tv_show WHERE id = $idtvshow";
                             $resultFilmTags = mysqli_query($koneksi, $queryFilmTags);
                             $filmTags = array();
 
@@ -449,7 +456,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                             $query_direksi = "SELECT id, nama_direksi FROM tb_direksi";
                             $result_direksi = mysqli_query($koneksi, $query_direksi);
 
-                            $result = mysqli_query($koneksi, "SELECT direktur_ids FROM tb_film WHERE id = $idFilm");
+                            $result = mysqli_query($koneksi, "SELECT direktur_ids FROM tb_tv_show WHERE id = $idtvshow");
                             $row = mysqli_fetch_assoc($result);
                             $direktorIds = $row['direktur_ids'];
 
@@ -622,7 +629,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                                     </div>
                                     <?php
                                     // Mendapatkan data pemain yang sudah terkait dengan film
-                                    $queryFilmPemain = "SELECT pemain_ids FROM tb_film WHERE id = $idFilm";
+                                    $queryFilmPemain = "SELECT pemain_ids FROM tb_tv_show WHERE id = $idtvshow";
                                     $resultFilmPemain = mysqli_query($koneksi, $queryFilmPemain);
                                     $filmPemain = array();
 
@@ -788,7 +795,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                                     <div id="yearList">
                                         <?php
                                         // Mendapatkan data tahun yang sudah terkait dengan film
-                                        $queryFilmTahun = "SELECT tahun_ids FROM tb_film WHERE id = $idFilm";
+                                        $queryFilmTahun = "SELECT tahun_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmTahun = mysqli_query($koneksi, $queryFilmTahun);
                                         $filmTahun = array();
 
@@ -952,7 +959,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                                         <?php
 
                                         // Mendapatkan data negara yang sudah terkait dengan film
-                                        $queryFilmNegara = "SELECT negara_ids FROM tb_film WHERE id = $idFilm";
+                                        $queryFilmNegara = "SELECT negara_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmNegara = mysqli_query($koneksi, $queryFilmNegara);
                                         $filmNegara = array();
 
@@ -1117,7 +1124,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                                     <div id="qualityList">
                                         <?php
                                         // Mendapatkan data kualitas yang sudah terkait dengan film
-                                        $queryFilmKualitas = "SELECT kualitas_ids FROM tb_film WHERE id = $idFilm";
+                                        $queryFilmKualitas = "SELECT kualitas_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmKualitas = mysqli_query($koneksi, $queryFilmKualitas);
                                         $filmKualitas = array();
 
@@ -1244,6 +1251,167 @@ $row_download = mysqli_fetch_assoc($result_download);
                                     function toggleSavedKualitas() {
                                         const savedKualitasList = document.getElementById("savedKualitasList");
                                         savedKualitasList.style.display = savedKualitasList.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accordion">
+                        <div class="card">
+                            <input type="hidden" name="selectedJaringan" id="selectedJaringanInput"
+                                value="<?php echo $jaringanNamesString ?>">
+
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseJaringan">
+                                        Jaringan
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseJaringan" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="jaringanInput"
+                                                placeholder="Enter a jaringan">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addJaringan()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="jaringanList">
+                                        <?php
+                                        // Mendapatkan data jaringan yang sudah terkait dengan film
+                                        $queryFilmJaringan = "SELECT jaringan_ids FROM tb_tv_show WHERE id = $idtvshow";
+                                        $resultFilmJaringan = mysqli_query($koneksi, $queryFilmJaringan);
+                                        $filmJaringan = array();
+
+                                        if ($rowFilmJaringan = mysqli_fetch_assoc($resultFilmJaringan)) {
+                                            $filmJaringan = explode(",", $rowFilmJaringan['jaringan_ids']);
+                                        }
+
+                                        // Query untuk mendapatkan nama jaringan berdasarkan id_jaringan
+                                        $query_jaringan = "SELECT nama_jaringan FROM tb_jaringan WHERE id IN (" . implode(',', $filmJaringan) . ")";
+                                        $result_jaringan = mysqli_query($koneksi, $query_jaringan);
+
+                                        // Menampilkan nama jaringan menggunakan foreach
+                                        foreach ($result_jaringan as $row) {
+                                            $nama_jaringan = $row['nama_jaringan'];
+                                            echo '<span class="jaringan">' . $nama_jaringan . '<i class="fas fa-times" onclick="removeJaringan(\'' . $nama_jaringan . '\')"></i></span>';
+                                        }
+                                        ?>
+
+                                    </div>
+
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedJaringan()">Tampilkan
+                                        Jaringan Tersimpan di database.</small>
+
+                                    <div id="savedJaringanList" style="display: none;">
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            $query_jaringan = "SELECT id, nama_jaringan FROM tb_jaringan";
+                                            $result_jaringan = mysqli_query($koneksi, $query_jaringan);
+
+                                            while ($row = mysqli_fetch_assoc($result_jaringan)) {
+                                                $id_jaringan = $row['id'];
+                                                $nama_jaringan = $row['nama_jaringan'];
+
+                                                echo '<a class="tag-link" onclick="handleJaringanClick(\'' . $nama_jaringan . '\')">' . $nama_jaringan . '</a>';
+                                                echo ' ,';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <style>
+                                    .jaringan {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
+
+                                    .jaringan i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
+
+                                <script>
+                                    let selectedJaringanArray = [];
+
+                                    function addJaringan() {
+                                        const inputElement = document.getElementById("jaringanInput");
+                                        const jaringans = inputElement.value.split(',').map(jaringan => jaringan.trim());
+
+                                        if (jaringans.length > 0 && jaringans[0] !== "") {
+                                            const jaringanContainerElement = document.getElementById("jaringanList");
+
+                                            jaringans.forEach(jaringan => {
+
+                                                const isJaringanExists = Array.from(jaringanContainerElement.children).some(jaringanElement => jaringanElement.textContent === jaringan);
+
+                                                if (!isJaringanExists) {
+                                                    const newJaringanElement = document.createElement("span");
+                                                    newJaringanElement.textContent = jaringan;
+                                                    newJaringanElement.classList.add("jaringan");
+
+                                                    const deleteIcon = document.createElement("i");
+                                                    deleteIcon.classList.add("fas", "fa-times");
+                                                    deleteIcon.addEventListener("click", function () {
+                                                        jaringanContainerElement.removeChild(newJaringanElement);
+                                                        selectedJaringanArray = selectedJaringanArray.filter(selectedJaringan => selectedJaringan !== jaringan); // Hapus jaringan dari array saat dihapus dari daftar
+                                                        updateSelectedJaringan();
+                                                    });
+
+                                                    newJaringanElement.appendChild(deleteIcon);
+                                                    jaringanContainerElement.appendChild(newJaringanElement);
+
+                                                    if (!selectedJaringanArray.includes(jaringan)) {
+                                                        selectedJaringanArray.push(jaringan);
+                                                    }
+                                                    updateSelectedJaringan();
+                                                }
+                                            });
+
+                                            inputElement.value = "";
+                                        }
+                                    }
+                                    function removeJaringan(jaringan) {
+                                        const jaringanContainerElement = document.getElementById("jaringanList");
+                                        const jaringans = jaringanContainerElement.getElementsByClassName("jaringan");
+
+                                        for (let i = 0; i < jaringans.length; i++) {
+                                            if (jaringans[i].textContent === jaringan) {
+                                                jaringanContainerElement.removeChild(jaringans[i]);
+                                                break;
+                                            }
+                                        }
+
+                                        selectedJaringanArray = selectedJaringanArray.filter(selectedJaringan => selectedJaringan !== jaringan);
+                                        updateSelectedJaringan();
+                                    }
+
+                                    function updateSelectedJaringan() {
+                                        const selectedJaringanInput = document.getElementById("selectedJaringanInput");
+                                        selectedJaringanInput.value = selectedJaringanArray.join(',');
+                                    }
+
+                                    function handleJaringanClick(jaringanName) {
+                                        const jaringanInputValue = document.getElementById("jaringanInput");
+                                        jaringanInputValue.value = jaringanName;
+                                    }
+
+                                    function toggleSavedJaringan() {
+                                        const savedJaringanList = document.getElementById("savedJaringanList");
+                                        savedJaringanList.style.display = savedJaringanList.style.display === "none" ? "block" : "none";
                                     }
                                 </script>
 

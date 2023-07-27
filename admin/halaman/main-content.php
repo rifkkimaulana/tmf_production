@@ -167,6 +167,9 @@
                 case 'add_tvshow':
                     include "tv_show/create.php";
                     break;
+                case 'update_tv_show':
+                    include "tv_show/update.php";
+                    break;
                 case 'backup_restore':
                     include "backup_restore/index.php";
                     break;
