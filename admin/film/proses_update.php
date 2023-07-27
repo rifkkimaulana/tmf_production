@@ -189,20 +189,16 @@ $genreIds = array();
 foreach ($genreArray as $genreName) {
     $slug = strtolower(str_replace(' ', '-', $genreName));
 
-    // Cek apakah data sudah ada di tabel tb_genre
     $sql = "SELECT id FROM tb_genre WHERE nama_genre = '$genreName' AND slug_genre = '$slug'";
     $result = mysqli_query($koneksi, $sql);
 
     if (mysqli_num_rows($result) > 0) {
-        // Jika data sudah ada, ambil id dari data tersebut
         $row = mysqli_fetch_assoc($result);
         $genreIds[] = $row['id'];
     } else {
-        // Jika data belum ada, lakukan insert ke tabel tb_genre
         $insertSql = "INSERT INTO tb_genre (nama_genre, slug_genre) VALUES ('$genreName', '$slug')";
 
         if (mysqli_query($koneksi, $insertSql)) {
-            // Ambil id dari data yang baru diinsert
             $genreIds[] = mysqli_insert_id($koneksi);
         } else {
             echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
@@ -400,12 +396,14 @@ $string_kualitasIds = implode(',', $kualitasIds);
 
 
 //Bagian 1
+$id_for_film = $_POST['id_for_film'];
+
 $judul_film = $_POST["judul_film"];
 $deskripsi = $_POST["deskripsi"];
 $statusFilm = $_POST['statusFilm'];
 
 
-//bagian 13 - Gambar
+// Bagian 13 - Gambar
 $targetDir = "../../gambar/film/";
 
 if (!file_exists($targetDir)) {
@@ -417,22 +415,57 @@ $imageName = $imageFile["name"];
 $imageTmpName = $imageFile["tmp_name"];
 $imageError = $imageFile["error"];
 
+$sqlThumbnail = "SELECT thumbnail FROM tb_film WHERE id = $id_for_film";
+$resultThumbnail = mysqli_query($koneksi, $sqlThumbnail);
+
+if (!$resultThumbnail) {
+    die("Error: " . $sqlThumbnail . "<br>" . mysqli_error($koneksi));
+}
+
+$thumbnailLama = mysqli_fetch_assoc($resultThumbnail)["thumbnail"];
+
 if ($imageError === UPLOAD_ERR_OK) {
+    // Jika ada gambar baru yang diunggah, hapus gambar lama dari direktori jika ada
+    if ($thumbnailLama && file_exists($targetDir . $thumbnailLama)) {
+        unlink($targetDir . $thumbnailLama);
+    }
+
     $uniqueName = uniqid() . '_' . $imageName;
 
     move_uploaded_file($imageTmpName, $targetDir . $uniqueName);
     echo "Gambar berhasil diunggah ke server dengan nama unik: " . $uniqueName;
+
+    // Update nilai thumbnail di database dengan nilai baru
+    $sqlUpdateThumbnail = "UPDATE tb_film SET thumbnail = '$uniqueName' WHERE id = $id_for_film";
+    if (!mysqli_query($koneksi, $sqlUpdateThumbnail)) {
+        echo "Error: " . $sqlUpdateThumbnail . "<br>" . mysqli_error($koneksi);
+    }
 } else {
-    echo "Error dalam mengunggah gambar.";
+    // Jika tidak ada gambar baru yang diunggah, nilai thumbnail tetap sama
+    $uniqueName = $thumbnailLama;
 }
 
-// Bagian 2 - Proses Insert ke tb_film
-$sql = "INSERT INTO tb_film (judul_film, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, thumbnail, tmdb_id, player_id, download_id) 
-        VALUES ('$judul_film', '$deskripsi', '$statusFilm', '$string_genreIds', '$string_tagIds', '$string_direksiIds', '$string_pemainIds', '$string_tahunIds', '$string_negaraIds', '$string_kualitasIds', '$uniqueName', '$id_tmdb', '$id_player', '$id_download')";
+
+
+$sql = "UPDATE tb_film 
+            SET judul_film = '$judul_film', 
+                deskripsi = '$deskripsi', 
+                status = '$statusFilm', 
+                genre_ids = '$string_genreIds', 
+                tag_ids = '$string_tagIds', 
+                direktur_ids = '$string_direksiIds', 
+                pemain_ids = '$string_pemainIds', 
+                tahun_ids = '$string_tahunIds', 
+                negara_ids = '$string_negaraIds', 
+                kualitas_ids = '$string_kualitasIds', 
+                thumbnail = '$uniqueName', 
+                tmdb_id = '$id_tmdb', 
+                player_id = '$id_player_to_update', 
+                download_id = '$id_download_to_update'
+            WHERE id = $id_for_film";
 
 if (mysqli_query($koneksi, $sql)) {
-    $filmId = mysqli_insert_id($koneksi);
-    echo "Data berhasil dimasukkan ke dalam tb_film dengan ID: " . $filmId;
+    echo "Data film berhasil diperbarui di tabel tb_film dengan ID: " . $id_for_film;
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }

@@ -20,6 +20,7 @@
         <div class="tab-pane fade show active" id="pengaturan_film">
             </br>
             <div class="form-group">
+                <input type="hidden" name="id" value="<?php echo $row['tmdb_id']; ?>">
                 <label for="judul">Judul (TMDB):</label>
                 <input type="text" class="form-control" id="judul" name="judul"
                     value="<?php echo $row_tmdb['judul']; ?>" required>

@@ -6,6 +6,79 @@ $idFilm = $_GET['id'];
 $result = mysqli_query($koneksi, "SELECT judul_film, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, thumbnail, tmdb_id, player_id, download_id, created_at, updated_at FROM tb_film WHERE id = $idFilm");
 $row = mysqli_fetch_assoc($result);
 
+
+// Ambil nama tag berdasarkan tag_ids
+$tagIds = explode(',', $row['tag_ids']);
+$tagNames = array();
+foreach ($tagIds as $tagId) {
+    $queryTagName = "SELECT nama_tag FROM tb_tag WHERE id = $tagId";
+    $resultTagName = mysqli_query($koneksi, $queryTagName);
+    if ($rowTagName = mysqli_fetch_assoc($resultTagName)) {
+        $tagNames[] = $rowTagName['nama_tag'];
+    }
+}
+$tagNamesString = implode(', ', $tagNames);
+
+// Ambil nama direktur berdasarkan direktur_ids
+$direkturIds = explode(',', $row['direktur_ids']);
+$direkturNames = array();
+foreach ($direkturIds as $direkturId) {
+    $queryDirekturName = "SELECT nama_direksi FROM tb_direksi WHERE id = $direkturId";
+    $resultDirekturName = mysqli_query($koneksi, $queryDirekturName);
+    if ($rowDirekturName = mysqli_fetch_assoc($resultDirekturName)) {
+        $direkturNames[] = $rowDirekturName['nama_direksi'];
+    }
+}
+$direkturNamesString = implode(', ', $direkturNames);
+
+// Ambil nama pemain berdasarkan pemain_ids
+$pemainIds = explode(',', $row['pemain_ids']);
+$pemainNames = array();
+foreach ($pemainIds as $pemainId) {
+    $queryPemainName = "SELECT nama_pemain FROM tb_pemain WHERE id = $pemainId";
+    $resultPemainName = mysqli_query($koneksi, $queryPemainName);
+    if ($rowPemainName = mysqli_fetch_assoc($resultPemainName)) {
+        $pemainNames[] = $rowPemainName['nama_pemain'];
+    }
+}
+$pemainNamesString = implode(', ', $pemainNames);
+
+// Ambil nama tahun berdasarkan tahun_ids
+$tahunIds = explode(',', $row['tahun_ids']);
+$tahunNames = array();
+foreach ($tahunIds as $tahunId) {
+    $queryTahunName = "SELECT tahun_rilis FROM tb_tahun WHERE id = $tahunId";
+    $resultTahunName = mysqli_query($koneksi, $queryTahunName);
+    if ($rowTahunName = mysqli_fetch_assoc($resultTahunName)) {
+        $tahunNames[] = $rowTahunName['tahun_rilis'];
+    }
+}
+$tahunNamesString = implode(', ', $tahunNames);
+
+// Ambil nama negara berdasarkan negara_ids
+$negaraIds = explode(',', $row['negara_ids']);
+$negaraNames = array();
+foreach ($negaraIds as $negaraId) {
+    $queryNegaraName = "SELECT nama_negara FROM tb_negara WHERE id = $negaraId";
+    $resultNegaraName = mysqli_query($koneksi, $queryNegaraName);
+    if ($rowNegaraName = mysqli_fetch_assoc($resultNegaraName)) {
+        $negaraNames[] = $rowNegaraName['nama_negara'];
+    }
+}
+$negaraNamesString = implode(', ', $negaraNames);
+
+// Ambil nama kualitas berdasarkan kualitas_ids
+$kualitasIds = explode(',', $row['kualitas_ids']);
+$kualitasNames = array();
+foreach ($kualitasIds as $kualitasId) {
+    $queryKualitasName = "SELECT nama_kualitas FROM tb_kualitas WHERE id = $kualitasId";
+    $resultKualitasName = mysqli_query($koneksi, $queryKualitasName);
+    if ($rowKualitasName = mysqli_fetch_assoc($resultKualitasName)) {
+        $kualitasNames[] = $rowKualitasName['nama_kualitas'];
+    }
+}
+$kualitasNamesString = implode(', ', $kualitasNames);
+
 $id_tmdb = $row['tmdb_id'];
 
 $result_tmdb = mysqli_query($koneksi, "SELECT judul, bahasa, tagline, rating_mpaa, tanggal_rilis, tahun_rilis, waktu_jalan, rating1, rating2, anggaran, pendapatan, link_trailer, url_poster, imdb_id, tmdb_id, penerjemah FROM tb_tmdb WHERE id = $id_tmdb");
@@ -34,8 +107,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                             <h3 class="card-title">Tambah Film</h3>
                         </div>
                         <div class="card-body">
-                            <input type="hidden" name="id" value="<?php echo $row['tmdb_id']; ?>">
                             <div class="form-group">
+                                <input type="hidden" name="id_for_film" value="<?php echo $_GET['id']; ?>">
                                 <label for="judul_film">Judul Film</label>
                                 <input type="text" class="form-control" id="judul_film" name="judul_film"
                                     value="<?php echo $row['judul_film']; ?>" required>
@@ -104,8 +177,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                                 ?>
 
                                 <div class="card-body">
-                                    <input type="hidden" name="selectedGenres" id="selectedGenresInput"
-                                        value="<?php $id_tmdb = $row['genre_ids']; ?>">
+                                    <input type="hidden" name="selectedGenres" id="selectedGenresInput" value="">
 
                                     <div class="form-group" style="height: 100px; overflow-y: auto;">
                                         <div id="genreContainer">
@@ -200,7 +272,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     <div id="accordion">
                         <div class="card">
                             <input type="hidden" name="selectedTag" id="selectedTagInput"
-                                value="<?php $id_tmdb = $row['tag_ids']; ?>">
+                                value="<?php echo $tagNamesString; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTag">
@@ -212,8 +284,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                             $query_tag = "SELECT nama_tag FROM tb_tag";
                             $result_tag = mysqli_query($koneksi, $query_tag);
 
-
-                            // Mendapatkan data tag yang sudah terkait dengan film
                             $queryFilmTags = "SELECT tag_ids FROM tb_film WHERE id = $idFilm";
                             $resultFilmTags = mysqli_query($koneksi, $queryFilmTags);
                             $filmTags = array();
@@ -240,11 +310,9 @@ $row_download = mysqli_fetch_assoc($result_download);
                                     <div id="tagList">
                                         <?php
                                         foreach ($filmTags as $tagId) {
-                                            // Query untuk mendapatkan nama tag berdasarkan ID tag
                                             $queryTagName = "SELECT nama_tag FROM tb_tag WHERE id = $tagId";
                                             $resultTagName = mysqli_query($koneksi, $queryTagName);
 
-                                            // Jika query berhasil dan ada hasil data, tampilkan nama tag
                                             if ($rowTagName = mysqli_fetch_assoc($resultTagName)) {
                                                 $tagName = $rowTagName['nama_tag'];
                                                 echo '<span class="tag">' . $tagName . '<i class="fas fa-times" onclick="removeTag(\'' . $tagName . '\')"></i></span>';
@@ -358,6 +426,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                                             const savedDirectorList = document.getElementById("savedTagList");
                                             savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
                                         }
+
+
                                     </script>
 
                                 </div>
@@ -367,7 +437,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     <div id="accordion">
                         <div class="card">
                             <input type="hidden" name="selectedDireksi" id="selectedDireksiInput"
-                                value="<?php $id_tmdb = $row['direksi_ids']; ?>">
+                                value="<?php echo $direkturNamesString ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseDirektur">
@@ -530,7 +600,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     <div id="accordion">
                         <div class="card">
                             <input type="hidden" name="selectedPemain" id="selectedPemainInput"
-                                value="<?php $id_tmdb = $row['pemain_ids']; ?>">
+                                value="<?php echo $pemainNamesString ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
@@ -694,7 +764,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     <div id="accordion">
                         <div class="card">
                             <input type="hidden" name="selectedTahun" id="selectedTahunInput"
-                                value="<?php $id_tmdb = $row['tahun_ids']; ?>">
+                                value="<?php echo $tahunNamesString ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
@@ -855,7 +925,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     <div id="accordion">
                         <div class="card">
                             <input type="hidden" name="selectedNegara" id="selectedNegaraInput"
-                                value="<?php $id_tmdb = $row['negara_ids']; ?>">
+                                value="<?php echo $negaraNamesString ?>">
 
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -1022,7 +1092,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     <div id="accordion">
                         <div class="card">
                             <input type="hidden" name="selectedKualitas" id="selectedKualitasInput"
-                                value="<?php $id_tmdb = $row['kualitas_ids']; ?>">
+                                value="<?php echo $kualitasNamesString ?>">
 
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -1158,9 +1228,8 @@ $row_download = mysqli_fetch_assoc($result_download);
                                             }
                                         }
 
-                                        // Hapus kualitas dari selectedKualitasArray
                                         selectedKualitasArray = selectedKualitasArray.filter(selectedQuality => selectedQuality !== kualitas);
-                                        updateSelectedKualitas(); // Update nilai input hidden
+                                        updateSelectedKualitas();
                                     }
                                     function updateSelectedKualitas() {
                                         const selectedKualitasInput = document.getElementById("selectedKualitasInput");
