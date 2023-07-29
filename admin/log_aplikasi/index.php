@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="table-log-aplikasi">
+                    <table class="table table-bordered table-striped" id="example2">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -54,3 +54,37 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "No data found",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "search": "Cari:",
+                "paginate": {
+                    "first": "Start",
+                    "last": "End",
+                    "next": "Next",
+                    "previous": "Previous"
+                }
+            },
+            "lengthMenu": [5, 10, 50, 100],
+            "pageLength": 5
+        });
+
+        // Event handler saat opsi tampilan berubah
+        $('#selectLength').on('change', function () {
+            table.page.len($(this).val()).draw();
+        });
+    });
+</script>

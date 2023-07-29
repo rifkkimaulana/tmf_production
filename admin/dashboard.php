@@ -186,7 +186,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 window.location.href = window.location.pathname + "?" + urlParams.toString();
             });
         </script>
-
     </div>
 </body>
 
