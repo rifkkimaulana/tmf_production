@@ -170,6 +170,15 @@
                 case 'update_tv_show':
                     include "tv_show/update.php";
                     break;
+                case 'episode':
+                    include "episode/index.php";
+                    break;
+                case 'add_episode':
+                    include "episode/create.php";
+                    break;
+                case 'update_episode':
+                    include "episode/update.php";
+                    break;
                 case 'backup_restore':
                     include "backup_restore/index.php";
                     break;

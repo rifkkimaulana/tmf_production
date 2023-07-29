@@ -78,9 +78,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                 </li>
 
                 <li
-                    class="nav-item <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'allepisodes' || $page == 'addepisode') ? 'menu-open' : ''; ?>">
+                    class="nav-item <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'episode' || $page == 'add_episode') ? 'menu-open' : ''; ?>">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tvshow"
-                        class="nav-link <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'allepisodes' || $page == 'addepisode') ? 'active' : ''; ?>">
+                        class="nav-link <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'episode' || $page == 'add_episode') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tv"></i>
                         <p>TV Show<i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -101,15 +101,15 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=allepisodes"
-                                class="nav-link <?php echo ($page == 'allepisodes') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=episode"
+                                class="nav-link <?php echo ($page == 'episode') ? 'active' : ''; ?>">
                                 <i class="nav-icon fas fa-video"></i>
                                 <p>Lihat Semua Episode</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=addepisode"
-                                class="nav-link <?php echo ($page == 'addepisode') ? 'active' : ''; ?>">
+                            <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_episode"
+                                class="nav-link <?php echo ($page == 'add_episode') ? 'active' : ''; ?>">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Tambah Episode</p>
                             </a>
