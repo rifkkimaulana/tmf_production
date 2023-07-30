@@ -147,16 +147,20 @@ if ($response !== false) {
         if ($response_credits !== false) {
             $credits_data = json_decode($response_credits, true);
 
-            $directors = array_filter($credits_data['crew'], function ($crew) {
-                return $crew['job'] === 'Director';
-            });
+            if (isset($credits_data['crew']) && is_array($credits_data['crew'])) {
+                $directors = array_filter($credits_data['crew'], function ($crew) {
+                    return $crew['job'] === 'Director';
+                });
 
-            $nama_direktur = array_column($directors, 'name');
-            $nama_direktur_string = implode(', ', $nama_direktur);
-
+                $nama_direktur = array_column($directors, 'name');
+                $nama_direktur_string = implode(', ', $nama_direktur);
+            } else {
+                $nama_direktur_string = "";
+            }
         } else {
             $nama_direktur_string = "";
         }
+
 
 
         $ch_cast = curl_init($cast_url);
@@ -1028,7 +1032,7 @@ if ($response !== false) {
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput" value="">
+                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput" value="HD">
 
                             <div class="card-header">
                                 <h4 class="card-title">

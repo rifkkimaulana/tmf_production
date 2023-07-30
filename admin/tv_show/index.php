@@ -145,13 +145,16 @@ include '../config/koneksi.php';
 <div class="modal fade" id="modalBerhasilDelete">
     <div class="modal-dialog">
         <div class="modal-content">
+            <!-- Bagian Header Modal -->
             <div class="modal-header">
                 <h4 class="modal-title">Berhasil Menghapus Film</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <!-- Bagian Body Modal -->
             <div class="modal-body">
                 <p>Film berhasil dihapus dari database.</p>
             </div>
+            <!-- Bagian Footer Modal -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
@@ -176,6 +179,43 @@ include '../config/koneksi.php';
         </div>
     </div>
 </div>
+<!-- Modal Notifikasi -->
+<div class="modal fade" id="berhasil_diubah">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Notifikasi</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Isi pesan notifikasi di sini -->
+                <p>Data berhasil diubah.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Notifikasi -->
+<div class="modal fade" id="berhasil_ditambah">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Notifikasi</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Isi pesan notifikasi di sini -->
+                <p>Data berhasil diubah.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php
 if (isset($_GET['alert'])) {
@@ -183,6 +223,10 @@ if (isset($_GET['alert'])) {
         echo '<script>$("#modalBerhasilDelete").modal("show");</script>';
     } elseif ($_GET['alert'] === 'gagal_delete') {
         echo '<script>$("#modalGagalDelete").modal("show");</script>';
+    } elseif ($_GET['alert'] === 'berhasil_ditambah') {
+        echo '<script>$("#berhasil_ditambah").modal("show");</script>';
+    } elseif ($_GET['alert'] === 'berhasil_diubah') {
+        echo '<script>$("#berhasil_diubah").modal("show");</script>';
     }
 }
 ?>

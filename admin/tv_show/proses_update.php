@@ -8,8 +8,14 @@ $judul = $_POST["judul"];
 $bahasa = $_POST["bahasa"];
 $tagline = $_POST["tagline"];
 $rating_mpaa = $_POST["rating_mpaa"];
-$tanggal_rilis_input = $_POST["tanggal_rilis"];
-$tanggal_rilis = date('Y-m-d', strtotime($tanggal_rilis_input));
+
+if (isset($_POST["tanggal_rilis"]) && !empty($_POST["tanggal_rilis"])) {
+    $tanggal_rilis_input = $_POST["tanggal_rilis"];
+    $tanggal_rilis = date('Y-m-d', strtotime($tanggal_rilis_input));
+} else {
+    $tanggal_rilis = "";
+}
+
 $tahun_rilis = $_POST["tahun_rilis"];
 $tanggal_terakhir_mengudara = $_POST["tanggal_terakhir_mengudara"];
 $waktu_jalan = $_POST["waktu_jalan"];
@@ -296,6 +302,7 @@ $id_for_tvshow = $_POST['tv_show_id'];
 
 $judul_tv_show = $_POST["judul_tv_show"];
 $deskripsi = $_POST["deskripsi"];
+$deskripsi = mysqli_real_escape_string($koneksi, $deskripsi);
 $status = $_POST['status'];
 
 
@@ -365,5 +372,5 @@ if (mysqli_query($koneksi, $sql)) {
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
-header("Location: ../dashboard.php?page=tv_show");
+header("Location: ../dashboard.php?page=tv_show&alert=berhasil_diubah");
 exit;

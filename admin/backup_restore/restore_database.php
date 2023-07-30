@@ -2,7 +2,7 @@
 ini_set('display_errors', E_ALL);
 error_reporting(E_ALL);
 // Include file koneksi.php
-include '../../koneksi.php';
+include '../../config/koneksi.php';
 
 // Mengambil nama database
 $queryDatabase = "SELECT DATABASE() AS 'database_name'";

@@ -1,12 +1,12 @@
 <?php
-include '../../koneksi.php';
+include '../../config/koneksi.php';
 
 $existingFiles = glob($backupDirectory . "*.sql");
 foreach ($existingFiles as $existingFile) {
     unlink($existingFile);
 }
 
-$backupDirectory = '../../admin/backup_restore/database/';
+$backupDirectory = '../backup_restore/database/';
 
 $backupFileName = $database . '_' . date('Ymd_His') . '.sql';
 

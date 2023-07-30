@@ -3,11 +3,21 @@ include '../../config/koneksi.php';
 
 //bagian TMDB Untuk Tv Show
 $judul = $_POST["judul"];
+$judul = mysqli_real_escape_string($koneksi, $judul);
+
 $bahasa = $_POST["bahasa"];
 $tagline = $_POST["tagline"];
+$tagline = mysqli_real_escape_string($koneksi, $tagline);
+
 $rating_mpaa = $_POST["rating_mpaa"];
-$tanggal_rilis_input = $_POST["tanggal_rilis"];
-$tanggal_rilis = date('Y-m-d', strtotime($tanggal_rilis_input));
+
+if (isset($_POST["tanggal_rilis"]) && !empty($_POST["tanggal_rilis"])) {
+    $tanggal_rilis_input = $_POST["tanggal_rilis"];
+    $tanggal_rilis = date('Y-m-d', strtotime($tanggal_rilis_input));
+} else {
+    $tanggal_rilis = "";
+}
+
 $tahun_rilis = $_POST["tahun_rilis"];
 $tanggal_terakhir_mengudara = $_POST["tanggal_terakhir_mengudara"];
 $waktu_jalan = $_POST["waktu_jalan"];
@@ -66,7 +76,8 @@ $tagIds = array();
 
 foreach ($tagArray as $tagName) {
     $slug = strtolower(str_replace(' ', '-', $tagName));
-
+    $slug = mysqli_real_escape_string($koneksi, $slug);
+    $tagName = mysqli_real_escape_string($koneksi, $tagName);
     $sql = "SELECT id FROM tb_tag WHERE nama_tag = '$tagName' AND slug_tag = '$slug'";
     $result = mysqli_query($koneksi, $sql);
 
@@ -77,6 +88,7 @@ foreach ($tagArray as $tagName) {
         $insertSql = "INSERT INTO tb_tag (nama_tag, slug_tag) VALUES ('$tagName', '$slug')";
 
         if (mysqli_query($koneksi, $insertSql)) {
+            // Ambil id dari data yang baru diinsert
             $tagIds[] = mysqli_insert_id($koneksi);
         } else {
             echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
@@ -111,31 +123,54 @@ foreach ($direksiArray as $direksiName) {
 }
 $string_direksiIds = implode(',', $direksiIds);
 
-// Bagian Proses Pemain
-$selectedPemain = $_POST['selectedPemain'];
-$pemainArray = explode(',', $selectedPemain);
-$pemainIds = array();
+$string_pemainIds = '';
 
-foreach ($pemainArray as $pemainName) {
-    $slug = strtolower(str_replace(' ', '-', $pemainName));
+if (isset($_POST['selectedPemain'])) {
+    $selectedPemain = $_POST['selectedPemain'];
+    $pemainArray = explode(',', $selectedPemain);
+    $pemainIds = array();
 
-    $sql = "SELECT id FROM tb_pemain WHERE nama_pemain = '$pemainName' AND slug_pemain = '$slug'";
-    $result = mysqli_query($koneksi, $sql);
+    foreach ($pemainArray as $pemainName) {
+        $slug = strtolower(str_replace(' ', '-', $pemainName));
+        $sql = "SELECT id FROM tb_pemain WHERE nama_pemain = ? AND slug_pemain = ?";
+        $stmt = mysqli_prepare($koneksi, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $pemainIds[] = $row['id'];
-    } else {
-        $insertSql = "INSERT INTO tb_pemain (nama_pemain, slug_pemain) VALUES ('$pemainName', '$slug')";
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ss", $pemainName, $slug);
 
-        if (mysqli_query($koneksi, $insertSql)) {
-            $pemainIds[] = mysqli_insert_id($koneksi);
+            mysqli_stmt_execute($stmt);
+
+            $result = mysqli_stmt_get_result($stmt);
+
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $pemainIds[] = $row['id'];
+            } else {
+                $insertSql = "INSERT INTO tb_pemain (nama_pemain, slug_pemain) VALUES (?, ?)";
+                $insertStmt = mysqli_prepare($koneksi, $insertSql);
+
+                if ($insertStmt) {
+                    mysqli_stmt_bind_param($insertStmt, "ss", $pemainName, $slug);
+
+                    if (mysqli_stmt_execute($insertStmt)) {
+                        $pemainIds[] = mysqli_insert_id($koneksi);
+                    } else {
+                        echo "Error: " . mysqli_error($koneksi);
+                    }
+
+                    mysqli_stmt_close($insertStmt);
+                } else {
+                    echo "Error: " . mysqli_error($koneksi);
+                }
+            }
+            mysqli_stmt_close($stmt);
         } else {
-            echo "Error: " . $insertSql . "<br>" . mysqli_error($koneksi);
+            echo "Error: " . mysqli_error($koneksi);
         }
     }
+
+    $string_pemainIds = implode(',', $pemainIds);
 }
-$string_pemainIds = implode(',', $pemainIds);
 
 // Bagian Proses Tahun
 $selectedTahun = $_POST['selectedTahun'];
@@ -243,7 +278,9 @@ $string_jaringanIds = implode(',', $jaringanIds);
 
 
 $judul_tv_show = $_POST["judul_tv_show"];
+$judul_tv_show = mysqli_real_escape_string($koneksi, $judul_tv_show);
 $deskripsi = $_POST["deskripsi"];
+$deskripsi = mysqli_real_escape_string($koneksi, $deskripsi);
 $status = $_POST['status'];
 
 $targetDir = "../../gambar/film/";
@@ -276,6 +313,6 @@ if (mysqli_query($koneksi, $sql)) {
 }
 
 mysqli_close($koneksi);
-header("Location: ../dashboard.php?page=tv_show");
+header("Location: ../dashboard.php?page=tv_show&alert=berhasil_ditambah");
 exit;
 ?>
