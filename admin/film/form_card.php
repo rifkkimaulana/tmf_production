@@ -21,17 +21,17 @@
             </br>
             <div class="form-group">
                 <label for="judul">Judul (TMDB):</label>
-                <input type="text" class="form-control" id="judul" name="judul" value="<?php echo $judul; ?>" required>
+                <input type="text" class="form-control" id="judul" name="judul" required>
                 <small class="text-muted">Isi dengan judul film asli dari TMDB.</small>
             </div>
             <div class="form-group">
                 <label for="bahasa">Bahasa (TMDB):</label>
-                <input type="text" class="form-control" id="bahasa" name="bahasa" value="<?php echo $bahasa; ?>">
+                <input type="text" class="form-control" id="bahasa" name="bahasa">
                 <small class="text-muted">Isi dengan bahasa lisan film dari TMDB.</small>
             </div>
             <div class="form-group">
                 <label for="tagline">Tagline (TMDB):</label>
-                <input type="text" class="form-control" id="tagline" name="tagline" value="<?php echo $tagline; ?>">
+                <input type="text" class="form-control" id="tagline" name="tagline">
                 <small class="text-muted">Isi dengan tagline film dari TMDB.</small>
             </div>
             <div class="form-group">
@@ -43,8 +43,7 @@
             <div class="form-group">
                 <label for="tanggal_rilis">Tanggal Rilis (TMDB):</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="tanggal_rilis" name="tanggal_rilis"
-                        value="<?php echo $tanggal_rilis; ?>">
+                    <input type="text" class="form-control" id="tanggal_rilis" name="tanggal_rilis">
                     <div class="input-group-append" data-target="#tanggal_rilis" data-toggle="datetimepicker">
                         <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                     </div>
@@ -56,8 +55,7 @@
             <div class="form-group">
                 <label for="tahun_rilis">Tahun Rilis (TMDB):</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="tahun_rilis" name="tahun_rilis"
-                        value="<?php echo $tahun_rilis; ?>">
+                    <input type="text" class="form-control" id="tahun_rilis" name="tahun_rilis">
                     <div class="input-group-append" data-target="#tahun_rilis" data-toggle="datetimepicker">
                         <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                     </div>
@@ -68,8 +66,7 @@
 
             <div class="form-group">
                 <label for="waktu_jalan">Waktu jalan dalam menit (TMDB):</label>
-                <input type="text" class="form-control" id="waktu_jalan" name="waktu_jalan"
-                    value="<?php echo $waktu_jalan; ?>">
+                <input type="text" class="form-control" id="waktu_jalan" name="waktu_jalan">
                 <small class="text-muted">Isi dengan waktu pemutaran film dalam menit dari
                     TMDB.</small>
             </div>
@@ -77,8 +74,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="rating_tmdb">Rating TMDB:</label>
-                        <input type="text" class="form-control" id="rating_tmdb" name="rating_tmdb"
-                            value="<?php echo $rating; ?>">
+                        <input type="text" class="form-control" id="rating_tmdb" name="rating_tmdb">
                         <small class="text-muted">Isi dengan peringkat rata-rata/suara dari
                             TMDB.</small>
                     </div>
@@ -95,19 +91,17 @@
             </div>
             <div class="form-group">
                 <label for="anggaran">Anggaran (TMDB):</label>
-                <input type="text" class="form-control" id="anggaran" name="anggaran" value="<?php echo $anggaran; ?>">
+                <input type="text" class="form-control" id="anggaran" name="anggaran">
                 <small class="text-muted">Isi dengan anggaran film dari TMDB.</small>
             </div>
             <div class="form-group">
                 <label for="pendapatan" value="<?php echo $rating; ?>">Pendapatan (TMDB):</label>
-                <input type="text" class="form-control" id="pendapatan" name="pendapatan"
-                    value="<?php echo $pendapatan; ?>">
+                <input type="text" class="form-control" id="pendapatan" name="pendapatan">
                 <small class=" text-muted">Isi dengan pendapatan film dari TMDB.</small>
             </div>
             <div class="form-group">
                 <label for="youtube_id" value="<?php echo $rating; ?>">Youtube ID Untuk Trailer (TMDB):</label>
-                <input type="text" class="form-control" id="youtube_id" name="youtube_id"
-                    value="<?php echo $trailer_link; ?>">
+                <input type="text" class="form-control" id="youtube_id" name="youtube_id">
                 <small class="text-muted">Isi dengan ID YouTube untuk trailer film dari TMDB.
                     Contoh: YROTBt1sae8.</small>
             </div>
@@ -119,20 +113,19 @@
             </div>
             <div class="form-group">
                 <label for="url_poster">Url Poster (TMDB):</label>
-                <input type="text" class="form-control" id="url_poster" name="url_poster"
-                    value="<?php echo $url_poster; ?>">
+                <input type="text" class="form-control" id="url_poster" name="url_poster">
                 <small class="text-muted">Isi dengan URL gambar poster film dari TMDB. Gunakan
                     gambar internal saja.</small>
             </div>
             <div class="form-group">
                 <label for="imdb_id">imdbID:</label>
-                <input type="text" class="form-control" id="imdb_id" name="imdb_id" value="<?php echo $imdb_id; ?>">
+                <input type="text" class="form-control" id="imdb_id" name="imdb_id">
                 <small class="text-muted">Isi dengan ID film dari IMDb. Contoh:
                     tt2582802.</small>
             </div>
             <div class="form-group">
                 <label for="tmdb_id">tmdbID:</label>
-                <input type="text" class="form-control" id="tmdb_id" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
+                <input type="text" class="form-control" id="tmdb_id" name="tmdb_id">
                 <small class="text-muted">Isi dengan ID film dari TMDB. Contoh: 244786.</small>
             </div>
         </div>

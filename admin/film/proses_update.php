@@ -469,3 +469,6 @@ if (mysqli_query($koneksi, $sql)) {
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
+
+header("Location: ../dashboard.php?page=film");
+exit;

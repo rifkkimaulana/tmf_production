@@ -52,7 +52,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                     </a>
                 </li>
                 <li
-                    class="nav-item <?php echo ($page == 'film' || $page == 'filim' || $page == 'add_film') ? 'menu-open' : ''; ?>">
+                    class="nav-item <?php echo ($page == 'film' || $page == 'add_film_tmdb' || $page == 'add_film') ? 'menu-open' : ''; ?>">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=film"
                         class="nav-link <?php echo ($page == 'film' || $page == 'add_film') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-film"></i>
@@ -74,13 +74,21 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                                 <p>Tambah Film</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="javascript:void(0);" onclick="openSearchModal();"
+                                class="nav-link <?php echo ($page == 'add_film_tmdb') ? 'active' : ''; ?>">
+                                <i class="nav-icon fas fa-plus"></i>
+                                <p>TMDB FILM Add</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
                 <li
-                    class="nav-item <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'episode' || $page == 'add_episode') ? 'menu-open' : ''; ?>">
+                    class="nav-item <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'add_tv_show_tmdb' || $page == 'episode' || $page == 'add_episode') ? 'menu-open' : ''; ?>">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tvshow"
-                        class="nav-link <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'episode' || $page == 'add_episode') ? 'active' : ''; ?>">
+                        class="nav-link <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'add_tv_show_tmdb' || $page == 'episode' || $page == 'add_episode') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tv"></i>
                         <p>TV Show<i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -98,6 +106,13 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                                 class="nav-link <?php echo ($page == 'add_tvshow') ? 'active' : ''; ?>">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Tambah TV Show</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:void(0);" onclick="openSearchModalTv();"
+                                class="nav-link <?php echo ($page == 'add_tv_show_tmdb') ? 'active' : ''; ?>">
+                                <i class="nav-icon fas fa-plus"></i>
+                                <p>TMDB TV Add</p>
                             </a>
                         </li>
                         <li class="nav-item">

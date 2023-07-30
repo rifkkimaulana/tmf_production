@@ -158,6 +158,9 @@
                 case 'add_film':
                     include "film/create.php";
                     break;
+                case 'add_film_tmdb':
+                    include "film/create_tmdb.php";
+                    break;
                 case 'update_film':
                     include "film/update.php";
                     break;
@@ -166,6 +169,9 @@
                     break;
                 case 'add_tvshow':
                     include "tv_show/create.php";
+                    break;
+                case 'add_tv_show_tmdb':
+                    include "tv_show/create_tmdb.php";
                     break;
                 case 'update_tv_show':
                     include "tv_show/update.php";

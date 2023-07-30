@@ -242,7 +242,6 @@ foreach ($jaringanArray as $jaringanName) {
 $string_jaringanIds = implode(',', $jaringanIds);
 
 
-//Bagian Insert TB_TV_Show
 $judul_tv_show = $_POST["judul_tv_show"];
 $deskripsi = $_POST["deskripsi"];
 $status = $_POST['status'];
@@ -277,4 +276,6 @@ if (mysqli_query($koneksi, $sql)) {
 }
 
 mysqli_close($koneksi);
+header("Location: ../dashboard.php?page=tv_show");
+exit;
 ?>

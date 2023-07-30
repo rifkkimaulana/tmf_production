@@ -1,6 +1,181 @@
 <?php
 include '../config/koneksi.php';
+
+$id_film = $_GET['id_film'];
+
+
+$api_key = '28f59279215bfffc21257db6c0f7bff5';
+$movie_id = $id_film;
+
+$base_url_tmdb = "https://api.themoviedb.org/3";
+$endpoint = "/movie/{$movie_id}";
+$query_string = "?api_key={$api_key}&append_to_response=videos";
+
+$url = $base_url_tmdb . $endpoint . $query_string;
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+curl_close($ch);
+
+if ($response !== false) {
+    $data = json_decode($response, true);
+
+    if (isset($data['title'])) {
+        $judul = $data['title'];
+        $tahun_rilis = substr($data['release_date'], 0, 4);
+        $judul_tahun = $judul . " (" . $tahun_rilis . ")";
+
+        $languageMap = array(
+            "en" => "English",
+            "ar" => "Arabic",
+            "bn" => "Bengali",
+            "zh" => "Chinese",
+            "cs" => "Czech",
+            "da" => "Danish",
+            "nl" => "Dutch",
+            "fi" => "Finnish",
+            "fr" => "French",
+            "de" => "German",
+            "el" => "Greek",
+            "he" => "Hebrew",
+            "hi" => "Hindi",
+            "hu" => "Hungarian",
+            "id" => "Indonesian",
+            "it" => "Italian",
+            "ja" => "Japanese",
+            "ko" => "Korean",
+            "ms" => "Malay",
+            "no" => "Norwegian",
+            "fa" => "Persian",
+            "pl" => "Polish",
+            "pt" => "Portuguese",
+            "ro" => "Romanian",
+            "ru" => "Russian",
+            "es" => "Spanish",
+            "sv" => "Swedish",
+            "th" => "Thai",
+            "tr" => "Turkish",
+            "uk" => "Ukrainian",
+            "vi" => "Vietnamese",
+            "other" => "Other",
+        );
+        $bahasa_kode = $data['original_language'];
+        $bahasa = isset($languageMap[$bahasa_kode]) ? $languageMap[$bahasa_kode] : $languageMap['en'];
+
+        $tagline = isset($data['tagline']) ? $data['tagline'] : "-";
+        $waktu_jalan = $data['runtime'];
+
+        $rating = $data['vote_average'];
+
+        $anggaran = $data['budget'];
+        $pendapatan = $data['revenue'];
+
+        $release_date = $data['release_date'];
+        $tanggal_rilis = date('d M Y', strtotime($release_date));
+
+        $url_poster = "https://image.tmdb.org/t/p/w200/{$data['poster_path']}";
+        $deskripsi = $data['overview'];
+
+        $imdb_id = $data['imdb_id'];
+        $tmdb_id = $data['id'];
+
+        $genres = $data['genres'];
+        $genre_names = array();
+
+        foreach ($genres as $genre) {
+            $genre_names[] = $genre['name'];
+        }
+
+        $trailer_key = "";
+        if (isset($data['videos']['results'])) {
+            foreach ($data['videos']['results'] as $video) {
+                if ($video['type'] === 'Trailer') {
+                    $trailer_key = $video['key'];
+                    break;
+                }
+            }
+        }
+
+        if (!empty($trailer_key)) {
+            $trailer_link = "https://www.youtube.com/watch?v={$trailer_key}";
+        } else {
+            $trailer_link = "Trailer not available";
+        }
+
+        // Ambil data kru produksi dari API TMDb
+        $credits_endpoint = "/movie/{$movie_id}/credits";
+        $credits_url = $base_url_tmdb . $credits_endpoint . $query_string;
+
+        $ch_credits = curl_init($credits_url);
+        curl_setopt($ch_credits, CURLOPT_RETURNTRANSFER, true);
+        $response_credits = curl_exec($ch_credits);
+        curl_close($ch_credits);
+
+        if ($response_credits !== false) {
+            $credits_data = json_decode($response_credits, true);
+
+            $directors = array_filter($credits_data['crew'], function ($crew) {
+                return $crew['job'] === 'Director';
+            });
+
+            $nama_direktur = array_column($directors, 'name');
+            $nama_direktur_string = implode(', ', $nama_direktur);
+
+        } else {
+            $nama_direktur_string = "";
+        }
+        $cast_url = $base_url_tmdb . $credits_endpoint . $query_string;
+
+        $ch_cast = curl_init($cast_url);
+        curl_setopt($ch_cast, CURLOPT_RETURNTRANSFER, true);
+        $response_cast = curl_exec($ch_cast);
+        curl_close($ch_cast);
+
+        if ($response_cast !== false) {
+            $cast_data = json_decode($response_cast, true);
+            $nama_pemain = array_column($cast_data['cast'], 'name');
+            $nama_pemain_string = implode(', ', $nama_pemain);
+        } else {
+            $nama_pemain_string = "";
+        }
+
+        if (isset($data['production_countries'])) {
+            $countries = $data['production_countries'];
+            $country_names = array();
+
+            foreach ($countries as $country) {
+                $country_names[] = $country['name'];
+            }
+            $nama_negara = implode(', ', $country_names);
+        } else {
+            $nama_negara = "";
+        }
+    } else {
+        $judul = 'Tidak ditemukan untuk';
+        $judul_tahun = "";
+        $bahasa = "";
+        $tagline = "";
+        $deskripsi = "";
+        $tanggal_rilis = "";
+        $tahun_rilis = "";
+        $waktu_jalan = "";
+        $rating = "";
+        $anggaran = "";
+        $pendapatan = "";
+        $trailer_link = "";
+        $url_poster = "";
+        $imdb_id = "";
+        $tmdb_id = "";
+        $nama_direktur_string = "";
+        $nama_pemain_string = "";
+        $nama_negara = "";
+    }
+} else {
+
+}
 ?>
+
+
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -9,22 +184,30 @@ include '../config/koneksi.php';
                 <div class="col-8">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Film</h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Tambah Film || Search:
+                                    <?php echo $judul . " id: " . $id_film; ?>
+                                </h3>
+                                <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_film"
+                                    class="btn btn-primary">Add Manual</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="judul_film">Judul Film</label>
-                                <input type="text" class="form-control" id="judul_film" name="judul_film" required>
+                                <input type="text" class="form-control" id="judul_film" name="judul_film"
+                                    value="<?php echo $judul_tahun; ?>" required>
                             </div>
-                            <div class="form-group">
+                            <div class=" form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                                <textarea class="form-control" id="deskripsi"
+                                    name="deskripsi"><?php echo $deskripsi; ?></textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="card">
-                        <?php include 'film/form_card.php'; ?>
+                        <?php include 'film/form_card_1.php'; ?>
                     </div>
                 </div>
 
@@ -69,9 +252,6 @@ include '../config/koneksi.php';
                                 $query = "SELECT id, nama_genre FROM tb_genre";
                                 $result = mysqli_query($koneksi, $query);
 
-                                if (!$result) {
-                                    die("Query gagal: " . mysqli_error($koneksi));
-                                }
                                 ?>
 
                                 <div class="card-body">
@@ -86,6 +266,13 @@ include '../config/koneksi.php';
                                                 echo '<div class="form-check">';
                                                 echo '<input type="checkbox" class="form-check-input" id="genre_' . $nama_genre . '" value="' . $nama_genre . '" >';
                                                 echo '<label class="form-check-label" for="genre_' . $id_genre . '">' . $nama_genre . '</label>';
+                                                echo '</div>';
+                                            }
+
+                                            foreach ($genre_names as $nama_genre) {
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="genre_' . $nama_genre . '" name="genre[]" value="' . $nama_genre . '" checked>';
+                                                echo '<label class="form-check-label" for="genre_' . $nama_genre . '">' . $nama_genre . '</label>';
                                                 echo '</div>';
                                             }
                                             ?>
@@ -156,7 +343,8 @@ include '../config/koneksi.php';
 
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedTag" id="selectedTagInput" value="">
+                            <input type="hidden" name="selectedTag" id="selectedTagInput"
+                                value="<?php echo $tagline; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTag">
@@ -178,8 +366,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="tagInput"
-                                                placeholder="Enter a tag">
-                                            <div class="input-group-append">
+                                                placeholder="Enter a tag" value="<?php echo $tagline; ?>">
+                                            <div class=" input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addTag()">Add</button>
                                             </div>
@@ -287,7 +475,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedDireksi" id="selectedDireksiInput" value="">
+                            <input type="hidden" name="selectedDireksi" id="selectedDireksiInput"
+                                value="<?php echo $nama_direktur_string; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseDirektur">
@@ -309,7 +498,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="directorInput"
-                                                placeholder="Enter a director's name">
+                                                placeholder="Enter a director's name"
+                                                value="<?php echo $nama_direktur_string; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addDirector()">Add</button>
@@ -417,7 +607,8 @@ include '../config/koneksi.php';
 
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedPemain" id="selectedPemainInput" value="">
+                            <input type="hidden" name="selectedPemain" id="selectedPemainInput"
+                                value="<?php echo $nama_pemain_string; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
@@ -430,7 +621,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="playerInput"
-                                                placeholder="Enter a player's name">
+                                                placeholder="Enter a player's name"
+                                                value="<?php echo $nama_pemain_string; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addPlayer()">Add</button>
@@ -543,7 +735,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedTahun" id="selectedTahunInput" value="">
+                            <input type="hidden" name="selectedTahun" id="selectedTahunInput"
+                                value="<?php echo $tahun_rilis; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
@@ -556,7 +749,7 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" id="yearInput"
-                                                placeholder="Enter a year">
+                                                placeholder="Enter a year" value="<?php echo $tahun_rilis; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addYear()">Add</button>
@@ -667,7 +860,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput" value="">
+                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput"
+                                value="<?php echo $nama_negara; ?>">
 
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -681,7 +875,7 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="countryInput"
-                                                placeholder="Enter a country">
+                                                placeholder="Enter a country" value="<?php echo $nama_negara; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addCountry()">Add</button>

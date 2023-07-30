@@ -1,30 +1,254 @@
 <?php
 include '../config/koneksi.php';
+
+$tv_id = $_GET['id_tv'];
+
+
+$api_key = '28f59279215bfffc21257db6c0f7bff5';
+$base_url_tmdb = "https://api.themoviedb.org/3";
+
+$endpoint = "/tv/{$tv_id}";
+$query_string = "?api_key={$api_key}&append_to_response=videos,credits";
+
+$url = $base_url_tmdb . $endpoint . $query_string;
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+curl_close($ch);
+
+if ($response !== false) {
+    $data = json_decode($response, true);
+
+    if (isset($data['name'])) {
+        $judul = $data['name'];
+        $tahun_rilis = substr($data['first_air_date'], 0, 4);
+        $judul_tahun = $judul . " (" . $tahun_rilis . ")";
+
+        $languageMap = array(
+            "en" => "English",
+            "ar" => "Arabic",
+            "bn" => "Bengali",
+            "zh" => "Chinese",
+            "cs" => "Czech",
+            "da" => "Danish",
+            "nl" => "Dutch",
+            "fi" => "Finnish",
+            "fr" => "French",
+            "de" => "German",
+            "el" => "Greek",
+            "he" => "Hebrew",
+            "hi" => "Hindi",
+            "hu" => "Hungarian",
+            "id" => "Indonesian",
+            "it" => "Italian",
+            "ja" => "Japanese",
+            "ko" => "Korean",
+            "ms" => "Malay",
+            "no" => "Norwegian",
+            "fa" => "Persian",
+            "pl" => "Polish",
+            "pt" => "Portuguese",
+            "ro" => "Romanian",
+            "ru" => "Russian",
+            "es" => "Spanish",
+            "sv" => "Swedish",
+            "th" => "Thai",
+            "tr" => "Turkish",
+            "uk" => "Ukrainian",
+            "vi" => "Vietnamese",
+            "other" => "Other",
+        );
+        $bahasa_kode = $data['original_language'];
+        $bahasa = isset($languageMap[$bahasa_kode]) ? $languageMap[$bahasa_kode] : $languageMap['en'];
+
+        $tagline = isset($data['tagline']) ? $data['tagline'] : "-";
+
+        $waktu_jalan = 0;
+
+        if (isset($data['episode_run_time'])) {
+            $durasi_episode = $data['episode_run_time'];
+            $waktu_jalan = array_sum($durasi_episode);
+        }
+
+        $jumlah_episode = 0;
+
+        if (isset($data['number_of_episodes'])) {
+            $jumlah_episode = $data['number_of_episodes'];
+        }
+
+        $rating = $data['vote_average'];
+
+        if (isset($data['budget'])) {
+            $anggaran = $data['budget'];
+        } else {
+            $anggaran = "";
+        }
+
+        if (isset($data['revenue'])) {
+            $pendapatan = $data['revenue'];
+        } else {
+            $pendapatan = "";
+        }
+
+        if (isset($data['release_date'])) {
+            $release_date = $data['release_date'];
+            $tanggal_rilis = date('d M Y', strtotime($release_date));
+        } else {
+            $tanggal_rilis = "";
+        }
+
+        $last_air_date = $data['last_air_date'];
+
+
+        $url_poster = "https://image.tmdb.org/t/p/w200/{$data['poster_path']}";
+        $deskripsi = $data['overview'];
+
+        if (isset($data['external_ids']['imdb_id'])) {
+            $id_imdb = $data['external_ids']['imdb_id'];
+        } else {
+            $id_imdb = "";
+        }
+
+        $id_tmdb = $tv_id;
+
+        $genres = $data['genres'];
+        $genre_names = array();
+
+        foreach ($genres as $genre) {
+            $genre_names[] = $genre['name'];
+        }
+
+        $trailer_key = "";
+        if (isset($data['videos']['results'])) {
+            foreach ($data['videos']['results'] as $video) {
+                if ($video['type'] === 'Trailer') {
+                    $trailer_key = $video['key'];
+                    break;
+                }
+            }
+        }
+
+        if (!empty($trailer_key)) {
+            $trailer_link = "https://www.youtube.com/watch?v={$trailer_key}";
+        } else {
+            $trailer_link = "";
+        }
+
+        // Ambil data kru produksi dari API TMDb
+        $credits_endpoint = "/movie/{$tv_id}/credits";
+        $credits_url = $base_url_tmdb . $credits_endpoint . $query_string;
+        $cast_url = $base_url_tmdb . $credits_endpoint . $query_string;
+
+        $ch_credits = curl_init($credits_url);
+        curl_setopt($ch_credits, CURLOPT_RETURNTRANSFER, true);
+        $response_credits = curl_exec($ch_credits);
+        curl_close($ch_credits);
+
+        if ($response_credits !== false) {
+            $credits_data = json_decode($response_credits, true);
+
+            $directors = array_filter($credits_data['crew'], function ($crew) {
+                return $crew['job'] === 'Director';
+            });
+
+            $nama_direktur = array_column($directors, 'name');
+            $nama_direktur_string = implode(', ', $nama_direktur);
+
+        } else {
+            $nama_direktur_string = "";
+        }
+
+
+        $ch_cast = curl_init($cast_url);
+        curl_setopt($ch_cast, CURLOPT_RETURNTRANSFER, true);
+        $response_cast = curl_exec($ch_cast);
+        curl_close($ch_cast);
+
+        if (isset($data['credits']['cast']) && !empty($data['credits']['cast'])) {
+            $cast = $data['credits']['cast'];
+
+            $nama_pemain = array_column($cast, 'name');
+            $nama_pemain_string = implode(', ', $nama_pemain);
+
+        }
+
+        if (isset($data['production_countries'])) {
+            $countries = $data['production_countries'];
+            $country_names = array();
+
+            foreach ($countries as $country) {
+                $country_names[] = $country['name'];
+            }
+            $nama_negara = implode(', ', $country_names);
+        } else {
+            $nama_negara = "";
+        }
+
+        $networks = $data['networks'];
+        $network_names = array();
+
+        foreach ($networks as $network) {
+            $network_names[] = $network['name'];
+        }
+        $jaringan = implode(', ', $network_names);
+    } else {
+        $judul = 'Tidak ditemukan untuk';
+        $judul_tahun = "";
+        $bahasa = "";
+        $tagline = "";
+        $deskripsi = "";
+        $tanggal_rilis = "";
+        $tahun_rilis = "";
+        $waktu_jalan = "";
+        $rating = "";
+        $anggaran = "";
+        $pendapatan = "";
+        $trailer_link = "";
+        $url_poster = "";
+        $nama_direktur_string = "";
+        $nama_pemain_string = "";
+        $nama_negara = "";
+        $id_imdb = "";
+        $id_tmdb = "";
+        $jumlah_episode = "";
+        $jaringan = "";
+    }
+} else {
+
+}
 ?>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form action="film/proses_create.php" method="post" enctype="multipart/form-data">
+        <form action="tv_show/proses_create.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-8">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Film</h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Tambah Film || Search:
+                                    <?php echo $judul . " id: " . $tv_id; ?>
+                                </h3>
+                                <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_tvshow"
+                                    class="btn btn-primary">Add Manual</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="judul_film">Judul Film</label>
-                                <input type="text" class="form-control" id="judul_film" name="judul_film" required>
+                                <label for="judul_tv_show">Judul TV Show</label>
+                                <input type="text" class="form-control" id="judul_tv_show" name="judul_tv_show"
+                                    value="<?php echo $judul_tahun; ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                                <textarea class="form-control" id="deskripsi"
+                                    name="deskripsi"><?php echo $deskripsi; ?></textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="card">
-                        <?php include 'film/form_card.php'; ?>
+                        <?php include 'tv_show/form_card_tmdb.php'; ?>
                     </div>
                 </div>
 
@@ -41,8 +265,8 @@ include '../config/koneksi.php';
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="statusFilm">Status</label>
-                                        <select class="form-control" id="statusFilm" name="statusFilm">
+                                        <label for="status">Status</label>
+                                        <select class="form-control" id="statusFilm" name="status">
                                             <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
                                             <option value="terbitkan">Terbitkan segera</option>
@@ -88,10 +312,16 @@ include '../config/koneksi.php';
                                                 echo '<label class="form-check-label" for="genre_' . $id_genre . '">' . $nama_genre . '</label>';
                                                 echo '</div>';
                                             }
+                                            foreach ($genre_names as $nama_genre) {
+                                                echo '<div class="form-check">';
+                                                echo '<input type="checkbox" class="form-check-input" id="genre_' . $nama_genre . '" name="genre[]" value="' . $nama_genre . '" checked>';
+                                                echo '<label class="form-check-label" for="genre_' . $nama_genre . '">' . $nama_genre . '</label>';
+                                                echo '</div>';
+                                            }
                                             ?>
                                         </div>
                                     </div>
-                                    <form method="post" action="film/proses_tambah_genre.php" id="addGenreForm">
+                                    <form method="post" action="tv_show/proses_tambah_genre.php" id="addGenreForm">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="newGenreInput" name="nama_genre"
                                                 placeholder="Masukkan genre baru">
@@ -127,7 +357,7 @@ include '../config/koneksi.php';
 
                                 let data = "nama_genre=" + encodeURIComponent(nama_genre);
 
-                                xhr.open('POST', 'film/proses_tambah_genre.php', true);
+                                xhr.open('POST', 'tv_show/proses_tambah_genre.php', true);
                                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                 xhr.send(data);
                             }
@@ -156,7 +386,8 @@ include '../config/koneksi.php';
 
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedTag" id="selectedTagInput" value="">
+                            <input type="hidden" name="selectedTag" id="selectedTagInput"
+                                value="<?php echo $tagline; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTag">
@@ -178,7 +409,7 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="tagInput"
-                                                placeholder="Enter a tag">
+                                                placeholder="Enter a tag" value="<?php echo $tagline; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addTag()">Add</button>
@@ -222,7 +453,6 @@ include '../config/koneksi.php';
                                         }
                                     </style>
                                     <script>
-                                        // Variabel untuk menyimpan nilai tag yang sudah ditampilkan
                                         let selectedTagsArray = [];
 
                                         function addTag() {
@@ -244,20 +474,18 @@ include '../config/koneksi.php';
                                                         deleteIcon.classList.add("fas", "fa-times");
                                                         deleteIcon.addEventListener("click", function () {
                                                             tagContainerElement.removeChild(newTagElement);
-                                                            // Saat tag dihapus, hapus juga dari selectedTagsArray
                                                             selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
-                                                            updateSelectedTags(); // Update nilai input hidden
+                                                            updateSelectedTags();
                                                         });
 
                                                         newTagElement.appendChild(deleteIcon);
                                                         tagContainerElement.appendChild(newTagElement);
 
-                                                        // Tambahkan tag ke dalam selectedTagsArray jika belum ada di dalamnya
                                                         if (!selectedTagsArray.includes(tagName)) {
                                                             selectedTagsArray.push(tagName);
                                                         }
 
-                                                        updateSelectedTags(); // Update nilai input hidden
+                                                        updateSelectedTags();
                                                     }
                                                 });
 
@@ -287,7 +515,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedDireksi" id="selectedDireksiInput" value="">
+                            <input type="hidden" name="selectedDireksi" id="selectedDireksiInput"
+                                value="<?php echo $nama_direktur_string; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseDirektur">
@@ -309,7 +538,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="directorInput"
-                                                placeholder="Enter a director's name">
+                                                placeholder="Enter a director's name"
+                                                value="<?php echo $nama_direktur_string; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addDirector()">Add</button>
@@ -417,7 +647,8 @@ include '../config/koneksi.php';
 
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedPemain" id="selectedPemainInput" value="">
+                            <input type="hidden" name="selectedPemain" id="selectedPemainInput"
+                                value="<?php echo $nama_pemain_string; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapsePemain">
@@ -430,7 +661,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="playerInput"
-                                                placeholder="Enter a player's name">
+                                                placeholder="Enter a player's name"
+                                                value="<?php echo $nama_pemain_string; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addPlayer()">Add</button>
@@ -543,7 +775,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedTahun" id="selectedTahunInput" value="">
+                            <input type="hidden" name="selectedTahun" id="selectedTahunInput"
+                                value="<?php echo $tahun_rilis; ?>">
                             <div class="card-header">
                                 <h4 class="card-title">
                                     <a class="d-block text-dark" data-toggle="collapse" href="#collapseTahun">
@@ -556,7 +789,7 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" id="yearInput"
-                                                placeholder="Enter a year">
+                                                placeholder="Enter a year" value="<?php echo $tahun_rilis; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addYear()">Add</button>
@@ -667,7 +900,8 @@ include '../config/koneksi.php';
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput" value="">
+                            <input type="hidden" name="selectedNegara" id="selectedNegaraInput"
+                                value="<?php echo $nama_negara; ?>">
 
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -681,7 +915,7 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="countryInput"
-                                                placeholder="Enter a country">
+                                                placeholder="Enter a country" value="<?php echo $nama_negara; ?>">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
                                                     onclick="addCountry()">Add</button>
@@ -917,6 +1151,132 @@ include '../config/koneksi.php';
                             </div>
                         </div>
                     </div>
+                    <div id="accordion">
+                        <div class="card">
+                            <input type="hidden" name="selectedJaringan" id="selectedJaringanInput"
+                                value="<?php echo $jaringan; ?>">
+
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a class="d-block text-dark" data-toggle="collapse" href="#collapseJaringan">
+                                        Jaringan
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseJaringan" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="jaringanInput"
+                                                placeholder="Enter a jaringan" value="<?php echo $jaringan; ?>">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="addJaringan()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="jaringanList">
+                                    </div>
+                                    <small class="text-primary" style="cursor: pointer;"
+                                        onclick="toggleSavedJaringan()">Tampilkan
+                                        Jaringan Tersimpan di database.</small>
+
+                                    <div id="savedJaringanList" style="display: none;">
+                                        <hr>
+                                        <div class="form-group" style="height: 80px; overflow-y: auto;">
+                                            <?php
+                                            $query_jaringan = "SELECT id, nama_jaringan FROM tb_jaringan";
+                                            $result_jaringan = mysqli_query($koneksi, $query_jaringan);
+
+                                            while ($row = mysqli_fetch_assoc($result_jaringan)) {
+                                                $id_jaringan = $row['id'];
+                                                $nama_jaringan = $row['nama_jaringan'];
+
+                                                echo '<a class="tag-link" onclick="handleJaringanClick(\'' . $nama_jaringan . '\')">' . $nama_jaringan . '</a>';
+                                                echo ' ,';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <style>
+                                    .jaringan {
+                                        display: inline-block;
+                                        background-color: #f0f0f0;
+                                        padding: 5px 10px;
+                                        margin-right: 5px;
+                                        border-radius: 5px;
+                                    }
+
+                                    .jaringan i {
+                                        margin-left: 5px;
+                                        cursor: pointer;
+                                    }
+                                </style>
+
+                                <script>
+                                    let selectedJaringanArray = [];
+
+                                    function addJaringan() {
+                                        const inputElement = document.getElementById("jaringanInput");
+                                        const jaringans = inputElement.value.split(',').map(jaringan => jaringan.trim());
+
+                                        if (jaringans.length > 0 && jaringans[0] !== "") {
+                                            const jaringanContainerElement = document.getElementById("jaringanList");
+
+                                            jaringans.forEach(jaringan => {
+
+                                                const isJaringanExists = Array.from(jaringanContainerElement.children).some(jaringanElement => jaringanElement.textContent === jaringan);
+
+                                                if (!isJaringanExists) {
+                                                    const newJaringanElement = document.createElement("span");
+                                                    newJaringanElement.textContent = jaringan;
+                                                    newJaringanElement.classList.add("jaringan");
+
+                                                    const deleteIcon = document.createElement("i");
+                                                    deleteIcon.classList.add("fas", "fa-times");
+                                                    deleteIcon.addEventListener("click", function () {
+                                                        jaringanContainerElement.removeChild(newJaringanElement);
+                                                        selectedJaringanArray = selectedJaringanArray.filter(selectedJaringan => selectedJaringan !== jaringan); // Hapus jaringan dari array saat dihapus dari daftar
+                                                        updateSelectedJaringan();
+                                                    });
+
+                                                    newJaringanElement.appendChild(deleteIcon);
+                                                    jaringanContainerElement.appendChild(newJaringanElement);
+
+                                                    if (!selectedJaringanArray.includes(jaringan)) {
+                                                        selectedJaringanArray.push(jaringan);
+                                                    }
+                                                    updateSelectedJaringan();
+                                                }
+                                            });
+
+                                            inputElement.value = "";
+                                        }
+                                    }
+
+                                    function updateSelectedJaringan() {
+                                        const selectedJaringanInput = document.getElementById("selectedJaringanInput");
+                                        selectedJaringanInput.value = selectedJaringanArray.join(',');
+                                    }
+
+                                    function handleJaringanClick(jaringanName) {
+                                        const jaringanInputValue = document.getElementById("jaringanInput");
+                                        jaringanInputValue.value = jaringanName;
+                                    }
+
+                                    function toggleSavedJaringan() {
+                                        const savedJaringanList = document.getElementById("savedJaringanList");
+                                        savedJaringanList.style.display = savedJaringanList.style.display === "none" ? "block" : "none";
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
