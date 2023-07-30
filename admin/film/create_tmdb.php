@@ -988,7 +988,7 @@ if ($response !== false) {
                     </div>
                     <div id="accordion">
                         <div class="card">
-                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput" value="">
+                            <input type="hidden" name="selectedKualitas" id="selectedKualitasInput" value="HD">
 
                             <div class="card-header">
                                 <h4 class="card-title">

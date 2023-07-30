@@ -400,6 +400,7 @@ $id_for_film = $_POST['id_for_film'];
 
 $judul_film = $_POST["judul_film"];
 $deskripsi = $_POST["deskripsi"];
+$deskripsi = mysqli_real_escape_string($koneksi, $deskripsi);
 $statusFilm = $_POST['statusFilm'];
 
 
@@ -470,5 +471,6 @@ if (mysqli_query($koneksi, $sql)) {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
 
-header("Location: ../dashboard.php?page=film");
+mysqli_close($koneksi);
+header("Location: ../dashboard.php?page=film&alert=berhasil_diubah");
 exit;

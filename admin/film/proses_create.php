@@ -404,3 +404,7 @@ if (mysqli_query($koneksi, $sql)) {
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
+
+mysqli_close($koneksi);
+header("Location: ../dashboard.php?page=film&alert=berhasil_ditambah");
+exit;
