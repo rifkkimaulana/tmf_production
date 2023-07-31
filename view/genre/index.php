@@ -1,0 +1,1 @@
+<?php include 'view/genre_button.php'; ?>
