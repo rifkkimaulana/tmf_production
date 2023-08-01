@@ -194,9 +194,12 @@
                 case 'log_aplikasi':
                     include "log_aplikasi/index.php";
                     break;
+                case 'komentar':
+                    include "komentar/index.php";
+                    break;
 
                 default:
-                    include "error/halaman-buntu.php";
+                    include "../view/error/halaman-buntu.php";
                     break;
             }
         } else {

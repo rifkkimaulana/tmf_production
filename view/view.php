@@ -278,7 +278,8 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                         <input type="hidden" name="nama" value="<?php echo $_SESSION['nama']; ?>">
                         <input type="hidden" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
                         <div class="form-group">
-                            <input class="form-control" id="komentar" name="komentar" rows="3" required></input>
+                            <input class="form-control" id="komentar" name="komentar" rows="3"
+                                placeholder="Tambahkan komentar" required></input>
                         </div>
                         <button type="submit" class="btn btn-outline-primary btn-rounded float-right submit-btn"
                             id="kirimBtn" style="display: none;">Kirim</button>
@@ -297,7 +298,8 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                 </br></br>
                 <?php
                 include 'config/koneksi.php';
-                $query_komentar = "SELECT * FROM tb_komentar ORDER BY id DESC";
+                $tmdb_id = $row_film['tmdb_id'];
+                $query_komentar = "SELECT * FROM tb_komentar WHERE tmdb_id = '$tmdb_id' ORDER BY id DESC";
                 $result_komentar = mysqli_query($koneksi, $query_komentar);
                 ?>
                 <?php while ($row_komentar = mysqli_fetch_assoc($result_komentar)) { ?>
@@ -309,7 +311,7 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                         $result_user = mysqli_query($koneksi, $query_user);
                         $row_user = mysqli_fetch_assoc($result_user);
                         $fotoProfil = $row_user['logo_user'];
-
+                        $tmdb_id = $row_film['tmdb_id'];
                         // Tampilkan foto profil jika ada, jika tidak, tampilkan foto default
                         if (!empty($fotoProfil)) {
                             $fotoUrl = $base_url . '/gambar/user/' . $fotoProfil;
@@ -324,13 +326,14 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                                 <h6 class="mt-0">
                                     <b>
                                         <?php echo $row_komentar['nama']; ?>
-                                    </b> .
-                                    <?php echo timeSinceUpload($row_komentar['waktu_post']); ?> .
+                                    </b>
+                                    <?php echo ". " . timeSinceUpload($row_komentar['waktu_post']); ?>
                                     <?php
                                     if (isset($_SESSION['nama']) && $_SESSION['nama'] === $row_komentar['nama']) {
                                         ?>
 
                                         <input type="hidden" name="komentar_id" value="<?php echo $row_komentar['id']; ?>">
+                                        <input type="hidden" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
                                         <a href="#" class="text-danger"
                                             onclick="if(confirm('Apakah Anda yakin ingin menghapus komentar ini?')) { this.parentNode.parentNode.submit(); } event.returnValue = false;">Hapus</a>
 
