@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config/base_url.php';
 include 'config/koneksi.php';
 
@@ -36,7 +37,8 @@ $limitedGenres = array_slice($genres, 0, 8);
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>TMF Production | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -51,6 +53,14 @@ $limitedGenres = array_slice($genres, 0, 8);
 
 
     <style>
+        .tmf_shadow {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .tmf_production {
+            margin-top: 15px;
+        }
+
         .genre-button {
             margin-bottom: 5px;
             margin-right: 5px;
@@ -59,6 +69,48 @@ $limitedGenres = array_slice($genres, 0, 8);
         .dropdown-menu {
             max-height: 300px;
             overflow-y: auto;
+        }
+
+        .tmf_teks {
+            color: black;
+        }
+
+        .card-body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .zoom-effect {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .zoom-effect:hover {
+            transform: scale(1.0);
+        }
+
+        .card-flat hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .comment-form .form-control {
+            border: none;
+            border-bottom: 1px solid #dcdcdc;
+            transition: border-bottom 0.3s;
+        }
+
+        /* Add bottom border to form */
+        .comment-form {
+            padding-bottom: 15px;
+        }
+
+        /* Style submit button */
+        .comment-form .submit-btn {
+            margin-top: 10px;
+        }
+
+        /* Style input field when focused */
+        .comment-form .form-control:focus {
+            border-bottom: 2px solid #007bff;
         }
     </style>
 </head>

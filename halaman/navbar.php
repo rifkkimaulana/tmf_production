@@ -70,8 +70,34 @@
                     </div>
                 </div>
             </form>
+
+            <!-- Notification Bell Icon -->
+            <ul class="navbar-nav ml-auto align-items-center">
+                <!-- Notification Bell Icon -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown">
+                        <i class="far fa-bell"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- Notification content goes here -->
+                    </div>
+                </li>
+
+                <!-- Profile Picture -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown">
+                        <img src="https://www.pngkey.com/png/detail/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
+                            class="img-circle elevation-2" style="width: 20px;">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- Profile-related items go here -->
+                    </div>
+                </li>
+            </ul>
+
         </div>
 
     </div>
 </nav>
+
 <!-- /.navbar -->
