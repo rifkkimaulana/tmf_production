@@ -1,73 +1,70 @@
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Seleksi TV Show</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example2" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 30%;">Judul TV Show</th>
-                                        <th style="width: 10%;">Pilih</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    // Assuming you have established the database connection ($koneksi)
-                                    $query = "SELECT id, judul_tv_show FROM tb_tv_show";
-                                    $result = mysqli_query($koneksi, $query);
+                <?php if (empty($_GET['id'])) { ?>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Seleksi TV Show</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example2" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 30%;">Judul TV Show</th>
+                                            <th style="width: 10%;">Pilih</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $query = "SELECT id, judul_tv_show FROM tb_tv_show";
+                                        $result = mysqli_query($koneksi, $query);
 
-                                    if (!$result) {
-                                        die("Query gagal: " . mysqli_error($koneksi));
-                                    }
+                                        if (!$result) {
+                                            die("Query gagal: " . mysqli_error($koneksi));
+                                        }
 
-                                    // Loop through the results and display TV show names in the table
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['judul_tv_show'] . "</td>";
-                                        echo '<td>
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['judul_tv_show'] . "</td>";
+                                            echo '<td>
                                   <form action="dashboard.php" method="get">
                                       <input type="hidden" name="page" value="add_episode">
                                       <input type="hidden" name="id" value="' . $row['id'] . '">
                                       <button type="submit" class="btn btn-primary">Pilih</button>
                                   </form>
                               </td>';
-                                        echo "</tr>";
-                                    }
+                                            echo "</tr>";
+                                        }
 
-                                    mysqli_free_result($result);
-                                    ?>
-                                </tbody>
-                            </table>
+                                        mysqli_free_result($result);
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <form action="episode/proses_create.php" method="post" enctype="multipart/form-data">
                     </div>
-                </div>
-                <?php
-                include '../config/koneksi.php';
-                if (isset($_GET['id'])) {
-                    $id_tv_show = $_GET['id'];
-                    // Lakukan tindakan selanjutnya dengan $selectedTvShowId
-                    $result = mysqli_query($koneksi, "SELECT id, judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
+                <?php } ?>
+                <form action="episode/proses_create.php" method="post" enctype="multipart/form-data">
+                    <?php
+                    include '../config/koneksi.php';
+                    if (isset($_GET['id'])) {
+                        $id_tv_show = $_GET['id'];
+                        $result = mysqli_query($koneksi, "SELECT id, judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
                     WHERE id = $id_tv_show");
-                    $row = mysqli_fetch_assoc($result);
+                        $row = mysqli_fetch_assoc($result);
 
-                    $id_tmdb_post = $row['tmdb_id'];
-                    $id_tv_post = $row['id'];
+                        $id_tmdb_post = $row['tmdb_id'];
+                        $id_tv_post = $row['id'];
 
-                    $result_tmdb = mysqli_query($koneksi, "SELECT judul, bahasa, tagline, rating_mpaa, tanggal_rilis, tahun_rilis, tanggal_terakhir_mengudara, waktu_jalan, jumlah_episode, rating1, rating2, anggaran, pendapatan, link_trailer, url_poster, imdb_id, tmdb_id, penerjemah FROM tb_tmdb WHERE id = $id_tmdb_post");
-                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                        $result_tmdb = mysqli_query($koneksi, "SELECT judul, bahasa, tagline, rating_mpaa, tanggal_rilis, tahun_rilis, tanggal_terakhir_mengudara, waktu_jalan, jumlah_episode, rating1, rating2, anggaran, pendapatan, link_trailer, url_poster, imdb_id, tmdb_id, penerjemah FROM tb_tmdb WHERE id = $id_tmdb_post");
+                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 
-                    // Selanjutnya, Anda dapat menyertakan form episode jika TV show telah dipilih
-                    echo '<div class="card">';
-                    include 'episode/form_tmdb.php';
-                    echo '</div>';
-                    ?>
+                        echo '<div class="card">';
+                        include 'episode/form_tmdb.php';
+                        echo '</div>';
+                        ?>
                 </div>
                 <div class="col-4">
                     <div id="accordion">
@@ -87,14 +84,17 @@
 
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">
-                                            <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
                                             <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                                    <a href="<?php echo $base_url . "/admin/dashboard.php?page=add_episode"; ?>">
+                                        <button type="button" class="btn btn-secondary float-right mr-1">Batal</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                                         <div class="form-group">
                                             <label for="nama_episode">Nama Episode</label>
                                             <input type="text" class="form-control" id="nama_episode" name="nama_episode"
-                                                required>
+                                                value="<?php echo $row_tmdb['judul']; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="jumlah_episode">Episode Ke</label>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 <?php } else {
-                } ?>
+                    } ?>
             </div>
         </div>
     </div>
