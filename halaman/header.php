@@ -29,7 +29,7 @@ if (empty($genres)) {
 }
 
 shuffle($genres);
-$limitedGenres = array_slice($genres, 0, 8);
+$limitedGenres = array_slice($genres, 0, 9);
 
 ?>
 <!DOCTYPE html>
@@ -115,21 +115,45 @@ $limitedGenres = array_slice($genres, 0, 8);
 
         .lewati-notification {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
+            bottom: 10px;
+            right: 5px;
             padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             display: none;
         }
 
         .lewati-content {
             display: flex;
             align-items: center;
+            opacity: 0.5;
         }
 
         .lewati-content p {
             margin-right: 10px;
+        }
+
+        /* Ukuran poster pada tampilan di laptop */
+        .img-poster {
+            max-width: 100%;
+        }
+
+        /* Ukuran poster pada tampilan di perangkat Android dalam mode landscape */
+        @media (max-width: 768px) {
+            .img-poster-android-landscape {
+                max-width: 50%;
+                display: block;
+                margin: 0 auto;
+                /* Membuat gambar menjadi posisi tengah secara horizontal */
+            }
+        }
+
+        /* Ukuran poster pada tampilan di perangkat Android dalam mode portrait */
+        @media (max-width: 576px) {
+            .img-poster-android-portrait {
+                max-width: 100%;
+                display: block;
+                margin: 0 auto;
+                /* Membuat gambar menjadi posisi tengah secara horizontal */
+            }
         }
     </style>
 </head>

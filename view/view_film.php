@@ -1,7 +1,6 @@
 <?php
 include 'config/koneksi.php';
 
-
 if (isset($_GET['id'])) {
     $filmId = $_GET['id'];
 } else {
@@ -33,17 +32,8 @@ $id_download = $row_film['download_id'];
         <div class="col-lg-12">
             <div class="card tmf_shadow bg-black">
                 <div class="embed-responsive embed-responsive-16by9">
-
-                    <a> Jika anda melihat halaman seperti ini video yang anda putar tidak tersedia silahkan anda
-                        alihkan
-                        ke server lain.</a>
-
                     <?php
-
                     include 'config/koneksi.php';
-
-
-
                     $playValue = isset($_GET['play']) ? $_GET['play'] : '';
 
                     $query_play = "SELECT * FROM tb_player WHERE id = '$id_player'";
@@ -136,8 +126,8 @@ $id_download = $row_film['download_id'];
                     ?>
                     <div class="lewati-notification">
                         <div class="lewati-content">
-                            <a href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=1"; ?>"
-                                class="btn btn-secondary">Lewati Trailer</a>
+                            <a href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=1"; ?>"
+                                class="btn btn-sm btn-dark">Lewati Trailer</a>
                         </div>
                     </div>
                     <?php
@@ -165,64 +155,65 @@ $id_download = $row_film['download_id'];
 
             <div class="card-flat">
                 <div class="card-header">
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
+                    <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
+                        data-target="#modalNotifikasi">
                         INFO PLAYER
                     </button>
                     <div class="float-right">
-                        <a href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id; ?>"><button
-                                type="button" class="btn btn-secondary">Trailer</button></a>
-                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                        <a href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id; ?>"><button
+                                type="button" class="btn btn-sm btn-secondary">Trailer</button></a>
+                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
                             <span class="sr-only">Play</span>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=1"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=1"; ?>">Server
                                 1</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=2"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=2"; ?>">Server
                                 2</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=3"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=3"; ?>">Server
                                 3</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=4"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=4"; ?>">Server
                                 4</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=5"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=5"; ?>">Server
                                 5</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=6"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=6"; ?>">Server
                                 6</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=7"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=7"; ?>">Server
                                 7</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=8"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=8"; ?>">Server
                                 8</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=9"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=9"; ?>">Server
                                 9</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=10"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=10"; ?>">Server
                                 10</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=11"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=11"; ?>">Server
                                 11</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=12"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=12"; ?>">Server
                                 12</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=13"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=13"; ?>">Server
                                 13</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=14"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=14"; ?>">Server
                                 14</a>
                             <a class="dropdown-item"
-                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=15"; ?>">Server
+                                href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id . "&play=15"; ?>">Server
                                 15</a>
                         </div>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                             data-target="#modalDownload">Unduh</button>
                     </div>
                 </div>
@@ -231,7 +222,10 @@ $id_download = $row_film['download_id'];
                     <div class="modal-dialog " role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalNotifikasiLabel">Notifikasi</h5>
+                                <?php if (empty($judul)) {
+                                    $judul = 'tidak ada informasi';
+                                } ?>
+                                <?php echo $judul; ?>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -240,15 +234,8 @@ $id_download = $row_film['download_id'];
                                 <div class="d-flex align-items-center">
                                     <i class="fas fa-bell mr-3" style="font-size: 24px;"></i>
                                     <div>
-                                        <h5>
-                                            Judul Player:
-                                            <b>
-                                                <?php echo $judul; ?>
-                                            </b>
-                                        </h5>
                                         <p>
-
-                                            Keterangan:
+                                            Keterangan:</br>
                                             <?php echo $row_play['pemberitahuan_player']; ?>
                                         </p>
                                     </div>
@@ -280,7 +267,7 @@ $id_download = $row_film['download_id'];
 
                                 ?>
                                 <ul class="list-group" style="height: 300px; overflow: auto;">
-                                    <li class="list-group-item">Server 1 Keterangan:
+                                    <li class="list-group-item">Server 1 :
                                         <?php
                                         if (!empty($row_download['judul1']) && !empty($row_download['link1'])) {
                                             echo $row_download['judul1'];
@@ -291,7 +278,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 2 Keterangan:
+                                    <li class="list-group-item">Server 2 :
                                         <?php
                                         if (!empty($row_download['judul2']) && !empty($row_download['link2'])) {
                                             echo $row_download['judul2'];
@@ -302,7 +289,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 3 Keterangan:
+                                    <li class="list-group-item">Server 3 :
                                         <?php
                                         if (!empty($row_download['judul3']) && !empty($row_download['link3'])) {
                                             echo $row_download['judul3'];
@@ -313,7 +300,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 4 Keterangan:
+                                    <li class="list-group-item">Server 4 :
                                         <?php
                                         if (!empty($row_download['judul4']) && !empty($row_download['link4'])) {
                                             echo $row_download['judul4'];
@@ -324,7 +311,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 5 Keterangan:
+                                    <li class="list-group-item">Server 5 :
                                         <?php
                                         if (!empty($row_download['judul5']) && !empty($row_download['link5'])) {
                                             echo $row_download['judul5'];
@@ -335,7 +322,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 6 Keterangan:
+                                    <li class="list-group-item">Server 6 :
                                         <?php
                                         if (!empty($row_download['judul6']) && !empty($row_download['link6'])) {
                                             echo $row_download['judul6'];
@@ -346,7 +333,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 7 Keterangan:
+                                    <li class="list-group-item">Server 7 :
                                         <?php
                                         if (!empty($row_download['judul7']) && !empty($row_download['link7'])) {
                                             echo $row_download['judul7'];
@@ -357,7 +344,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 8 Keterangan:
+                                    <li class="list-group-item">Server 8 :
                                         <?php
                                         if (!empty($row_download['judul8']) && !empty($row_download['link8'])) {
                                             echo $row_download['judul8'];
@@ -368,7 +355,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 9 Keterangan:
+                                    <li class="list-group-item">Server 9 :
                                         <?php
                                         if (!empty($row_download['judul9']) && !empty($row_download['link9'])) {
                                             echo $row_download['judul9'];
@@ -379,7 +366,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 10 Keterangan:
+                                    <li class="list-group-item">Server 10 :
                                         <?php
                                         if (!empty($row_download['judul10']) && !empty($row_download['link10'])) {
                                             echo $row_download['judul10'];
@@ -390,7 +377,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 11 Keterangan:
+                                    <li class="list-group-item">Server 11 :
                                         <?php
                                         if (!empty($row_download['judul11']) && !empty($row_download['link11'])) {
                                             echo $row_download['judul11'];
@@ -401,7 +388,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 12 Keterangan:
+                                    <li class="list-group-item">Server 12 :
                                         <?php
                                         if (!empty($row_download['judul12']) && !empty($row_download['link12'])) {
                                             echo $row_download['judul12'];
@@ -412,7 +399,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 13 Keterangan:
+                                    <li class="list-group-item">Server 13 :
                                         <?php
                                         if (!empty($row_download['judul13']) && !empty($row_download['link13'])) {
                                             echo $row_download['judul13'];
@@ -423,7 +410,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 14 Keterangan:
+                                    <li class="list-group-item">Server 14 :
                                         <?php
                                         if (!empty($row_download['judul14']) && !empty($row_download['link14'])) {
                                             echo $row_download['judul14'];
@@ -434,7 +421,7 @@ $id_download = $row_film['download_id'];
                                         }
                                         ?>
                                     </li>
-                                    <li class="list-group-item">Server 15 Keterangan:
+                                    <li class="list-group-item">Server 15 :
                                         <?php
                                         if (!empty($row_download['judul15']) && !empty($row_download['link15'])) {
                                             echo $row_download['judul15'];
@@ -578,7 +565,7 @@ $id_download = $row_film['download_id'];
                 <b>
                     Judul Film:
                 </b>
-                <a href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id; ?>">
+                <a href="<?php echo $base_url . "/dashboard.php?page=movies&id=" . $tmdb_id; ?>">
                     <?php echo $row_tmdb['judul']; ?>
                 </a>
                 <hr>
@@ -658,7 +645,7 @@ $id_download = $row_film['download_id'];
                 }
             </script>
 
-            <div class="card-flat comment-form">
+            <div class="card-flat comment-form" style="margin-bottom: 5px;">
                 </br>
                 <?php
                 $query_jumlah_komentar = "SELECT COUNT(*) as total_komentar FROM tb_komentar WHERE tmdb_id = ?";
@@ -670,7 +657,7 @@ $id_download = $row_film['download_id'];
                 $total_komentar = $row_jumlah_komentar['total_komentar'];
                 ?>
                 <h6>
-                    <?php echo $total_komentar; ?> Komentar
+                    <?php echo "    " . $total_komentar; ?> Komentar
                 </h6>
 
                 <form action="view/proses_komentar.php" method="POST">
@@ -685,14 +672,16 @@ $id_download = $row_film['download_id'];
                     <?php if (isset($_SESSION['nama'])) { ?>
                         <input type="hidden" name="nama" value="<?php echo $_SESSION['nama']; ?>">
                         <input type="hidden" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
+                        <input type="hidden" name="halaman" value="<?php echo $_GET['page']; ?>">
                         <div class="form-group">
                             <input class="form-control" id="komentar" name="komentar" rows="3"
                                 placeholder="Tambahkan komentar" required></input>
                         </div>
-                        <button type="submit" class="btn btn-outline-primary btn-rounded float-right submit-btn"
-                            id="kirimBtn" style="display: none;">Kirim</button>
-                        <button type="button" class="btn btn-outline-secondary btn-rounded float-right submit-btn"
-                            id="batalBtn" style="display: none;">Batal</button>
+                        <button type="submit" class="btn btn-sm btn-outline-primary btn-rounded float-right submit-btn ml-1"
+                            id="kirimBtn" style="display: none;">Kirim </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded float-right submit-btn"
+                            id="batalBtn" style="display: none;">Batal </button>
+
                     <?php } else { ?>
                         <div class="form-group">
                             <input class="form-control" id="komentar" name="komentar" rows="3"
@@ -703,7 +692,7 @@ $id_download = $row_film['download_id'];
             </div>
 
             <div class="card-flat">
-                </br></br>
+                </br>
                 <?php
                 include 'config/koneksi.php';
                 $tmdb_id = $row_film['tmdb_id'];
@@ -713,56 +702,52 @@ $id_download = $row_film['download_id'];
                 <?php while ($row_komentar = mysqli_fetch_assoc($result_komentar)) { ?>
                     <div class="media">
                         <?php
-                        // Ambil foto profil pengguna dari tabel tb_users berdasarkan nama pengguna (nama yang mengirim komentar)
                         $namaUser = $row_komentar['nama'];
                         $query_user = "SELECT logo_user FROM tb_users WHERE user_nama = '$namaUser'";
                         $result_user = mysqli_query($koneksi, $query_user);
                         $row_user = mysqli_fetch_assoc($result_user);
                         $fotoProfil = $row_user['logo_user'];
                         $tmdb_id = $row_film['tmdb_id'];
-                        // Tampilkan foto profil jika ada, jika tidak, tampilkan foto default
                         if (!empty($fotoProfil)) {
                             $fotoUrl = $base_url . '/gambar/user/' . $fotoProfil;
                         } else {
                             $fotoUrl = 'https://www.pngkey.com/png/detail/202-2024792_user-profile-icon-png-download-fa-user-circle.png';
                         }
                         ?>
-                        <img src="<?php echo $fotoUrl; ?>" class="mr-3" alt="User Avatar"
-                            style="width: 30px; height: 30px;">
+                        <img src="<?php echo $fotoUrl; ?>" class="mr-3" alt="User"
+                            style="width: 30px; height: 30px; margin-top: 10px;">
                         <div class="media-body">
-                            <form action="view/proses_hapus_komentar.php" method="POST">
-                                <h6 class="mt-0">
-                                    <b>
-                                        <?php echo $row_komentar['nama']; ?>
-                                    </b>
-                                    <?php echo ". " . timeSinceUpload($row_komentar['waktu_post']); ?>
-                                    <?php
-                                    if (isset($_SESSION['nama']) && $_SESSION['nama'] === $row_komentar['nama']) {
-                                        ?>
+                            <b>
+                                <?php echo $row_komentar['nama']; ?>
+                            </b>
+                            <small>
 
-                                        <input type="hidden" name="komentar_id" value="<?php echo $row_komentar['id']; ?>">
-                                        <input type="hidden" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
-                                        <a href="#" class="text-danger"
-                                            onclick="if(confirm('Apakah Anda yakin ingin menghapus komentar ini?')) { this.parentNode.parentNode.submit(); } event.returnValue = false;">Hapus</a>
-
-                                        <?php
-                                    }
-                                    ?>
-                                </h6>
-                            </form>
-
-                            <?php echo $row_komentar['komentar']; ?>
+                                <?php echo "(" . timeSinceUpload($row_komentar['waktu_post']) . ")"; ?>
+                            </small></br>
+                            <a>
+                                <?php echo $row_komentar['komentar']; ?>
+                            </a>
                         </div>
+                        <form action="view/proses_hapus_komentar.php" method="POST">
+                            <?php
+                            if (isset($_SESSION['nama']) && $_SESSION['nama'] === $row_komentar['nama']) {
+                                ?>
+                                <input type="hidden" name="komentar_id" value="<?php echo $row_komentar['id']; ?>">
+                                <input type="hidden" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
+                                <button type="submit" class="btn btn-outline btn-sm" style="margin-top: 10px;"
+                                    onclick="if(confirm('Apakah Anda yakin ingin menghapus komentar ini?')) { this.parentNode.parentNode.submit(); } event.returnValue = false;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <?php
+                            }
+                            ?>
+                        </form>
                     </div>
                     <hr>
                 <?php } ?>
             </div>
-
-
-
         </div>
     </div>
-
 </div>
 
 <?php include 'view/widgets.php'; ?>
@@ -782,7 +767,6 @@ $id_download = $row_film['download_id'];
         xhttp.send();
     }
 
-    // Reload the view count every minute (60,000 milliseconds)
     setInterval(reloadViewCount, 60000);
 </script>
 

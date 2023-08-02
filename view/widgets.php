@@ -42,25 +42,22 @@ $result_film = mysqli_query($koneksi, $query_film);
     <div class="row">
         <div class="col-lg-12">
             <div class="card-flat">
-                <div class="card-header">
-                    <h5 class="card-title m-0">Search Movie</h5>
-                </div>
                 <div class="card-body">
                     <form action="#" method="GET">
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="page" name="page" value="dashboard">
                             <input type="text" class="form-control" id="keyword" name="keyword"
-                                placeholder="Judul film">
+                                placeholder="Search Film & TV Show">
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="tipe" name="tipe">
+                            <select class="form-control form-control-sm" id="tipe" name="tipe">
                                 <option value="all">Semua Tipe</option>
                                 <option value="film">Film</option>
                                 <option value="tvShow">TV Show</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="genre" name="genre">
+                            <select class="form-control form-control-sm" id="genre" name="genre">
                                 <option value="all_genre">Semua Genre</option>
                                 <?php foreach ($genres as $genres) { ?>
                                     <?php
@@ -73,7 +70,7 @@ $result_film = mysqli_query($koneksi, $query_film);
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="tahun" name="tahun">
+                            <select class="form-control form-control-sm" id="tahun" name="tahun">
                                 <option value="all_tahun">
                                     Semua Tahun
                                 </option>
@@ -88,7 +85,7 @@ $result_film = mysqli_query($koneksi, $query_film);
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="negara" name="negara">
+                            <select class="form-control form-control-sm" id="negara" name="negara">
                                 <option value="all_negara">
                                     Semua Negara
                                 </option>
@@ -103,7 +100,7 @@ $result_film = mysqli_query($koneksi, $query_film);
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="kualitas" name="kualitas">
+                            <select class="form-control form-control-sm" id="kualitas" name="kualitas">
                                 <option value="all_kualitas">
                                     Semua Kualitas
                                 </option>
@@ -117,7 +114,9 @@ $result_film = mysqli_query($koneksi, $query_film);
                                 <?php } ?>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Cari</button>
+                        <div class="float-right">
+                        <button type="submit" class="btn btn-sm btn-primary">Cari</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -143,10 +142,10 @@ $result_film = mysqli_query($koneksi, $query_film);
                             ?>
                             <div class="row">
                                 <?php $tmdb_id = $row_film['tmdb_id']; ?>
-                                <div class="col-md-4 col-12 tmf_teks">
-                                    <a href="dashboard.php?page=view&id=<?php echo $tmdb_id; ?>" style="color: black;">
+                                <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
+                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
                                         <?php if (!empty($row_film['thumbnail'])) { ?>
-                                            <img class="img-fluid rounded img-android"
+                                            <img class="img-fluid rounded img-android img-poster img-poster-android-landscape"
                                                 src="gambar/film/<?php echo $row_film['thumbnail']; ?>"
                                                 alt="<?php echo $row_film['judul_film']; ?>">
                                         <?php } else {
@@ -156,13 +155,13 @@ $result_film = mysqli_query($koneksi, $query_film);
                                             $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                             $url_poster = $row_tmdb['url_poster'];
                                             ?>
-                                            <img class="img-fluid rounded img-android" src="<?php echo $url_poster; ?>"
+                                            <img class="img-fluid rounded img-android img-poster img-poster-android-landscape" src="<?php echo $url_poster; ?>"
                                                 alt="<?php echo $row_film['judul_film']; ?>">
                                         <?php } ?>
                                     </a>
                                 </div>
-                                <div class="col-md-8 col-12">
-                                    <a href="dashboard.php?page=view&id=<?php echo $tmdb_id; ?>" style="color: black;">
+                                <div class="col-lg-8 col-sm-6 col-6">
+                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
                                         <strong>
                                             <?php echo $row_film['judul_film']; ?>
                                         </strong></br>

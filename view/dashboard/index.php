@@ -8,10 +8,10 @@
 
         while ($row_film = mysqli_fetch_assoc($result_film)) {
             if (!empty($row_film['judul_film'])) { ?>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <?php if (!empty($row_film['thumbnail'])) { ?>
                         <a href="dashboard.php?page=view&id=<?php echo $row_film['tmdb_id']; ?>">
-                            <img class=" col-md-12 zoom-effect" src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
+                            <img class="col-md-12 zoom-effect" src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
                                 alt="<?php echo $row_film['judul_film']; ?>">
                         </a>
 
@@ -22,7 +22,7 @@
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['url_poster'];
                         ?>
-                        <a href="dashboard.php?page=view&id=<?php echo $tmdb_id; ?>">
+                        <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>">
                             <img class="col-md-12 zoom-effect" src="<?php echo $url_poster; ?>"
                                 alt="<?php echo $row_film['judul_film']; ?>">
                         </a>
@@ -38,7 +38,7 @@
                     </a>
 
                     <div class="card-body">
-                        <a class=" tmf_teks" href="dashboard.php?page=view&id=<?php echo $row_film['tmdb_id']; ?>">
+                        <a class=" tmf_teks" href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
                             <h5 class="card-title">
                                 <?php echo $row_film['judul_film']; ?>
                             </h5>

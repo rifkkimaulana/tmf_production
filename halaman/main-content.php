@@ -23,8 +23,11 @@
                 case 'negara':
                     include "view/negara/index.php";
                     break;
-                case 'view':
-                    include "view/view.php";
+                case 'movies':
+                    include "view/view_film.php";
+                    break;
+                case 'tv':
+                    include "view/view_tv.php";
                     break;
 
                 default:

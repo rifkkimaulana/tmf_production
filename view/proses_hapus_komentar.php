@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result_hapus = mysqli_query($koneksi, $query_hapus);
 
         if ($result_hapus) {
-            header("Location: ../dashboard.php?page=view&id=" . $tmdb_id);
+            header("Location: ../dashboard.php?page=movies&id=" . $tmdb_id);
         } else {
             echo "Gagal menghapus komentar. Silakan coba lagi.";
         }
