@@ -112,6 +112,25 @@ $limitedGenres = array_slice($genres, 0, 8);
         .comment-form .form-control:focus {
             border-bottom: 2px solid #007bff;
         }
+
+        .lewati-notification {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .lewati-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .lewati-content p {
+            margin-right: 10px;
+        }
     </style>
 </head>
 

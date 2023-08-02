@@ -21,39 +21,442 @@ $query_tmdb = "SELECT link_trailer FROM tb_tmdb WHERE id = '$tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 
-$link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : $row_film['link_trailer'];
+$link = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : $row_film['link_trailer'];
 
+$id_player = $row_film['player_id'];
+$id_download = $row_film['download_id'];
 
 ?>
 
 <div class="col-md-9 tmf_production">
     <div class="row">
-
         <div class="col-lg-12">
-
-            <div class="card card-primary tmf_shadow">
-
+            <div class="card tmf_shadow bg-black">
                 <div class="embed-responsive embed-responsive-16by9">
+
+                    <a> Jika anda melihat halaman seperti ini video yang anda putar tidak tersedia silahkan anda
+                        alihkan
+                        ke server lain.</a>
+
                     <?php
-                    if (strpos($link_trailer, 'v=') !== false) {
-                        $video_id = substr($link_trailer, strpos($link_trailer, 'v=') + 2);
-                        $link_trailer = "https://www.youtube.com/embed/" . $video_id . "?autoplay=1";
-                    } else {
-                        exit("Error: Invalid YouTube URL.");
+
+                    include 'config/koneksi.php';
+
+
+
+                    $playValue = isset($_GET['play']) ? $_GET['play'] : '';
+
+                    $query_play = "SELECT * FROM tb_player WHERE id = '$id_player'";
+                    $result_play = mysqli_query($koneksi, $query_play);
+                    $row_play = mysqli_fetch_assoc($result_play);
+
+                    switch ($playValue) {
+                        case 1:
+                            $link = $row_play['link1'];
+                            $judul = $row_play['judul1'];
+                            break;
+                        case 2:
+                            $link = $row_play['link2'];
+                            $judul = $row_play['judul2'];
+                            break;
+                        case 3:
+                            $link = $row_play['link3'];
+                            $judul = $row_play['judul2'];
+                            break;
+                        case 4:
+                            $link = $row_play['link4'];
+                            $judul = $row_play['judul4'];
+                            break;
+                        case 5:
+                            $link = $row_play['link5'];
+                            $judul = $row_play['judul5'];
+                            break;
+                        case 6:
+                            $link = $row_play['link6'];
+                            $judul = $row_play['judul6'];
+                            break;
+                        case 7:
+                            $link = $row_play['link7'];
+                            $judul = $row_play['judul7'];
+                            break;
+                        case 8:
+                            $link = $row_play['link8'];
+                            $judul = $row_play['judul8'];
+                            break;
+                        case 9:
+                            $link = $row_play['link9'];
+                            $judul = $row_play['judul9'];
+                            break;
+                        case 10:
+                            $link = $row_play['link10'];
+                            $judul = $row_play['judul10'];
+                            break;
+                        case 11:
+                            $link = $row_play['link11'];
+                            $judul = $row_play['judul11'];
+                            break;
+                        case 12:
+                            $link = $row_play['link12'];
+                            $judul = $row_play['judul12'];
+                            break;
+                        case 13:
+                            $link = $row_play['link13'];
+                            $judul = $row_play['judul13'];
+                            break;
+                        case 14:
+                            $link = $row_play['link14'];
+                            $judul = $row_play['judul14'];
+                            break;
+                        case 15:
+                            $link = $row_play['link15'];
+                            $judul = $row_play['judul15'];
+                            break;
+                        default:
+                            if (strpos($link, 'v=') !== false) {
+                                $video_id = substr($link, strpos($link, 'v=') + 2);
+                                $link = "https://www.youtube.com/embed/" . $video_id . "?autoplay=1";
+                            }
+                            break;
                     }
                     ?>
-                    <iframe src="<?php echo $link_trailer; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
+                    <?php
+                    if (empty($link)) {
+                        $link = $row_play['link1'];
+                    }
+                    ?>
+                    <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+                        allowfullscreen>
+                    </iframe>
+
                 </div>
+
+                <?php
+                if (strpos($link, 'autoplay=1') !== false) {
+                    ?>
+                    <div class="lewati-notification">
+                        <div class="lewati-content">
+                            <a href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=1"; ?>"
+                                class="btn btn-secondary">Lewati Trailer</a>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
+
+            <script>
+                var iframe = document.querySelector("iframe");
+                var lewatiNotification = document.querySelector(".lewati-notification");
+
+                // Tampilkan notifikasi lewati setelah 5 detik
+                setTimeout(function () {
+                    lewatiNotification.style.display = "block";
+                }, 5000);
+
+                // Tambahkan event click untuk tombol "Lewati"
+                lewatiNotification.querySelector("a").addEventListener("click", function (event) {
+                    event.preventDefault();
+                    var link_film = this.getAttribute("href");
+                    iframe.remove(); // Hapus iframe trailer
+                    window.location.href = link_film; // Menuju ke link film
+                });
+            </script>
+
             <div class="card-flat">
-                <h4>
+                <div class="card-header">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
+                        INFO PLAYER
+                    </button>
+                    <div class="float-right">
+                        <a href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id; ?>"><button
+                                type="button" class="btn btn-secondary">Trailer</button></a>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
+                            <span class="sr-only">Play</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=1"; ?>">Server
+                                1</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=2"; ?>">Server
+                                2</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=3"; ?>">Server
+                                3</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=4"; ?>">Server
+                                4</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=5"; ?>">Server
+                                5</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=6"; ?>">Server
+                                6</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=7"; ?>">Server
+                                7</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=8"; ?>">Server
+                                8</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=9"; ?>">Server
+                                9</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=10"; ?>">Server
+                                10</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=11"; ?>">Server
+                                11</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=12"; ?>">Server
+                                12</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=13"; ?>">Server
+                                13</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=14"; ?>">Server
+                                14</a>
+                            <a class="dropdown-item"
+                                href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id . "&play=15"; ?>">Server
+                                15</a>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#modalDownload">Unduh</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="modalNotifikasi" tabindex="-1" role="dialog"
+                    aria-labelledby="modalNotifikasiLabel" aria-hidden="true">
+                    <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalNotifikasiLabel">Notifikasi</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-bell mr-3" style="font-size: 24px;"></i>
+                                    <div>
+                                        <h5>
+                                            Judul Player:
+                                            <b>
+                                                <?php echo $judul; ?>
+                                            </b>
+                                        </h5>
+                                        <p>
+
+                                            Keterangan:
+                                            <?php echo $row_play['pemberitahuan_player']; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal List Download -->
+                <div class="modal fade" id="modalDownload" tabindex="-1" role="dialog"
+                    aria-labelledby="modalDownloadLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDownloadLabel">Pilih File untuk Diunduh</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <?php
+                                $query_download = "SELECT * FROM tb_download WHERE id = '$id_download'";
+                                $result_download = mysqli_query($koneksi, $query_download);
+                                $row_download = mysqli_fetch_assoc($result_download);
+
+                                $judul_null = "null";
+                                $link_null = "null";
+
+                                ?>
+                                <ul class="list-group" style="height: 300px; overflow: auto;">
+                                    <li class="list-group-item">Server 1 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul1']) && !empty($row_download['link1'])) {
+                                            echo $row_download['judul1'];
+                                            echo '<a href="' . $row_download['link1'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 2 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul2']) && !empty($row_download['link2'])) {
+                                            echo $row_download['judul2'];
+                                            echo '<a href="' . $row_download['link2'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 3 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul3']) && !empty($row_download['link3'])) {
+                                            echo $row_download['judul3'];
+                                            echo '<a href="' . $row_download['link3'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 4 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul4']) && !empty($row_download['link4'])) {
+                                            echo $row_download['judul4'];
+                                            echo '<a href="' . $row_download['link4'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 5 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul5']) && !empty($row_download['link5'])) {
+                                            echo $row_download['judul5'];
+                                            echo '<a href="' . $row_download['link5'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 6 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul6']) && !empty($row_download['link6'])) {
+                                            echo $row_download['judul6'];
+                                            echo '<a href="' . $row_download['link6'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 7 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul7']) && !empty($row_download['link7'])) {
+                                            echo $row_download['judul7'];
+                                            echo '<a href="' . $row_download['link7'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 8 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul8']) && !empty($row_download['link8'])) {
+                                            echo $row_download['judul8'];
+                                            echo '<a href="' . $row_download['link8'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 9 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul9']) && !empty($row_download['link9'])) {
+                                            echo $row_download['judul9'];
+                                            echo '<a href="' . $row_download['link9'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 10 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul10']) && !empty($row_download['link10'])) {
+                                            echo $row_download['judul10'];
+                                            echo '<a href="' . $row_download['link10'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 11 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul11']) && !empty($row_download['link11'])) {
+                                            echo $row_download['judul11'];
+                                            echo '<a href="' . $row_download['link11'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 12 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul12']) && !empty($row_download['link12'])) {
+                                            echo $row_download['judul12'];
+                                            echo '<a href="' . $row_download['link12'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 13 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul13']) && !empty($row_download['link13'])) {
+                                            echo $row_download['judul13'];
+                                            echo '<a href="' . $row_download['link13'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 14 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul14']) && !empty($row_download['link14'])) {
+                                            echo $row_download['judul14'];
+                                            echo '<a href="' . $row_download['link14'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li class="list-group-item">Server 15 Keterangan:
+                                        <?php
+                                        if (!empty($row_download['judul15']) && !empty($row_download['link15'])) {
+                                            echo $row_download['judul15'];
+                                            echo '<a href="' . $row_download['link15'] . '" class="float-right">Unduh</a>';
+                                        } else {
+                                            echo $judul_null;
+                                            echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                        }
+                                        ?>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="tmf_production">
                     <b>
                         <?php echo $row_film['judul_film']; ?>
                     </b>
                 </h4>
-
                 <?php
                 $description = $row_film['deskripsi'];
                 $words = explode(' ', $description);
@@ -144,7 +547,6 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                 $row_genre = mysqli_fetch_assoc($result_genre);
                 $genres[] = $row_genre['nama_genre'];
             }
-            $nama_genre = implode(", ", $genres);
 
             $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
 
@@ -173,16 +575,23 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
             <div class="card-flat">
                 </br>
                 <hr>
-                <a>
-                    <b>
-                        Judul Film:
-                    </b>
+                <b>
+                    Judul Film:
+                </b>
+                <a href="<?php echo $base_url . "/dashboard.php?page=view&id=" . $tmdb_id; ?>">
                     <?php echo $row_tmdb['judul']; ?>
                 </a>
                 <hr>
-                <a><b>Genre:</b>
-                    <?php echo $nama_genre; ?>
-                </a>
+                <b>Genre:</b>
+                <?php foreach ($genres as $genres) { ?>
+                    <?php
+                    $slug_genre = strtolower(str_replace(' ', '-', $genres));
+                    ?>
+                    <a href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                        <?php echo $genres . ", "; ?>
+                    </a>
+                <?php } ?>
+
                 <hr>
                 <a><b>Bahasa:</b>
                     <?php echo $row_tmdb['bahasa']; ?>
@@ -216,13 +625,14 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                     <?php echo $pendapatan; ?>
                 </a>
                 <hr>
-                <a><b>ID IMDB:</b>
+                <b>ID IMDB:</b>
+                <a href="<?php echo "https://www.imdb.com/title/" . $row_tmdb['imdb_id']; ?>" target="_blank">
                     <?php echo $row_tmdb['imdb_id']; ?>
                 </a>
                 <hr>
-                <a><b>ID TMDB:</b>
-                    <?php echo $row_tmdb['tmdb_id']; ?>
-                </a>
+                <b>ID TMDB:</b>
+                <a href="<?php echo "https://www.themoviedb.org/movie/" . $row_tmdb['tmdb_id']; ?>" target="_blank">
+                    <?php echo $row_tmdb['tmdb_id']; ?> </a>
                 <hr>
                 <a><b>Jumlah Episode:</b>
                     <?php echo $row_tmdb['jumlah_episode']; ?>
@@ -247,8 +657,6 @@ $link_trailer = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : 
                     }
                 }
             </script>
-
-            <!-- Comment Form (Left Side) -->
 
             <div class="card-flat comment-form">
                 </br>

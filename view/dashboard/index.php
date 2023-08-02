@@ -27,16 +27,24 @@
                                 alt="<?php echo $row_film['judul_film']; ?>">
                         </a>
                     <?php } ?>
+                    <?php
+                    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                    $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                    $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
 
+                    $total_kunjungan = $row_kunjungan['total_kunjungan'];
+                    ?>
+
+                    </a>
 
                     <div class="card-body">
                         <a class=" tmf_teks" href="dashboard.php?page=view&id=<?php echo $row_film['tmdb_id']; ?>">
                             <h5 class="card-title">
                                 <?php echo $row_film['judul_film']; ?>
                             </h5>
-                        </a>
-                        <p class="card-text">
-                            500 x ditonton
+                        </a></br>
+                        <p style="font-size: 14px;">
+                            <?php echo $total_kunjungan; ?> x ditonton
                         </p>
                     </div>
 

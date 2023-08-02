@@ -64,9 +64,9 @@ $result_film = mysqli_query($koneksi, $query_film);
                                 <option value="all_genre">Semua Genre</option>
                                 <?php foreach ($genres as $genres) { ?>
                                     <?php
-                                    $slug_negara = strtolower(str_replace(' ', '-', $genres));
+                                    $slug_genre = strtolower(str_replace(' ', '-', $genres));
                                     ?>
-                                    <option value=" <?php echo $genres; ?>">
+                                    <option value=" <?php echo $slug_genre; ?>">
                                         <?php echo $genres; ?>
                                     </option>
                                 <?php } ?>
@@ -166,10 +166,13 @@ $result_film = mysqli_query($koneksi, $query_film);
                                         <strong>
                                             <?php echo $row_film['judul_film']; ?>
                                         </strong></br>
-                                        <?php foreach ($genres as $genre) { ?>
+                                        <?php foreach ($genres as $genres) { ?>
+                                            <?php
+                                            $slug_genre = strtolower(str_replace(' ', '-', $genres));
+                                            ?>
                                             <a style="font-size: 14px;"
-                                                href="dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
-                                                <?php echo $genre . ", "; ?>
+                                                href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                                                <?php echo $genres . ", "; ?>
                                             </a>
                                         <?php } ?>
 
