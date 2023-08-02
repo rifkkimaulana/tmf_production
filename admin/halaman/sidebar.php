@@ -87,7 +87,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
 
                 <li
                     class="nav-item <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'add_tv_show_tmdb' || $page == 'episode' || $page == 'add_episode') ? 'menu-open' : ''; ?>">
-                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tvshow"
+                    <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tv_show"
                         class="nav-link <?php echo ($page == 'tv_show' || $page == 'add_tvshow' || $page == 'add_tv_show_tmdb' || $page == 'episode' || $page == 'add_episode') ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tv"></i>
                         <p>TV Show<i class="right fas fa-angle-left"></i></p>

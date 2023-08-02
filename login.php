@@ -1,8 +1,6 @@
 <?php
 include 'config/koneksi.php';
 
-session_start();
-
 if (isset($_SESSION['status']) && ($_SESSION['status'] == "administrator_logedin" || $_SESSION['status'] == "manajemen_logedin")) {
     if ($_SESSION['level'] == "administrator") {
         header("location: admin/");
@@ -71,66 +69,71 @@ if (isset($_COOKIE['remember_me'])) {
     $remember = false;
 }
 ?>
-<?php include 'header.php'; ?>
+<?php include 'halaman/header.php'; ?>
 
-<div class="card card-outline card-primary">
-    <div class="card-header text-center">
-        <a href="<?php echo $base_url; ?>" class="h1"><b>APP</b>KEUANGAN</a>
-    </div>
-
-    <div class="card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-
-        <form action="" method="post">
-            <div class="input-group mb-3">
-                <input type="username" class="form-control" placeholder="Username" name="username" required autofocus>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
+<div class="login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="<?php echo $base_url; ?>" class="h1"><b>APP</b>KEUANGAN</a>
             </div>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" name="password" required>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form action="" method="post">
+                    <div class="input-group mb-3">
+                        <input type="username" class="form-control" placeholder="Username" name="username" required
+                            autofocus>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <div class="icheck-primary">
-                        <input type="checkbox" id="remember" name="remember" <?php if ($remember)
-                            echo "checked"; ?>>
-                        <label for="remember">
-                            Remember Me
-                        </label>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember" name="remember" <?php if ($remember)
+                                    echo "checked"; ?>>
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block" name="submit">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <br>
+
+                <h5 class="text-center">
+                    ATAU
+                </h5>
+
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <a href="<?php echo $base_url; ?>/google/login.php" class="btn btn-block btn-danger">
+                        <i class="fab fa-google mr-2"></i> Sign in using Google
+                    </a>
                 </div>
-                <!-- /.col -->
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block" name="submit">Sign In</button>
-                </div>
-                <!-- /.col -->
+
+                <p class="mb-1">
+                    <a href="<?php echo $base_url; ?>/insert_email.php">I forgot my password</a>
+                </p>
             </div>
-        </form>
-
-        <br>
-
-        <h5 class="text-center">
-            ATAU
-        </h5>
-
-        <div class="social-auth-links text-center mt-2 mb-3">
-            <a href="<?php echo $base_url; ?>/google/login.php" class="btn btn-block btn-danger">
-                <i class="fab fa-google mr-2"></i> Sign in using Google
-            </a>
         </div>
-
-        <p class="mb-1">
-            <a href="<?php echo $base_url; ?>/insert_email.php">I forgot my password</a>
-        </p>
     </div>
 </div>
 
@@ -357,4 +360,4 @@ if (isset($_COOKIE['remember_me'])) {
         }
     });
 </script>
-<?php include 'footer.php'; ?>
+<?php include 'halaman/footer.php'; ?>

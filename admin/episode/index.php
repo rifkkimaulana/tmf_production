@@ -20,7 +20,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT tb_episode_tv_show.id AS episode_id, tb_tv_show.judul_tv_show, tb_episode_tv_show.nama_episode, tb_episode_tv_show.jumlah_episode, tb_episode_tv_show.slug_episode
+                                    $query = "SELECT tb_episode_tv_show.id AS episode_id, tb_tv_show.judul_tv_show, tb_episode_tv_show.nama_episode, tb_episode_tv_show.jumlah_episode, tb_episode_tv_show.tv_show_id
                FROM tb_episode_tv_show
                LEFT JOIN tb_tv_show ON tb_episode_tv_show.tv_show_id = tb_tv_show.id";
 
@@ -40,6 +40,9 @@
                                         echo "<td>" . $row['jumlah_episode'] . "</td>";
 
                                         echo '<td style="text-align: center;">
+                                        <a href="dashboard.php?page=add_episode&id=' . $row['tv_show_id'] . '" class="btn btn-sm btn-primary" title="Ubah">
+                    <i class="fas fa-plus"></i>
+                </a>
                 <a href="dashboard.php?page=update_episode_tv_show&id=' . $row['episode_id'] . '" class="btn btn-sm btn-warning" title="Ubah">
                     <i class="fas fa-edit"></i>
                 </a>
@@ -64,6 +67,7 @@
         </div>
     </div>
 </section>
+<!--modal hapus-->
 <div class="modal fade" id="modalKonfirmasi" tabindex="-1" role="dialog" aria-labelledby="modalKonfirmasiLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -84,14 +88,88 @@
         </div>
     </div>
 </div>
+<!--modal gagal karena episode sudah ada-->
+<div class="modal fade" id="dataSudahAdaModal" tabindex="-1" role="dialog" aria-labelledby="dataSudahAdaModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataSudahAdaModalLabel">Data Sudah Ada</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Data episode tersebut sudah ada!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Data berhasil ditambahkan-->
+<div class="modal fade" id="berhasilAddEpisodeModal" tabindex="-1" role="dialog"
+    aria-labelledby="berhasilAddEpisodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="berhasilAddEpisodeModalLabel">Berhasil Ditambahkan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Data episode berhasil ditambahkan!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--data gagal ditambahkan-->
+<div class="modal fade" id="gagalDitambahkanModal" tabindex="-1" role="dialog"
+    aria-labelledby="gagalDitambahkanModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gagalDitambahkanModalLabel">Gagal Ditambahkan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Terjadi kesalahan saat menambahkan data episode.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    // Tambahkan script berikut untuk menangkap ID dari button delete yang dipilih
     $(document).ready(function () {
         $('.btn-delete').click(function () {
             var episode_id = $(this).data('filmid');
             var hapusLink = document.getElementById('hapusLink');
             hapusLink.href = 'episode/delete.php?id=' + episode_id;
         });
+
+
+        <?php
+        if (isset($_GET['alert'])) {
+            $alert = $_GET['alert'];
+            if ($alert === 'data_sudah_ada') {
+                echo "$('#dataSudahAdaModal').modal('show');";
+            } elseif ($alert === 'berhasil_add_episode') {
+                echo "$('#berhasilAddEpisodeModal').modal('show');";
+            } elseif ($alert === 'gagal_ditambahkan') {
+                echo "$('#gagalDitambahkanModal').modal('show');";
+            }
+        }
+        ?>
     });
 </script>
 

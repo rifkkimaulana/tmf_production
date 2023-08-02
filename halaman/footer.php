@@ -1,6 +1,6 @@
 </div>
 
-<footer class="main-footer">
+<footer class="main-footer tmf_production">
     <strong>Copyright &copy; 2014-
         <?php echo date('Y'); ?> <a style="text-transform: uppercase;" href="<?php echo $base_url; ?>">TMF
             Production</a>.

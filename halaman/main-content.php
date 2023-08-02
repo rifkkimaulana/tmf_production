@@ -27,7 +27,10 @@
                     include "view/view_film.php";
                     break;
                 case 'tv':
-                    include "view/view_tv.php";
+                    include "view/tvshow/view_tv.php";
+                    break;
+                case 'error':
+                    include "view/error/halaman-buntu.php";
                     break;
 
                 default:
