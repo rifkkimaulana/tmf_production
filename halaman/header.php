@@ -155,6 +155,25 @@ $limitedGenres = array_slice($genres, 0, 9);
                 /* Membuat gambar menjadi posisi tengah secara horizontal */
             }
         }
+
+        /* Tampilkan elemen biasa di layar besar (lebar minimal 768px) */
+        .card-flat {
+            display: block;
+        }
+
+        /* Sembunyikan elemen di layar kecil (lebar maksimal 767px) */
+        @media screen and (max-width: 767px) {
+            .hide-on-small-screen {
+                display: none;
+            }
+        }
+
+        /* Sembunyikan elemen di layar besar (lebar minimal 768px) */
+        @media screen and (min-width: 768px) {
+            .hide-on-large-screen {
+                display: none;
+            }
+        }
     </style>
 </head>
 

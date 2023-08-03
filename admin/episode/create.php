@@ -119,9 +119,22 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="jumlah_episode">Episode Ke</label>
+                                            <?php
+                                            $query_last_episode = "SELECT jumlah_episode FROM tb_episode_tv_show WHERE tv_show_id = '$id_tv_show' ORDER BY jumlah_episode DESC LIMIT 1";
+                                            $result_last_episode = mysqli_query($koneksi, $query_last_episode);
+
+                                            if ($result_last_episode && mysqli_num_rows($result_last_episode) > 0) {
+                                                $row_last_episode = mysqli_fetch_assoc($result_last_episode);
+                                                $last_episode = $row_last_episode['jumlah_episode'];
+                                                $next_episode = $last_episode + 1;
+                                            } else {
+                                                $next_episode = 1;
+                                            }
+                                            ?>
                                             <input type="number" class="form-control" id="jumlah_episode"
-                                                name="jumlah_episode" required>
+                                                name="jumlah_episode" value="<?php echo $next_episode; ?>" required>
                                         </div>
+
                                     </form>
                                 </div>
                             </div>

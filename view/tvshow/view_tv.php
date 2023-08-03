@@ -28,7 +28,6 @@ $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = '$id_tv'";
 $result_episode = mysqli_query($koneksi, $query_episode);
 
 if (mysqli_num_rows($result_episode) > 0) {
-
     $row_episode = mysqli_fetch_assoc($result_episode);
     $jumlah_episode = $row_episode['jumlah_episode'];
     $id_player = $row_episode['player_id'];
@@ -38,8 +37,8 @@ if (mysqli_num_rows($result_episode) > 0) {
 
 <div class="col-md-9 tmf_production">
     <div class="row">
-        <div class="col-lg-12 order-1">
-            <div class="card tmf_shadow bg-black">
+        <div class="col-lg-12">
+            <div class="card tmf_shadow bg-black order-md-1">
                 <div class="embed-responsive embed-responsive-16by9">
                     <?php
                     include 'config/koneksi.php';
@@ -137,7 +136,6 @@ if (mysqli_num_rows($result_episode) > 0) {
                     </iframe>
 
                 </div>
-
                 <?php
                 if (strpos($link, 'autoplay=1') !== false) {
                     ?>
@@ -151,25 +149,7 @@ if (mysqli_num_rows($result_episode) > 0) {
                 }
                 ?>
             </div>
-
-            <script>
-                var iframe = document.querySelector("iframe");
-                var lewatiNotification = document.querySelector(".lewati-notification");
-
-                // Tampilkan notifikasi lewati setelah 5 detik
-                setTimeout(function () {
-                    lewatiNotification.style.display = "block";
-                }, 5000);
-
-                // Tambahkan event click untuk tombol "Lewati"
-                lewatiNotification.querySelector("a").addEventListener("click", function (event) {
-                    event.preventDefault();
-                    var link_film = this.getAttribute("href");
-                    iframe.remove(); // Hapus iframe trailer
-                    window.location.href = link_film; // Menuju ke link film
-                });
-            </script>
-
+            <!-- Kolom Judul & Deskripsi -->
             <div class="card-flat">
                 <div class="card-header">
                     <?php
@@ -180,15 +160,15 @@ if (mysqli_num_rows($result_episode) > 0) {
                             INFO PLAYER
                         </button>
                     <?php }
-                    ;
                     ?>
                     <div class="float-right">
-                        <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id; ?>"><button
-                                type="button" class="btn btn-sm btn-secondary">Trailer</button>
-                        </a>
                         <?php
                         if (isset($_GET['episode']) ? $_GET['episode'] : '') {
                             ?>
+                            <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id; ?>"><button
+                                    type="button" class="btn btn-sm btn-secondary">Trailer</button>
+                            </a>
+
                             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
                                 <span class="sr-only">Play</span>
@@ -243,9 +223,11 @@ if (mysqli_num_rows($result_episode) > 0) {
                             <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                                 data-target="#modalDownload">Unduh</button>
                         <?php }
-                        ; ?>
+                        ?>
                     </div>
                 </div>
+
+                <!-- Modal Notifikasi Player-->
                 <div class="modal fade" id="modalNotifikasi" tabindex="-1" role="dialog"
                     aria-labelledby="modalNotifikasiLabel" aria-hidden="true">
                     <div class="modal-dialog " role="document">
@@ -461,13 +443,12 @@ if (mysqli_num_rows($result_episode) > 0) {
                                         }
                                         ?>
                                     </li>
-
-
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Judul TV SHOW -->
                 <h4 class="tmf_production">
                     <b>
                         <?php echo $row_tv['judul_tv_show']; ?>
@@ -489,15 +470,12 @@ if (mysqli_num_rows($result_episode) > 0) {
                 $result_tv = mysqli_query($koneksi, $query_tv);
                 $row_tv = mysqli_fetch_assoc($result_tv);
 
-                // Calculate the time duration in seconds between the created_at timestamp and the current time
                 $created_at_timestamp = strtotime($row_tv['created_at']);
                 $current_timestamp = time();
                 $time_duration_seconds = $current_timestamp - $created_at_timestamp;
-
-                // Convert the time duration to a human-readable format (hours, minutes, and seconds)
                 $time_duration_formatted = gmdate("H:i:s", $time_duration_seconds);
 
-                // Function to convert timestamp to "time since upload" format
+                // Function Upload sejak
                 function timeSinceUpload($timestamp)
                 {
                     $timeDiff = time() - strtotime($timestamp);
@@ -526,84 +504,129 @@ if (mysqli_num_rows($result_episode) > 0) {
                 $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                 $total_kunjungan = $row_kunjungan['total_kunjungan'];
                 ?>
-
                 <a> <b>
-                        <?php echo $total_kunjungan; ?>x ditonton <b>.</b>
+                        <?php echo $total_kunjungan; ?>x ditonton
+                    </b>
+                    <small>
                         <?php echo timeSinceUpload($row_tv['created_at']); ?>
-                    </b></a>
-
+                    </small>
+                </a>
                 <p class="card-text" id="filmDescription">
                     <?php echo $limited_description; ?>
                 </p>
-
-
                 <?php if (count($words) > 20) { ?>
                     <a class="card-link tmf_teks" id="showMoreLink" onclick="toggleDescription()">Lebih Banyak</a>
                 <?php } ?>
-
-
             </div>
-            <script>
-                var descriptionElement = document.getElementById("filmDescription");
-                var showMoreLink = document.getElementById("showMoreLink");
-                var toggleState = false;
-                var limitedDescription = "<?php echo $limited_description; ?>";
-                var fullDescription = "<?php echo $full_description; ?>";
+            <!-- End Kolom Judul & Deskripsi -->
 
-                function toggleDescription() {
-                    toggleState = !toggleState;
-                    if (toggleState) {
-                        descriptionElement.innerHTML = fullDescription;
-                        showMoreLink.innerHTML = "Sedikit";
+            <!-- Start Button Episode -->
+            <div class="card card-flat hide-on-large-screen tmf_production">
+                <?php
+                if (isset($_GET['id'])) {
+                    $tmdb_id = $_GET['id'];
+
+                    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
+                    $result_film = mysqli_query($koneksi, $query_film);
+                    $row_tv = mysqli_fetch_assoc($result_film);
+                    $id_tmdb = $row_tv['tmdb_id'];
+
+                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
+                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
+
+                    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+                    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
+                } else {
+                    echo 'ID Tidak Ditemukan!';
+                }
+                if (mysqli_num_rows($result_tmdb2) > 0) {
+                    while ($row_tmdb2 = mysqli_fetch_assoc($result_tmdb2)) {
+                        $select_id_tmdb = $row_tmdb2['id'];
+
+                        $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $select_id_tmdb;";
+                        $result_film = mysqli_query($koneksi, $query_film);
+                        $row_tv = mysqli_fetch_assoc($result_film);
+                        $tv_id = $row_tv['id'];
+                        $judul = $row_tv['judul_tv_show'];
+                        $page_id = $row_tv['tmdb_id'];
+                        ?>
+                        <hr>
+                        <div class="card-header font-weight-bold">
+                            <?php echo $judul; ?>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = $tv_id";
+                            $result_episode = mysqli_query($koneksi, $query_episode);
+                            if (mysqli_num_rows($result_episode) > 0) {
+                                while ($row_episode = mysqli_fetch_assoc($result_episode)) {
+                                    $episode = $row_episode['jumlah_episode'];
+
+                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $page_id . "&episode=" . $episode;
+                                    ?>
+                                    <a href="<?php echo $url; ?>">
+                                        <button type="button"
+                                            class="btn btn-sm <?php if ($_GET['episode'] == $episode && $_GET['id'] == $page_id) { ?> btn-primary <?php } else { ?> btn-secondary <?php } ?> mt-1">
+                                            <?php echo $episode; ?>
+                                        </button>
+                                    </a>
+                                    <?php
+                                }
+                            } else {
+                                echo "<small>Episode tidak tersedia.</small>";
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo "<small>Tidak ada id tersedia.</small>";
+                } ?>
+            </div>
+            <!-- End Button Episode
+
+            <!-- TMDB LIST-->
+            <div class="card-flat">
+                <?php
+                $tmdb_id = $row_tv['tmdb_id'];
+                $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = '$tmdb_id'";
+                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+
+                // Ambil nama-nama genre dari tabel tb_genre berdasarkan genre_ids
+                $genre_ids = explode(",", $row_tv['genre_ids']);
+                $genres = array();
+                foreach ($genre_ids as $genre_id) {
+                    $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
+                    $result_genre = mysqli_query($koneksi, $query_genre);
+                    $row_genre = mysqli_fetch_assoc($result_genre);
+                    $genres[] = $row_genre['nama_genre'];
+                }
+
+                $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
+                // Function format durasi
+                function formatDuration($minutes)
+                {
+                    $hours = floor($minutes / 60);
+                    $remainingMinutes = $minutes % 60;
+
+                    if ($hours > 0) {
+                        return $hours . " jam " . $remainingMinutes . " menit";
                     } else {
-                        descriptionElement.innerHTML = limitedDescription;
-                        showMoreLink.innerHTML = "Lebih Banyak";
+                        return $remainingMinutes . " menit";
                     }
                 }
-            </script>
-
-            <?php
-            $tmdb_id = $row_tv['tmdb_id'];
-            $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = '$tmdb_id'";
-            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-
-            // Ambil nama-nama genre dari tabel tb_genre berdasarkan genre_ids
-            $genre_ids = explode(",", $row_tv['genre_ids']);
-            $genres = array();
-            foreach ($genre_ids as $genre_id) {
-                $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
-                $result_genre = mysqli_query($koneksi, $query_genre);
-                $row_genre = mysqli_fetch_assoc($result_genre);
-                $genres[] = $row_genre['nama_genre'];
-            }
-
-            $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
-
-            function formatDuration($minutes)
-            {
-                $hours = floor($minutes / 60);
-                $remainingMinutes = $minutes % 60;
-
-                if ($hours > 0) {
-                    return $hours . " jam " . $remainingMinutes . " menit";
-                } else {
-                    return $remainingMinutes . " menit";
+                $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
+                // Function format rupiah
+                function formatCurrency($amount)
+                {
+                    return "IDR " . number_format($amount, 0, ',', '.');
                 }
-            }
-            $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
-
-            function formatCurrency($amount)
-            {
-                return "IDR " . number_format($amount, 0, ',', '.');
-            }
-            $anggaran = formatCurrency($row_tmdb['anggaran']);
-            $pendapatan = formatCurrency($row_tmdb['pendapatan']);
-            ?>
-
-
-            <div class="card-flat">
-                </br>
+                $anggaran = formatCurrency($row_tmdb['anggaran']);
+                $pendapatan = formatCurrency($row_tmdb['pendapatan']);
+                ?>
                 <hr>
                 <b>
                     Judul Film:
@@ -621,7 +644,6 @@ if (mysqli_num_rows($result_episode) > 0) {
                         <?php echo $genres . ", "; ?>
                     </a>
                 <?php } ?>
-
                 <hr>
                 <a><b>Bahasa:</b>
                     <?php echo $row_tmdb['bahasa']; ?>
@@ -668,9 +690,8 @@ if (mysqli_num_rows($result_episode) > 0) {
                     <?php echo $row_tmdb['jumlah_episode']; ?>
                 </a>
             </div>
-
-
-
+            <!-- End TMDB LIST -->
+            <!-- Form Komentar-->
             <div class="card-flat comment-form" style="margin-bottom: 5px;">
                 </br>
                 <?php
@@ -716,7 +737,9 @@ if (mysqli_num_rows($result_episode) > 0) {
                     <?php } ?>
                 </form>
             </div>
+            <!-- End form komentar-->
 
+            <!-- Kolom komentar-->
             <div class="card-flat">
                 </br>
                 <?php
@@ -772,20 +795,127 @@ if (mysqli_num_rows($result_episode) > 0) {
                     <hr>
                 <?php } ?>
             </div>
+            <!-- End Kolom komentar-->
         </div>
     </div>
 </div>
 
-<?php include 'view/tvshow/episode_button.php'; ?>
+<?php
+if (isset($_GET['id'])) {
+    $tmdb_id = $_GET['id'];
 
+    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
+    $result_film = mysqli_query($koneksi, $query_film);
+    $row_tv = mysqli_fetch_assoc($result_film);
+    $id_tmdb = $row_tv['tmdb_id'];
+
+    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
+    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
+
+    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
+} else {
+    echo 'ID Tidak Ditemukan!';
+}
+?>
+<div class="col-md-3 tmf_production ">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-flat hide-on-small-screen">
+                <?php
+                if (isset($_GET['id'])) {
+                    $tmdb_id = $_GET['id'];
+
+                    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
+                    $result_film = mysqli_query($koneksi, $query_film);
+                    $row_tv = mysqli_fetch_assoc($result_film);
+                    $id_tmdb = $row_tv['tmdb_id'];
+
+                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
+                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
+
+                    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+                    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
+                } else {
+                    echo 'ID Tidak Ditemukan!';
+                }
+
+                if (isset($_GET['id'])) {
+                    $tmdb_id = $_GET['id'];
+
+                    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
+                    $result_film = mysqli_query($koneksi, $query_film);
+                    $row_tv = mysqli_fetch_assoc($result_film);
+                    $id_tmdb = $row_tv['tmdb_id'];
+
+                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
+                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
+
+                    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+                    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
+                } else {
+                    echo 'ID Tidak Ditemukan!';
+                }
+                if (mysqli_num_rows($result_tmdb2) > 0) {
+                    while ($row_tmdb2 = mysqli_fetch_assoc($result_tmdb2)) {
+                        $select_id_tmdb = $row_tmdb2['id'];
+
+                        $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $select_id_tmdb;";
+                        $result_film = mysqli_query($koneksi, $query_film);
+                        $row_tv = mysqli_fetch_assoc($result_film);
+                        $tv_id = $row_tv['id'];
+                        $judul = $row_tv['judul_tv_show'];
+                        $page_id = $row_tv['tmdb_id'];
+                        ?>
+                        <div class="card-header font-weight-bold">
+                            <?php echo $judul; ?>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = $tv_id";
+                            $result_episode = mysqli_query($koneksi, $query_episode);
+                            if (mysqli_num_rows($result_episode) > 0) {
+                                while ($row_episode = mysqli_fetch_assoc($result_episode)) {
+                                    $episode = $row_episode['jumlah_episode'];
+
+                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $page_id . "&episode=" . $episode;
+                                    ?>
+                                    <a href="<?php echo $url; ?>">
+                                        <button type="button"
+                                            class="btn btn-sm <?php if ($_GET['episode'] == $episode && $_GET['id'] == $page_id) { ?> btn-primary <?php } else { ?> btn-secondary <?php } ?> mt-1">
+                                            <?php echo $episode; ?>
+                                        </button>
+                                    </a>
+                                    <?php
+                                }
+                            } else {
+                                echo "<small>Episode tidak tersedia.</small>";
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo "<small>Tidak ada id tersedia.</small>";
+                } ?>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Function to reload the view count
+    // Function untuk reload view count
     function reloadViewCount() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                // Update the content of the view count element
+
                 document.getElementById("viewCount").innerHTML = "<b>" + this.responseText + "x ditonton</b>";
             }
         };
@@ -794,9 +924,8 @@ if (mysqli_num_rows($result_episode) > 0) {
     }
 
     setInterval(reloadViewCount, 60000);
-</script>
 
-<script>
+    // Melakukan Insert ke kunjungan
     document.addEventListener("DOMContentLoaded", function () {
         var tmdb_id = <?php echo $filmId; ?>;
         var xhttp = new XMLHttpRequest();
@@ -804,9 +933,8 @@ if (mysqli_num_rows($result_episode) > 0) {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("berkunjung=" + tmdb_id);
     });
-</script>
 
-<script>
+    // Menampilkan dan menyembunyikan button komentar
     var inputField = document.getElementById("komentar");
     var kirimBtn = document.getElementById("kirimBtn");
     var batalBtn = document.getElementById("batalBtn");
@@ -820,4 +948,22 @@ if (mysqli_num_rows($result_episode) > 0) {
         kirimBtn.style.display = "none";
         batalBtn.style.display = "none";
     });
+
+    // Menampikan deskripsi sedikit dan banyak
+    var descriptionElement = document.getElementById("filmDescription");
+    var showMoreLink = document.getElementById("showMoreLink");
+    var toggleState = false;
+    var limitedDescription = "<?php echo $limited_description; ?>";
+    var fullDescription = "<?php echo $full_description; ?>";
+
+    function toggleDescription() {
+        toggleState = !toggleState;
+        if (toggleState) {
+            descriptionElement.innerHTML = fullDescription;
+            showMoreLink.innerHTML = "Sedikit";
+        } else {
+            descriptionElement.innerHTML = limitedDescription;
+            showMoreLink.innerHTML = "Lebih Banyak";
+        }
+    }
 </script>

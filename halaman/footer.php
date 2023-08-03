@@ -24,6 +24,22 @@
     });
 </script>
 
+<script>
+    var iframe = document.querySelector("iframe");
+    var lewatiNotification = document.querySelector(".lewati-notification");
+
+    setTimeout(function () {
+        lewatiNotification.style.display = "block";
+    }, 5000);
+
+    lewatiNotification.querySelector("a").addEventListener("click", function (event) {
+        event.preventDefault();
+        var link_film = this.getAttribute("href");
+        iframe.remove();
+        window.location.href = link_film;
+    });
+</script>
+
 </body>
 
 </html>

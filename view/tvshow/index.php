@@ -14,7 +14,6 @@
                             <img class="col-md-12 zoom-effect" src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
                                 alt="<?php echo $row_tv['judul_tv_show']; ?>">
                         </a>
-
                     <?php } else {
                         $tmdb_id = $row_tv['tmdb_id'];
                         $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
@@ -34,9 +33,7 @@
 
                     $total_kunjungan = $row_kunjungan['total_kunjungan'];
                     ?>
-
                     </a>
-
                     <div class="card-body">
                         <a class=" tmf_teks" href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
                             <h5 class="card-title">
@@ -47,12 +44,9 @@
                             <?php echo $total_kunjungan; ?> x ditonton
                         </p>
                     </div>
-
-
                 </div>
             <?php }
         } ?>
     </div>
 
 </div>
-<?php //include 'view/tvshow/episode_button.php'; ?>
