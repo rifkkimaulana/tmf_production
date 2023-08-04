@@ -3,7 +3,6 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Data Pengguna</h3>
-                <!-- Tombol Tambah Pengguna -->
                 <div class="card-tools">
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah_pengguna_modal">
                         <i class="fas fa-plus"></i> Tambah Pengguna
@@ -88,8 +87,6 @@
     </div>
 </div>
 
-
-<!-- Modal Tambah Pengguna -->
 <div class="modal fade" id="tambah_pengguna_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -148,9 +145,6 @@
         </div>
     </div>
 </div>
-<!-- END Modal Tambah Pengguna -->
-
-<!-- Modal User Update -->
 <?php
 $data = mysqli_query($koneksi, "SELECT * FROM tb_users");
 while ($d = mysqli_fetch_array($data)) {
@@ -220,7 +214,6 @@ while ($d = mysqli_fetch_array($data)) {
 }
 ?>
 
-<!-- Modal Hapus Pengguna -->
 <?php
 $data = mysqli_query($koneksi, "SELECT * FROM tb_users");
 while ($d = mysqli_fetch_array($data)) {
@@ -252,7 +245,6 @@ while ($d = mysqli_fetch_array($data)) {
     }
 }
 ?>
-<!-- END Modal Hapus Pengguna -->
 
 <script>
     $(document).ready(function () {
@@ -281,7 +273,6 @@ while ($d = mysqli_fetch_array($data)) {
             "pageLength": 5
         });
 
-        // Event handler saat opsi tampilan berubah
         $('#selectLength').on('change', function () {
             table.page.len($(this).val()).draw();
         });
