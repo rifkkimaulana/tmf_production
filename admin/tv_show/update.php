@@ -1,12 +1,10 @@
 <?php
 include '../config/koneksi.php';
-
 $idtvshow = $_GET['id'];
 $result = mysqli_query($koneksi, "SELECT judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
  WHERE id = $idtvshow");
 $row = mysqli_fetch_assoc($result);
 
-// Ambil nama tag berdasarkan tag_ids
 $tagIds = explode(',', $row['tag_ids']);
 $tagNames = array();
 foreach ($tagIds as $tagId) {
@@ -18,7 +16,6 @@ foreach ($tagIds as $tagId) {
 }
 $tagNamesString = implode(', ', $tagNames);
 
-// Ambil nama direktur berdasarkan direktur_ids
 $direkturIds = explode(',', $row['direktur_ids']);
 $direkturNames = array();
 foreach ($direkturIds as $direkturId) {
@@ -30,7 +27,6 @@ foreach ($direkturIds as $direkturId) {
 }
 $direkturNamesString = implode(', ', $direkturNames);
 
-// Ambil nama pemain berdasarkan pemain_ids
 $pemainIds = explode(',', $row['pemain_ids']);
 $pemainNames = array();
 foreach ($pemainIds as $pemainId) {
@@ -42,7 +38,6 @@ foreach ($pemainIds as $pemainId) {
 }
 $pemainNamesString = implode(', ', $pemainNames);
 
-// Ambil nama tahun berdasarkan tahun_ids
 $tahunIds = explode(',', $row['tahun_ids']);
 $tahunNames = array();
 foreach ($tahunIds as $tahunId) {
@@ -54,7 +49,6 @@ foreach ($tahunIds as $tahunId) {
 }
 $tahunNamesString = implode(', ', $tahunNames);
 
-// Ambil nama negara berdasarkan negara_ids
 $negaraIds = explode(',', $row['negara_ids']);
 $negaraNames = array();
 foreach ($negaraIds as $negaraId) {
@@ -66,7 +60,6 @@ foreach ($negaraIds as $negaraId) {
 }
 $negaraNamesString = implode(', ', $negaraNames);
 
-// Ambil nama kualitas berdasarkan kualitas_ids
 $kualitasIds = explode(',', $row['kualitas_ids']);
 $kualitasNames = array();
 foreach ($kualitasIds as $kualitasId) {
@@ -78,7 +71,6 @@ foreach ($kualitasIds as $kualitasId) {
 }
 $kualitasNamesString = implode(', ', $kualitasNames);
 
-// Ambil nama jaringan berdasarkan jaringan_ids
 $jaringanIds = explode(',', $row['jaringan_ids']);
 $jaringanNames = array();
 
@@ -103,7 +95,6 @@ $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <form action="tv_show/proses_update.php" method="post" enctype="multipart/form-data">
@@ -361,7 +352,6 @@ include '../config/koneksi.php';
                                         }
                                     </style>
                                     <script>
-                                        // Variabel untuk menyimpan nilai tag yang sudah ditampilkan
                                         let selectedTagsArray = [];
 
                                         function addTag() {
@@ -383,20 +373,18 @@ include '../config/koneksi.php';
                                                         deleteIcon.classList.add("fas", "fa-times");
                                                         deleteIcon.addEventListener("click", function () {
                                                             tagContainerElement.removeChild(newTagElement);
-                                                            // Saat tag dihapus, hapus juga dari selectedTagsArray
                                                             selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
-                                                            updateSelectedTags(); // Update nilai input hidden
+                                                            updateSelectedTags();
                                                         });
 
                                                         newTagElement.appendChild(deleteIcon);
                                                         tagContainerElement.appendChild(newTagElement);
 
-                                                        // Tambahkan tag ke dalam selectedTagsArray jika belum ada di dalamnya
                                                         if (!selectedTagsArray.includes(tagName)) {
                                                             selectedTagsArray.push(tagName);
                                                         }
 
-                                                        updateSelectedTags(); // Update nilai input hidden
+                                                        updateSelectedTags();
                                                     }
                                                 });
 
@@ -414,9 +402,8 @@ include '../config/koneksi.php';
                                                 }
                                             }
 
-                                            // Hapus tag dari selectedTagsArray
                                             selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
-                                            updateSelectedTags(); // Update nilai input hidden
+                                            updateSelectedTags();
                                         }
 
                                         function updateSelectedTags() {
@@ -426,7 +413,7 @@ include '../config/koneksi.php';
 
                                         function handleTagClick(tagName) {
                                             const tagInputValue = document.getElementById("tagInput");
-                                            tagInputValue.value = tagName; // Isi input "tagInput" dengan nama tag yang dipilih
+                                            tagInputValue.value = tagName;
                                         }
 
                                         function toggleSavedTags() {
@@ -434,9 +421,7 @@ include '../config/koneksi.php';
                                             savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
                                         }
 
-
                                     </script>
-
                                 </div>
                             </div>
                         </div>
@@ -469,12 +454,9 @@ include '../config/koneksi.php';
                                 $direktorName = $rowDirektor['nama_direksi'];
                                 $direktorNames[] = $direktorName;
                             }
-
-
                             ?>
                             <div id="collapseDirektur" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
-
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="directorInput"
@@ -485,7 +467,6 @@ include '../config/koneksi.php';
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id="directorList">
                                         <?php
                                         foreach ($direktorNames as $direktorName) {
@@ -493,7 +474,6 @@ include '../config/koneksi.php';
                                         }
                                         ?>
                                     </div>
-
                                     <small class="text-primary" style="cursor: pointer;"
                                         onclick="toggleSavedDirector()">Tampilkan Direktur Tersimpan di
                                         database.</small>
@@ -537,7 +517,6 @@ include '../config/koneksi.php';
                                                 const directorContainerElement = document.getElementById("directorList");
 
                                                 directorNames.forEach((directorName) => {
-                                                    // Cek apakah direktur sudah ada sebelumnya
                                                     const isDirectorExists = selectedDirectorsArray.includes(directorName);
 
                                                     if (!isDirectorExists) {
@@ -550,16 +529,15 @@ include '../config/koneksi.php';
                                                         deleteIcon.addEventListener("click", function () {
                                                             directorContainerElement.removeChild(newDirectorElement);
                                                             selectedDirectorsArray = selectedDirectorsArray.filter((director) => director !== directorName);
-                                                            updateSelectedDirectors(); // Update nilai input hidden
+                                                            updateSelectedDirectors();
                                                         });
 
                                                         newDirectorElement.appendChild(deleteIcon);
                                                         directorContainerElement.appendChild(newDirectorElement);
 
-                                                        // Tambahkan direktur ke dalam selectedDirectorsArray jika belum ada di dalamnya
                                                         selectedDirectorsArray.push(directorName);
 
-                                                        updateSelectedDirectors(); // Update nilai input hidden
+                                                        updateSelectedDirectors();
                                                     }
                                                 });
 
@@ -576,12 +554,9 @@ include '../config/koneksi.php';
                                                     break;
                                                 }
                                             }
-
-                                            // Hapus direktur dari selectedDirectorsArray
                                             selectedDirectorsArray = selectedDirectorsArray.filter(director => director !== directorName);
-                                            updateSelectedDirectors(); // Update nilai input hidden
+                                            updateSelectedDirectors();
                                         }
-
 
                                         function updateSelectedDirectors() {
                                             const selectedDirectorInput = document.getElementById("selectedDireksiInput");
@@ -628,7 +603,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                     <?php
-                                    // Mendapatkan data pemain yang sudah terkait dengan film
                                     $queryFilmPemain = "SELECT pemain_ids FROM tb_tv_show WHERE id = $idtvshow";
                                     $resultFilmPemain = mysqli_query($koneksi, $queryFilmPemain);
                                     $filmPemain = array();
@@ -641,7 +615,6 @@ include '../config/koneksi.php';
                                     <div id="playerList">
                                         <?php
                                         foreach ($filmPemain as $pemainId) {
-                                            // Query untuk mendapatkan nama pemain berdasarkan id_pemain
                                             $query_pemain = "SELECT nama_pemain FROM tb_pemain WHERE id = $pemainId";
                                             $result_pemain = mysqli_query($koneksi, $query_pemain);
 
@@ -664,12 +637,9 @@ include '../config/koneksi.php';
                                             <?php
                                             $query_pemain = "SELECT id, nama_pemain FROM tb_pemain";
                                             $result_pemain = mysqli_query($koneksi, $query_pemain);
-
                                             while ($row = mysqli_fetch_assoc($result_pemain)) {
                                                 $id_pemain = $row['id'];
                                                 $nama_pemain = $row['nama_pemain'];
-
-
                                                 echo '<a class="tag-link" onclick="handlePemainClick(\'' . $nama_pemain . '\')">' . $nama_pemain . '</a>';
                                                 echo ' ,';
                                             }
@@ -716,21 +686,17 @@ include '../config/koneksi.php';
                                                     deleteIcon.addEventListener("click", function () {
                                                         playerContainerElement.removeChild(newPlayerElement);
                                                         selectedPemainArray = selectedPemainArray.filter(pemain => pemain !== playerName);
-                                                        updateSelectedPemain(); // Update nilai input hidden
+                                                        updateSelectedPemain();
                                                     });
 
                                                     newPlayerElement.appendChild(deleteIcon);
                                                     playerContainerElement.appendChild(newPlayerElement);
-
-                                                    // Tambahkan pemain ke dalam selectedPemainArray jika belum ada di dalamnya
                                                     if (!selectedPemainArray.includes(playerName)) {
                                                         selectedPemainArray.push(playerName);
                                                     }
-
-                                                    updateSelectedPemain(); // Update nilai input hidden
+                                                    updateSelectedPemain();
                                                 }
                                             });
-
                                             inputElement.value = "";
                                         }
                                     }
@@ -744,10 +710,8 @@ include '../config/koneksi.php';
                                                 break;
                                             }
                                         }
-
-                                        // Hapus pemain dari selectedPemainArray
                                         selectedPemainArray = selectedPemainArray.filter(pemain => pemain !== pemainName);
-                                        updateSelectedPemain(); // Update nilai input hidden
+                                        updateSelectedPemain();
                                     }
 
                                     function updateSelectedPemain() {
@@ -757,7 +721,7 @@ include '../config/koneksi.php';
 
                                     function handlePemainClick(pemainName) {
                                         const pemainInputValue = document.getElementById("playerInput");
-                                        pemainInputValue.value = pemainName; // Isi input "playerInput" dengan nama pemain yang dipilih
+                                        pemainInputValue.value = pemainName;
                                     }
 
                                     function toggleSavedPemain() {
@@ -794,7 +758,6 @@ include '../config/koneksi.php';
 
                                     <div id="yearList">
                                         <?php
-                                        // Mendapatkan data tahun yang sudah terkait dengan film
                                         $queryFilmTahun = "SELECT tahun_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmTahun = mysqli_query($koneksi, $queryFilmTahun);
                                         $filmTahun = array();
@@ -804,7 +767,6 @@ include '../config/koneksi.php';
                                         }
 
                                         foreach ($filmTahun as $tahunId) {
-                                            // Query untuk mendapatkan tahun rilis berdasarkan id_tahun
                                             $query_tahun = "SELECT tahun_rilis FROM tb_tahun WHERE id = $tahunId";
                                             $result_tahun = mysqli_query($koneksi, $query_tahun);
 
@@ -826,7 +788,6 @@ include '../config/koneksi.php';
                                             <?php
                                             $query_tahun = "SELECT id, tahun_rilis FROM tb_tahun";
                                             $result_tahun = mysqli_query($koneksi, $query_tahun);
-
                                             while ($row = mysqli_fetch_assoc($result_tahun)) {
                                                 $id_tahun = $row['id'];
                                                 $nama_tahun = $row['tahun_rilis'];
@@ -838,7 +799,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
                                 <style>
                                     .year {
                                         display: inline-block;
@@ -877,18 +837,17 @@ include '../config/koneksi.php';
                                                     deleteIcon.addEventListener("click", function () {
                                                         yearContainerElement.removeChild(newYearElement);
                                                         selectedTahunArray = selectedTahunArray.filter(selectedYear => selectedYear !== year);
-                                                        updateSelectedTahun(); // Update nilai input hidden
+                                                        updateSelectedTahun();
                                                     });
 
                                                     newYearElement.appendChild(deleteIcon);
                                                     yearContainerElement.appendChild(newYearElement);
 
-                                                    // Tambahkan tahun ke dalam selectedTahunArray jika belum ada di dalamnya
                                                     if (!selectedTahunArray.includes(year)) {
                                                         selectedTahunArray.push(year);
                                                     }
 
-                                                    updateSelectedTahun(); // Update nilai input hidden
+                                                    updateSelectedTahun();
                                                 }
                                             });
 
@@ -906,9 +865,8 @@ include '../config/koneksi.php';
                                             }
                                         }
 
-                                        // Hapus tahun dari selectedTahunArray
                                         selectedTahunArray = selectedTahunArray.filter(selectedYear => selectedYear !== tahun);
-                                        updateSelectedTahun(); // Update nilai input hidden
+                                        updateSelectedTahun();
                                     }
 
                                     function updateSelectedTahun() {
@@ -954,11 +912,8 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
 
-
                                     <div id="countryList">
                                         <?php
-
-                                        // Mendapatkan data negara yang sudah terkait dengan film
                                         $queryFilmNegara = "SELECT negara_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmNegara = mysqli_query($koneksi, $queryFilmNegara);
                                         $filmNegara = array();
@@ -1020,7 +975,7 @@ include '../config/koneksi.php';
                                 </style>
 
                                 <script>
-                                    let selectedNegaraArray = []; // Tambahkan deklarasi array untuk menyimpan negara yang dipilih
+                                    let selectedNegaraArray = [];
 
                                     function addCountry() {
                                         const inputElement = document.getElementById("countryInput");
@@ -1030,7 +985,6 @@ include '../config/koneksi.php';
                                             const countryContainerElement = document.getElementById("countryList");
 
                                             countries.forEach(country => {
-                                                // Cek apakah negara sudah ada dalam daftar
                                                 const isCountryExists = Array.from(countryContainerElement.children).some(countryElement => countryElement.textContent === country);
 
                                                 if (!isCountryExists) {
@@ -1043,17 +997,16 @@ include '../config/koneksi.php';
                                                     deleteIcon.addEventListener("click", function () {
                                                         countryContainerElement.removeChild(newCountryElement);
                                                         selectedNegaraArray = selectedNegaraArray.filter(selectedCountry => selectedCountry !== country); // Hapus negara dari array saat dihapus dari daftar
-                                                        updateSelectedNegara(); // Update nilai input hidden
+                                                        updateSelectedNegara();
                                                     });
 
                                                     newCountryElement.appendChild(deleteIcon);
                                                     countryContainerElement.appendChild(newCountryElement);
 
-                                                    // Tambahkan negara ke dalam selectedNegaraArray jika belum ada di dalamnya
                                                     if (!selectedNegaraArray.includes(country)) {
                                                         selectedNegaraArray.push(country);
                                                     }
-                                                    updateSelectedNegara(); // Update nilai input hidden
+                                                    updateSelectedNegara();
 
                                                 }
                                             });
@@ -1072,9 +1025,8 @@ include '../config/koneksi.php';
                                             }
                                         }
 
-                                        // Hapus negara dari selectedNegaraArray
                                         selectedNegaraArray = selectedNegaraArray.filter(selectedCountry => selectedCountry !== negaraName);
-                                        updateSelectedNegara(); // Update nilai input hidden
+                                        updateSelectedNegara();
                                     }
 
                                     function updateSelectedNegara() {
@@ -1123,7 +1075,6 @@ include '../config/koneksi.php';
 
                                     <div id="qualityList">
                                         <?php
-                                        // Mendapatkan data kualitas yang sudah terkait dengan film
                                         $queryFilmKualitas = "SELECT kualitas_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmKualitas = mysqli_query($koneksi, $queryFilmKualitas);
                                         $filmKualitas = array();
@@ -1132,11 +1083,9 @@ include '../config/koneksi.php';
                                             $filmKualitas = explode(",", $rowFilmKualitas['kualitas_ids']);
                                         }
 
-                                        // Query untuk mendapatkan nama kualitas berdasarkan id_kualitas
                                         $query_kualitas = "SELECT nama_kualitas FROM tb_kualitas WHERE id IN (" . implode(',', $filmKualitas) . ")";
                                         $result_kualitas = mysqli_query($koneksi, $query_kualitas);
 
-                                        // Menampilkan nama kualitas menggunakan foreach
                                         foreach ($result_kualitas as $row) {
                                             $nama_kualitas = $row['nama_kualitas'];
                                             echo '<span class="quality">' . $nama_kualitas . '<i class="fas fa-times" onclick="removeKualitas(\'' . $nama_kualitas . '\')"></i></span>';
@@ -1284,7 +1233,6 @@ include '../config/koneksi.php';
 
                                     <div id="jaringanList">
                                         <?php
-                                        // Mendapatkan data jaringan yang sudah terkait dengan film
                                         $queryFilmJaringan = "SELECT jaringan_ids FROM tb_tv_show WHERE id = $idtvshow";
                                         $resultFilmJaringan = mysqli_query($koneksi, $queryFilmJaringan);
                                         $filmJaringan = array();
@@ -1293,30 +1241,24 @@ include '../config/koneksi.php';
                                             $filmJaringan = explode(",", $rowFilmJaringan['jaringan_ids']);
                                         }
 
-                                        // Query untuk mendapatkan nama jaringan berdasarkan id_jaringan
                                         $query_jaringan = "SELECT nama_jaringan FROM tb_jaringan WHERE id IN (" . implode(',', $filmJaringan) . ")";
                                         $result_jaringan = mysqli_query($koneksi, $query_jaringan);
 
-                                        // Menampilkan nama jaringan menggunakan foreach
                                         foreach ($result_jaringan as $row) {
                                             $nama_jaringan = $row['nama_jaringan'];
                                             echo '<span class="jaringan">' . $nama_jaringan . '<i class="fas fa-times" onclick="removeJaringan(\'' . $nama_jaringan . '\')"></i></span>';
                                         }
                                         ?>
-
                                     </div>
-
                                     <small class="text-primary" style="cursor: pointer;"
                                         onclick="toggleSavedJaringan()">Tampilkan
                                         Jaringan Tersimpan di database.</small>
-
                                     <div id="savedJaringanList" style="display: none;">
                                         <hr>
                                         <div class="form-group" style="height: 80px; overflow-y: auto;">
                                             <?php
                                             $query_jaringan = "SELECT id, nama_jaringan FROM tb_jaringan";
                                             $result_jaringan = mysqli_query($koneksi, $query_jaringan);
-
                                             while ($row = mysqli_fetch_assoc($result_jaringan)) {
                                                 $id_jaringan = $row['id'];
                                                 $nama_jaringan = $row['nama_jaringan'];

@@ -152,7 +152,6 @@
     </div>
 </div>
 
-<!--Script Style Callendar Terakhir mengudara-->
 <script>
     $(function () {
         $('#tanggal_terakhir_mengudara').datetimepicker({

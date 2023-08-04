@@ -1,8 +1,6 @@
 <?php
 include '../config/koneksi.php';
-
 $tv_id = $_GET['id_tv'];
-
 
 $api_key = '28f59279215bfffc21257db6c0f7bff5';
 $base_url_tmdb = "https://api.themoviedb.org/3";
@@ -18,12 +16,10 @@ curl_close($ch);
 
 if ($response !== false) {
     $data = json_decode($response, true);
-
     if (isset($data['name'])) {
         $judul = $data['name'];
         $tahun_rilis = substr($data['first_air_date'], 0, 4);
         $judul_tahun = $judul . " (" . $tahun_rilis . ")";
-
         $languageMap = array(
             "en" => "English",
             "ar" => "Arabic",
@@ -99,7 +95,6 @@ if ($response !== false) {
 
         $last_air_date = $data['last_air_date'];
 
-
         $url_poster = "https://image.tmdb.org/t/p/w200/{$data['poster_path']}";
         $deskripsi = $data['overview'];
 
@@ -134,7 +129,6 @@ if ($response !== false) {
             $trailer_link = "";
         }
 
-        // Ambil data kru produksi dari API TMDb
         $credits_endpoint = "/movie/{$tv_id}/credits";
         $credits_url = $base_url_tmdb . $credits_endpoint . $query_string;
         $cast_url = $base_url_tmdb . $credits_endpoint . $query_string;
@@ -160,8 +154,6 @@ if ($response !== false) {
         } else {
             $nama_direktur_string = "";
         }
-
-
 
         $ch_cast = curl_init($cast_url);
         curl_setopt($ch_cast, CURLOPT_RETURNTRANSFER, true);
@@ -218,10 +210,8 @@ if ($response !== false) {
         $jaringan = "";
     }
 } else {
-
 }
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <form action="tv_show/proses_create.php" method="post" enctype="multipart/form-data">
@@ -250,7 +240,6 @@ if ($response !== false) {
                             </div>
                         </div>
                     </div>
-
                     <div class="card">
                         <?php include 'tv_show/form_card_tmdb.php'; ?>
                     </div>
@@ -271,8 +260,8 @@ if ($response !== false) {
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="statusFilm" name="status">
-                                            <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
                                             <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
@@ -504,7 +493,7 @@ if ($response !== false) {
 
                                         function handleTagClick(tagName) {
                                             const tagInputValue = document.getElementById("tagInput");
-                                            tagInputValue.value = tagName; // Isi input "tagInput" dengan nama tag yang dipilih
+                                            tagInputValue.value = tagName;
                                         }
 
                                         function toggleSavedTags() {
@@ -597,7 +586,6 @@ if ($response !== false) {
                                                 const directorContainerElement = document.getElementById("directorList");
 
                                                 directorNames.forEach((directorName) => {
-                                                    // Cek apakah direktur sudah ada sebelumnya
                                                     const isDirectorExists = selectedDirectorsArray.includes(directorName);
 
                                                     if (!isDirectorExists) {
@@ -610,16 +598,13 @@ if ($response !== false) {
                                                         deleteIcon.addEventListener("click", function () {
                                                             directorContainerElement.removeChild(newDirectorElement);
                                                             selectedDirectorsArray = selectedDirectorsArray.filter((director) => director !== directorName);
-                                                            updateSelectedDirectors(); // Update nilai input hidden
+                                                            updateSelectedDirectors();
                                                         });
 
                                                         newDirectorElement.appendChild(deleteIcon);
                                                         directorContainerElement.appendChild(newDirectorElement);
-
-                                                        // Tambahkan direktur ke dalam selectedDirectorsArray jika belum ada di dalamnya
                                                         selectedDirectorsArray.push(directorName);
-
-                                                        updateSelectedDirectors(); // Update nilai input hidden
+                                                        updateSelectedDirectors();
                                                     }
                                                 });
 
@@ -627,23 +612,19 @@ if ($response !== false) {
                                             }
                                         }
 
-
                                         function updateSelectedDirectors() {
                                             const selectedDirectorInput = document.getElementById("selectedDireksiInput");
                                             selectedDirectorInput.value = selectedDirectorsArray.join(',');
                                         }
-
                                         function handleDireksiClick(tagName) {
                                             const direksiInputValue = document.getElementById("directorInput");
                                             direksiInputValue.value = tagName;
                                         }
-
                                         function toggleSavedDirector() {
                                             const savedDirectorList = document.getElementById("savedDirectorList");
                                             savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
                                         }
                                     </script>
-
                                 </div>
                             </div>
                         </div>
@@ -740,18 +721,17 @@ if ($response !== false) {
                                                     deleteIcon.addEventListener("click", function () {
                                                         playerContainerElement.removeChild(newPlayerElement);
                                                         selectedPemainArray = selectedPemainArray.filter(pemain => pemain !== playerName);
-                                                        updateSelectedPemain(); // Update nilai input hidden
+                                                        updateSelectedPemain();
                                                     });
 
                                                     newPlayerElement.appendChild(deleteIcon);
                                                     playerContainerElement.appendChild(newPlayerElement);
 
-                                                    // Tambahkan pemain ke dalam selectedPemainArray jika belum ada di dalamnya
                                                     if (!selectedPemainArray.includes(playerName)) {
                                                         selectedPemainArray.push(playerName);
                                                     }
 
-                                                    updateSelectedPemain(); // Update nilai input hidden
+                                                    updateSelectedPemain();
                                                 }
                                             });
 
@@ -766,7 +746,7 @@ if ($response !== false) {
 
                                     function handlePemainClick(pemainName) {
                                         const pemainInputValue = document.getElementById("playerInput");
-                                        pemainInputValue.value = pemainName; // Isi input "playerInput" dengan nama pemain yang dipilih
+                                        pemainInputValue.value = pemainName;
                                     }
 
                                     function toggleSavedPemain() {
@@ -814,7 +794,6 @@ if ($response !== false) {
                                             <?php
                                             $query_tahun = "SELECT id, tahun_rilis FROM tb_tahun";
                                             $result_tahun = mysqli_query($koneksi, $query_tahun);
-
                                             while ($row = mysqli_fetch_assoc($result_tahun)) {
                                                 $id_tahun = $row['id'];
                                                 $nama_tahun = $row['tahun_rilis'];
@@ -865,18 +844,17 @@ if ($response !== false) {
                                                     deleteIcon.addEventListener("click", function () {
                                                         yearContainerElement.removeChild(newYearElement);
                                                         selectedTahunArray = selectedTahunArray.filter(selectedYear => selectedYear !== year);
-                                                        updateSelectedTahun(); // Update nilai input hidden
+                                                        updateSelectedTahun();
                                                     });
 
                                                     newYearElement.appendChild(deleteIcon);
                                                     yearContainerElement.appendChild(newYearElement);
 
-                                                    // Tambahkan tahun ke dalam selectedTahunArray jika belum ada di dalamnya
                                                     if (!selectedTahunArray.includes(year)) {
                                                         selectedTahunArray.push(year);
                                                     }
 
-                                                    updateSelectedTahun(); // Update nilai input hidden
+                                                    updateSelectedTahun();
                                                 }
                                             });
 
@@ -969,7 +947,7 @@ if ($response !== false) {
                                 </style>
 
                                 <script>
-                                    let selectedNegaraArray = []; // Tambahkan deklarasi array untuk menyimpan negara yang dipilih
+                                    let selectedNegaraArray = [];
 
                                     function addCountry() {
                                         const inputElement = document.getElementById("countryInput");
@@ -979,7 +957,6 @@ if ($response !== false) {
                                             const countryContainerElement = document.getElementById("countryList");
 
                                             countries.forEach(country => {
-                                                // Cek apakah negara sudah ada dalam daftar
                                                 const isCountryExists = Array.from(countryContainerElement.children).some(countryElement => countryElement.textContent === country);
 
                                                 if (!isCountryExists) {
@@ -992,17 +969,16 @@ if ($response !== false) {
                                                     deleteIcon.addEventListener("click", function () {
                                                         countryContainerElement.removeChild(newCountryElement);
                                                         selectedNegaraArray = selectedNegaraArray.filter(selectedCountry => selectedCountry !== country); // Hapus negara dari array saat dihapus dari daftar
-                                                        updateSelectedNegara(); // Update nilai input hidden
+                                                        updateSelectedNegara();
                                                     });
 
                                                     newCountryElement.appendChild(deleteIcon);
                                                     countryContainerElement.appendChild(newCountryElement);
 
-                                                    // Tambahkan negara ke dalam selectedNegaraArray jika belum ada di dalamnya
                                                     if (!selectedNegaraArray.includes(country)) {
                                                         selectedNegaraArray.push(country);
                                                     }
-                                                    updateSelectedNegara(); // Update nilai input hidden
+                                                    updateSelectedNegara();
 
                                                 }
                                             });
