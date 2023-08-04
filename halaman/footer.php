@@ -17,14 +17,12 @@
     $(document).ready(function () {
         $('#belumkepake').select2();
     });
-
     var iframe = document.querySelector("iframe");
     var lewatiNotification = document.querySelector(".lewati-notification");
 
     setTimeout(function () {
         lewatiNotification.style.display = "block";
     }, 5000);
-
     lewatiNotification.querySelector("a").addEventListener("click", function (event) {
         event.preventDefault();
         var link_film = this.getAttribute("href");
