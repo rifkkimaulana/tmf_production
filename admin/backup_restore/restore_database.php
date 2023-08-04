@@ -40,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["sqlFile"])) {
             mysqli_stmt_close($stmt);
 
             unlink($targetFile);
+
+            echo '<script>window.location.href = "../dashboard.php?page=dashboard&alert=berhasil_restoreDatabase";</script>';
+
         } else {
             echo "Gagal mengunggah file.";
         }
@@ -47,5 +50,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["sqlFile"])) {
         echo "File yang diunggah bukan file SQL.";
     }
 }
-
 ?>
