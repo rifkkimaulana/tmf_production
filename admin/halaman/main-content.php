@@ -1,8 +1,5 @@
 <div class="content">
     <div class="container-fluid">
-
-
-        <!-- Modal Konfirmasi Logout -->
         <div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="modalLogoutLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -24,8 +21,6 @@
             </div>
         </div>
 
-
-        <!-- Modal Berhasil -->
         <div class="modal fade" id="modalBerhasil" tabindex="-1" role="dialog" aria-labelledby="modalBerhasilLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -46,7 +41,6 @@
             </div>
         </div>
 
-        <!-- Modal Berhasil Dihapus -->
         <div class="modal fade" id="modalBerhasilDihapus" tabindex="-1" role="dialog"
             aria-labelledby="modalBerhasilLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -67,7 +61,6 @@
             </div>
         </div>
 
-        <!-- Modal Gagal -->
         <div class="modal fade" id="modalGagal" tabindex="-1" role="dialog" aria-labelledby="modalGagalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -88,7 +81,6 @@
             </div>
         </div>
 
-        <!-- JavaScript untuk menampilkan modal -->
         <script>
             var alertType = '<?php echo isset($_GET["alert"]) ? $_GET["alert"] : ""; ?>';
 

@@ -10,7 +10,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
 
             </div>
         </div>
-
     </a>
     <div class="sidebar">
         <div class="user-panel mt-1 pb-2 mb-1 d-flex sidebar-collapse">
@@ -33,7 +32,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                 <span class="badge badge-success">Online</span>
             </div>
         </div>
-
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -58,7 +56,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         <i class="nav-icon fas fa-film"></i>
                         <p>Film<i class="right fas fa-angle-left"></i></p>
                     </a>
-                    <!-- Submenu "Tambah Film" -->
                     <ul class="nav nav-treeview" style="padding-left: 20px;">
                         <li class="nav-item">
                             <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=film"
@@ -92,7 +89,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         <i class="nav-icon fas fa-tv"></i>
                         <p>TV Show<i class="right fas fa-angle-left"></i></p>
                     </a>
-                    <!-- Submenu "Tambah TV Show" -->
                     <ul class="nav nav-treeview" style="padding-left: 20px;">
                         <li class="nav-item">
                             <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=tv_show"
@@ -139,7 +135,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>Artikel<i class="right fas fa-angle-left"></i></p>
                     </a>
-                    <!-- Submenu Artikel -->
                     <ul class="nav nav-treeview" style="padding-left: 20px;">
                         <li class="nav-item">
                             <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=artikel"
@@ -171,8 +166,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         </li>
                     </ul>
                 </li>
-
-
 
                 <li class="nav-item">
                     <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=komentar"
@@ -252,9 +245,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                     </ul>
                 </li>
 
-
-
-
                 <li
                     class="nav-item <?php echo ($page == 'backup_restore' || $page == 'reset_database') ? 'menu-open' : ''; ?>">
                     <a href="#" class="nav-link">
@@ -295,7 +285,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                         <p>Logout</p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>
