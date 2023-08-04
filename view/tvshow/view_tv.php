@@ -16,12 +16,13 @@ if (!$row_tv) {
 }
 
 $tmdb_id = $row_tv['tmdb_id'];
-
 $query_tmdb = "SELECT link_trailer FROM tb_tmdb WHERE id = '$tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-$row_tmdb = mysqli_fetch_assoc($result_tmdb);
+if (mysqli_num_rows($result_tmdb) > 0) {
+    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+    $link = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : $row_film['link_trailer'];
+}
 
-$link = !empty($row_tmdb['link_trailer']) ? $row_tmdb['link_trailer'] : $row_film['link_trailer'];
 
 $id_tv = $row_tv['id'];
 $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = '$id_tv'";
@@ -691,6 +692,8 @@ if (mysqli_num_rows($result_episode) > 0) {
                 </a>
             </div>
             <!-- End TMDB LIST -->
+
+
             <!-- Form Komentar-->
             <div class="card-flat comment-form" style="margin-bottom: 5px;">
                 </br>
