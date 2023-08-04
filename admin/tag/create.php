@@ -5,9 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["tag_name"])) {
         $tag_name = $_POST["tag_name"];
 
-        // Jika data tag_slug tidak diisi, buat slug dari tag_name
         if (empty($_POST["tag_slug"])) {
-            // Hapus karakter non-alfanumerik dan spasi dari tag_name
             $tag_slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($tag_name));
         } else {
             $tag_slug = $_POST["tag_slug"];
@@ -24,6 +22,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 mysqli_close($koneksi);
 ?>

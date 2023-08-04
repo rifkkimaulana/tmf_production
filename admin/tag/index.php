@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -112,17 +111,14 @@ include '../config/koneksi.php';
                                 "pageLength": 5
                             });
 
-                            // Event handler when the length option changes
                             $('#selectLength').on('change', function () {
                                 table.page.len($(this).val()).draw();
                             });
 
-                            // Event handler when the checkbox in the thead is checked
                             $('#checkAll').on('change', function () {
                                 $('input[name="selected_tag[]"]').prop('checked', this.checked);
                             });
 
-                            // Event handler when the checkbox in the tbody is checked
                             $('input[name="selected_tag[]"]').on('change', function () {
                                 if ($('input[name="selected_tag[]"]:checked').length === $('input[name="selected_tag[]"]').length) {
                                     $('#checkAll').prop('checked', true);
@@ -132,7 +128,6 @@ include '../config/koneksi.php';
                             });
                         });
                     </script>
-
                 </div>
             </div>
         </div>
