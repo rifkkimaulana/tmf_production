@@ -24,7 +24,7 @@
                     include "view/negara/index.php";
                     break;
                 case 'movies':
-                    include "view/view_film.php";
+                    include "view/film/view_film.php";
                     break;
                 case 'tv':
                     include "view/tvshow/view_tv.php";

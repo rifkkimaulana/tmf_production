@@ -98,17 +98,14 @@ $limitedGenres = array_slice($genres, 0, 9);
             transition: border-bottom 0.3s;
         }
 
-        /* Add bottom border to form */
         .comment-form {
             padding-bottom: 15px;
         }
 
-        /* Style submit button */
         .comment-form .submit-btn {
             margin-top: 10px;
         }
 
-        /* Style input field when focused */
         .comment-form .form-control:focus {
             border-bottom: 2px solid #007bff;
         }
@@ -131,48 +128,112 @@ $limitedGenres = array_slice($genres, 0, 9);
             margin-right: 10px;
         }
 
-        /* Ukuran poster pada tampilan di laptop */
         .img-poster {
             max-width: 100%;
         }
 
-        /* Ukuran poster pada tampilan di perangkat Android dalam mode landscape */
         @media (max-width: 768px) {
             .img-poster-android-landscape {
                 max-width: 50%;
                 display: block;
                 margin: 0 auto;
-                /* Membuat gambar menjadi posisi tengah secara horizontal */
             }
         }
 
-        /* Ukuran poster pada tampilan di perangkat Android dalam mode portrait */
         @media (max-width: 576px) {
             .img-poster-android-portrait {
                 max-width: 100%;
                 display: block;
                 margin: 0 auto;
-                /* Membuat gambar menjadi posisi tengah secara horizontal */
             }
         }
 
-        /* Tampilkan elemen biasa di layar besar (lebar minimal 768px) */
         .card-flat {
             display: block;
         }
 
-        /* Sembunyikan elemen di layar kecil (lebar maksimal 767px) */
         @media screen and (max-width: 767px) {
             .hide-on-small-screen {
                 display: none;
             }
         }
 
-        /* Sembunyikan elemen di layar besar (lebar minimal 768px) */
         @media screen and (min-width: 768px) {
             .hide-on-large-screen {
                 display: none;
             }
+        }
+
+
+        .tmf-card-terbaru {
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .tmf-card-terbaru h3 {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 0;
+        }
+
+        .tmf-card-terbaru .line {
+            flex: 1;
+            height: 1px;
+            background-color: #007bff;
+            margin-left: 10px;
+        }
+
+        /* Gaya untuk membuat gambar menjadi landscape dan diberi efek zoom */
+        .thumbnail-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .thumbnail-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .video-info {
+            padding: 10px;
+        }
+
+        /* Gaya untuk membuat tampilan seperti pencarian YouTube */
+        .col-lg-3,
+        .col-md-4,
+        .col-sm-6,
+        .col-12 {
+            margin-bottom: 15px;
+        }
+
+        .video-info strong {
+            font-size: 16px;
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        .video-info a {
+            color: #606060;
+            text-decoration: none;
+        }
+
+        .video-info a:hover {
+            color: #000;
         }
     </style>
 </head>

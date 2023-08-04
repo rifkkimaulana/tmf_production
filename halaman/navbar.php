@@ -29,9 +29,8 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <?php foreach ($genres as $genre) { ?>
                             <?php
-                            $slug_genre = strtolower(str_replace(' ', '-', $genre));
                             ?>
-                            <li><a href="<?php echo $base_url . "/dashboard.php?page=genre&f=" . $slug_genre; ?>"
+                            <li><a href="<?php echo $base_url . "/dashboard.php?page=genre&f=" . urlencode($genre); ?>"
                                     class="dropdown-item">
                                     <?php echo $genre; ?>
                                 </a></li>
@@ -44,9 +43,8 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <?php foreach ($negara as $negara) { ?>
                             <?php
-                            $slug_negara = strtolower(str_replace(' ', '-', $negara));
                             ?>
-                            <li><a href="<?php echo $base_url . "/dashboard.php?page=negara&f=" . $slug_negara; ?>"
+                            <li><a href="<?php echo $base_url . "/dashboard.php?page=negara&f=" . $negara; ?>"
                                     class="dropdown-item">
                                     <?php echo $negara; ?>
                                 </a></li>
@@ -70,9 +68,6 @@
                     </div>
                 </div>
             </form>
-
-
-
         </div>
 
     </div>

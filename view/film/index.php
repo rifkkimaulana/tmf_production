@@ -62,7 +62,7 @@
             <?php include 'view/search.php'; ?>
             <div class="card-flat">
                 <div class="card-header">
-                    <h5 class="card-title m-0">Paling Banyak Diputar</h5>
+                    <h5 class="card-title m-0">FILM Paling Banyak Diputar</h5>
                 </div>
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
