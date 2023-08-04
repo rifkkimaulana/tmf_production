@@ -120,7 +120,7 @@
             <div class="form-group">
                 <label for="youtube_id">Youtube ID Untuk Trailer (TMDB):</label>
                 <input type="text" class="form-control" id="youtube_id" name="youtube_id"
-                    value="<?php echo $trailer_link; ?>">
+                    value="<?php echo $trailer_link; ?>" required>
                 <small class="text-muted">Isi dengan ID YouTube untuk trailer tv show dari TMDB.
                     Contoh: YROTBt1sae8.</small>
             </div>

@@ -235,6 +235,12 @@ $limitedGenres = array_slice($genres, 0, 9);
         .video-info a:hover {
             color: #000;
         }
+
+        .card-img-top {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+        }
     </style>
 </head>
 
