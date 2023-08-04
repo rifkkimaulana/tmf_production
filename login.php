@@ -62,7 +62,6 @@ if (isset($_POST['remember'])) {
     setcookie("remember_me", "", time() - 3600, "/", "", true, true);
 }
 
-// Memeriksa apakah cookie "remember_me" telah ada
 if (isset($_COOKIE['remember_me'])) {
     $remember = true;
 } else {
@@ -109,11 +108,9 @@ if (isset($_COOKIE['remember_me'])) {
                                 </label>
                             </div>
                         </div>
-                        <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block" name="submit">Sign In</button>
                         </div>
-                        <!-- /.col -->
                     </div>
                 </form>
 
@@ -122,13 +119,11 @@ if (isset($_COOKIE['remember_me'])) {
                 <h5 class="text-center">
                     ATAU
                 </h5>
-
                 <div class="social-auth-links text-center mt-2 mb-3">
                     <a href="<?php echo $base_url; ?>/google/login.php" class="btn btn-block btn-danger">
                         <i class="fab fa-google mr-2"></i> Sign in using Google
                     </a>
                 </div>
-
                 <p class="mb-1">
                     <a href="<?php echo $base_url; ?>/insert_email.php">I forgot my password</a>
                 </p>
@@ -140,7 +135,6 @@ if (isset($_COOKIE['remember_me'])) {
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Modal Token Expired -->
 <div class="modal fade" id="tokenExpired" tabindex="-1" role="dialog" aria-labelledby="tokenExpiredModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -166,7 +160,6 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'token_expired') {
-            // Jika ada, tampilkan modal
             $('#tokenExpired').modal('show');
         }
     });
@@ -197,13 +190,11 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'gagal') {
-            // Jika ada, tampilkan modal
             $('#gagalLoginModal').modal('show');
         }
     });
 </script>
 
-<!-- Modal Password Tidak Serasi -->
 <div class="modal fade" id="passwordMismatchModal" tabindex="-1" role="dialog"
     aria-labelledby="passwordMismatchModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -229,13 +220,11 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'password_tidak_sesuai') {
-            // Jika ada, tampilkan modal
             $('#passwordMismatchModal').modal('show');
         }
     });
 </script>
 
-<!-- Modal Password Berhasil Diupdate -->
 <div class="modal fade" id="passwordSuccessModal" tabindex="-1" role="dialog"
     aria-labelledby="passwordSuccessModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -260,13 +249,11 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'berhasil_update_password') {
-            // Jika ada, tampilkan modal
             $('#passwordSuccessModal').modal('show');
         }
     });
 </script>
 
-<!-- Modal Email Tidak Terdaftar -->
 <div class="modal fade" id="emailNotFound" tabindex="-1" role="dialog" aria-labelledby="emailNotFoundModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -291,13 +278,11 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'email_tidak_terdaftar') {
-            // Jika ada, tampilkan modal
             $('#emailNotFound').modal('show');
         }
     });
 </script>
 
-<!-- Modal Failed Token -->
 <div class="modal fade" id="failedToken" tabindex="-1" role="dialog" aria-labelledby="failedTokenModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -323,13 +308,11 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'failed_token') {
-            // Jika ada, tampilkan modal
             $('#failedToken').modal('show');
         }
     });
 </script>
 
-<!-- Modal Invalid Response -->
 <div class="modal fade" id="invalidResponseModal" tabindex="-1" role="dialog"
     aria-labelledby="invalidResponseModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -355,7 +338,6 @@ if (isset($_COOKIE['remember_me'])) {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('alert') === 'invalid_response') {
-            // Jika ada, tampilkan modal
             $('#invalidResponseModal').modal('show');
         }
     });
