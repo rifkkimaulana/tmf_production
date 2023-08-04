@@ -2,7 +2,6 @@
     <?php
     include 'config/koneksi.php';
 
-    // Cek apakah ada parameter judul di URL
     if (isset($_GET['judul']) && !empty($_GET['judul'])) {
         $encoded_judul = $_GET['judul'];
         $judul_artikel = urldecode($encoded_judul);
@@ -72,8 +71,6 @@
                     </div>
                 </div>
             </div>
-
-
 
             <!-- Form Komentar-->
             <div class="card-flat comment-form" style="margin-bottom: 5px;">
@@ -182,7 +179,6 @@
 
 
         <?php } else {
-            // Jika artikel tidak ditemukan, tampilkan pesan
             echo '<div class="alert alert-danger">Artikel tidak ditemukan</div>';
         }
     } else {
@@ -194,7 +190,7 @@
             $result_artikel = mysqli_query($koneksi, $query_artikel);
 
             if (empty($row_artikel)) { ?>
-                <div class="card-header">
+                <div class="card-header mb-3">
                     <h5 class="card-title">Hasil Pencarian Artikel :
                         <b>
                             <?php echo $_GET['search']; ?>

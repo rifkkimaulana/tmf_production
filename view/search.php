@@ -35,22 +35,24 @@
         $kualitas[] = $row_kualitas['nama_kualitas'];
     }
     ?>
+
     <div class="card-body">
         <form action="#" method="GET">
             <div class="form-group">
                 <input type="hidden" class="form-control" id="page" name="page" value="dashboard">
-                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search Film & TV Show">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Search Film & TV Show"
+                    value="<?php echo $_GET['search']; ?>" required>
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="tipe" name="tipe">
-                    <option value="all">Semua Tipe</option>
+                    <option value="">Semua Tipe</option>
                     <option value="film">Film</option>
-                    <option value="tvShow">TV Show</option>
+                    <option value="tvshow">TV Show</option>
                 </select>
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="genre" name="genre">
-                    <option value="all_genre">Semua Genre</option>
+                    <option value="">Semua Genre</option>
                     <?php foreach ($genres as $genres) { ?>
                         <?php
                         $slug_genre = strtolower(str_replace(' ', '-', $genres));

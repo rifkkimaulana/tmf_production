@@ -1,130 +1,290 @@
-<div class="col-md-9 tmf_production">
-    <?php include 'view/genre_button.php'; ?>
-    <div class="card-flat">
-        <div class="tmf-card-terbaru ">
-            <h3>
-                FILM TERBARU
-                <span class="line"></span>
-            </h3>
+<?php
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+
+    $judul = $_GET['search'];
+
+    $tipe = isset($_GET['tipe']) ? $_GET['tipe'] : '';
+
+    if ($tipe === 'film') {
+        $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                    FROM tb_film
+                    LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
+                    JOIN tb_negara ON FIND_IN_SET(tb_negara.id, tb_film.negara_ids)
+                    WHERE tb_film.judul_film LIKE '%$judul%'
+                    GROUP BY tb_film.tmdb_id";
+
+        $query_film_tv = $query_film;
+    } elseif ($tipe === 'tvshow') {
+        $query_tv_show = "SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, tb_tv_show.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                    FROM tb_tv_show
+                    LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
+                    JOIN tb_negara ON FIND_IN_SET(tb_negara.id, tb_tv_show.negara_ids)
+                    WHERE tb_tv_show.judul_tv_show LIKE '%$judul%'
+                    GROUP BY tb_tv_show.tmdb_id";
+
+        $query_film_tv = $query_tv_show;
+    } else {
+        $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                    FROM tb_film
+                    LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
+                    JOIN tb_negara ON FIND_IN_SET(tb_negara.id, tb_film.negara_ids)
+                    WHERE tb_film.judul_film LIKE '%$judul%'
+                    GROUP BY tb_film.tmdb_id";
+
+        $query_tv_show = "SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, tb_tv_show.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                    FROM tb_tv_show
+                    LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
+                    JOIN tb_negara ON FIND_IN_SET(tb_negara.id, tb_tv_show.negara_ids)
+                    WHERE tb_tv_show.judul_tv_show LIKE '%$judul%'
+                    GROUP BY tb_tv_show.tmdb_id";
+
+        $query_film_tv = "SELECT * FROM (($query_film) UNION ($query_tv_show)) AS merged_results ORDER BY total_kunjungan DESC";
+    }
+
+    $result_film_tv = mysqli_query($koneksi, $query_film_tv);
+
+    $count = 0;
+
+    if (mysqli_num_rows($result_film_tv) == 0) {
+        echo "FILM & TV SHOW Tidak Tersedia.";
+    } else {
+        ?>
+
+        <div class="col-md-9 tmf_production">
+            <div class="card-flat">
+                <div class="tmf-card-terbaru ">
+                    <h3>
+                        Hasil Pencarian :
+                        <?php echo $_GET['search']; ?>
+                        <span class="line"></span>
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <?php
+                while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
+                    if (!empty($row_film_tv['judul'])) {
+                        $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
+                        $genres = array();
+
+                        foreach ($genre_ids as $genre_id) {
+                            $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
+                            $result_genre = mysqli_query($koneksi, $query_genre);
+                            $row_genre = mysqli_fetch_assoc($result_genre);
+                            $genres[] = $row_genre['nama_genre'];
+                        }
+
+                        $country_ids = array_filter(explode(',', $row_film_tv['negara_ids']));
+                        $countries = array();
+
+                        foreach ($country_ids as $country_id) {
+                            $query_country = "SELECT nama_negara FROM tb_negara WHERE id = '$country_id'";
+                            $result_country = mysqli_query($koneksi, $query_country);
+                            $row_country = mysqli_fetch_assoc($result_country);
+                            $countries[] = $row_country['nama_negara'];
+                        }
+
+                        if ($count % 4 === 0 && $count > 0) {
+                            echo '</div><div class="row">';
+                        }
+                        ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                            <?php
+                            $cek_id_tmdb = $row_film_tv['tmdb_id'];
+                            $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
+                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                            ?>
+                            <a href="dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $row_film_tv['tmdb_id']; ?>"
+                                style="color: black;">
+                                <div class="thumbnail-container">
+                                    <?php if (!empty($row_film_tv['thumbnail'])) { ?>
+                                        <img class="img-fluid rounded img-landscape-zoom"
+                                            src="gambar/film/<?php echo $row_film_tv['thumbnail']; ?>"
+                                            alt="<?php echo $row_film_tv['judul']; ?>">
+                                    <?php } else {
+                                        $tmdb_id = $row_film_tv['tmdb_id'];
+                                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                                        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                                        $url_poster = $row_tmdb['url_poster'];
+                                        ?>
+                                        <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                            alt="<?php echo $row_film_tv['judul']; ?>">
+                                    <?php } ?>
+                                </div>
+                                <div class="video-info">
+                                    <strong>
+                                        <?php echo $row_film_tv['judul']; ?>
+                                    </strong>
+                                    <?php
+                                    $genre_limit = 3;
+                                    $count_genre = 0;
+
+                                    foreach ($genres as $genre) {
+                                        $slug_genre = strtolower(str_replace(' ', '-', $genre));
+                                        ?>
+                                        <a style="font-size: 14px;" href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                                            <?php echo $genre . ", "; ?>
+                                        </a>
+                                        <?php
+                                        $count_genre++;
+                                        if ($count_genre >= $genre_limit) {
+                                            break;
+                                        }
+                                    }
+                                    ?>
+                                    <?php foreach ($countries as $country) { ?>
+                                        <span style="font-size: 12px;">
+                                            <?php echo $country . ", "; ?>
+                                        </span>
+                                    <?php } ?>
+                                    <p style="font-size: 14px;"><i class="fas fa-eye"></i>
+                                        <?php echo $row_film_tv['total_kunjungan']; ?> x ditonton
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <?php
+                        $count++;
+                    }
+                }
+                ?>
+            </div>
         </div>
-    </div>
-    <div class="row">
         <?php
-        include 'config/koneksi.php';
-        $query_film = "SELECT thumbnail, judul_film, tmdb_id FROM tb_film
+    }
+} else {
+    ?>
+
+
+    <div class="col-md-9 tmf_production">
+        <?php include 'view/genre_button.php'; ?>
+        <div class="card-flat">
+            <div class="tmf-card-terbaru ">
+                <h3>
+                    FILM TERBARU
+                    <span class="line"></span>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <?php
+            include 'config/koneksi.php';
+            $query_film = "SELECT thumbnail, judul_film, tmdb_id FROM tb_film
                    ORDER BY created_at DESC LIMIT 8";
-        $result_film = mysqli_query($koneksi, $query_film);
-        while ($row_film = mysqli_fetch_assoc($result_film)) {
-            if (!empty($row_film['judul_film'])) { ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="thumbnail-container">
-                        <?php if (!empty($row_film['thumbnail'])) { ?>
-                            <a href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
-                                <img class="img-fluid rounded img-landscape-zoom"
-                                    src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
-                                    alt="<?php echo $row_film['judul_film']; ?>">
-                            </a>
+            $result_film = mysqli_query($koneksi, $query_film);
+            while ($row_film = mysqli_fetch_assoc($result_film)) {
+                if (!empty($row_film['judul_film'])) { ?>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                        <div class="thumbnail-container">
+                            <?php if (!empty($row_film['thumbnail'])) { ?>
+                                <a href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
+                                    <img class="img-fluid rounded img-landscape-zoom"
+                                        src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
+                                        alt="<?php echo $row_film['judul_film']; ?>">
+                                </a>
 
-                        <?php } else {
-                            $tmdb_id = $row_film['tmdb_id'];
-                            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                            $url_poster = $row_tmdb['url_poster'];
-                            ?>
-                            <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>">
-                                <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                    alt="<?php echo $row_film['judul_film']; ?>">
-                            </a>
-                        <?php } ?>
+                            <?php } else {
+                                $tmdb_id = $row_film['tmdb_id'];
+                                $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                                $url_poster = $row_tmdb['url_poster'];
+                                ?>
+                                <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>">
+                                    <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                        alt="<?php echo $row_film['judul_film']; ?>">
+                                </a>
+                            <?php } ?>
+                        </div>
+                        <?php
+                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+
+                        $total_kunjungan = $row_kunjungan['total_kunjungan'];
+                        ?>
+
+                        </a>
+
+                        <div class="card-body">
+                            <a class=" tmf_teks" href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
+                                <h5 class="card-title">
+                                    <?php echo $row_film['judul_film']; ?>
+                                </h5>
+                            </a></br>
+                            <p style="font-size: 14px;">
+                                <?php echo $total_kunjungan; ?> x ditonton
+                            </p>
+                        </div>
                     </div>
-                    <?php
-                    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
-                    $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-                    $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+                <?php }
+            } ?>
+        </div>
 
-                    $total_kunjungan = $row_kunjungan['total_kunjungan'];
-                    ?>
+        <!-- TV SHOW TERBARU -->
+        <div class="card-flat">
+            <div class="tmf-card-terbaru ">
+                <h3>
+                    TV SHOW TERBARU
+                    <span class="line"></span>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <?php
+            include 'config/koneksi.php';
+            $query_tv = "SELECT thumbnail, judul_tv_show, tmdb_id FROM tb_tv_show ORDER BY created_at DESC LIMIT 8";
+            $result_tv = mysqli_query($koneksi, $query_tv);
 
-                    </a>
+            while ($row_tv = mysqli_fetch_assoc($result_tv)) {
+                if (!empty($row_tv['judul_tv_show'])) { ?>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                        <div class="thumbnail-container">
+                            <?php if (!empty($row_tv['thumbnail'])) { ?>
+                                <a href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
+                                    <img class="img-fluid rounded img-landscape-zoom"
+                                        src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
+                                        alt="<?php echo $row_tv['judul_tv_show']; ?>">
+                                </a>
+                            <?php } else {
+                                $tmdb_id = $row_tv['tmdb_id'];
+                                $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                                $url_poster = $row_tmdb['url_poster'];
+                                ?>
+                                <a href="dashboard.php?page=tv&id=<?php echo $tmdb_id; ?>">
+                                    <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                        alt="<?php echo $row_tv['judul_tv_show']; ?>">
+                                </a>
+                            <?php } ?>
+                        </div>
+                        <?php
+                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
 
-                    <div class="card-body">
-                        <a class=" tmf_teks" href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
-                            <h5 class="card-title">
-                                <?php echo $row_film['judul_film']; ?>
-                            </h5>
-                        </a></br>
-                        <p style="font-size: 14px;">
-                            <?php echo $total_kunjungan; ?> x ditonton
-                        </p>
+                        $total_kunjungan = $row_kunjungan['total_kunjungan'];
+                        ?>
+                        </a>
+                        <div class="card-body">
+                            <a class=" tmf_teks" href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
+                                <h5 class="card-title">
+                                    <?php echo $row_tv['judul_tv_show']; ?>
+                                </h5>
+                            </a></br>
+                            <p style="font-size: 14px;">
+                                <?php echo $total_kunjungan; ?> x ditonton
+                            </p>
+                        </div>
                     </div>
-                </div>
-            <?php }
-        } ?>
-    </div>
-
-    <!-- TV SHOW TERBARU -->
-    <div class="card-flat">
-        <div class="tmf-card-terbaru ">
-            <h3>
-                TV SHOW TERBARU
-                <span class="line"></span>
-            </h3>
+                <?php }
+            } ?>
         </div>
     </div>
-    <div class="row">
-        <?php
-        include 'config/koneksi.php';
-        $query_tv = "SELECT thumbnail, judul_tv_show, tmdb_id FROM tb_tv_show ORDER BY created_at DESC LIMIT 8";
-        $result_tv = mysqli_query($koneksi, $query_tv);
-
-        while ($row_tv = mysqli_fetch_assoc($result_tv)) {
-            if (!empty($row_tv['judul_tv_show'])) { ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="thumbnail-container">
-                        <?php if (!empty($row_tv['thumbnail'])) { ?>
-                            <a href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
-                                <img class="img-fluid rounded img-landscape-zoom"
-                                    src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
-                                    alt="<?php echo $row_tv['judul_tv_show']; ?>">
-                            </a>
-                        <?php } else {
-                            $tmdb_id = $row_tv['tmdb_id'];
-                            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                            $url_poster = $row_tmdb['url_poster'];
-                            ?>
-                            <a href="dashboard.php?page=tv&id=<?php echo $tmdb_id; ?>">
-                                <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                    alt="<?php echo $row_tv['judul_tv_show']; ?>">
-                            </a>
-                        <?php } ?>
-                    </div>
-                    <?php
-                    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
-                    $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-                    $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
-
-                    $total_kunjungan = $row_kunjungan['total_kunjungan'];
-                    ?>
-                    </a>
-                    <div class="card-body">
-                        <a class=" tmf_teks" href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
-                            <h5 class="card-title">
-                                <?php echo $row_tv['judul_tv_show']; ?>
-                            </h5>
-                        </a></br>
-                        <p style="font-size: 14px;">
-                            <?php echo $total_kunjungan; ?> x ditonton
-                        </p>
-                    </div>
-                </div>
-            <?php }
-        } ?>
-    </div>
-</div>
-
+<?php } ?>
 <div class="col-md-3 tmf_production">
     <div class="row">
         <div class="col-lg-12">

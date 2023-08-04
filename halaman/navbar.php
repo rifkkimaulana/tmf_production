@@ -57,10 +57,14 @@
             </ul>
 
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-0 ml-md-3">
+            <form class="form-inline ml-0 ml-md-3" action="dashboard.php" method="GET">
+                <!-- Input hidden untuk menentukan halaman -->
+                <input type="hidden" name="page" value="dashboard">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search Film & TV Show"
-                        aria-label="Search">
+                    <!-- Input untuk pencarian film dan TV show -->
+                    <input class="form-control form-control-navbar" type="search" name="search"
+                        placeholder="Search Film & TV Show" aria-label="Search" value="<?php echo $_GET['search']; ?>"
+                        required>
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -68,6 +72,7 @@
                     </div>
                 </div>
             </form>
+
         </div>
 
     </div>
