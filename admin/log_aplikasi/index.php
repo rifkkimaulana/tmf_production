@@ -82,7 +82,6 @@
             "pageLength": 5
         });
 
-        // Event handler saat opsi tampilan berubah
         $('#selectLength').on('change', function () {
             table.page.len($(this).val()).draw();
         });
