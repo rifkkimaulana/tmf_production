@@ -3,7 +3,6 @@ session_start();
 include 'config/base_url.php';
 include 'config/koneksi.php';
 
-// Select Negara
 $q_negara = "SELECT * FROM tb_negara";
 $r_negara = mysqli_query($koneksi, $q_negara);
 $negara = array();
@@ -16,7 +15,6 @@ if (empty($negara)) {
     exit();
 }
 
-// Select Genre Film
 $q_genre = "SELECT * FROM tb_genre";
 $r_genre = mysqli_query($koneksi, $q_genre);
 $genres = array();
@@ -41,16 +39,12 @@ $limitedGenres = array_slice($genres, 0, 9);
 
     <title>TMF Production | Dashboard</title>
 
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/adminlte.min.css">
-    <!-- Select2 Admin-->
-    <link href="<?php echo $base_url; ?>/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/adminlte.min.css">
+    <link href="<?php echo $base_url; ?>/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 
     <style>
         .tmf_shadow {
@@ -186,7 +180,6 @@ $limitedGenres = array_slice($genres, 0, 9);
             margin-left: 10px;
         }
 
-        /* Gaya untuk membuat gambar menjadi landscape dan diberi efek zoom */
         .thumbnail-container {
             position: relative;
             overflow: hidden;
@@ -207,7 +200,6 @@ $limitedGenres = array_slice($genres, 0, 9);
             padding: 10px;
         }
 
-        /* Gaya untuk membuat tampilan seperti pencarian YouTube */
         .col-lg-3,
         .col-md-4,
         .col-sm-6,

@@ -1,4 +1,3 @@
-<!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="<?php echo $base_url; ?>/dashboard.php?page=dashboard" class="navbar-brand">
@@ -12,7 +11,6 @@
         </button>
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-            <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a href="<?php echo $base_url; ?>/dashboard.php?page=dashboard" class="nav-link">Home</a>
@@ -56,12 +54,9 @@
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
             <form class="form-inline ml-0 ml-md-3" action="dashboard.php" method="GET">
-                <!-- Input hidden untuk menentukan halaman -->
                 <input type="hidden" name="page" value="dashboard">
                 <div class="input-group input-group-sm">
-                    <!-- Input untuk pencarian film dan TV show -->
                     <input class="form-control form-control-navbar" type="search" name="search"
                         placeholder="Search Film & TV Show" aria-label="Search" value="<?php if (empty($_GET['search'])) {
                         } else {

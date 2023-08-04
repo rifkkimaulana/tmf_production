@@ -1,6 +1,5 @@
 <div class="card-flat">
     <?php
-    // Select Negara
     $q_negara = "SELECT * FROM tb_negara";
     $r_negara = mysqli_query($koneksi, $q_negara);
     $negara = array();
@@ -9,7 +8,6 @@
         $negara[] = $row_negara['nama_negara'];
     }
 
-    // Select Genre
     $q_genre = "SELECT * FROM tb_genre";
     $r_genre = mysqli_query($koneksi, $q_genre);
     $genres = array();
@@ -18,7 +16,6 @@
         $genres[] = $row_film['nama_genre'];
     }
 
-    // Select Tahun
     $q_tahun = "SELECT * FROM tb_tahun";
     $r_tahun = mysqli_query($koneksi, $q_tahun);
     $tahun = array();
@@ -26,7 +23,7 @@
     while ($row_tahun = mysqli_fetch_assoc($r_tahun)) {
         $tahun[] = $row_tahun['tahun_rilis'];
     }
-    // Select Kualitas
+
     $q_kualitas = "SELECT * FROM tb_kualitas";
     $r_kualitas = mysqli_query($koneksi, $q_kualitas);
     $kualitas = array();
