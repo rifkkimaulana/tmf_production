@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -43,7 +42,6 @@ include '../config/koneksi.php';
 
                             <h3 class="card-title">Genre</h3>
                         </div>
-                        <!-- Replace the hardcoded URLs with baseurl for AdminLTE 3.2 -->
 
                         <div class="card-body">
                             <div class="table-responsive">
@@ -115,17 +113,14 @@ include '../config/koneksi.php';
                                 "pageLength": 5
                             });
 
-                            // Event handler saat opsi tampilan berubah
                             $('#selectLength').on('change', function () {
                                 table.page.len($(this).val()).draw();
                             });
 
-                            // Event handler saat checkbox pada thead di centang
                             $('#checkAll').on('change', function () {
                                 $('input[name="selected_genre[]"]').prop('checked', this.checked);
                             });
 
-                            // Event handler saat checkbox pada tbody di centang
                             $('input[name="selected_genre[]"]').on('change', function () {
                                 if ($('input[name="selected_genre[]"]:checked').length === $('input[name="selected_genre[]"]').length) {
                                     $('#checkAll').prop('checked', true);

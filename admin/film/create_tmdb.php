@@ -223,8 +223,8 @@ if ($response !== false) {
                                     <div class="form-group">
                                         <label for="statusFilm">Status</label>
                                         <select class="form-control" id="statusFilm" name="statusFilm">
-                                            <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
                                             <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
