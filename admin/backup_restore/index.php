@@ -1,4 +1,5 @@
 <?php
+
 include '../config/koneksi.php';
 
 // Mengambil nama database
@@ -46,7 +47,7 @@ while ($rowTables = mysqli_fetch_row($resultTables)) {
                 <form action="backup_restore/restore_database.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="backupFile">Pilih File Backup:</label>
-                        <input type="file" class="form-control-file" id="backupFile" name="backupFile" required>
+                        <input type="file" class="form-control-file" id="sqlFile" name="sqlFile" required>
                     </div>
                     <button type="submit" class="btn btn-success">Restore Database</button>
 

@@ -1,42 +1,75 @@
 <?php
-ini_set('display_errors', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+session_start();
+if ($_SESSION['status'] != "administrator_logedin") {
+    header("location:../index.php?alert=belum_login");
+}
+
 // Include file koneksi.php
 include '../../config/koneksi.php';
 
-// Mengambil nama database
-$queryDatabase = "SELECT DATABASE() AS 'database_name'";
-$resultDatabase = mysqli_query($koneksi, $queryDatabase);
-$rowDatabase = mysqli_fetch_assoc($resultDatabase);
-$database = $rowDatabase['database_name'];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["sqlFile"])) {
+    $targetDir = __DIR__ . "/database/"; // Replace with the server-side directory path where you want to save the SQL file
+    $targetFile = $targetDir . basename($_FILES["sqlFile"]["name"]);
+    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-// Fungsi untuk melakukan restore database
-function restoreDatabase($koneksi, $database, $backupFilePath)
-{
-    // Baca isi file backup
-    $sqlCommands = file_get_contents($backupFilePath);
+    // Check if the uploaded file is a SQL file
+    if ($fileType == "sql") {
+        if (move_uploaded_file($_FILES["sqlFile"]["tmp_name"], $targetFile)) {
+            // Read and split the content of the SQL file by the semicolon
+            $sqlContent = file_get_contents($targetFile);
+            $sqlStatements = explode(';', $sqlContent);
 
-    // Eksekusi perintah-perintah SQL
-    if (mysqli_multi_query($koneksi, $sqlCommands)) {
-        echo "Restore database berhasil.";
+            // Prepare the statement
+            $stmt = mysqli_stmt_init($koneksi);
+
+            // Execute each SQL statement
+            foreach ($sqlStatements as $sqlStatement) {
+                $sqlStatement = trim($sqlStatement);
+                if (!empty($sqlStatement)) {
+                    // Bind the SQL statement
+                    if (mysqli_stmt_prepare($stmt, $sqlStatement)) {
+                        if (mysqli_stmt_execute($stmt)) {
+                            echo "Pernyataan SQL berhasil dieksekusi: " . $sqlStatement . "<br>";
+                        } else {
+                            echo "Gagal mengeksekusi pernyataan SQL: " . mysqli_stmt_error($stmt) . "<br>";
+
+                            // Kosongkan bagian user_agent
+                            if (strpos($sqlStatement, "INSERT INTO tb_view") !== false) {
+                                $sqlStatement = str_replace("INSERT INTO tb_view (id, user_agent,", "INSERT INTO tb_view (id, user_agent, ", $sqlStatement);
+                                $sqlStatement = preg_replace("/'(.+?)'/", "NULL", $sqlStatement, 1);
+
+                                if (mysqli_stmt_prepare($stmt, $sqlStatement)) {
+                                    if (mysqli_stmt_execute($stmt)) {
+                                        echo "Data telah dikosongkan.<br>";
+                                    } else {
+                                        echo "Gagal mengosongkan data: " . mysqli_stmt_error($stmt) . "<br>";
+                                    }
+                                } else {
+                                    echo "Gagal menyiapkan pernyataan SQL: " . mysqli_stmt_error($stmt) . "<br>";
+                                }
+                            }
+                        }
+                    } else {
+                        echo "Gagal menyiapkan pernyataan SQL: " . mysqli_stmt_error($stmt) . "<br>";
+                    }
+                }
+            }
+
+            // Close the statement
+            mysqli_stmt_close($stmt);
+
+            // Hapus file SQL setelah dieksekusi
+            unlink($targetFile);
+        } else {
+            echo "Gagal mengunggah file.";
+        }
     } else {
-        echo "Gagal restore database: " . mysqli_error($koneksi);
+        echo "File yang diunggah bukan file SQL.";
     }
 }
 
-// Menyimpan backup database
-if (isset($_POST['backupFile'])) {
-    $backupFile = $_POST['backupFile'];
-    $backupFilePath = "../../admin/backup_restore/database/$backupFile";
-
-    if (file_exists($backupFilePath)) {
-        // Panggil fungsi restoreDatabase
-        restoreDatabase($koneksi, $database, $backupFilePath);
-    } else {
-        echo "File backup tidak ditemukan.";
-    }
-
-    header("Location: ../../dashboard.php?page=dashboard");
-    exit();
-}
 ?>
