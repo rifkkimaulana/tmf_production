@@ -219,10 +219,23 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 
     $count = 0;
 
-    if (mysqli_num_rows($result_film_tv) == 0) {
-        echo "FILM & TV SHOW Tidak Tersedia.";
-    } else {
-        ?>
+    if (mysqli_num_rows($result_film_tv) == 0) { ?>
+        <div class="col-md-9 tmf_production">
+            <div class="card-flat">
+                <div class="tmf-card-terbaru ">
+                    <h3>
+                        Hasil Pencarian :
+                        <?php echo $_GET['search']; ?>
+                        <span class="line"></span>
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                Tidak Tersedia.
+            </div>
+
+        </div>
+    <?php } else { ?>
 
         <div class="col-md-9 tmf_production">
             <div class="card-flat">
@@ -296,9 +309,8 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                     $count_genre = 0;
 
                                     foreach ($genres as $genre) {
-                                        $slug_genre = strtolower(str_replace(' ', '-', $genre));
                                         ?>
-                                        <a style="font-size: 14px;" href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                                        <a style="font-size: 14px;" href="dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
                                             <?php echo $genre . ", "; ?>
                                         </a>
                                         <?php
@@ -474,7 +486,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                 LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
                                 GROUP BY tb_film.tmdb_id
                                 UNION
-                                SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, '', SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                                SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                                 FROM tb_tv_show
                                 LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
                                 GROUP BY tb_tv_show.tmdb_id
@@ -495,7 +507,13 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                             <div class="row">
                                 <?php $tmdb_id = $row_film_tv['tmdb_id']; ?>
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
-                                    <a href="dashboard.php?page=<?php echo (strpos($row_film_tv['genre_ids'], ',') === false) ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id; ?>"
+                                    <?php
+                                    $cek_id_tmdb = $row_film_tv['tmdb_id'];
+                                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
+                                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                                    ?>
+                                    <a href="dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $row_film_tv['tmdb_id']; ?>"
                                         style="color: black;">
                                         <?php if (!empty($row_film_tv['thumbnail'])) { ?>
                                             <img class="img-fluid rounded img-landscape-zoom"
@@ -519,15 +537,25 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                         <strong>
                                             <?php echo $row_film_tv['judul']; ?>
                                         </strong><br>
-                                        <?php foreach ($genres as $genres) { ?>
-                                            <?php
-                                            $slug_genre = strtolower(str_replace(' ', '-', $genres));
+                                        <?php
+                                        $genre_limit = 3;
+                                        $count_genre = 0;
+
+                                        foreach ($genres as $genre) {
                                             ?>
                                             <a style="font-size: 14px;"
-                                                href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
-                                                <?php echo $genres . ", "; ?>
+                                                href="dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
+                                                <small>
+                                                    <?php echo $genre . ", "; ?>
+                                                </small>
                                             </a>
-                                        <?php } ?>
+                                            <?php
+                                            $count_genre++;
+                                            if ($count_genre >= $genre_limit) {
+                                                break;
+                                            }
+                                        }
+                                        ?>
 
                                         <p style="font-size: 14px;"><i class="fas fa-eye"></i>
                                             <?php echo $row_film_tv['total_kunjungan']; ?> x ditonton

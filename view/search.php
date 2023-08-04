@@ -48,14 +48,16 @@
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="tipe" name="tipe">
-                    <option value="" <?php if (empty($_GET['tipe']))
-                        echo 'selected'; ?>>Semua Tipe</option>
-                    <option value="film" <?php if ($_GET['tipe'] === 'film')
-                        echo 'selected'; ?>>Film</option>
-                    <option value="tvshow" <?php if ($_GET['tipe'] === 'tvshow')
+                    <option value="" <?php if (!isset($_GET['tipe']) || $_GET['tipe'] === '')
+                        echo 'selected'; ?>>Semua
+                        Tipe</option>
+                    <option value="film" <?php if (isset($_GET['tipe']) && $_GET['tipe'] === 'film')
+                        echo 'selected'; ?>>
+                        Film</option>
+                    <option value="tvshow" <?php if (isset($_GET['tipe']) && $_GET['tipe'] === 'tvshow')
                         echo 'selected'; ?>>TV Show</option>
-
                 </select>
+
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="genre" name="genre">
