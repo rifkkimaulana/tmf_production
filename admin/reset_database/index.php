@@ -18,8 +18,6 @@
     </div>
 </div>
 
-
-<!-- Modal Konfirmasi Reset Database -->
 <div class="modal fade" id="confirmResetModal" tabindex="-1" role="dialog" aria-labelledby="confirmResetModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
