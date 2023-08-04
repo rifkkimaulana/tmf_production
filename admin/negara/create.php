@@ -5,9 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["nama_negara"])) {
         $country_name = $_POST["nama_negara"];
 
-        // Jika data country_slug tidak diisi, buat slug dari country_name
         if (empty($_POST["slug_negara"])) {
-            // Hapus karakter non-alfanumerik dan spasi dari country_name
             $country_slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($country_name));
         } else {
             $country_slug = $_POST["slug_negara"];
@@ -24,6 +22,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 mysqli_close($koneksi);
 ?>
