@@ -139,17 +139,15 @@ $id_download = $row_film['download_id'];
                 var iframe = document.querySelector("iframe");
                 var lewatiNotification = document.querySelector(".lewati-notification");
 
-                // Tampilkan notifikasi lewati setelah 5 detik
                 setTimeout(function () {
                     lewatiNotification.style.display = "block";
                 }, 5000);
 
-                // Tambahkan event click untuk tombol "Lewati"
                 lewatiNotification.querySelector("a").addEventListener("click", function (event) {
                     event.preventDefault();
                     var link_film = this.getAttribute("href");
-                    iframe.remove(); // Hapus iframe trailer
-                    window.location.href = link_film; // Menuju ke link film
+                    iframe.remove();
+                    window.location.href = link_film;
                 });
             </script>
 
@@ -464,15 +462,12 @@ $id_download = $row_film['download_id'];
                     exit("Error: Film not found in database.");
                 }
 
-                // Calculate the time duration in seconds between the created_at timestamp and the current time
                 $created_at_timestamp = strtotime($row_film['created_at']);
                 $current_timestamp = time();
                 $time_duration_seconds = $current_timestamp - $created_at_timestamp;
 
-                // Convert the time duration to a human-readable format (hours, minutes, and seconds)
                 $time_duration_formatted = gmdate("H:i:s", $time_duration_seconds);
 
-                // Function to convert timestamp to "time since upload" format
                 function timeSinceUpload($timestamp)
                 {
                     $timeDiff = time() - strtotime($timestamp);
@@ -495,7 +490,6 @@ $id_download = $row_film['download_id'];
                     }
                 }
 
-                // Calculate the total number of views for the movie
                 $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$filmId'";
                 $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
                 $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
@@ -525,7 +519,6 @@ $id_download = $row_film['download_id'];
             $result_tmdb = mysqli_query($koneksi, $query_tmdb);
             $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 
-            // Ambil nama-nama genre dari tabel tb_genre berdasarkan genre_ids
             $genre_ids = explode(",", $row_film['genre_ids']);
             $genres = array();
             foreach ($genre_ids as $genre_id) {

@@ -1,5 +1,4 @@
 <?php
-// Fungsi untuk mendapatkan id tb_genre berdasarkan nama_genre
 function getGenreId($koneksi, $nama_genre)
 {
     $query_genre_id = "SELECT id FROM tb_genre WHERE nama_genre = '$nama_genre'";
@@ -63,7 +62,6 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 
 
     if ($tipe === 'film') {
-        // Query SQL untuk mencari film berdasarkan judul dan genre
         $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                     FROM tb_film
                     LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
@@ -71,37 +69,29 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                     WHERE tb_film.judul_film LIKE '%$judul%'";
 
         if (!empty($genre_filter)) {
-            // Dapatkan id tb_genre berdasarkan nama_genre
             $genre_id = getGenreId($koneksi, $genre_filter);
             if ($genre_id !== null) {
-                // Filter genre berdasarkan genre_ids
                 $query_film .= " AND FIND_IN_SET($genre_id, tb_film.genre_ids)";
             }
         }
 
         if (!empty($kualitas_filter)) {
-            // Dapatkan id tb_kualitas berdasarkan nama_kualitas
             $kualitas_id = getKualitasId($koneksi, $kualitas_filter);
             if ($kualitas_id !== null) {
-                // Filter kualitas berdasarkan kualitas_id
                 $query_film .= " AND FIND_IN_SET($kualitas_id, tb_film.kualitas_ids)";
             }
         }
 
         if (!empty($negara_filter)) {
-            // Dapatkan id tb_negara berdasarkan nama_negara
             $negara_id = getNegaraId($koneksi, $negara_filter);
             if ($negara_id !== null) {
-                // Filter negara berdasarkan negara_id
                 $query_film .= " AND FIND_IN_SET($negara_id, tb_film.negara_ids)";
             }
         }
 
         if (!empty($tahun_filter)) {
-            // Dapatkan id tb_tahun berdasarkan nama_tahun
             $tahun_id = getTahunId($koneksi, $tahun_filter);
             if ($tahun_id !== null) {
-                // Filter tahun berdasarkan tahun_id
                 $query_film .= " AND FIND_IN_SET($tahun_id, tb_film.tahun_ids)";
             }
         }
@@ -110,7 +100,6 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
         $query_film .= " GROUP BY tb_film.tmdb_id";
         $query_film_tv = $query_film;
     } elseif ($tipe === 'tvshow') {
-        // Query SQL untuk mencari TV show berdasarkan judul dan genre
         $query_tv_show = "SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, tb_tv_show.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                     FROM tb_tv_show
                     LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
@@ -118,44 +107,35 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                     WHERE tb_tv_show.judul_tv_show LIKE '%$judul%'";
 
         if (!empty($genre_filter)) {
-            // Dapatkan id tb_genre berdasarkan nama_genre
             $genre_id = getGenreId($koneksi, $genre_filter);
             if ($genre_id !== null) {
-                // Filter genre berdasarkan genre_ids
                 $query_tv_show .= " AND FIND_IN_SET($genre_id, tb_tv_show.genre_ids)";
             }
         }
 
         if (!empty($kualitas_filter)) {
-            // Dapatkan id tb_kualitas berdasarkan nama_kualitas
             $kualitas_id = getKualitasId($koneksi, $kualitas_filter);
             if ($kualitas_id !== null) {
-                // Filter kualitas berdasarkan kualitas_id
                 $query_tv_show .= " AND FIND_IN_SET($kualitas_id, tb_tv_show.kualitas_ids)";
             }
         }
 
         if (!empty($negara_filter)) {
-            // Dapatkan id tb_negara berdasarkan nama_negara
             $negara_id = getNegaraId($koneksi, $negara_filter);
             if ($negara_id !== null) {
-                // Filter negara berdasarkan negara_id
                 $query_tv_show .= " AND FIND_IN_SET($negara_id, tb_tv_show.negara_ids)";
             }
         }
 
         if (!empty($tahun_filter)) {
-            // Dapatkan id tb_tahun berdasarkan nama_tahun
             $tahun_id = getTahunId($koneksi, $tahun_filter);
             if ($tahun_id !== null) {
-                // Filter tahun berdasarkan tahun_id
                 $query_tv_show .= " AND FIND_IN_SET($tahun_id, tb_tv_show.tahun_ids)";
             }
         }
 
         $query_film_tv = $query_tv_show;
     } else {
-        // Query SQL untuk mencari film dan TV show berdasarkan judul dan genre
         $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                     FROM tb_film
                     LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
@@ -169,40 +149,32 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                     WHERE tb_tv_show.judul_tv_show LIKE '%$judul%'";
 
         if (!empty($genre_filter)) {
-            // Dapatkan id tb_genre berdasarkan nama_genre
             $genre_id = getGenreId($koneksi, $genre_filter);
             if ($genre_id !== null) {
-                // Filter genre berdasarkan genre_ids
                 $query_film .= " AND FIND_IN_SET($genre_id, tb_film.genre_ids)";
                 $query_tv_show .= " AND FIND_IN_SET($genre_id, tb_tv_show.genre_ids)";
             }
         }
 
         if (!empty($kualitas_filter)) {
-            // Dapatkan id tb_kualitas berdasarkan nama_kualitas
             $kualitas_id = getKualitasId($koneksi, $kualitas_filter);
             if ($kualitas_id !== null) {
-                // Filter kualitas berdasarkan kualitas_id
                 $query_film .= " AND FIND_IN_SET($kualitas_id, tb_film.kualitas_ids)";
                 $query_tv_show .= " AND FIND_IN_SET($kualitas_id, tb_tv_show.kualitas_ids)";
             }
         }
 
         if (!empty($negara_filter)) {
-            // Dapatkan id tb_negara berdasarkan nama_negara
             $negara_id = getNegaraId($koneksi, $negara_filter);
             if ($negara_id !== null) {
-                // Filter negara berdasarkan negara_id
                 $query_film .= " AND FIND_IN_SET($negara_id, tb_film.negara_ids)";
                 $query_tv_show .= " AND FIND_IN_SET($negara_id, tb_tv_show.negara_ids)";
             }
         }
 
         if (!empty($tahun_filter)) {
-            // Dapatkan id tb_tahun berdasarkan nama_tahun
             $tahun_id = getTahunId($koneksi, $tahun_filter);
             if ($tahun_id !== null) {
-                // Filter tahun berdasarkan tahun_id
                 $query_tv_show .= " AND FIND_IN_SET($tahun_id, tb_tv_show.tahun_ids)";
                 $query_film .= " AND FIND_IN_SET($tahun_id, tb_film.tahun_ids)";
             }
@@ -211,7 +183,6 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
         $query_film .= " GROUP BY tb_film.tmdb_id";
         $query_tv_show .= " GROUP BY tb_tv_show.tmdb_id";
 
-        // Gabungkan hasil pencarian film dan TV show menggunakan UNION
         $query_film_tv = "SELECT * FROM (($query_film) UNION ($query_tv_show)) AS merged_results ORDER BY total_kunjungan DESC";
     }
 
