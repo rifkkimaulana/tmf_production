@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -39,10 +38,8 @@ include '../config/koneksi.php';
                                     <i class="fas fa-trash"></i> Hapus Tahun
                                 </button>
                             </div>
-
                             <h3 class="card-title">Tahun</h3>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example2" class="table table-bordered table-striped">
@@ -57,7 +54,6 @@ include '../config/koneksi.php';
 
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <?php
                                         $query = "SELECT * FROM tb_tahun";
@@ -81,7 +77,6 @@ include '../config/koneksi.php';
                                 </table>
                             </div>
                         </div>
-
                     </form>
 
                     <script>
@@ -111,17 +106,14 @@ include '../config/koneksi.php';
                                 "pageLength": 5
                             });
 
-                            // Event handler ketika opsi jumlah entri diubah
                             $('#selectLength').on('change', function () {
                                 table.page.len($(this).val()).draw();
                             });
 
-                            // Event handler ketika checkbox pada thead di-check
                             $('#checkAll').on('change', function () {
                                 $('input[name="selected_year[]"]').prop('checked', this.checked);
                             });
 
-                            // Event handler ketika checkbox pada tbody di-check
                             $('input[name="selected_year[]"]').on('change', function () {
                                 if ($('input[name="selected_year[]"]:checked').length === $('input[name="selected_year[]"]').length) {
                                     $('#checkAll').prop('checked', true);
@@ -131,7 +123,6 @@ include '../config/koneksi.php';
                             });
                         });
                     </script>
-
                 </div>
             </div>
         </div>
