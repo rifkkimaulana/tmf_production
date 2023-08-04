@@ -72,7 +72,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- Modal Konfirmasi Delete -->
                                 <div class="modal fade" id="konfirmasiDeleteModal_<?php echo $row_komentar['id']; ?>"
                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -99,8 +98,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- END Modal Konfirmasi Delete -->
-
                             <?php } ?>
                         </tbody>
                     </table>
@@ -137,7 +134,6 @@
             "pageLength": 5
         });
 
-        // Event handler saat opsi tampilan berubah
         $('#selectLength').on('change', function () {
             table.page.len($(this).val()).draw();
         });
