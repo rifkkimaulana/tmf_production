@@ -2,13 +2,10 @@
 include '../config/koneksi.php';
 ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <form action="artikel/proses_create_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
-
-                <!--Bagian Kiri Row 8-->
                 <div class="col-8">
                     <div class="card">
                         <div class="card-header">
@@ -28,11 +25,8 @@ include '../config/koneksi.php';
                         </div>
                     </div>
                 </div>
-                <!--Bagian Kanan Row 4-->
                 <div class="col-4">
                     <div id="accordion">
-
-                        <!--Button Submit Artikel-->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -46,8 +40,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">
-                                            <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
                                             <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
@@ -57,8 +51,6 @@ include '../config/koneksi.php';
                                 </div>
                             </div>
                         </div>
-
-                        <!--Form Kategori Artikel-->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -116,8 +108,6 @@ include '../config/koneksi.php';
                                 </div>
                             </div>
                         </div>
-
-                        <!--Form Tag Artikel-->
                         <div class="card">
                             <input type="hidden" name="selectedTag" id="selectedTagInput" value="">
                             <div class="card-header">
@@ -173,8 +163,6 @@ include '../config/koneksi.php';
                                 </div>
                             </div>
                         </div>
-
-                        <!--Form Upload Gambar-->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -205,7 +193,6 @@ include '../config/koneksi.php';
     </div>
 </section>
 
-<!--Script Summernote untuk isi artikel-->
 <script>
     $(document).ready(function () {
         $('.summernote').summernote({
@@ -220,7 +207,6 @@ include '../config/koneksi.php';
     });
 </script>
 
-<!--Script Preview Image -->
 <script>
     function previewImage(event) {
         const imagePreviewElement = document.getElementById("imagePreview");
@@ -237,24 +223,20 @@ include '../config/koneksi.php';
             imagePreviewElement.style.display = "none";
         }
     }
-</script>
-<!--Style Form Tag-->
-<style>
+
     .tag {
-        display: inline-block;
-        background-color: #f0f0f0;
+        display: inline - block;
+        background - color: #f0f0f0;
         padding: 5px 10px;
-        margin-right: 5px;
-        border-radius: 5px;
+        margin - right: 5px;
+        border - radius: 5px;
     }
 
     .tag i {
-        margin-left: 5px;
+        margin - left: 5px;
         cursor: pointer;
     }
-</style>
-<!--Script Form TAG-->
-<script>
+
     let selectedTagsArray = [];
 
     function addTag() {
@@ -309,10 +291,7 @@ include '../config/koneksi.php';
         const savedDirectorList = document.getElementById("savedTagList");
         savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
     }
-</script>
 
-<!--Script Kategori Artikel-->
-<script>
     function addCategory() {
         let nama_kategori = document.getElementById('newCategoryInput').value;
 
@@ -323,10 +302,8 @@ include '../config/koneksi.php';
                 if (xhr.status === 200) {
                     let categoryContainer = document.getElementById('categoryContainer');
                     categoryContainer.innerHTML = xhr.responseText;
-
                     document.getElementById('newCategoryInput').value = '';
 
-                    // Call updateSelectedCategories after adding a new category
                     updateSelectedCategories();
                 } else {
                     console.error('Gagal menambahkan kategori');
@@ -360,6 +337,5 @@ include '../config/koneksi.php';
         checkboxes[i].addEventListener('change', updateSelectedCategories);
     }
 
-    // Call updateSelectedCategories when the page loads to update the selectedCategoriesInput
     updateSelectedCategories();
 </script>

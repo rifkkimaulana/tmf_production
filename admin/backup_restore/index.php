@@ -1,14 +1,11 @@
 <?php
-
 include '../config/koneksi.php';
 
-// Mengambil nama database
 $queryDatabase = "SELECT DATABASE() AS 'database_name'";
 $resultDatabase = mysqli_query($koneksi, $queryDatabase);
 $rowDatabase = mysqli_fetch_assoc($resultDatabase);
 $database = $rowDatabase['database_name'];
 
-// Mengambil ukuran database
 $query = "SELECT table_schema AS 'Database', ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Size (MB)'
           FROM information_schema.TABLES
           WHERE table_schema = '$database'
@@ -17,7 +14,6 @@ $result = mysqli_query($koneksi, $query);
 $row = mysqli_fetch_assoc($result);
 $ukuranDatabase = $row['Size (MB)'];
 
-// Menampilkan tabel-tabel database
 $queryTables = "SHOW TABLES";
 $resultTables = mysqli_query($koneksi, $queryTables);
 
@@ -28,10 +24,6 @@ while ($rowTables = mysqli_fetch_row($resultTables)) {
 
 ?>
 
-<!-- Tampilan HTML -->
-
-
-<!-- Form Backup dan Restore -->
 <div class="row">
     <div class="col-md-6">
         <div class="card">
@@ -149,6 +141,5 @@ while ($rowTables = mysqli_fetch_row($resultTables)) {
 
 
 <?php
-// Menutup koneksi database
 mysqli_close($koneksi);
 ?>

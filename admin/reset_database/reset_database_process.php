@@ -22,6 +22,6 @@ $resultDatabase = mysqli_query($koneksi, $queryDatabase);
 $rowDatabase = mysqli_fetch_assoc($resultDatabase);
 $database = $rowDatabase['database_name'];
 
-header("Location: ../../admin/dashboard.php?page=dashboard");
+header("Location: ../../admin/dashboard.php?page=backup_restore");
 exit();
 ?>

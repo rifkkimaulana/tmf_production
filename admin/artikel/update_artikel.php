@@ -11,7 +11,6 @@ $row = mysqli_fetch_assoc($result);
 
 $image = $row['thumbnail'];
 
-// Ambil nama tag berdasarkan tag_ids
 $tagIds = explode(',', $row['tag_ids']);
 $tagNames = array();
 foreach ($tagIds as $tagId) {
@@ -23,7 +22,6 @@ foreach ($tagIds as $tagId) {
 }
 $tagNamesString = implode(', ', $tagNames);
 
-// Ambil kategori artikel berdasarkan kategori_ids
 $kategoriIds = explode(',', $row['kategori_ids']);
 $kategoriNames = array();
 foreach ($kategoriIds as $kategoriId) {
@@ -34,7 +32,6 @@ foreach ($kategoriIds as $kategoriId) {
     }
 }
 $kategoriNamesString = implode(', ', $kategoriNames);
-
 ?>
 
 <section class="content">
@@ -103,7 +100,6 @@ $kategoriNamesString = implode(', ', $kategoriNames);
                             </div>
                         </div>
 
-                        <!--Style Update Kategori Artikel -->
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
@@ -276,10 +272,8 @@ $kategoriNamesString = implode(', ', $kategoriNames);
                                     </div>
                                     <div class="form-group">
                                         <label>Preview:</label><br>
-                                        <!-- Gambar Pertama (Pratinjau dari Input Tipe "File") -->
                                         <img src="" id="imagePreview" alt="Preview"
                                             style="max-width: 300px; max-height: 200px; display: none;">
-                                        <!-- Gambar Kedua (Pratinjau dari Database atau Gambar Default) -->
                                         <img src="../gambar/artikel/<?php echo $image; ?>" alt="Preview"
                                             style="max-width: 300px; max-height: 200px; display: block;"
                                             id="defaultImage">
@@ -294,7 +288,6 @@ $kategoriNamesString = implode(', ', $kategoriNames);
     </div>
 </section>
 
-<!--Script Bagian Kategori-->
 <script>
     function addCategory() {
         let nama_kategori = document.getElementById('newCategoryInput').value;
@@ -342,7 +335,6 @@ $kategoriNamesString = implode(', ', $kategoriNames);
 
     updateSelectedCategories();
 </script>
-<!--Style Bagian Tag-->
 <style>
     .tag {
         display: inline-block;
@@ -358,7 +350,6 @@ $kategoriNamesString = implode(', ', $kategoriNames);
     }
 </style>
 
-<!-- Script Bagian TAG-->
 <script>
     let selectedTagsArray = [];
 
@@ -427,10 +418,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
         const savedDirectorList = document.getElementById("savedTagList");
         savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
     }
-</script>
 
-<!--Script untuk preview image-->
-<script>
     function previewImage(event) {
         const imagePreviewElement = document.getElementById("imagePreview");
         const defaultImageElement = document.getElementById("defaultImage");

@@ -1,6 +1,5 @@
 <?php include '../config/koneksi.php'; ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -104,17 +103,14 @@
                                 "pageLength": 5
                             });
 
-                            // Event handler saat opsi tampilan berubah
                             $('#selectLength').on('change', function () {
                                 table.page.len($(this).val()).draw();
                             });
 
-                            // Event handler saat checkbox pada thead di centang
                             $('#checkAll').on('change', function () {
                                 $('input[name="selected_tag_artikel[]"]').prop('checked', this.checked);
                             });
 
-                            // Event handler saat checkbox pada tbody di centang
                             $('input[name="selected_tag_artikel[]"]').on('change', function () {
                                 if ($('input[name="selected_tag_artikel[]"]:checked').length === $('input[name="selected_tag_artikel[]"]').length) {
                                     $('#checkAll').prop('checked', true);

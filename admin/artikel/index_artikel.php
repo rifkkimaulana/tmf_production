@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -30,16 +29,13 @@ include '../config/koneksi.php';
                     JOIN tb_tag_artikel ON tb_artikel.tag_ids = tb_tag_artikel.id
                     GROUP BY tb_artikel.id";
 
-                                // Eksekusi query ke database dan tangani kesalahan
                                 $result = mysqli_query($koneksi, $query);
                                 if (!$result) {
                                     die("Query gagal: " . mysqli_error($koneksi));
                                 }
 
-                                // Inisialisasi nomor urut dengan angka 1
                                 $nomorUrut = 1;
 
-                                // Lakukan perulangan untuk menampilkan data dalam tabel
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr>";
                                     echo "<td>" . $nomorUrut . "</td>";
@@ -57,11 +53,9 @@ include '../config/koneksi.php';
                                         </td>';
                                     echo "</tr>";
 
-                                    // Inkremen nomor urut setiap kali melakukan perulangan
                                     $nomorUrut++;
                                 }
 
-                                // Bebaskan hasil dari query
                                 mysqli_free_result($result);
                                 ?>
                             </tbody>
@@ -100,13 +94,11 @@ include '../config/koneksi.php';
             "pageLength": 5
         });
 
-        // Event handler ketika opsi jumlah entri diubah
         $('#selectLength').on('change', function () {
             table.page.len($(this).val()).draw();
         });
     });
 </script>
-<!-- Modal Konfirmasi Hapus Artikel -->
 <div class="modal fade" id="modalKonfirmasiHapusArtikel" tabindex="-1" role="dialog"
     aria-labelledby="modalKonfirmasiHapusArtikelLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -131,35 +123,28 @@ include '../config/koneksi.php';
 
 <script>
     $(document).ready(function () {
-        // Event handler untuk saat modal ditampilkan
         $('#modalKonfirmasiHapusArtikel').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Tombol yang membuka modal
-            var artikelId = button.data('artikelid'); // Ambil data-artikelid dari tombol
-            var judulArtikel = button.data('judulartikel'); // Ambil data-judulartikel dari tombol
+            var button = $(event.relatedTarget);
+            var artikelId = button.data('artikelid');
+            var judulArtikel = button.data('judulartikel');
 
-            // Update konten modal dengan judul artikel yang akan dihapus
             $('#judulArtikelToDelete').text(judulArtikel);
 
-            // Buat link untuk menghapus artikel dengan mengambil ID artikel dari tombol
             var hapusArtikelLink = 'artikel/proses_delete_artikel.php?id=' + artikelId;
             $('#hapusArtikelLink').attr('href', hapusArtikelLink);
         });
     });
 </script>
-<!-- Modal Berhasil Delete -->
 <div class="modal fade" id="modalBerhasilDelete">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Bagian Header Modal -->
             <div class="modal-header">
                 <h4 class="modal-title">Berhasil Menghapus Artikel</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <!-- Bagian Body Modal -->
             <div class="modal-body">
                 <p>Artikel berhasil dihapus dari database.</p>
             </div>
-            <!-- Bagian Footer Modal -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
@@ -167,7 +152,6 @@ include '../config/koneksi.php';
     </div>
 </div>
 
-<!-- Modal Gagal Delete -->
 <div class="modal fade" id="modalGagalDelete">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -195,7 +179,6 @@ if (isset($_GET['alert'])) {
 }
 ?>
 
-<!-- Modal for Success Message -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -217,17 +200,14 @@ if (isset($_GET['alert'])) {
 </div>
 
 <script>
-    // Check if the URL contains the success alert parameter
     const urlParams = new URLSearchParams(window.location.search);
     const alertParam = urlParams.get('alert');
 
-    // Show the success modal if the alert parameter is set to 'berhasil_diupdate'
     if (alertParam === 'berhasil_diupdate') {
         $('#successModal').modal('show');
     }
 </script>
 
-<!-- Modal for Success Message -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -249,12 +229,10 @@ if (isset($_GET['alert'])) {
 </div>
 
 <script>
-    // Check if the URL contains the success alert parameter
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = urlParams.get('page');
     const alertParam = urlParams.get('alert');
 
-    // Show the success modal if the alert parameter is set to 'berhasil_ditambahkan' and page parameter is 'artikel'
     if (alertParam === 'berhasil_ditambahkan' && pageParam === 'artikel') {
         $('#successModal').modal('show');
     }
