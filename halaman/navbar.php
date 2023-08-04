@@ -63,9 +63,12 @@
                 <div class="input-group input-group-sm">
                     <!-- Input untuk pencarian film dan TV show -->
                     <input class="form-control form-control-navbar" type="search" name="search"
-                        placeholder="Search Film & TV Show" aria-label="Search" value="<?php echo $_GET['search']; ?>"
-                        required>
-                    <div class="input-group-append">
+                        placeholder="Search Film & TV Show" aria-label="Search" value="<?php if (empty($_GET['search'])) {
+                        } else {
+                            echo $_GET['search'];
+                        }
+                        ?>" required>
+                    <div class=" input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
                         </button>

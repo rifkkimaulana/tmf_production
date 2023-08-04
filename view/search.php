@@ -41,73 +41,90 @@
             <div class="form-group">
                 <input type="hidden" class="form-control" id="page" name="page" value="dashboard">
                 <input type="text" class="form-control" id="search" name="search" placeholder="Search Film & TV Show"
-                    value="<?php echo $_GET['search']; ?>" required>
+                    value="<?php if (empty($_GET['search'])) {
+                    } else {
+                        echo $_GET['search'];
+                    } ?>" required>
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="tipe" name="tipe">
-                    <option value="">Semua Tipe</option>
-                    <option value="film">Film</option>
-                    <option value="tvshow">TV Show</option>
+                    <option value="" <?php if (empty($_GET['tipe']))
+                        echo 'selected'; ?>>Semua Tipe</option>
+                    <option value="film" <?php if ($_GET['tipe'] === 'film')
+                        echo 'selected'; ?>>Film</option>
+                    <option value="tvshow" <?php if ($_GET['tipe'] === 'tvshow')
+                        echo 'selected'; ?>>TV Show</option>
+
                 </select>
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="genre" name="genre">
                     <option value="">Semua Genre</option>
-                    <?php foreach ($genres as $genres) { ?>
+                    <?php foreach ($genres as $genre) { ?>
                         <?php
-                        $slug_genre = strtolower(str_replace(' ', '-', $genres));
+                        $selected = '';
+                        if (isset($_GET['genre']) && $_GET['genre'] === $genre) {
+                            $selected = 'selected';
+                        }
                         ?>
-                        <option value=" <?php echo $slug_genre; ?>">
-                            <?php echo $genres; ?>
+                        <option value="<?php echo $genre; ?>" <?php echo $selected; ?>>
+                            <?php echo $genre; ?>
                         </option>
                     <?php } ?>
                 </select>
+
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="tahun" name="tahun">
-                    <option value="all_tahun">
-                        Semua Tahun
-                    </option>
-                    <?php foreach ($tahun as $tahun) { ?>
+                    <option value="">Semua Tahun</option>
+                    <?php foreach ($tahun as $tahun_item) { ?>
                         <?php
-                        $slug_tahun = strtolower(str_replace(' ', '-', $tahun));
+                        $selected = '';
+                        if (isset($_GET['tahun']) && $_GET['tahun'] === $tahun_item) {
+                            $selected = 'selected';
+                        }
                         ?>
-                        <option value=" <?php echo $slug_tahun; ?>">
-                            <?php echo $tahun; ?>
+                        <option value="<?php echo $tahun_item; ?>" <?php echo $selected; ?>>
+                            <?php echo $tahun_item; ?>
                         </option>
                     <?php } ?>
                 </select>
             </div>
             <div class="form-group">
                 <select class="form-control form-control-sm" id="negara" name="negara">
-                    <option value="all_negara">
-                        Semua Negara
-                    </option>
-                    <?php foreach ($negara as $negara) { ?>
+                    <option value="">Semua Negara</option>
+                    <?php foreach ($negara as $negara_item) { ?>
                         <?php
-                        $slug_negara = strtolower(str_replace(' ', '-', $negara));
+                        $selected = '';
+                        if (isset($_GET['negara']) && $_GET['negara'] === $negara_item) {
+                            $selected = 'selected';
+                        }
                         ?>
-                        <option value=" <?php echo $slug_negara; ?>">
-                            <?php echo $negara; ?>
+                        <option value="<?php echo $negara_item; ?>" <?php echo $selected; ?>>
+                            <?php echo $negara_item; ?>
                         </option>
                     <?php } ?>
                 </select>
             </div>
+
             <div class="form-group">
                 <select class="form-control form-control-sm" id="kualitas" name="kualitas">
-                    <option value="all_kualitas">
-                        Semua Kualitas
-                    </option>
-                    <?php foreach ($kualitas as $kualitas) { ?>
-                        <?php
-                        $slug_kualitas = strtolower(str_replace(' ', '-', $kualitas));
+                    <option value="">Semua Kualitas</option>
+                    <?php foreach ($kualitas as $kualitas_item) {
                         ?>
-                        <option value=" <?php echo $slug_kualitas; ?>">
-                            <?php echo $kualitas; ?>
+                        <?php
+                        $selected = '';
+                        if (isset($_GET['kualitas']) && $_GET['kualitas'] === $kualitas_item) {
+                            $selected = 'selected';
+                        }
+                        ?>
+                        <option value="<?php echo $kualitas_item; ?>" <?php echo $selected; ?>>
+                            <?php echo $kualitas_item; ?>
                         </option>
                     <?php } ?>
                 </select>
             </div>
+
             <div class="float-right">
                 <button type="submit" class="btn btn-sm btn-primary">Cari</button>
             </div>
