@@ -2,7 +2,6 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../../config/koneksi.php';
 
-    //bagian 3 - Player
     $notif_player = $_POST["notif_player"];
 
     $playerJudul1 = $_POST["playerJudul-1"];
@@ -67,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
     }
 
-    //bagian 4 - download
     $judulDownload1 = $_POST["judulDownload-1"];
     $linkDownload1 = $_POST["linkDownload-1"];
 
@@ -113,7 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $judulDownload15 = $_POST["judulDownload-15"];
     $linkDownload15 = $_POST["linkDownload-15"];
 
-    // Query SQL untuk memasukkan data ke dalam tabel
     $sql = "INSERT INTO tb_download (judul1, link1, judul2, link2, judul3, link3, judul4, link4, judul5, link5,
                                 judul6, link6, judul7, link7, judul8, link8, judul9, link9, judul10, link10,
                                 judul11, link11, judul12, link12, judul13, link13, judul14, link14, judul15, link15)
@@ -141,14 +138,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $created_at = date('Y-m-d H:i:s');
     $updated_at = date('Y-m-d H:i:s');
 
-    // Query untuk cek apakah data dengan jumlah_episode dan tv_show_id sudah ada
     $cek_query = "SELECT * FROM tb_episode_tv_show WHERE jumlah_episode = '$jumlah_episode' AND tv_show_id = '$tv_show_id'";
     $cek_result = mysqli_query($koneksi, $cek_query);
 
     if (mysqli_num_rows($cek_result) > 0) {
         header("Location: ../dashboard.php?page=episode&alert=data_sudah_ada");
     } else {
-        // Data belum ada, lakukan insert
         $query = "INSERT INTO tb_episode_tv_show (nama_episode, slug_episode, jumlah_episode, tv_show_id, player_id, download_id, status, created_at, updated_at) 
               VALUES ('$nama_episode', '$slug_episode', '$jumlah_episode', '$tv_show_id', '$id_player', '$id_download', '$status', '$created_at', '$updated_at')";
 

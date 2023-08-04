@@ -174,7 +174,5 @@
             "lengthMenu": [5, 10, 50, 100],
             "pageLength": 5
         });
-
-
     });
 </script>

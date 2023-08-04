@@ -28,10 +28,8 @@
                                     if (!$result) {
                                         die("Query gagal: " . mysqli_error($koneksi));
                                     }
-
                                     $nomorUrut = 1;
 
-                                    // Lakukan perulangan untuk menampilkan data dalam tabel
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         echo "<td>" . $nomorUrut . "</td>";
@@ -43,9 +41,7 @@
                                         <a href="dashboard.php?page=add_episode&id=' . $row['tv_show_id'] . '" class="btn btn-sm btn-primary" title="Ubah">
                     <i class="fas fa-plus"></i>
                 </a>
-                <a href="dashboard.php?page=update_episode_tv_show&id=' . $row['episode_id'] . '" class="btn btn-sm btn-warning" title="Ubah">
-                    <i class="fas fa-edit"></i>
-                </a>
+                
                 <a href="#" class="btn btn-sm btn-danger btn-delete" title="Hapus" data-toggle="modal" data-target="#modalKonfirmasi" data-filmid="' . $row['episode_id'] . '">
                         <i class="fas fa-trash"></i>
                     </a>

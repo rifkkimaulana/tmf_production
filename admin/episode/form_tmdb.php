@@ -1,5 +1,4 @@
 <div class="card-body">
-    <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="pengaturan_tab_list">
         <li class="nav-item">
             <a class="nav-link active" id="film-tab" data-toggle="pill" href="#pengaturan_film"
@@ -15,7 +14,6 @@
         </li>
     </ul>
 
-    <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane fade show active" id="pengaturan_film">
             </br>
@@ -169,7 +167,6 @@
             </div>
         </div>
 
-        <!-- Player Tab Pane -->
         <div class="tab-pane fade" id="pengaturan_player">
             <div class="form-group">
                 </br>
@@ -226,7 +223,6 @@
 
             </ul>
 
-            <!-- Nested Tab panes for Player Tab -->
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="play1">
                     </br>
@@ -442,10 +438,8 @@
             </div>
         </div>
 
-        <!-- Download Tab Pane -->
         <div class="tab-pane fade" id="pengaturan_download">
             </br>
-            <!-- Nested Nav tabs for Download Tab -->
             <ul class="nav nav-tabs" id="nested_download_tab_list">
                 <li class="nav-item">
                     <a class="nav-link active" id="player-general-tab" data-toggle="pill" href="#donwload-1">1</a>
@@ -494,7 +488,6 @@
                 </li>
             </ul>
 
-            <!-- Nested Tab panes for Player Tab -->
             <div class="tab-content">
 
                 <div class="tab-pane fade show active" id="donwload-1">

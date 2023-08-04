@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -113,17 +112,14 @@ include '../config/koneksi.php';
                                 "pageLength": 5
                             });
 
-                            // Event handler ketika opsi jumlah entri diubah
                             $('#selectLength').on('change', function () {
                                 table.page.len($(this).val()).draw();
                             });
 
-                            // Event handler ketika checkbox pada thead di-check
                             $('#checkAll').on('change', function () {
                                 $('input[name="selected_direksi[]"]').prop('checked', this.checked);
                             });
 
-                            // Event handler ketika checkbox pada tbody di-check
                             $('input[name="selected_direksi[]"]').on('change', function () {
                                 if ($('input[name="selected_direksi[]"]:checked').length === $('input[name="selected_direksi[]"]').length) {
                                     $('#checkAll').prop('checked', true);

@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -31,21 +30,18 @@ include '../config/koneksi.php';
                                             JOIN tb_tag ON tb_film.tag_ids = tb_tag.id
                                             GROUP BY tb_film.id";
 
-                                // Eksekusi query ke database dan tangani kesalahan
                                 $result = mysqli_query($koneksi, $query);
                                 if (!$result) {
                                     die("Query gagal: " . mysqli_error($koneksi));
                                 }
 
-                                // Inisialisasi nomor urut dengan angka 1
                                 $nomorUrut = 1;
 
-                                // Lakukan perulangan untuk menampilkan data dalam tabel
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr>";
                                     echo "<td>" . $nomorUrut . "</td>";
                                     echo "<td>" . $row['judul_film'] . "</td>";
-                                    echo "<td>" . $row['genres'] . "</td>"; // Tampilkan genre-genre yang telah digabungkan
+                                    echo "<td>" . $row['genres'] . "</td>";
                                     echo "<td>" . $row['nama_tag'] . "</td>";
                                     echo "<td>" . $row['created_at'] . "</td>";
                                     echo '<td style="text-align: center;">
@@ -59,11 +55,9 @@ include '../config/koneksi.php';
                   </td>';
                                     echo "</tr>";
 
-                                    // Inkremen nomor urut setiap kali melakukan perulangan
                                     $nomorUrut++;
                                 }
 
-                                // Bebaskan hasil dari query
                                 mysqli_free_result($result);
                                 ?>
                             </tbody>
@@ -101,14 +95,12 @@ include '../config/koneksi.php';
             "pageLength": 5
         });
 
-        // Event handler ketika opsi jumlah entri diubah
         $('#selectLength').on('change', function () {
             table.page.len($(this).val()).draw();
         });
     });
 </script>
 
-<!-- Modal Konfirmasi Penghapusan -->
 <div class="modal fade" id="modalKonfirmasi" tabindex="-1" role="dialog" aria-labelledby="modalKonfirmasiLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -130,14 +122,11 @@ include '../config/koneksi.php';
     </div>
 </div>
 
-<!-- Script JavaScript -->
 <script>
-    // Menangkap event saat modal dibuka
     $('#modalKonfirmasi').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button yang membuka modal
-        var filmId = button.data('filmid'); // Mengambil data-filmid dari atribut data pada button
-        var filmTitle = button.closest('tr').find('td:eq(1)').text(); // Mengambil judul film dari kolom kedua pada baris yang dipilih
-
+        var button = $(event.relatedTarget);
+        var filmId = button.data('filmid');
+        var filmTitle = button.closest('tr').find('td:eq(1)').text();
         $('#filmTitle').text(filmTitle);
 
         var hapusLink = 'film/delete.php?id=' + filmId;
@@ -145,20 +134,16 @@ include '../config/koneksi.php';
     });
 </script>
 
-<!-- Modal Berhasil Delete -->
 <div class="modal fade" id="modalBerhasilDelete">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Bagian Header Modal -->
             <div class="modal-header">
                 <h4 class="modal-title">Berhasil Menghapus Film</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <!-- Bagian Body Modal -->
             <div class="modal-body">
                 <p>Film berhasil dihapus dari database.</p>
             </div>
-            <!-- Bagian Footer Modal -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
@@ -166,7 +151,6 @@ include '../config/koneksi.php';
     </div>
 </div>
 
-<!-- Modal Gagal Delete -->
 <div class="modal fade" id="modalGagalDelete">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -183,7 +167,6 @@ include '../config/koneksi.php';
         </div>
     </div>
 </div>
-<!-- Modal Notifikasi -->
 <div class="modal fade" id="berhasil_diubah">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -192,7 +175,6 @@ include '../config/koneksi.php';
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Isi pesan notifikasi di sini -->
                 <p>Data berhasil diubah.</p>
             </div>
             <div class="modal-footer">
@@ -201,7 +183,6 @@ include '../config/koneksi.php';
         </div>
     </div>
 </div>
-<!-- Modal Notifikasi -->
 <div class="modal fade" id="berhasil_ditambah">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -210,7 +191,6 @@ include '../config/koneksi.php';
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Isi pesan notifikasi di sini -->
                 <p>Data berhasil diubah.</p>
             </div>
             <div class="modal-footer">
@@ -219,7 +199,6 @@ include '../config/koneksi.php';
         </div>
     </div>
 </div>
-
 
 <?php
 if (isset($_GET['alert'])) {
