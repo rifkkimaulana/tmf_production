@@ -39,7 +39,6 @@ include '../config/koneksi.php';
 
                                 $nomorUrut = 1;
 
-                                // Lakukan perulangan untuk menampilkan data dalam tabel
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr>";
                                     echo "<td>" . $nomorUrut . "</td>";
@@ -51,7 +50,7 @@ include '../config/koneksi.php';
                       <a href="dashboard.php?page=update_tv_show&id=' . $row['id'] . '" class="btn btn-sm btn-warning" title="Ubah">
                           <i class="fas fa-edit"></i>
                       </a>
-                      <a href="#" class="btn btn-sm btn-danger" title="Hapus" data-toggle="modal" data-target="#modalKonfirmasi" data-filmid="' . $row['id'] . '">
+                      <a class="btn btn-sm btn-danger" title="Hapus" data-toggle="modal" data-target="#modalKonfirmasi" data-filmid="' . $row['id'] . '">
                         <i class="fas fa-trash"></i>
                     </a>
                     
@@ -152,7 +151,7 @@ include '../config/koneksi.php';
             </div>
             <!-- Bagian Body Modal -->
             <div class="modal-body">
-                <p>Film berhasil dihapus dari database.</p>
+                <p>TV berhasil dihapus dari database.</p>
             </div>
             <!-- Bagian Footer Modal -->
             <div class="modal-footer">
@@ -171,7 +170,7 @@ include '../config/koneksi.php';
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Gagal menghapus film dari database. Silakan coba lagi.</p>
+                <p>Gagal menghapus TV dari database. Silakan coba lagi.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
