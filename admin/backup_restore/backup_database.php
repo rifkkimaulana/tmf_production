@@ -1,13 +1,12 @@
 <?php
-include '../../config/koneksi.php';
-
-$existingFiles = glob($backupDirectory . "*.sql");
-foreach ($existingFiles as $existingFile) {
-    unlink($existingFile);
+session_start();
+if ($_SESSION['status'] != "administrator_logedin") {
+    header("location:../index.php?alert=belum_login");
 }
 
-$backupDirectory = '../backup_restore/database/';
+include '../../config/koneksi.php';
 
+$backupDirectory = '../backup_restore/database/';
 $backupFileName = $database . '_' . date('Ymd_His') . '.sql';
 
 $tables = array();
@@ -31,20 +30,11 @@ foreach ($tables as $table) {
     $backupContent .= "\n";
 }
 
-$backupFilePath = $backupDirectory . $backupFileName;
-$fileHandle = fopen($backupFilePath, 'w');
-fwrite($fileHandle, $backupContent);
-fclose($fileHandle);
-
-if (file_exists($backupFilePath)) {
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename=' . basename($backupFilePath));
-    header('Content-Length: ' . filesize($backupFilePath));
-    readfile($backupFilePath);
-    exit;
-
-} else {
-    echo "Gagal menyimpan dan mengunduh file backup.";
-}
+// Set header untuk mengunduh file tanpa menyimpannya di direktori
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header('Content-Disposition: attachment; filename=' . basename($backupFileName));
+header('Content-Length: ' . strlen($backupContent));
+echo $backupContent;
+exit;
 ?>
