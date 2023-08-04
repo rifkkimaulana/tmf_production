@@ -17,24 +17,27 @@
         while ($row_film = mysqli_fetch_assoc($result_film)) {
             if (!empty($row_film['judul_film'])) { ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                    <?php if (!empty($row_film['thumbnail'])) { ?>
-                        <a href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
-                            <img class="col-md-12 zoom-effect" src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
-                                alt="<?php echo $row_film['judul_film']; ?>">
-                        </a>
+                    <div class="thumbnail-container">
+                        <?php if (!empty($row_film['thumbnail'])) { ?>
+                            <a href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
+                                <img class="img-fluid rounded img-landscape-zoom"
+                                    src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
+                                    alt="<?php echo $row_film['judul_film']; ?>">
+                            </a>
 
-                    <?php } else {
-                        $tmdb_id = $row_film['tmdb_id'];
-                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                        $url_poster = $row_tmdb['url_poster'];
-                        ?>
-                        <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>">
-                            <img class="col-md-12 zoom-effect" src="<?php echo $url_poster; ?>"
-                                alt="<?php echo $row_film['judul_film']; ?>">
-                        </a>
-                    <?php } ?>
+                        <?php } else {
+                            $tmdb_id = $row_film['tmdb_id'];
+                            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                            $url_poster = $row_tmdb['url_poster'];
+                            ?>
+                            <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>">
+                                <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                    alt="<?php echo $row_film['judul_film']; ?>">
+                            </a>
+                        <?php } ?>
+                    </div>
                     <?php
                     $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
                     $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
@@ -78,23 +81,26 @@
         while ($row_tv = mysqli_fetch_assoc($result_tv)) {
             if (!empty($row_tv['judul_tv_show'])) { ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                    <?php if (!empty($row_tv['thumbnail'])) { ?>
-                        <a href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
-                            <img class="col-md-12 zoom-effect" src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
-                                alt="<?php echo $row_tv['judul_tv_show']; ?>">
-                        </a>
-                    <?php } else {
-                        $tmdb_id = $row_tv['tmdb_id'];
-                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                        $url_poster = $row_tmdb['url_poster'];
-                        ?>
-                        <a href="dashboard.php?page=tv&id=<?php echo $tmdb_id; ?>">
-                            <img class="col-md-12 zoom-effect" src="<?php echo $url_poster; ?>"
-                                alt="<?php echo $row_tv['judul_tv_show']; ?>">
-                        </a>
-                    <?php } ?>
+                    <div class="thumbnail-container">
+                        <?php if (!empty($row_tv['thumbnail'])) { ?>
+                            <a href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
+                                <img class="img-fluid rounded img-landscape-zoom"
+                                    src="gambar/film/<?php echo $row_film['thumbnail']; ?> "
+                                    alt="<?php echo $row_tv['judul_tv_show']; ?>">
+                            </a>
+                        <?php } else {
+                            $tmdb_id = $row_tv['tmdb_id'];
+                            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                            $url_poster = $row_tmdb['url_poster'];
+                            ?>
+                            <a href="dashboard.php?page=tv&id=<?php echo $tmdb_id; ?>">
+                                <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                    alt="<?php echo $row_tv['judul_tv_show']; ?>">
+                            </a>
+                        <?php } ?>
+                    </div>
                     <?php
                     $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
                     $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
@@ -158,7 +164,7 @@
                                     <a href="dashboard.php?page=<?php echo (strpos($row_film_tv['genre_ids'], ',') === false) ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id; ?>"
                                         style="color: black;">
                                         <?php if (!empty($row_film_tv['thumbnail'])) { ?>
-                                            <img class="img-fluid rounded img-android img-poster img-poster-android-landscape"
+                                            <img class="img-fluid rounded img-landscape-zoom"
                                                 src="gambar/film/<?php echo $row_film_tv['thumbnail']; ?>"
                                                 alt="<?php echo $row_film_tv['judul']; ?>">
                                         <?php } else {
@@ -168,8 +174,8 @@
                                             $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                             $url_poster = $row_tmdb['url_poster'];
                                             ?>
-                                            <img class="img-fluid rounded img-android img-poster img-poster-android-landscape"
-                                                src="<?php echo $url_poster; ?>" alt="<?php echo $row_film_tv['judul']; ?>">
+                                            <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                                alt="<?php echo $row_film_tv['judul']; ?>">
                                         <?php } ?>
                                     </a>
                                 </div>

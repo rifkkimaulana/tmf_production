@@ -59,7 +59,7 @@
             <!-- SEARCH FORM -->
             <form class="form-inline ml-0 ml-md-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search Film & TV Show"
                         aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
