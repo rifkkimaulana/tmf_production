@@ -74,9 +74,8 @@ if (isset($_COOKIE['remember_me'])) {
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="<?php echo $base_url; ?>" class="h1"><b>APP</b>KEUANGAN</a>
+                <a href="<?php echo $base_url; ?>" class="h1"><b>TMF</b>PRODUCTION</a>
             </div>
-
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
@@ -113,9 +112,7 @@ if (isset($_COOKIE['remember_me'])) {
                         </div>
                     </div>
                 </form>
-
                 <br>
-
                 <h5 class="text-center">
                     ATAU
                 </h5>
@@ -131,8 +128,6 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="modal fade" id="tokenExpired" tabindex="-1" role="dialog" aria-labelledby="tokenExpiredModalLabel"
@@ -165,7 +160,6 @@ if (isset($_COOKIE['remember_me'])) {
     });
 </script>
 
-<!-- Modal Gagal Login -->
 <div class="modal fade" id="gagalLoginModal" tabindex="-1" role="dialog" aria-labelledby="gagalLoginModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
