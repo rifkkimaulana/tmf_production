@@ -5,9 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["nama_jaringan"])) {
         $network_name = $_POST["nama_jaringan"];
 
-        // Jika data network_slug tidak diisi, buat slug dari network_name
         if (empty($_POST["slug_jaringan"])) {
-            // Hapus karakter non-alfanumerik dan spasi dari network_name
             $network_slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($network_name));
         } else {
             $network_slug = $_POST["slug_jaringan"];
@@ -24,6 +22,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 mysqli_close($koneksi);
 ?>
