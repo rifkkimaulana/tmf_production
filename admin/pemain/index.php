@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
 ?>
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -34,7 +33,6 @@ include '../config/koneksi.php';
             <div class="col-8">
                 <div class="card">
                     <form action="pemain/delete.php" method="post" id="form-pemain">
-
                         <div class="card-header">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-danger" id="deletePlayerBtn">
@@ -44,7 +42,6 @@ include '../config/koneksi.php';
 
                             <h3 class="card-title">Pemain</h3>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example2" class="table table-bordered table-striped">
@@ -83,9 +80,7 @@ include '../config/koneksi.php';
                                 </table>
                             </div>
                         </div>
-
                     </form>
-
                     <script>
                         $(document).ready(function () {
                             var table = $('#example2').DataTable({
@@ -113,17 +108,14 @@ include '../config/koneksi.php';
                                 "pageLength": 5
                             });
 
-                            // Event handler ketika opsi jumlah entri diubah
                             $('#selectLength').on('change', function () {
                                 table.page.len($(this).val()).draw();
                             });
 
-                            // Event handler ketika checkbox pada thead di-check
                             $('#checkAll').on('change', function () {
                                 $('input[name="selected_player[]"]').prop('checked', this.checked);
                             });
 
-                            // Event handler ketika checkbox pada tbody di-check
                             $('input[name="selected_player[]"]').on('change', function () {
                                 if ($('input[name="selected_player[]"]:checked').length === $('input[name="selected_player[]"]').length) {
                                     $('#checkAll').prop('checked', true);
@@ -133,7 +125,6 @@ include '../config/koneksi.php';
                             });
                         });
                     </script>
-
                 </div>
             </div>
         </div>
