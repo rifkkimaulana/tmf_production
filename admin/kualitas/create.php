@@ -5,9 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["nama_kualitas"])) {
         $quality_name = $_POST["nama_kualitas"];
 
-        // Jika data quality_slug tidak diisi, buat slug dari quality_name
         if (empty($_POST["slug_kualitas"])) {
-            // Hapus karakter non-alfanumerik dan spasi dari quality_name
             $quality_slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($quality_name));
         } else {
             $quality_slug = $_POST["slug_kualitas"];
@@ -24,6 +22,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 mysqli_close($koneksi);
 ?>
