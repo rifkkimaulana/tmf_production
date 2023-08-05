@@ -7,7 +7,14 @@ ob_start();
 
 <div class="content-wrapper" style="background-color: white;">
     <?php include 'halaman/main-content.php'; ?>
+    <div class="loader"></div>
 </div>
+<script>
+    // Setelah halaman dimuat sepenuhnya, sembunyikan loading spinner
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.loader').style.display = 'none';
+    });
+</script>
 <?php include 'halaman/footer.php'; ?>
 
 <?php
