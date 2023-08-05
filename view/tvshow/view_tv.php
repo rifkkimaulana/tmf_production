@@ -426,7 +426,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                                         <?php } ?>
 
                                         <?php
-                                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
                                         $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
                                         $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
 
@@ -452,18 +452,13 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-
                 document.getElementById("viewCount").innerHTML = "<b>" + this.responseText + "x ditonton</b>";
             }
         };
-        xhttp.open("GET", "get_view_count.php?id=<?php echo $tv_tmdb_id; ?>", true);
-        xhttp.send();
     }
-
     setInterval(reloadViewCount, 60000);
-
     document.addEventListener("DOMContentLoaded", function () {
-        var tmdb_id = < ? php echo $tv_tmdb_id; ?>;
+        var tmdb_id = <?php echo $tv_tmdb_id; ?>;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "<?php echo $base_url; ?>/config/visit.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
