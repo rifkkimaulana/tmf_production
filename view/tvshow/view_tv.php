@@ -111,23 +111,19 @@ if (mysqli_num_rows($result_episode) > 0) {
                         }
                     }
                     ?>
-                    <?php
-                    if (empty($link)) {
-                        $link = $row_play['link1'];
-                    }
-                    ?>
+
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
                     </iframe>
-
                 </div>
+
                 <?php
                 if (strpos($link, 'autoplay=1') !== false) {
                     ?>
                     <div class="lewati-notification">
                         <div class="lewati-content">
-                            <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=1"; ?>"
+                            <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tv_tmdb_id . "&episode=" . $playValue . "&play=1"; ?>"
                                 class="btn btn-sm btn-dark">Lewati Trailer</a>
                         </div>
                     </div>
