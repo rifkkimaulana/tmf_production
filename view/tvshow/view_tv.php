@@ -363,10 +363,6 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                 </div>
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
-
-                    $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
-                    $result_tv = mysqli_query($koneksi, $query_tv);
-                    $row_tv = mysqli_fetch_assoc($result_tv);
                     $desired_genre_ids = $row_tv['genre_ids'];
 
                     $query_tv2 = "SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
