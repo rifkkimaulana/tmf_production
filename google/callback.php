@@ -1,10 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 include '../config/koneksi.php';
+include '../config/base_url.php';
 include 'secrets.php';
-
 function getAccessToken($code)
 {
     global $client_id, $client_secret, $redirect_uri;
@@ -16,7 +13,6 @@ function getAccessToken($code)
         'redirect_uri' => $redirect_uri,
         'grant_type' => 'authorization_code',
     );
-
     $url = 'https://oauth2.googleapis.com/token';
 
     $ch = curl_init();
@@ -37,31 +33,28 @@ function getAccessToken($code)
     }
 }
 
-// Tangani respon dari Google setelah pengguna memberikan izin
 if (isset($_GET['code'])) {
     $code = $_GET['code'];
     $access_token = getAccessToken($code);
 
     // Validasi access token dari Google
     if ($access_token) {
-        // Mendapatkan informasi pengguna
         $url = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' . $access_token;
         $result = file_get_contents($url);
 
         if ($result === false) {
             // Jika terjadi kesalahan saat meminta informasi pengguna
             $error = error_get_last();
-            header("Location: login.php?alert=failed_token&error_message=" . urlencode($error['message']));
+            header("Location:" . $base_url . "login.php?alert=failed_token&error_message=" . urlencode($error['message']));
             exit();
         }
 
         $userInfo = json_decode($result, true);
 
         if (isset($userInfo['email'])) {
-            // Variabel untuk nilai email
+
             $email = $userInfo['email'];
 
-            // Cek apakah email pengguna ada dalam database
             $stmt = $koneksi->prepare("SELECT * FROM tb_users WHERE email=?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
@@ -70,10 +63,8 @@ if (isset($_GET['code'])) {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
 
-                // Dapatkan level pengguna berdasarkan email
                 $level = $row['user_level'];
 
-                // Buat sesi pengguna dan arahkan ke halaman yang sesuai berdasarkan level
                 session_start();
                 $_SESSION['email'] = $email;
                 $_SESSION['id'] = $row['user_id'];
@@ -81,36 +72,32 @@ if (isset($_GET['code'])) {
                 $_SESSION['username'] = $row['user_username'];
                 $_SESSION['level'] = $row['user_level'];
 
-                //Kondisi untuk level user login
                 if ($level == "administrator") {
                     $_SESSION['status'] = "administrator_logedin";
-                    header("location: ../admin/");
+                    header("location: " . $base_url . "/admin/");
                     exit();
                 } else if ($level == "manajemen") {
                     $_SESSION['status'] = "manajemen_logedin";
-                    header("location: ../manajemen/");
+                    header("location: " . $base_url . "/manajemen/");
                     exit();
                 } else {
-                    header("location: ../login.php?alert=email_tidak_terdaftar");
+                    header("location: " . $base_url . "login.php?alert=email_tidak_terdaftar");
                     exit();
                 }
             } else {
-                header("location: ../login.php?alert=email_tidak_terdaftar");
+                header("location: " . $base_url . "login.php?alert=email_tidak_terdaftar");
                 exit();
             }
         } else {
-            // Jika email tidak ditemukan dalam data pengguna dari Google
-            header("location: ../login.php?alert=email_tidak_terdaftar");
+            header("location: " . $base_url . "login.php?alert=email_tidak_terdaftar");
             exit();
         }
     } else {
-        // Jika token akses gagal diperoleh dari Google
-        header("Location: ../login.php?alert=failed_token");
+        header("Location: " . $base_url . "login.php?alert=failed_token");
         exit();
     }
 } else {
-    // Jika kode otorisasi tidak ditemukan dalam parameter
-    header("Location: ../login.php?alert=invalid_response");
+    header("Location: " . $base_url . "login.php?alert=invalid_response");
     exit();
 }
 ?>
