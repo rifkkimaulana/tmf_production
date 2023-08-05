@@ -1,10 +1,8 @@
-<!-- Kolom Judul & Deskripsi -->
 <div class="card-flat">
     <?php
     if (isset($_GET['episode']) ? $_GET['episode'] : '') {
         ?>
         <div class="card-header">
-
             <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
                 INFO PLAYER
             </button>
@@ -13,7 +11,6 @@
                 <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
                         type="button" class="btn btn-sm btn-secondary">Trailer</button>
                 </a>
-
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
                     <span class="sr-only">Play</span>
@@ -74,7 +71,6 @@
     <?php }
     ?>
 
-    <!-- Modal Notifikasi Player-->
     <div class="modal fade" id="modalNotifikasi" tabindex="-1" role="dialog" aria-labelledby="modalNotifikasiLabel"
         aria-hidden="true">
         <div class="modal-dialog " role="document">
@@ -103,7 +99,6 @@
         </div>
     </div>
 
-    <!-- Modal List Download -->
     <div class="modal fade" id="modalDownload" tabindex="-1" role="dialog" aria-labelledby="modalDownloadLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -297,7 +292,7 @@
             </div>
         </div>
     </div>
-    <!-- Judul TV SHOW -->
+
     <h4 class="tmf_production">
         <b>
             <?php echo $row_tv['judul_tv_show']; ?>
@@ -309,22 +304,17 @@
     $limited_description = implode(' ', array_slice($words, 0, 20));
     $full_description = $description;
 
-    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$filmId'";
+    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
     $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
     $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
 
     $total_kunjungan = $row_kunjungan['total_kunjungan'];
-
-    $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$filmId'";
-    $result_tv = mysqli_query($koneksi, $query_tv);
-    $row_tv = mysqli_fetch_assoc($result_tv);
 
     $created_at_timestamp = strtotime($row_tv['created_at']);
     $current_timestamp = time();
     $time_duration_seconds = $current_timestamp - $created_at_timestamp;
     $time_duration_formatted = gmdate("H:i:s", $time_duration_seconds);
 
-    // Function Upload sejak
     function timeSinceUpload($timestamp)
     {
         $timeDiff = time() - strtotime($timestamp);
@@ -347,10 +337,6 @@
         }
     }
 
-    // Calculate the total number of views for the movie
-    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$filmId'";
-    $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-    $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
     $total_kunjungan = $row_kunjungan['total_kunjungan'];
     ?>
     <a> <b>
@@ -367,4 +353,3 @@
         <a class="card-link tmf_teks" id="showMoreLink" onclick="toggleDescription()">Lebih Banyak</a>
     <?php } ?>
 </div>
-<!-- End Kolom Judul & Deskripsi -->

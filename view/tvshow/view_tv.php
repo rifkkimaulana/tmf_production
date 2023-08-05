@@ -22,6 +22,10 @@ if (mysqli_num_rows($result_episode) > 0) {
     $id_download = $row_episode['download_id'];
 }
 
+$query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
+$result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+$row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+
 ?>
 <div class="col-md-9 tmf_production">
     <div class="row">
@@ -432,62 +436,25 @@ if (isset($_GET['id'])) {
         <div class="col-lg-12">
             <div class="card-flat hide-on-small-screen">
                 <?php
-                if (isset($_GET['id'])) {
-                    $tmdb_id = $_GET['id'];
+                $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tv_tmdb_id;";
+                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                $select_id_dbtmdb = $row_tmdb['tmdb_id'];
 
-                    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
-                    $result_film = mysqli_query($koneksi, $query_film);
-                    $row_tv = mysqli_fetch_assoc($result_film);
-                    $id_tmdb = $row_tv['tmdb_id'];
-
-                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
-                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
-
-                    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
-                    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
-                } else {
-                    echo 'ID Tidak Ditemukan!';
-                }
-
-                if (isset($_GET['id'])) {
-                    $tmdb_id = $_GET['id'];
-
-                    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
-                    $result_film = mysqli_query($koneksi, $query_film);
-                    $row_tv = mysqli_fetch_assoc($result_film);
-                    $id_tmdb = $row_tv['tmdb_id'];
-
-                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
-                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
-
-                    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
-                    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
-                } else {
-                    echo 'ID Tidak Ditemukan!';
-                }
+                $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+                $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
 
                 if (mysqli_num_rows($result_tmdb2) > 0) {
                     while ($row_tmdb2 = mysqli_fetch_assoc($result_tmdb2)) {
                         $select_id_tmdb = $row_tmdb2['id'];
-                        $query_tv2 = "SELECT * FROM tb_tv_show WHERE tmdb_id = $select_id_tmdb;";
-                        $result_tv2 = mysqli_query($koneksi, $query_tv2);
 
-                        if (mysqli_num_rows($result_tv2) > 0) {
-
-                            $row_tv2 = mysqli_fetch_assoc($result_tv2);
-                            $tv_id = $row_tv2['id'];
-                            $judul = $row_tv2['judul_tv_show'];
-                            $page_id = $row_tv2['tmdb_id'];
-                        }
-
-                        if (!$result_tv) {
-                            die("Pesan Kesalahan: " . mysqli_error($koneksi));
-                        }
+                        $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = $select_id_tmdb;";
+                        $result_tv = mysqli_query($koneksi, $query_tv);
+                        $row_tv = mysqli_fetch_assoc($result_tv);
+                        $tv_id = $row_tv['id'];
+                        $judul = $row_tv['judul_tv_show'];
                         ?>
+                        <hr>
                         <div class="card-header font-weight-bold">
                             <?php echo $judul; ?>
                         </div>
@@ -499,11 +466,11 @@ if (isset($_GET['id'])) {
                                 while ($row_episode = mysqli_fetch_assoc($result_episode)) {
                                     $episode = $row_episode['jumlah_episode'];
 
-                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $page_id . "&episode=" . $episode . "&play=1";
+                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $select_id_tmdb . "&episode=" . $episode . "&play=1";
                                     ?>
                                     <a href="<?php echo $url; ?>">
                                         <button type="button"
-                                            class="btn btn-sm <?php if ($_GET['episode'] == $episode && $_GET['id'] == $page_id) { ?> btn-primary <?php } else { ?> btn-secondary <?php } ?> mt-1">
+                                            class="btn btn-sm <?php if ($_GET['episode'] == $episode && $_GET['id'] == $select_id_tmdb) { ?> btn-primary <?php } else { ?> btn-secondary <?php } ?> mt-1">
                                             <?php echo $episode; ?>
                                         </button>
                                     </a>
