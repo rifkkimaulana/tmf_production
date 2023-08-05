@@ -78,7 +78,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <?php if (empty($judul)) {
-                        $judul = 'tidak ada informasi';
+                        $judul = '';
                     } ?>
                     <?php echo $judul; ?>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -117,8 +117,10 @@
                     $result_download = mysqli_query($koneksi, $query_download);
                     $row_download = mysqli_fetch_assoc($result_download);
 
-                    $judul_null = "null";
-                    $link_null = "null";
+                    $safelink = 'https://semawur.com/st/?api=f0ad0323a77b9ddc5189f885e8a3b150446d37ce&url=';
+                    $judul_null = "";
+                    $download_unik = rand(1000, 9999);
+                    $link_null = $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=" . $playValue . "&alert=link_download_found&id_download=" . $download_unik;
 
                     ?>
                     <ul class="list-group" style="height: 300px; overflow: auto;">
@@ -126,10 +128,10 @@
                             <?php
                             if (!empty($row_download['judul1']) && !empty($row_download['link1'])) {
                                 echo $row_download['judul1'];
-                                echo '<a href="' . $row_download['link1'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link1'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -137,10 +139,10 @@
                             <?php
                             if (!empty($row_download['judul2']) && !empty($row_download['link2'])) {
                                 echo $row_download['judul2'];
-                                echo '<a href="' . $row_download['link2'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link2'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -148,10 +150,10 @@
                             <?php
                             if (!empty($row_download['judul3']) && !empty($row_download['link3'])) {
                                 echo $row_download['judul3'];
-                                echo '<a href="' . $row_download['link3'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link3'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -159,10 +161,10 @@
                             <?php
                             if (!empty($row_download['judul4']) && !empty($row_download['link4'])) {
                                 echo $row_download['judul4'];
-                                echo '<a href="' . $row_download['link4'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link4'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -170,10 +172,10 @@
                             <?php
                             if (!empty($row_download['judul5']) && !empty($row_download['link5'])) {
                                 echo $row_download['judul5'];
-                                echo '<a href="' . $row_download['link5'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link5'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -181,10 +183,10 @@
                             <?php
                             if (!empty($row_download['judul6']) && !empty($row_download['link6'])) {
                                 echo $row_download['judul6'];
-                                echo '<a href="' . $row_download['link6'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link6'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -192,10 +194,10 @@
                             <?php
                             if (!empty($row_download['judul7']) && !empty($row_download['link7'])) {
                                 echo $row_download['judul7'];
-                                echo '<a href="' . $row_download['link7'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link7'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -203,10 +205,10 @@
                             <?php
                             if (!empty($row_download['judul8']) && !empty($row_download['link8'])) {
                                 echo $row_download['judul8'];
-                                echo '<a href="' . $row_download['link8'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link8'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -214,10 +216,10 @@
                             <?php
                             if (!empty($row_download['judul9']) && !empty($row_download['link9'])) {
                                 echo $row_download['judul9'];
-                                echo '<a href="' . $row_download['link9'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link9'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -225,10 +227,10 @@
                             <?php
                             if (!empty($row_download['judul10']) && !empty($row_download['link10'])) {
                                 echo $row_download['judul10'];
-                                echo '<a href="' . $row_download['link10'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link10'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -236,10 +238,10 @@
                             <?php
                             if (!empty($row_download['judul11']) && !empty($row_download['link11'])) {
                                 echo $row_download['judul11'];
-                                echo '<a href="' . $row_download['link11'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link11'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -247,10 +249,10 @@
                             <?php
                             if (!empty($row_download['judul12']) && !empty($row_download['link12'])) {
                                 echo $row_download['judul12'];
-                                echo '<a href="' . $row_download['link12'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link12'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -258,10 +260,10 @@
                             <?php
                             if (!empty($row_download['judul13']) && !empty($row_download['link13'])) {
                                 echo $row_download['judul13'];
-                                echo '<a href="' . $row_download['link13'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link13'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -269,10 +271,10 @@
                             <?php
                             if (!empty($row_download['judul14']) && !empty($row_download['link14'])) {
                                 echo $row_download['judul14'];
-                                echo '<a href="' . $row_download['link14'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link14'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -280,10 +282,10 @@
                             <?php
                             if (!empty($row_download['judul15']) && !empty($row_download['link15'])) {
                                 echo $row_download['judul15'];
-                                echo '<a href="' . $row_download['link15'] . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $row_download['link15'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
