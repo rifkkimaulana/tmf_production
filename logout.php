@@ -5,6 +5,6 @@ session_destroy();
 
 setcookie("remember_me", "", time() - 3600, "/");
 
-header("location: index.php");
+header("location: login/index.php");
 exit();
 ?>
