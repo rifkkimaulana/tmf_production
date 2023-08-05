@@ -76,6 +76,15 @@ foreach ($kualitas_ids as $kualitas_id) {
     $kualitas[] = $row_kualitas['nama_kualitas'];
 }
 
+$negara_ids = explode(",", $row_tv['negara_ids']);
+$negara = array();
+foreach ($negara_ids as $negara_id) {
+    $query_negara = "SELECT nama_negara FROM tb_negara WHERE id = '$negara_id'";
+    $result_negara = mysqli_query($koneksi, $query_negara);
+    $row_kualitas = mysqli_fetch_assoc($result_negara);
+    $negara[] = $row_kualitas['nama_negara'];
+}
+
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
 $anggaran = formatCurrency($row_tmdb['anggaran']);
 $pendapatan = formatCurrency($row_tmdb['pendapatan']);
@@ -209,8 +218,20 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <a href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
                         <?php echo $genres . ", "; ?>
                     </a>
+                    <?php
+                }
+                if (empty($row_tv['negara_ids'])) {
+                } else { ?>
+                    <hr>
+                    <b>Negara :</b>
+                    <?php foreach ($negara as $negara) { ?>
+                        <a href="dashboard.php?page=negara&f=<?php echo urlencode($negara); ?>">
+                            <?php echo $negara . ", "; ?>
+                        </a>
 
-                <?php }
+                        <?php
+                    }
+                }
                 $bahasa = $row_tmdb['bahasa'];
                 if (empty($anggaran)) {
                 } else { ?>
@@ -298,7 +319,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         <?php echo $row_tmdb['jumlah_episode']; ?>
                     </a>
                 <?php }
-                if (empty($row_tv['jaringan_ids'])) {
+                if (empty($row_tv['kualitas_ids'])) {
                 } else { ?>
                     <hr>
                     <b>Kualitas :</b>
