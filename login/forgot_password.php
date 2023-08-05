@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Request new
+                            <button type="submit" name="submit" class="btn btn-primary btn-block">Request new
                                 password</button>
                         </div>
                     </div>
