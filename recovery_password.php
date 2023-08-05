@@ -9,30 +9,32 @@ $query_user = "SELECT * FROM tb_users WHERE reset_token='$reset_token'";
 $result_user = mysqli_query($koneksi, $query_user);
 
 if (mysqli_num_rows($result_user) > 0) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['update'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
 
-        if ($password === $confirm_password) {
-            $row_user = mysqli_fetch_assoc($result_user);
+            if ($password === $confirm_password) {
+                $row_user = mysqli_fetch_assoc($result_user);
 
-            $reset_token = $row_user['reset_token'];
-            $id_reset = $row_user['reset_id'];
+                $reset_token = $row_user['reset_token'];
+                $id_reset = $row_user['reset_id'];
 
-            $query_wa = "UPDATE tb_log_whatsapp SET status='Berhasil' WHERE id_pesan='$id_reset'";
-            mysqli_query($koneksi, $query_wa);
+                $query_wa = "UPDATE tb_log_whatsapp SET status='Berhasil' WHERE id_pesan='$id_reset'";
+                mysqli_query($koneksi, $query_wa);
 
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $query = "UPDATE tb_users SET reset_token=NULL, user_password='$hashed_password' WHERE reset_token='$reset_token'";
-            mysqli_query($koneksi, $query);
+                $query = "UPDATE tb_users SET reset_token=NULL, user_password='$hashed_password' WHERE reset_token='$reset_token'";
+                mysqli_query($koneksi, $query);
 
-            header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
-            exit();
-        } else {
-            header("location: " . $base_url . "/recovery_password.php?alert=passwordMismatch");
-            exit();
+                header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
+                exit();
+            } else {
+                header("location: " . $base_url . "/recovery_password.php?alert=passwordMismatch");
+                exit();
+            }
         }
     }
 } else {
@@ -70,7 +72,8 @@ if (mysqli_num_rows($result_user) > 0) {
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Change password</button>
+                            <button type="submit" name="update" class="btn btn-primary btn-block">Change
+                                password</button>
                         </div>
                     </div>
                 </form>
