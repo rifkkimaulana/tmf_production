@@ -125,56 +125,5 @@ include '../halaman/header.php';
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="emailNotFound" tabindex="-1" role="dialog" aria-labelledby="emailNotFoundModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="emailNotFoundModalLabel">Error</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Email tidak ditemukan. Silakan coba lagi.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="emailSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Success</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Email berhasil diverifikasi! Silahkan cek whatsapp anda kami telah mengirimkan link reset password!
-            </div>
-            <div class="modal-footer">
-                <a href="<?php echo $base_url; ?>" class="btn btn-primary">Masuk</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<script>
-    $(document).ready(function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('success') === 'email_berhasil_diverifikasi') {
-            $('#emailSuccessModal').modal('show');
-        }
-    });
-</script>
-
+<?php include 'modal.php'; ?>
 <?php include '../halaman/footer.php'; ?>

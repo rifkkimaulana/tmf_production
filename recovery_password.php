@@ -84,4 +84,5 @@ if (mysqli_num_rows($result_user) > 0) {
         </div>
     </div>
 </div>
+<?php include 'login/modal.php'; ?>
 <?php include 'halaman/footer.php'; ?>
