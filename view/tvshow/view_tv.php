@@ -5,10 +5,9 @@ $tv_tmdb_id = $_GET['id'];
 $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
 $result_tv = mysqli_query($koneksi, $query_tv);
 $row_tv = mysqli_fetch_assoc($result_tv);
+$id_tv = $row_tv['id'];
 
-
-$tmdb_id = $row_tv['tmdb_id'];
-$query_tmdb = "SELECT link_trailer FROM tb_tmdb WHERE id = '$tmdb_id'";
+$query_tmdb = "SELECT link_trailer FROM tb_tmdb WHERE id = '$tv_tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
 if (mysqli_num_rows($result_tmdb) > 0) {
     $row_tmdb = mysqli_fetch_assoc($result_tmdb);
@@ -16,7 +15,7 @@ if (mysqli_num_rows($result_tmdb) > 0) {
 }
 
 
-$id_tv = $row_tv['id'];
+
 $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = '$id_tv'";
 $result_episode = mysqli_query($koneksi, $query_episode);
 
