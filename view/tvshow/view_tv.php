@@ -1,6 +1,4 @@
 <?php
-include 'config/koneksi.php';
-
 $tv_tmdb_id = $_GET['id'];
 $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
 $result_tv = mysqli_query($koneksi, $query_tv);
