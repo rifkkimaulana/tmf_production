@@ -140,7 +140,6 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
 
             <?php include 'judul_deskripsi.php'; ?>
 
-            <!-- Start Button Episode -->
             <div class="card card-flat hide-on-large-screen tmf_production">
                 <?php
                 $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tv_tmdb_id;";
@@ -194,9 +193,7 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                     echo "<small>Tidak ada id tersedia.</small>";
                 } ?>
             </div>
-            <!-- End Button Episode -->
 
-            <!-- TMDB LIST-->
             <div class="card-flat">
                 <?php
                 $tmdb_id = $row_tv['tmdb_id'];
@@ -204,7 +201,6 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 
-                // Ambil nama-nama genre dari tabel tb_genre berdasarkan genre_ids
                 $genre_ids = explode(",", $row_tv['genre_ids']);
                 $genres = array();
                 foreach ($genre_ids as $genre_id) {
@@ -215,7 +211,6 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                 }
 
                 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
-                // Function format durasi
                 function formatDuration($minutes)
                 {
                     $hours = floor($minutes / 60);
@@ -228,7 +223,7 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                     }
                 }
                 $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
-                // Function format rupiah
+
                 function formatCurrency($amount)
                 {
                     return "IDR " . number_format($amount, 0, ',', '.');
@@ -287,12 +282,14 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                 </a>
                 <hr>
                 <b>ID IMDB:</b>
-                <a href="<?php echo "https://www.imdb.com/title/" . $row_tmdb['imdb_id']; ?>" target="_blank">
+                <a href="<?php echo $safelink . "https://www.imdb.com/title/" . $row_tmdb['imdb_id']; ?>"
+                    target="_blank">
                     <?php echo $row_tmdb['imdb_id']; ?>
                 </a>
                 <hr>
                 <b>ID TMDB:</b>
-                <a href="<?php echo "https://www.themoviedb.org/movie/" . $row_tmdb['tmdb_id']; ?>" target="_blank">
+                <a href="<?php echo $safelink . "https://www.themoviedb.org/movie/" . $row_tmdb['tmdb_id']; ?>"
+                    target="_blank">
                     <?php echo $row_tmdb['tmdb_id']; ?> </a>
                 <hr>
                 <a><b>Jumlah Episode:</b>
