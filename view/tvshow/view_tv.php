@@ -193,40 +193,69 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <a href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
                         <?php echo $genres . ", "; ?>
                     </a>
-                <?php } ?>
-                <hr>
-                <a><b>Bahasa:</b>
-                    <?php echo $row_tmdb['bahasa']; ?>
-                </a>
-                <hr>
-                <a><b>Tagline:</b>
-                    <?php echo $row_tmdb['tagline']; ?>
-                </a>
-                <hr>
-                <a><b>Rating MPAA:</b>
-                    <?php echo $row_tmdb['rating_mpaa']; ?>
-                </a>
-                <hr>
-                <a><b>Tanggal Rilis:</b>
-                    <?php echo $tanggal_rilis; ?>
-                </a>
-                <hr>
-                <a><b>Durasi:</b>
-                    <?php echo $waktu_jalan; ?>
-                </a>
-                <hr>
-                <a><b>Rating TMDB:</b>
-                    <?php echo $row_tmdb['rating1'] . " dari " . $row_tmdb['rating2']; ?>
-                </a>
-                <hr>
-                <a><b>Anggaran:</b>
-                    <?php echo $anggaran; ?>
-                </a>
-                <hr>
-                <a><b>Pendapatan:</b>
-                    <?php echo $pendapatan; ?>
-                </a>
-                <?php
+
+                <?php }
+                $bahasa = $row_tmdb['bahasa'];
+                if (empty($anggaran)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Bahasa:</b>
+                        <?php echo $bahasa; ?>
+                    </a>
+                <?php }
+                $tagline = $row_tmdb['tagline'];
+                if (empty($tagline)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Tagline:</b>
+                        <?php echo $tagline; ?>
+                    </a>
+                <?php }
+                $rating_mpaa = $row_tmdb['rating_mpaa'];
+                if (empty($rating_mpaa)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Rating MPAA:</b>
+                        <?php echo $rating_mpaa ?>
+                    </a>
+                <?php }
+                if (empty($tanggal_rilis)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Tanggal Rilis:</b>
+                        <?php echo $tanggal_rilis; ?>
+                    </a>
+                <?php }
+                if (empty($waktu_jalan)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Durasi:</b>
+                        <?php echo $waktu_jalan; ?>
+                    </a>
+                <?php }
+                $rating1 = $row_tmdb['rating1'];
+                if (empty($rating1)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Rating TMDB:</b>
+                        <?php echo $rating1 . " dari " . $row_tmdb['rating2']; ?>
+                    </a>
+                <?php }
+                if (empty($anggaran)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Anggaran:</b>
+                        <?php echo $anggaran; ?>
+                    </a>
+                <?php }
+                if (empty($pendapatan)) {
+                } else { ?>
+                    <hr>
+                    <a><b>Pendapatan:</b>
+                        <?php echo $pendapatan; ?>
+                    </a>
+                    <?php
+                }
                 $imdb_id = $row_tmdb['imdb_id'];
                 if (empty($imdb_id)) {
                 } else { ?>
@@ -236,8 +265,8 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         target="_blank">
                         <?php echo $imdb_id; ?>
                     </a>
-                <?php } ?>
-                <?php if (empty($select_id_dbtmdb)) {
+                <?php }
+                if (empty($select_id_dbtmdb)) {
                 } else { ?>
                     <hr>
                     <b>ID TMDB:</b>
