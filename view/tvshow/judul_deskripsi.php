@@ -119,13 +119,8 @@
 
                     $safelink = 'https://semawur.com/st/?api=f0ad0323a77b9ddc5189f885e8a3b150446d37ce&url=';
                     $judul_null = "";
-
-                    $links = array();
-                    for ($i = 1; $i <= 15; $i++) {
-                        $download_unik = uniqid() . "_" . mt_rand(1000, 9999);
-                        $link_null = $base_url . "/dashboard.php?page=donwload_" . $download_unik;
-                        $links[] = $link_null;
-                    }
+                    $download_unik = rand(1000, 9999);
+                    $link_null = $base_url . "/dashboard.php?page=donwload_" . $download_unik;
 
                     ?>
                     <ul class="list-group" style="height: 300px; overflow: auto;">
@@ -136,7 +131,7 @@
                                 echo '<a href="' . $safelink . $row_download['link1'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $safelink . $link() . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -147,7 +142,7 @@
                                 echo '<a href="' . $safelink . $row_download['link2'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $safelink . $link() . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
