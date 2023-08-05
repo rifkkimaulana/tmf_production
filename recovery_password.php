@@ -32,7 +32,7 @@ if (mysqli_num_rows($result_user) > 0) {
                 header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
                 exit();
             } else {
-                header("location: " . $base_url . "/recovery_password.php?alert=passwordMismatch");
+                header("location: " . $base_url . "/recovery_password.php?token=" . $reset_token . "&alert=passwordMismatch");
                 exit();
             }
         }
