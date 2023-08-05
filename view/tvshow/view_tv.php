@@ -390,18 +390,15 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                             }
                             ?>
                             <div class="row">
-                                <?php $tmdb_id = $row_tv['tmdb_id']; ?>
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
-                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
+                                    <a href="<?php $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tv_tmdb_id; ?>"
+                                        style="color: black;">
                                         <div class="thumbnail-container">
                                             <?php if (!empty($row_tv['thumbnail'])) { ?>
                                                 <img class="img-fluid rounded img-landscape-zoom"
                                                     src="gambar/tv/<?php echo $row_tv['thumbnail']; ?>"
                                                     alt="<?php echo $row_tv['judul_tv_show']; ?>">
                                             <?php } else {
-                                                $tmdb_id = $row_tv['tmdb_id'];
-                                                $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                                                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                                 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                                 $url_poster = $row_tmdb['url_poster'];
                                                 ?>
