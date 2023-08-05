@@ -7,16 +7,9 @@ ob_start();
 
 <div class="content-wrapper" style="background-color: white;">
     <?php include 'halaman/main-content.php'; ?>
-    <div id="loading-screen">
-        Loading...
-    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(window).on("load", function () {
-        $("#loading-screen").addClass("hidden");
-    });
-</script>
+
 
 <?php include 'halaman/footer.php'; ?>
 

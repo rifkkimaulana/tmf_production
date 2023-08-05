@@ -226,32 +226,6 @@ $limitedGenres = array_slice($genres, 0, 9);
             max-height: 200px;
             object-fit: cover;
         }
-
-        /* Gaya overlay atau loading screen */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            /* Ubah warna sesuai kebutuhan */
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-            /* Nilai opacity 1 untuk tampilan penuh */
-            transition: opacity 0.5s;
-            /* Durasi transisi redup */
-        }
-
-        /* Animasi redup */
-        #loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-            /* Agar konten di bawah tidak dapat diakses */
-        }
     </style>
 </head>
 
