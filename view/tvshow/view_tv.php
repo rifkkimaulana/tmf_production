@@ -85,6 +85,15 @@ foreach ($negara_ids as $negara_id) {
     $negara[] = $row_negara['nama_negara'];
 }
 
+$pemain_ids = explode(",", $row_tv['pemain_ids']);
+$pemain = array();
+foreach ($pemain_ids as $pemain_id) {
+    $query_pemain = "SELECT nama_pemain FROM tb_negara WHERE id = '$negara_id'";
+    $result_pemain = mysqli_query($koneksi, $query_pemain);
+    $row_nrow_pemaingara = mysqli_fetch_assoc($result_pemain);
+    $pemain[] = $row_pemain['nama_pemain'];
+}
+
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
 $anggaran = formatCurrency($row_tmdb['anggaran']);
 $pendapatan = formatCurrency($row_tmdb['pendapatan']);
@@ -343,6 +352,19 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         <?php
                     }
                 }
+                if (empty($row_tv['pemain_ids'])) {
+                } else { ?>
+                    <hr>
+                    <b>Network :</b>
+                    <?php foreach ($pemain as $pemain) { ?>
+                        <a href="dashboard.php?page=pemain&f=<?php echo urlencode($pemain); ?>">
+                            <?php echo $pemain . ", "; ?>
+                        </a>
+
+                        <?php
+                    }
+                }
+                ?>
                 ?>
             </div>
 
