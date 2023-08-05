@@ -72,7 +72,7 @@ if (isset($_COOKIE['remember_me'])) {
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-                <div class="social-auth-links text-center">
+                <div class="social-auth-links text-center mt-2 mb-3">
                     <a href="<?php echo $base_url; ?>/google/login.php" class="btn btn-block btn-danger">
                         <i class="fab fa-google mr-2"></i> Sign in using Google
                     </a>
@@ -113,10 +113,7 @@ if (isset($_COOKIE['remember_me'])) {
                         </div>
                     </div>
                 </form>
-                <br>
-
-
-                <p class="mb-1">
+                <p class="mt-1">
                     <a href="<?php echo $base_url; ?>/insert_email.php">I forgot my password</a>
                 </p>
             </div>
