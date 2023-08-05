@@ -64,7 +64,7 @@ foreach ($jaringan_ids as $jaringan_id) {
     $query_jaringan = "SELECT nama_jaringan FROM tb_jaringan WHERE id = '$jaringan_id'";
     $result_jaringan = mysqli_query($koneksi, $query_jaringan);
     $row_jaringan = mysqli_fetch_assoc($result_jaringan);
-    $jaringan[] = $row_genre['nama_jaringan'];
+    $jaringan[] = $row_jaringan['nama_jaringan'];
 }
 
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
