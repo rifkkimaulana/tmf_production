@@ -67,6 +67,15 @@ foreach ($jaringan_ids as $jaringan_id) {
     $jaringan[] = $row_jaringan['nama_jaringan'];
 }
 
+$kualitas_ids = explode(",", $row_tv['kualitas_ids']);
+$kualitas = array();
+foreach ($kualitas_ids as $kualitas_id) {
+    $query_kualitas = "SELECT nama_kualitas FROM tb_kualitas WHERE id = '$kualitas_id'";
+    $result_kualitas = mysqli_query($koneksi, $query_jaringan);
+    $row_kualitas = mysqli_fetch_assoc($result_jaringan);
+    $kualitas[] = $row_kualitas['nama_kualitas'];
+}
+
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
 $anggaran = formatCurrency($row_tmdb['anggaran']);
 $pendapatan = formatCurrency($row_tmdb['pendapatan']);
@@ -292,9 +301,21 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                 if (empty($row_tv['jaringan_ids'])) {
                 } else { ?>
                     <hr>
-                    <b>Network:</b>
+                    <b>Kualitas :</b>
+                    <?php foreach ($kualitas as $kualitas) { ?>
+                        <a href="dashboard.php?page=kualitas&f=<?php echo urlencode($kualitas); ?>">
+                            <?php echo $kualitas . ", "; ?>
+                        </a>
+
+                        <?php
+                    }
+                }
+                if (empty($row_tv['jaringan_ids'])) {
+                } else { ?>
+                    <hr>
+                    <b>Network :</b>
                     <?php foreach ($jaringan as $jaringan) { ?>
-                        <a>
+                        <a href="dashboard.php?page=network&f=<?php echo urlencode($jaringan); ?>">
                             <?php echo $jaringan . ", "; ?>
                         </a>
 
