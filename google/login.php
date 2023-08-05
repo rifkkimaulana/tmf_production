@@ -16,14 +16,6 @@ function createAuthUrl()
     $url = 'https://accounts.google.com/o/oauth2/auth?' . http_build_query($params);
     return $url;
 }
-function getUserInfo($access_token)
-{
-    $url = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' . $access_token;
-    $result = file_get_contents($url);
-    $response = json_decode($result, true);
-    return $response;
-}
-
 $authUrl = createAuthUrl();
 header("Location: $authUrl");
 exit();
