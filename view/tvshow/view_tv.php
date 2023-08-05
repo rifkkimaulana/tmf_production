@@ -289,8 +289,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         <?php echo $row_tmdb['jumlah_episode']; ?>
                     </a>
                 <?php }
-                $pendapatan_r = $row_tmdb['pendapatan'];
-                if (empty($pendapatan_r)) {
+                if (empty($jaringan)) {
                 } else { ?>
                     <hr>
                     <b>Network:</b>
