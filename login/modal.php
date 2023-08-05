@@ -12,9 +12,6 @@
             <div class="modal-body">
                 Akun pengguna tidak tersedia, silahkan login dengan pengguna lain.
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
         </div>
     </div>
 </div>
@@ -31,9 +28,6 @@
             </div>
             <div class="modal-body">
                 Autentikasi ke data pengguna tidak dapat diproses.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -52,9 +46,6 @@
             <div class="modal-body">
                 Pengguna yang anda pilih tidak tersedia.
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
         </div>
     </div>
 </div>
@@ -71,9 +62,6 @@
             </div>
             <div class="modal-body">
                 Email tidak tersedia.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -92,9 +80,6 @@
             <div class="modal-body">
                 Tidak dapat login karena kesalahan akses token google.
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
         </div>
     </div>
 </div>
@@ -111,9 +96,6 @@
             </div>
             <div class="modal-body">
                 Kesalahan akses kode silahkan hubungi developer aplikasi.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -132,9 +114,6 @@
             <div class="modal-body">
                 Password atau username yang anda masukan tidak tersedia.
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
         </div>
     </div>
 </div>
@@ -151,9 +130,6 @@
             </div>
             <div class="modal-body">
                 <p>Permintaan lupa password anda berhasil kami kirim. silahkan cek pesan baru di whatsapp!.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -173,10 +149,6 @@
             <div class="modal-body">
                 Password Berhasil diubah silahkan login dengan password baru anda.
             </div>
-            <div class="modal-footer">
-                <a href="<?php echo $base_url; ?>" class="btn btn-primary">Masuk</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
         </div>
     </div>
 </div>
@@ -193,10 +165,6 @@
             <div class="modal-body">
                 Password yang anda masukan tidak sesuai.
             </div>
-            <div class="modal-footer">
-                <a href="<?php echo $base_url; ?>" class="btn btn-primary">Masuk</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
         </div>
     </div>
 </div>
@@ -211,10 +179,6 @@
             </div>
             <div class="modal-body">
                 Link whatsapp sudah tidak dapat digunakan!. silahkan kirim ulang permintaan lupa password.
-            </div>
-            <div class="modal-footer">
-                <a href="<?php echo $base_url; ?>" class="btn btn-primary">Masuk</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
