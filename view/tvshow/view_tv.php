@@ -10,8 +10,6 @@ function formatDuration($minutes)
         return $remainingMinutes . " menit";
     }
 }
-$waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
-
 function formatCurrency($amount)
 {
     return "IDR " . number_format($amount, 0, ',', '.');
@@ -226,7 +224,9 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         <?php echo $tanggal_rilis; ?>
                     </a>
                 <?php }
-                if (empty($waktu_jalan)) {
+                $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
+                $waktu_jalan_r = $row_tmdb['waktu_jalan'];
+                if (empty($waktu_jalan_r)) {
                 } else { ?>
                     <hr>
                     <a><b>Durasi:</b>
