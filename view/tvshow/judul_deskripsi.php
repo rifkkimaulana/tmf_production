@@ -1,20 +1,19 @@
 <!-- Kolom Judul & Deskripsi -->
 <div class="card-flat">
-    <div class="card-header">
-        <?php
-        if (isset($_GET['episode']) ? $_GET['episode'] : '') {
-            ?>
+    <?php
+    if (isset($_GET['episode']) ? $_GET['episode'] : '') {
+        ?>
+        <div class="card-header">
+
             <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
                 INFO PLAYER
             </button>
-        <?php } ?>
-        <div class="float-right">
-            <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
-                    type="button" class="btn btn-sm btn-secondary">Trailer</button>
-            </a>
-            <?php
-            if (isset($_GET['episode']) ? $_GET['episode'] : '') {
-                ?>
+
+            <div class="float-right">
+                <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
+                        type="button" class="btn btn-sm btn-secondary">Trailer</button>
+                </a>
+
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
                     <span class="sr-only">Play</span>
@@ -69,10 +68,11 @@
                 </div>
                 <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                     data-target="#modalDownload">Unduh</button>
-            <?php }
-            ?>
+
+            </div>
         </div>
-    </div>
+    <?php }
+    ?>
 
     <!-- Modal Notifikasi Player-->
     <div class="modal fade" id="modalNotifikasi" tabindex="-1" role="dialog" aria-labelledby="modalNotifikasiLabel"
