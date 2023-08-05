@@ -15,24 +15,76 @@
                 <?php
                 include 'config/koneksi.php';
 
+
+
+
+
                 if (isset($_GET['page']) && $_GET['page'] === 'negara') {
 
                     $selected_country = $_GET['f'];
+                    function getNegaraIdByName($koneksi, $nama_negara)
+                    {
+                        // Melakukan pencegahan terhadap SQL injection dengan menghindari penggunaan variabel langsung dalam kueri.
+                        $nama_negara = mysqli_real_escape_string($koneksi, $nama_negara);
 
-                    $query_film_tv = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
-                                        FROM tb_film
-                                        LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
-                                        JOIN tb_negara ON FIND_IN_SET(tb_negara.id, tb_film.negara_ids)
-                                        WHERE tb_negara.nama_negara LIKE '%$selected_country%'
-                                        GROUP BY tb_film.tmdb_id
-                                        UNION
-                                        SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, tb_tv_show.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
-                                        FROM tb_tv_show
-                                        LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
-                                        JOIN tb_negara ON FIND_IN_SET(tb_negara.id, tb_tv_show.negara_ids)
-                                        WHERE tb_negara.nama_negara LIKE '%$selected_country%'
-                                        GROUP BY tb_tv_show.tmdb_id
-                                        ORDER BY total_kunjungan DESC ";
+                        // Kueri SQL untuk mencari id negara berdasarkan nama negara yang diberikan.
+                        $query = "SELECT id FROM tb_negara WHERE nama_negara = '$nama_negara'";
+
+                        // Menjalankan kueri dan mendapatkan hasilnya.
+                        $result = mysqli_query($koneksi, $query);
+
+                        // Memeriksa apakah ada hasil yang ditemukan.
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            // Mengambil data hasil dari kueri.
+                            $row = mysqli_fetch_assoc($result);
+                            // Mengembalikan id negara yang sesuai.
+                            return $row['id'];
+                        } else {
+                            // Jika tidak ada hasil yang ditemukan atau ada kesalahan eksekusi, kembalikan nilai null.
+                            return null;
+                        }
+                    }
+                    $selected_country_id = getNegaraIdByName($koneksi, $selected_country_name);
+
+                    if ($selected_country_id !== null) {
+                        // Jika id negara yang sesuai ditemukan, gunakan id tersebut untuk melakukan filter dalam kueri UNION
+                        $query_film_tv = "SELECT thumbnail, judul, tmdb_id, genre_ids, negara_ids, total_kunjungan
+                        FROM (
+                            SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                            FROM tb_film
+                            LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
+                            WHERE FIND_IN_SET('$selected_country_id', tb_film.negara_ids)
+                            GROUP BY tb_film.tmdb_id
+                    
+                            UNION
+                    
+                            SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, tb_tv_show.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                            FROM tb_tv_show
+                            LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
+                            WHERE FIND_IN_SET('$selected_country_id', tb_tv_show.negara_ids)
+                            GROUP BY tb_tv_show.tmdb_id
+                        ) AS combined_data
+                        ORDER BY total_kunjungan DESC ";
+                    } else {
+                        // Jika id negara tidak ditemukan, mungkin berikan pesan kesalahan atau tampilkan semua film dan acara TV tanpa filter negara
+                        $query_film_tv = "SELECT thumbnail, judul, tmdb_id, genre_ids, negara_ids, total_kunjungan
+                        FROM (
+                            SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                            FROM tb_film
+                            LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
+                            GROUP BY tb_film.tmdb_id
+                    
+                            UNION
+                    
+                            SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show AS judul, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, tb_tv_show.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
+                            FROM tb_tv_show
+                            LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
+                            GROUP BY tb_tv_show.tmdb_id
+                        ) AS combined_data
+                        ORDER BY total_kunjungan DESC ";
+                    }
+
+
                     $result_film_tv = mysqli_query($koneksi, $query_film_tv);
                     $count = 0;
 
