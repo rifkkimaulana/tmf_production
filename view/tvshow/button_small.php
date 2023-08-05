@@ -1,5 +1,13 @@
 <div class="card-flat hide-on-small-screen">
     <?php
+    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tv_tmdb_id;";
+    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
+
+    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
+
     if (mysqli_num_rows($result_tmdb2) > 0) {
         while ($row_tmdb2 = mysqli_fetch_assoc($result_tmdb2)) {
             $select_id_tmdb = $row_tmdb2['id'];
