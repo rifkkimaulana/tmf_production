@@ -1,6 +1,5 @@
 <?php
 include 'config/koneksi.php';
-
 if (isset($_SESSION['status']) && ($_SESSION['status'] == "administrator_logedin" || $_SESSION['status'] == "manajemen_logedin")) {
     if ($_SESSION['level'] == "administrator") {
         header("location: admin/");
@@ -30,7 +29,6 @@ if (isset($_POST['submit'])) {
             $_SESSION['nama'] = $row['user_nama'];
             $_SESSION['username'] = $row['user_username'];
             $_SESSION['level'] = $row['user_level'];
-
             if ($row['user_level'] == "administrator") {
                 $_SESSION['status'] = "administrator_logedin";
                 header("location:admin/");
@@ -43,7 +41,6 @@ if (isset($_POST['submit'])) {
                 header("location:login.php?alert=gagal");
                 exit();
             }
-
         } else {
             header("location:login.php?alert=gagal");
             exit();
@@ -53,7 +50,6 @@ if (isset($_POST['submit'])) {
         exit();
     }
 }
-
 if (isset($_POST['remember'])) {
     $remember = true;
     setcookie("remember_me", "1", time() + (7 * 24 * 60 * 60), "/", "", true, true);
@@ -61,7 +57,6 @@ if (isset($_POST['remember'])) {
     $remember = false;
     setcookie("remember_me", "", time() - 3600, "/", "", true, true);
 }
-
 if (isset($_COOKIE['remember_me'])) {
     $remember = true;
 } else {
@@ -69,10 +64,9 @@ if (isset($_COOKIE['remember_me'])) {
 }
 ?>
 <?php include 'halaman/header.php'; ?>
-
 <div class="login-page">
     <div class="login-box">
-        <div class="card-flat card-outline card-primary">
+        <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <a href="<?php echo $base_url; ?>" class="h1"><b>TMF</b>PRODUCTION</a>
             </div>
@@ -129,7 +123,6 @@ if (isset($_COOKIE['remember_me'])) {
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="modal fade" id="tokenExpired" tabindex="-1" role="dialog" aria-labelledby="tokenExpiredModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -150,16 +143,6 @@ if (isset($_COOKIE['remember_me'])) {
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'token_expired') {
-            $('#tokenExpired').modal('show');
-        }
-    });
-</script>
-
 <div class="modal fade" id="gagalLoginModal" tabindex="-1" role="dialog" aria-labelledby="gagalLoginModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -179,15 +162,6 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'gagal') {
-            $('#gagalLoginModal').modal('show');
-        }
-    });
-</script>
 
 <div class="modal fade" id="passwordMismatchModal" tabindex="-1" role="dialog"
     aria-labelledby="passwordMismatchModalLabel" aria-hidden="true">
@@ -209,15 +183,6 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'password_tidak_sesuai') {
-            $('#passwordMismatchModal').modal('show');
-        }
-    });
-</script>
 
 <div class="modal fade" id="passwordSuccessModal" tabindex="-1" role="dialog"
     aria-labelledby="passwordSuccessModalLabel" aria-hidden="true">
@@ -238,15 +203,6 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'berhasil_update_password') {
-            $('#passwordSuccessModal').modal('show');
-        }
-    });
-</script>
 
 <div class="modal fade" id="emailNotFound" tabindex="-1" role="dialog" aria-labelledby="emailNotFoundModalLabel"
     aria-hidden="true">
@@ -267,15 +223,6 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'email_tidak_terdaftar') {
-            $('#emailNotFound').modal('show');
-        }
-    });
-</script>
 
 <div class="modal fade" id="failedToken" tabindex="-1" role="dialog" aria-labelledby="failedTokenModalLabel"
     aria-hidden="true">
@@ -297,16 +244,6 @@ if (isset($_COOKIE['remember_me'])) {
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'failed_token') {
-            $('#failedToken').modal('show');
-        }
-    });
-</script>
-
 <div class="modal fade" id="invalidResponseModal" tabindex="-1" role="dialog"
     aria-labelledby="invalidResponseModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -326,13 +263,25 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function () {
-
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('alert') === 'invalid_response') {
+        const alertParam = urlParams.get('alert');
+
+        if (alertParam === 'gagal') {
+            $('#gagalLoginModal').modal('show');
+        } else if (alertParam === 'password_tidak_sesuai') {
+            $('#passwordMismatchModal').modal('show');
+        } else if (alertParam === 'berhasil_update_password') {
+            $('#passwordSuccessModal').modal('show');
+        } else if (alertParam === 'email_tidak_terdaftar') {
+            $('#emailNotFound').modal('show');
+        } else if (alertParam === 'invalid_response') {
             $('#invalidResponseModal').modal('show');
+        } else if (alertParam === 'token_expired') {
+            $('#tokenExpired').modal('show');
+        } else if (alertParam === 'failed_token') {
+            $('#failedToken').modal('show');
         }
     });
 </script>

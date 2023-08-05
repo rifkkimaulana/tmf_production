@@ -1,15 +1,12 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="<?php echo $base_url; ?>/dashboard.php?page=dashboard" class="navbar-brand">
-
             <span class="brand-text font-weight-light"><b>TMF</b>PRODUCTION</span>
         </a>
-
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -53,7 +50,6 @@
                     <a href="<?php echo $base_url; ?>/dashboard.php?page=artikel" class="nav-link">Artikel</a>
                 </li>
             </ul>
-
             <form class="form-inline ml-0 ml-md-3" action="dashboard.php" method="GET">
                 <input type="hidden" name="page" value="dashboard">
                 <div class="input-group input-group-sm">
@@ -70,8 +66,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
-
     </div>
 </nav>
