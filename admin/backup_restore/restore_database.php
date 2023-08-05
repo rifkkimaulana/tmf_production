@@ -9,9 +9,10 @@ if ($_SESSION['status'] != "administrator_logedin") {
 }
 
 include '../../config/koneksi.php';
+include '../../config/base_url.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["sqlFile"])) {
-    $targetDir = __DIR__ . "/database/";
+    $targetDir = $base_url . "/admin/backup_restore/database/";
     $targetFile = $targetDir . basename($_FILES["sqlFile"]["name"]);
     $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
