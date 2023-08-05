@@ -12,15 +12,16 @@ if (mysqli_num_rows($result_tmdb) > 0) {
     $link = $row_tmdb['link_trailer'];
 }
 
-$query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = '$id_tv'";
+$episode = isset($_GET['episode']) ? $_GET['episode'] : '1';
+$query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = '$id_tv' AND jumlah_episode = '$episode'";
 $result_episode = mysqli_query($koneksi, $query_episode);
 
 if (mysqli_num_rows($result_episode) > 0) {
     $row_episode = mysqli_fetch_assoc($result_episode);
-    $jumlah_episode = $row_episode['jumlah_episode'];
     $id_player = $row_episode['player_id'];
     $id_download = $row_episode['download_id'];
 }
+
 ?>
 <div class="col-md-9 tmf_production">
     <div class="row">
@@ -28,7 +29,7 @@ if (mysqli_num_rows($result_episode) > 0) {
             <div class="card tmf_shadow bg-black">
                 <div class="embed-responsive embed-responsive-16by9">
                     <?php
-                    $playValue = isset($_GET['episode']) ? $_GET['episode'] : '1';
+                    $playValue = isset($_GET['play']) ? $_GET['play'] : '1';
 
                     if (isset($_GET['episode']) ? $_GET['episode'] : '') {
 
@@ -124,7 +125,7 @@ if (mysqli_num_rows($result_episode) > 0) {
                     <div class="lewati-notification">
                         <div class="lewati-content">
 
-                            <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tv_tmdb_id . "&episode=" . $playValue . "&play=1"; ?>"
+                            <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=" . $playValue; ?>"
                                 class="btn btn-sm btn-dark">Lewati Trailer</a>
                         </div>
                     </div>
@@ -635,7 +636,7 @@ if (isset($_GET['id'])) {
     setInterval(reloadViewCount, 60000);
 
     document.addEventListener("DOMContentLoaded", function () {
-        var tmdb_id = <?php echo $tv_tmdb_id; ?>;
+        var tmdb_id = < ? php echo $tv_tmdb_id; ?>;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "<?php echo $base_url; ?>/config/visit.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
