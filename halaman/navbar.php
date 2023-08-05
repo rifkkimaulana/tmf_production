@@ -42,7 +42,7 @@
                         <?php foreach ($negara as $negara) { ?>
                             <?php
                             ?>
-                            <li><a href="<?php echo $base_url . "/dashboard.php?page=negara&f=" . $negara; ?>"
+                            <li><a href="<?php echo $base_url . "/dashboard.php?page=negara&f=" . urlencode($negara); ?>"
                                     class="dropdown-item">
                                     <?php echo $negara; ?>
                                 </a></li>
