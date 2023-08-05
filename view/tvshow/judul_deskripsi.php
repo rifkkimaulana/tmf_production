@@ -3,75 +3,71 @@
     <div class="card-header">
         <?php
         if (isset($_GET['episode']) ? $_GET['episode'] : '') {
-            ?>
+            $page = $_GET['page']
+                ?>
             <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
                 INFO PLAYER
             </button>
-        <?php }
-        ?>
-        <div class="float-right">
-            <?php
-            if (isset($_GET['episode']) ? $_GET['episode'] : '') {
-                ?>
-                <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id; ?>"><button type="button"
-                        class="btn btn-sm btn-secondary">Trailer</button>
+            <div class="float-right">
+                <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
+                        type="button" class="btn btn-sm btn-secondary">Trailer</button>
                 </a>
-
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
                     <span class="sr-only">Play</span>
                 </button>
+
                 <div class="dropdown-menu">
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=1"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=1"; ?>">Server
                         1</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=2"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=2"; ?>">Server
                         2</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=3"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=3"; ?>">Server
                         3</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=4"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=4"; ?>">Server
                         4</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=5"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=5"; ?>">Server
                         5</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=6"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=6"; ?>">Server
                         6</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=7"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=7"; ?>">Server
                         7</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=8"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=8"; ?>">Server
                         8</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=9"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=9"; ?>">Server
                         9</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=10"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=10"; ?>">Server
                         10</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=11"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=11"; ?>">Server
                         11</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=12"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=12"; ?>">Server
                         12</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=13"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=13"; ?>">Server
                         13</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=14"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=14"; ?>">Server
                         14</a>
                     <a class="dropdown-item"
-                        href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id . "&episode=" . $jumlah_episode . "&play=15"; ?>">Server
+                        href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=15"; ?>">Server
                         15</a>
                 </div>
                 <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                     data-target="#modalDownload">Unduh</button>
             <?php }
-            ?>
+        ?>
         </div>
     </div>
 
