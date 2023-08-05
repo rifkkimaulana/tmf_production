@@ -81,8 +81,8 @@ $negara = array();
 foreach ($negara_ids as $negara_id) {
     $query_negara = "SELECT nama_negara FROM tb_negara WHERE id = '$negara_id'";
     $result_negara = mysqli_query($koneksi, $query_negara);
-    $row_kualitas = mysqli_fetch_assoc($result_negara);
-    $negara[] = $row_kualitas['nama_negara'];
+    $row_negara = mysqli_fetch_assoc($result_negara);
+    $negara[] = $row_negara['nama_negara'];
 }
 
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
