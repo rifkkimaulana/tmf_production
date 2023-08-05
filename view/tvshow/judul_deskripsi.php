@@ -1,22 +1,21 @@
 <!-- Kolom Judul & Deskripsi -->
 <div class="card-flat">
     <div class="card-header">
-        <?php
-        if (isset($_GET['episode']) ? $_GET['episode'] : '') {
-            $page = $_GET['page']
+        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
+            INFO PLAYER
+        </button>
+        <div class="float-right">
+            <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
+                    type="button" class="btn btn-sm btn-secondary">Trailer</button>
+            </a>
+            <?php
+            if (isset($_GET['episode']) ? $_GET['episode'] : '') {
                 ?>
-            <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
-                INFO PLAYER
-            </button>
-            <div class="float-right">
-                <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
-                        type="button" class="btn btn-sm btn-secondary">Trailer</button>
-                </a>
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Play
                     <span class="sr-only">Play</span>
                 </button>
-
+                <?php $page = $_GET['page'] ?>
                 <div class="dropdown-menu">
                     <a class="dropdown-item"
                         href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=1"; ?>">Server
@@ -67,7 +66,7 @@
                 <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                     data-target="#modalDownload">Unduh</button>
             <?php }
-        ?>
+            ?>
         </div>
     </div>
 
