@@ -42,7 +42,7 @@ if (mysqli_num_rows($result_user) > 0) {
 }
 
 ?>
-<div class="login-page ">
+<div class="login-page bg-white">
     <div class="login-box">
         <div class="card">
             <div class="card-header text-center">
