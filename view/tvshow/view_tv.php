@@ -1017,6 +1017,18 @@ if (isset($_GET['id'])) {
 </div>
 
 <script>
+    function reloadViewCount() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+                document.getElementById("viewCount").innerHTML = "<b>" + this.responseText + "x ditonton</b>";
+            }
+        };
+        xhttp.open("GET", "get_view_count.php?id=<?php echo $filmId; ?>", true);
+        xhttp.send();
+    }
+
     setInterval(reloadViewCount, 60000);
 
     document.addEventListener("DOMContentLoaded", function () {
