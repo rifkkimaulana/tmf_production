@@ -1,4 +1,21 @@
 <?php
+function formatDuration($minutes)
+{
+    $hours = floor($minutes / 60);
+    $remainingMinutes = $minutes % 60;
+
+    if ($hours > 0) {
+        return $hours . " jam " . $remainingMinutes . " menit";
+    } else {
+        return $remainingMinutes . " menit";
+    }
+}
+$waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
+
+function formatCurrency($amount)
+{
+    return "IDR " . number_format($amount, 0, ',', '.');
+}
 $tv_tmdb_id = $_GET['id'];
 $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
 $result_tv = mysqli_query($koneksi, $query_tv);
@@ -22,9 +39,30 @@ if (mysqli_num_rows($result_episode) > 0) {
     $id_download = $row_episode['download_id'];
 }
 
+$query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tv_tmdb_id;";
+$result_tmdb = mysqli_query($koneksi, $query_tmdb);
+$row_tmdb = mysqli_fetch_assoc($result_tmdb);
+$select_id_dbtmdb = $row_tmdb['tmdb_id'];
+
+$query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
+$result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
+
 $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
 $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
 $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+
+$genre_ids = explode(",", $row_tv['genre_ids']);
+$genres = array();
+foreach ($genre_ids as $genre_id) {
+    $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
+    $result_genre = mysqli_query($koneksi, $query_genre);
+    $row_genre = mysqli_fetch_assoc($result_genre);
+    $genres[] = $row_genre['nama_genre'];
+}
+
+$tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
+$anggaran = formatCurrency($row_tmdb['anggaran']);
+$pendapatan = formatCurrency($row_tmdb['pendapatan']);
 
 ?>
 <div class="col-md-9 tmf_production">
@@ -139,112 +177,20 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
             </div>
 
             <?php include 'judul_deskripsi.php'; ?>
-
-            <div class="card card-flat hide-on-large-screen tmf_production">
-                <?php
-                $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tv_tmdb_id;";
-                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                $select_id_dbtmdb = $row_tmdb['tmdb_id'];
-
-                $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
-                $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
-
-                if (mysqli_num_rows($result_tmdb2) > 0) {
-                    while ($row_tmdb2 = mysqli_fetch_assoc($result_tmdb2)) {
-                        $select_id_tmdb = $row_tmdb2['id'];
-
-                        $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = $select_id_tmdb;";
-                        $result_tv = mysqli_query($koneksi, $query_tv);
-                        $row_tv = mysqli_fetch_assoc($result_tv);
-                        $tv_id = $row_tv['id'];
-                        $judul = $row_tv['judul_tv_show'];
-                        ?>
-                        <hr>
-                        <div class="card-header font-weight-bold">
-                            <?php echo $judul; ?>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = $tv_id";
-                            $result_episode = mysqli_query($koneksi, $query_episode);
-                            if (mysqli_num_rows($result_episode) > 0) {
-                                while ($row_episode = mysqli_fetch_assoc($result_episode)) {
-                                    $episode = $row_episode['jumlah_episode'];
-
-                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $select_id_tmdb . "&episode=" . $episode . "&play=1";
-                                    ?>
-                                    <a href="<?php echo $url; ?>">
-                                        <button type="button"
-                                            class="btn btn-sm <?php if ($_GET['episode'] == $episode && $_GET['id'] == $select_id_tmdb) { ?> btn-primary <?php } else { ?> btn-secondary <?php } ?> mt-1">
-                                            <?php echo $episode; ?>
-                                        </button>
-                                    </a>
-                                    <?php
-                                }
-                            } else {
-                                echo "<small>Episode tidak tersedia.</small>";
-                            }
-                            ?>
-                        </div>
-                        <?php
-                    }
-                } else {
-                    echo "<small>Tidak ada id tersedia.</small>";
-                } ?>
-            </div>
+            <?php include 'button_large.php'; ?>
 
             <div class="card-flat">
-                <?php
-                $tmdb_id = $row_tv['tmdb_id'];
-                $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = '$tmdb_id'";
-                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-
-                $genre_ids = explode(",", $row_tv['genre_ids']);
-                $genres = array();
-                foreach ($genre_ids as $genre_id) {
-                    $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
-                    $result_genre = mysqli_query($koneksi, $query_genre);
-                    $row_genre = mysqli_fetch_assoc($result_genre);
-                    $genres[] = $row_genre['nama_genre'];
-                }
-
-                $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
-                function formatDuration($minutes)
-                {
-                    $hours = floor($minutes / 60);
-                    $remainingMinutes = $minutes % 60;
-
-                    if ($hours > 0) {
-                        return $hours . " jam " . $remainingMinutes . " menit";
-                    } else {
-                        return $remainingMinutes . " menit";
-                    }
-                }
-                $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
-
-                function formatCurrency($amount)
-                {
-                    return "IDR " . number_format($amount, 0, ',', '.');
-                }
-                $anggaran = formatCurrency($row_tmdb['anggaran']);
-                $pendapatan = formatCurrency($row_tmdb['pendapatan']);
-                ?>
                 <hr>
                 <b>
                     Judul Film:
                 </b>
-                <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tmdb_id; ?>">
+                <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tmdb_id; ?>">
                     <?php echo $row_tmdb['judul']; ?>
                 </a>
                 <hr>
                 <b>Genre:</b>
                 <?php foreach ($genres as $genres) { ?>
-                    <?php
-                    $slug_genre = strtolower(str_replace(' ', '-', $genres));
-                    ?>
-                    <a href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                    <a href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
                         <?php echo $genres . ", "; ?>
                     </a>
                 <?php } ?>
@@ -288,7 +234,7 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                 </a>
                 <hr>
                 <b>ID TMDB:</b>
-                <a href="<?php echo $safelink . "https://www.themoviedb.org/movie/" . $row_tmdb['tmdb_id']; ?>"
+                <a href="<?php echo $safelink . "https://www.themoviedb.org/tv/" . $row_tmdb['tmdb_id']; ?>"
                     target="_blank">
                     <?php echo $row_tmdb['tmdb_id']; ?> </a>
                 <hr>
@@ -296,8 +242,6 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                     <?php echo $row_tmdb['jumlah_episode']; ?>
                 </a>
             </div>
-            <!-- End TMDB LIST -->
-
 
             <!-- Form Komentar-->
             <div class="card-flat comment-form" style="margin-bottom: 5px;">
@@ -305,14 +249,14 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                 <?php
                 $query_jumlah_komentar = "SELECT COUNT(*) as total_komentar FROM tb_komentar WHERE tmdb_id = ?";
                 $stmt = $koneksi->prepare($query_jumlah_komentar);
-                $stmt->bind_param("i", $tmdb_id);
+                $stmt->bind_param("i", $tv_tmdb_id);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $row_jumlah_komentar = $result->fetch_assoc();
                 $total_komentar = $row_jumlah_komentar['total_komentar'];
                 ?>
                 <h6>
-                    <?php echo "    " . $total_komentar; ?> Komentar
+                    <?php echo $total_komentar; ?> Komentar
                 </h6>
 
                 <form action="view/proses_komentar.php" method="POST">
@@ -322,12 +266,11 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                     } else {
                         $namaUser = 'Guest';
                     }
-                    $tmdb_id = $row_tv['tmdb_id'];
                     ?>
                     <?php if (isset($_SESSION['nama'])) { ?>
                         <input type="hidden" name="nama" value="<?php echo $_SESSION['nama']; ?>">
-                        <input type="hidden" name="tmdb_id" value="<?php echo $tmdb_id; ?>">
-                        <input type="hidden" name="halaman" value="<?php echo $_GET['page']; ?>">
+                        <input type="hidden" name="tmdb_id" value="<?php echo $tv_tmdb_id; ?>">
+                        <input type="hidden" name="halaman" value="<?php echo $page; ?>">
                         <div class="form-group">
                             <input class="form-control" id="komentar" name="komentar" rows="3"
                                 placeholder="Tambahkan komentar" required></input>
@@ -351,9 +294,7 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
             <div class="card-flat">
                 </br>
                 <?php
-                include 'config/koneksi.php';
-                $tmdb_id = $row_tv['tmdb_id'];
-                $query_komentar = "SELECT * FROM tb_komentar WHERE tmdb_id = '$tmdb_id' ORDER BY id DESC";
+                $query_komentar = "SELECT * FROM tb_komentar WHERE tmdb_id = '$tv_tmdb_id' ORDER BY id DESC";
                 $result_komentar = mysqli_query($koneksi, $query_komentar);
                 ?>
                 <?php while ($row_komentar = mysqli_fetch_assoc($result_komentar)) { ?>
@@ -364,11 +305,11 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                         $result_user = mysqli_query($koneksi, $query_user);
                         $row_user = mysqli_fetch_assoc($result_user);
                         $fotoProfil = $row_user['logo_user'];
-                        $tmdb_id = $row_film['tmdb_id'];
+
                         if (!empty($fotoProfil)) {
                             $fotoUrl = $base_url . '/gambar/user/' . $fotoProfil;
                         } else {
-                            $fotoUrl = 'https://www.pngkey.com/png/detail/202-2024792_user-profile-icon-png-download-fa-user-circle.png';
+                            $fotoUrl = $base_url . '/gambar/user/user.png';
                         }
                         ?>
                         <img src="<?php echo $fotoUrl; ?>" class="mr-3" alt="User"
@@ -378,7 +319,6 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                                 <?php echo $row_komentar['nama']; ?>
                             </b>
                             <small>
-
                                 <?php echo "(" . timeSinceUpload($row_komentar['waktu_post']) . ")"; ?>
                             </small></br>
                             <a>
@@ -408,82 +348,10 @@ $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
     </div>
 </div>
 
-<?php
-if (isset($_GET['id'])) {
-    $tmdb_id = $_GET['id'];
-
-    $query_film = "SELECT * FROM tb_tv_show WHERE tmdb_id = $tmdb_id;";
-    $result_film = mysqli_query($koneksi, $query_film);
-    $row_tv = mysqli_fetch_assoc($result_film);
-    $id_tmdb = $row_tv['tmdb_id'];
-
-    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $id_tmdb;";
-    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-    $select_id_dbtmdb = $row_tmdb['tmdb_id'];
-
-    $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
-    $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
-} else {
-    echo 'ID Tidak Ditemukan!';
-}
-?>
 <div class="col-md-3 tmf_production ">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card-flat hide-on-small-screen">
-                <?php
-                $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tv_tmdb_id;";
-                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                $select_id_dbtmdb = $row_tmdb['tmdb_id'];
-
-                $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
-                $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
-
-                if (mysqli_num_rows($result_tmdb2) > 0) {
-                    while ($row_tmdb2 = mysqli_fetch_assoc($result_tmdb2)) {
-                        $select_id_tmdb = $row_tmdb2['id'];
-
-                        $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = $select_id_tmdb;";
-                        $result_tv = mysqli_query($koneksi, $query_tv);
-                        $row_tv = mysqli_fetch_assoc($result_tv);
-                        $tv_id = $row_tv['id'];
-                        $judul = $row_tv['judul_tv_show'];
-                        ?>
-                        <hr>
-                        <div class="card-header font-weight-bold">
-                            <?php echo $judul; ?>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            $query_episode = "SELECT * FROM tb_episode_tv_show WHERE tv_show_id = $tv_id";
-                            $result_episode = mysqli_query($koneksi, $query_episode);
-                            if (mysqli_num_rows($result_episode) > 0) {
-                                while ($row_episode = mysqli_fetch_assoc($result_episode)) {
-                                    $episode = $row_episode['jumlah_episode'];
-
-                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $select_id_tmdb . "&episode=" . $episode . "&play=1";
-                                    ?>
-                                    <a href="<?php echo $url; ?>">
-                                        <button type="button"
-                                            class="btn btn-sm <?php if ($_GET['episode'] == $episode && $_GET['id'] == $select_id_tmdb) { ?> btn-primary <?php } else { ?> btn-secondary <?php } ?> mt-1">
-                                            <?php echo $episode; ?>
-                                        </button>
-                                    </a>
-                                    <?php
-                                }
-                            } else {
-                                echo "<small>Episode tidak tersedia.</small>";
-                            }
-                            ?>
-                        </div>
-                        <?php
-                    }
-                } else {
-                    echo "<small>Tidak ada id tersedia.</small>";
-                } ?>
-            </div>
+            <?php include 'button_small.php'; ?>
         </div>
     </div>
 
