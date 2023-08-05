@@ -72,7 +72,14 @@ if (isset($_COOKIE['remember_me'])) {
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <a href="<?php echo $base_url; ?>/google/login.php" class="btn btn-block btn-danger">
+                        <i class="fab fa-google mr-2"></i> Sign in using Google
+                    </a>
+                </div>
+                <h5 class="text-center">
+                    ATAU
+                </h5>
                 <form action="" method="post">
                     <div class="input-group mb-3">
                         <input type="username" class="form-control" placeholder="Username" name="username" required
@@ -107,14 +114,8 @@ if (isset($_COOKIE['remember_me'])) {
                     </div>
                 </form>
                 <br>
-                <h5 class="text-center">
-                    ATAU
-                </h5>
-                <div class="social-auth-links text-center mt-2 mb-3">
-                    <a href="<?php echo $base_url; ?>/google/login.php" class="btn btn-block btn-danger">
-                        <i class="fab fa-google mr-2"></i> Sign in using Google
-                    </a>
-                </div>
+
+
                 <p class="mb-1">
                     <a href="<?php echo $base_url; ?>/insert_email.php">I forgot my password</a>
                 </p>
