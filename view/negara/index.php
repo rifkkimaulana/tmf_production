@@ -3,7 +3,7 @@
     <div class="card-flat">
         <div class="tmf-card-terbaru">
             <h3>
-                GENRE:
+                NEGARA :
                 <?php echo $_GET['f'] ?>
                 <span class="line"></span>
             </h3>
@@ -13,35 +13,28 @@
         <div class="card-body">
             <div class="row">
                 <?php
+                function getNegaraIdByName($koneksi, $nama_negara)
+                {
+                    $nama_negara = mysqli_real_escape_string($koneksi, $nama_negara);
+
+                    $query_negara = "SELECT id FROM tb_negara WHERE nama_negara = '$nama_negara'";
+
+                    $result_negara = mysqli_query($koneksi, $query_negara);
+
+                    if ($result_negara && mysqli_num_rows($result_negara) > 0) {
+                        $row_negara = mysqli_fetch_assoc($result_negara);
+                        return $row_negara['id'];
+                    } else {
+                        return null;
+                    }
+                }
+
                 include 'config/koneksi.php';
-
-
-
-
 
                 if (isset($_GET['page']) && $_GET['page'] === 'negara') {
 
                     $selected_country_name = $_GET['f'];
-                    function getNegaraIdByName($koneksi, $nama_negara)
-                    {
-                        $nama_negara = mysqli_real_escape_string($koneksi, $nama_negara);
 
-                        $query = "SELECT id FROM tb_negara WHERE nama_negara = '$nama_negara'";
-
-                        // Menjalankan kueri dan mendapatkan hasilnya.
-                        $result = mysqli_query($koneksi, $query);
-
-                        // Memeriksa apakah ada hasil yang ditemukan.
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            // Mengambil data hasil dari kueri.
-                            $row = mysqli_fetch_assoc($result);
-                            // Mengembalikan id negara yang sesuai.
-                            return $row['id'];
-                        } else {
-                            // Jika tidak ada hasil yang ditemukan atau ada kesalahan eksekusi, kembalikan nilai null.
-                            return null;
-                        }
-                    }
                     $selected_country_id = getNegaraIdByName($koneksi, $selected_country_name);
 
                     if ($selected_country_id !== null) {
@@ -63,7 +56,9 @@
                             GROUP BY tb_tv_show.tmdb_id
                         ) AS combined_data
                         ORDER BY total_kunjungan DESC ";
+
                     } else {
+
                         // Jika id negara tidak ditemukan, mungkin berikan pesan kesalahan atau tampilkan semua film dan acara TV tanpa filter negara
                         $query_film_tv = "SELECT thumbnail, judul, tmdb_id, genre_ids, negara_ids, total_kunjungan
                         FROM (
@@ -84,10 +79,8 @@
 
 
                     $result_film_tv = mysqli_query($koneksi, $query_film_tv);
+
                     $count = 0;
-
-                    $row_film_tv = mysqli_fetch_assoc($result_film_tv);
-
 
                     while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
                         if (!empty($row_film_tv['judul'])) {
