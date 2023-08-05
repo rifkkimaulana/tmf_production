@@ -1,8 +1,8 @@
 <?php
 include 'config/koneksi.php';
 
-$filmId = $_GET['id'];
-$query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$filmId'";
+$tv_tmdb_id = $_GET['id'];
+$query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
 $result_tv = mysqli_query($koneksi, $query_tv);
 $row_tv = mysqli_fetch_assoc($result_tv);
 
@@ -552,7 +552,7 @@ if (isset($_GET['id'])) {
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
 
-                    $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$filmId'";
+                    $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
                     $result_tv = mysqli_query($koneksi, $query_tv);
                     $row_tv = mysqli_fetch_assoc($result_tv);
                     $desired_genre_ids = $row_tv['genre_ids'];
@@ -649,14 +649,14 @@ if (isset($_GET['id'])) {
                 document.getElementById("viewCount").innerHTML = "<b>" + this.responseText + "x ditonton</b>";
             }
         };
-        xhttp.open("GET", "get_view_count.php?id=<?php echo $filmId; ?>", true);
+        xhttp.open("GET", "get_view_count.php?id=<?php echo $tv_tmdb_id; ?>", true);
         xhttp.send();
     }
 
     setInterval(reloadViewCount, 60000);
 
     document.addEventListener("DOMContentLoaded", function () {
-        var tmdb_id = <?php echo $filmId; ?>;
+        var tmdb_id = <?php echo $tv_tmdb_id; ?>;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "<?php echo $base_url; ?>/config/visit.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
