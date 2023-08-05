@@ -21,13 +21,11 @@
 
                 if (isset($_GET['page']) && $_GET['page'] === 'negara') {
 
-                    $selected_country = $_GET['f'];
+                    $selected_country_name = $_GET['f'];
                     function getNegaraIdByName($koneksi, $nama_negara)
                     {
-                        // Melakukan pencegahan terhadap SQL injection dengan menghindari penggunaan variabel langsung dalam kueri.
                         $nama_negara = mysqli_real_escape_string($koneksi, $nama_negara);
 
-                        // Kueri SQL untuk mencari id negara berdasarkan nama negara yang diberikan.
                         $query = "SELECT id FROM tb_negara WHERE nama_negara = '$nama_negara'";
 
                         // Menjalankan kueri dan mendapatkan hasilnya.
