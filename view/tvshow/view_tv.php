@@ -1,6 +1,4 @@
 <?php
-include 'config/koneksi.php';
-
 $tv_tmdb_id = $_GET['id'];
 $query_tv = "SELECT * FROM tb_tv_show WHERE tmdb_id = '$tv_tmdb_id'";
 $result_tv = mysqli_query($koneksi, $query_tv);
@@ -24,14 +22,12 @@ if (mysqli_num_rows($result_episode) > 0) {
     $id_download = $row_episode['download_id'];
 }
 ?>
-
 <div class="col-md-9 tmf_production">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card tmf_shadow bg-black order-md-1">
+            <div class="card tmf_shadow bg-black">
                 <div class="embed-responsive embed-responsive-16by9">
                     <?php
-                    include 'config/koneksi.php';
                     $playValue = isset($_GET['episode']) ? $_GET['episode'] : '';
 
                     if (isset($_GET['episode']) ? $_GET['episode'] : '') {
