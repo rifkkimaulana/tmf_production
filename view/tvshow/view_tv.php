@@ -1032,16 +1032,14 @@ if (isset($_GET['id'])) {
 
     setInterval(reloadViewCount, 60000);
 
-    // Melakukan Insert ke kunjungan
     document.addEventListener("DOMContentLoaded", function () {
         var tmdb_id = <?php echo $filmId; ?>;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "<?php echo $base_url; ?>/kunjungan.php", true);
+        xhttp.open("POST", "<?php echo $base_url; ?>/config/visit.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("berkunjung=" + tmdb_id);
     });
 
-    // Menampilkan dan menyembunyikan button komentar
     var inputField = document.getElementById("komentar");
     var kirimBtn = document.getElementById("kirimBtn");
     var batalBtn = document.getElementById("batalBtn");
@@ -1056,7 +1054,6 @@ if (isset($_GET['id'])) {
         batalBtn.style.display = "none";
     });
 
-    // Menampikan deskripsi sedikit dan banyak
     var descriptionElement = document.getElementById("filmDescription");
     var showMoreLink = document.getElementById("showMoreLink");
     var toggleState = false;

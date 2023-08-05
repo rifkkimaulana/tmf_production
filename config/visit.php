@@ -1,18 +1,15 @@
 <?php
-require_once 'config/koneksi.php';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    include '../config/koneksi.php';
+
     $tmdb_id = $_POST['berkunjung'];
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
     $session_duration = 3600;
-
     $tmdb_id = mysqli_real_escape_string($koneksi, $tmdb_id);
-
     $user_agent = preg_replace('/[^\w\s]/', '', $user_agent);
-
     $user_agent = mysqli_real_escape_string($koneksi, $user_agent);
     $session_duration = mysqli_real_escape_string($koneksi, $session_duration);
-
     $tanggal = date("Y-m-d H:i:s");
 
     $query_check = "SELECT COUNT(*) AS count FROM tb_view WHERE tmdb_id = '$tmdb_id'";
@@ -36,7 +33,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($koneksi);
     }
-} else {
-    echo "Data harus dikirim melalui POST.";
 }
 ?>

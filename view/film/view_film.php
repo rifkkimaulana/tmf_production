@@ -861,7 +861,7 @@ $id_download = $row_film['download_id'];
     document.addEventListener("DOMContentLoaded", function () {
         var tmdb_id = <?php echo $filmId; ?>;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "<?php echo $base_url; ?>/kunjungan.php", true);
+        xhttp.open("POST", "<?php echo $base_url; ?>/config/visit.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("berkunjung=" + tmdb_id);
     });

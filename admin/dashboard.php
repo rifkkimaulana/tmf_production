@@ -1,6 +1,6 @@
 <?php
-include '../config/minify_function.php';
-ob_start();
+//include '../config/minify_function.php';
+//ob_start();
 ?>
 <?php
 include '../config/base_url.php';
@@ -240,7 +240,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
 </html>
 
 <?php
-$html = ob_get_clean();
-$minified_html = minify_html($html);
-echo $minified_html;
+//$html = ob_get_clean();
+//$minified_html = minify_html($html);
+//echo $minified_html;
 ?>
