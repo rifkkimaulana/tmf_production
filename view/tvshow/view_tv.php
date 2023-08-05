@@ -71,8 +71,8 @@ $kualitas_ids = explode(",", $row_tv['kualitas_ids']);
 $kualitas = array();
 foreach ($kualitas_ids as $kualitas_id) {
     $query_kualitas = "SELECT nama_kualitas FROM tb_kualitas WHERE id = '$kualitas_id'";
-    $result_kualitas = mysqli_query($koneksi, $query_jaringan);
-    $row_kualitas = mysqli_fetch_assoc($result_jaringan);
+    $result_kualitas = mysqli_query($koneksi, $query_kualitas);
+    $row_kualitas = mysqli_fetch_assoc($result_kualitas);
     $kualitas[] = $row_kualitas['nama_kualitas'];
 }
 
