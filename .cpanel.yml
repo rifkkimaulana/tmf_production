@@ -1,0 +1,20 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/u1588530/public_html/tv.arsprostudio.com/
+    - /bin/cp dashboard.php $DEPLOYPATH
+    - /bin/cp index.php $DEPLOYPATH
+    - /bin/cp insert_email.php $DEPLOYPATH
+    - /bin/cp kunjungan.php $DEPLOYPATH
+    - /bin/cp login.php $DEPLOYPATH
+    - /bin/cp logout.php $DEPLOYPATH
+    - /bin/cp proses_insert_email.php $DEPLOYPATH
+    - /bin/cp recovery_password.php $DEPLOYPATH
+    - /bin/cp wa_gateway.php $DEPLOYPATH
+    - /bin/cp -R admin $DEPLOYPATH
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R config $DEPLOYPATH
+    - /bin/cp -R gambar $DEPLOYPATH
+    - /bin/cp -R google $DEPLOYPATH
+    - /bin/cp -R halaman $DEPLOYPATH
+    - /bin/cp -R view $DEPLOYPATH
