@@ -227,29 +227,30 @@ $limitedGenres = array_slice($genres, 0, 9);
             object-fit: cover;
         }
 
-        .loader {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #007bff;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-left: -25px;
-            margin-top: -25px;
+        /* Gaya overlay atau loading screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            /* Ubah warna sesuai kebutuhan */
             z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            /* Nilai opacity 1 untuk tampilan penuh */
+            transition: opacity 0.5s;
+            /* Durasi transisi redup */
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+        /* Animasi redup */
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            /* Agar konten di bawah tidak dapat diakses */
         }
     </style>
 </head>
