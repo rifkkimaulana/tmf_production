@@ -11,19 +11,12 @@ while ($row_negara = mysqli_fetch_assoc($r_negara)) {
     $negara[] = $row_negara['nama_negara'];
 }
 
-if (empty($negara)) {
-    exit();
-}
-
 $q_genre = "SELECT * FROM tb_genre";
 $r_genre = mysqli_query($koneksi, $q_genre);
 $genres = array();
 
 while ($row_film = mysqli_fetch_assoc($r_genre)) {
     $genres[] = $row_film['nama_genre'];
-}
-if (empty($genres)) {
-    exit();
 }
 
 shuffle($genres);
