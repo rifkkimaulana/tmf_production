@@ -1,5 +1,5 @@
 <?php
-include 'config/minify_function.php';
+include '../config/minify_function.php';
 ob_start();
 ?>
 <?php
