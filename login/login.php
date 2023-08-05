@@ -1,6 +1,6 @@
 <?php
-include 'config/koneksi.php';
-include 'config/base_url.php';
+include '../config/koneksi.php';
+include '../config/base_url.php';
 
 if (isset($_SESSION['status']) && ($_SESSION['status'] == "administrator_logedin" || $_SESSION['status'] == "manajemen_logedin")) {
     if ($_SESSION['level'] == "administrator") {
@@ -45,11 +45,11 @@ if (isset($_POST['submit'])) {
                 exit();
             }
         } else {
-            header("location: " . $base_url . "/login.php?alert=passwordSalah");
+            header("location: " . $base_url . "/login/login.php?alert=passwordSalah");
             exit();
         }
     } else {
-        header("location: " . $base_url . "/login.php?alert=userNotFound");
+        header("location: " . $base_url . "/login/login.php?alert=userNotFound");
         exit();
     }
 }
@@ -108,8 +108,7 @@ if (isset($_COOKIE['remember_me'])) {
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember" name="remember" 
-                                <?php if ($remember) echo "checked"; ?>>
-                                <label for="remember">
+                                <?php if ($remember) echo "checked"; ?>> <label for="remember">
                                     Remember Me
                                 </label>
                             </div>
@@ -120,7 +119,7 @@ if (isset($_COOKIE['remember_me'])) {
                     </div>
                 </form>
                 <p class="mt-1">
-                    <a href="<?php echo $base_url; ?>/forgot_password.php">I forgot my password</a>
+                    <a href="<?php echo $base_url; ?>/login/forgot_password.php">I forgot my password</a>
                 </p>
             </div>
         </div>
@@ -290,3 +289,5 @@ if (isset($_COOKIE['remember_me'])) {
         }
     });
 </script>
+
+<?php include '../halaman/footer.php'; ?>

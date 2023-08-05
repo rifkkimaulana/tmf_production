@@ -1,52 +1,52 @@
 <?php
 include 'config/koneksi.php';
+include 'config/base_url.php';
+
 $reset_token = $_GET['token'];
 $reset_token = mysqli_real_escape_string($koneksi, $reset_token);
 
-$query = "SELECT * FROM tb_users WHERE reset_token='$reset_token'";
-$result = mysqli_query($koneksi, $query);
+$query_user = "SELECT * FROM tb_users WHERE reset_token='$reset_token'";
+$result_user = mysqli_query($koneksi, $query_user);
 
-$reset_query = "SELECT * FROM tb_users WHERE reset_token='$reset_token'";
-$reset_hasil = mysqli_query($koneksi, $reset_query);
-$row = mysqli_fetch_assoc($reset_hasil);
-$id_reset = $row['reset_id'];
-
-$query = "UPDATE tb_log_whatsapp SET status='Berhasil' WHERE id_pesan='$id_reset'";
-mysqli_query($koneksi, $query);
-
-if (mysqli_num_rows($result) > 0) {
+if (mysqli_num_rows($result_user) > 0) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
         if ($password === $confirm_password) {
-            $row = mysqli_fetch_assoc($result);
-            $reset_token = $row['reset_token'];
+            $row_user = mysqli_fetch_assoc($result_user);
+
+            $reset_token = $row_user['reset_token'];
+            $id_reset = $row_user['reset_id'];
+
+            $query_wa = "UPDATE tb_log_whatsapp SET status='Berhasil' WHERE id_pesan='$id_reset'";
+            mysqli_query($koneksi, $query_wa);
 
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             $query = "UPDATE tb_users SET reset_token=NULL, user_password='$hashed_password' WHERE reset_token='$reset_token'";
             mysqli_query($koneksi, $query);
 
-            header("Location: login.php?alert=berhasil_update_password");
+            header("location: " . $base_url . "/login/login.php?alert=suksesUpdatePassword");
             exit();
         } else {
-            header("Location: login.php?alert=password_tidak_sesuai");
+            header("location: " . $base_url . "/recovery_password.php?alert=passwordMismatch");
             exit();
         }
     }
 } else {
-    header("Location: login.php?alert=token_expired");
+    header("location: " . $base_url . "/login/login.php?alert=tokenExpired");
     exit();
 }
 ?>
 
 <?php include 'halaman/header.php'; ?>
-<div class="login-page">
+<div class="login-page ">
     <div class="login-box">
-        <div class="card card-outline card-primary">
+        <div class="card">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>TMF</b>PRODUCTION</a>
+                <a href="<?php echo $base_url; ?>" class="h1"><b>TMF</b>PRODUCTION</a>
             </div>
 
             <div class="card-body">
@@ -78,7 +78,7 @@ if (mysqli_num_rows($result) > 0) {
                 </form>
 
                 <p class="mt-3 mb-1">
-                    <a href="<?php echo $base_url; ?>login.php">Login</a>
+                    <a href="<?php echo $base_url; ?>/login/login.php">Back Login</a>
                 </p>
             </div>
         </div>
