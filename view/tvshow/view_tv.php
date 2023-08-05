@@ -241,14 +241,16 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         <?php echo $rating1 . " dari " . $row_tmdb['rating2']; ?>
                     </a>
                 <?php }
-                if (empty($anggaran)) {
+                $anggaran_r = $row_tmdb['anggaran'];
+                if (empty($anggaran_r)) {
                 } else { ?>
                     <hr>
                     <a><b>Anggaran:</b>
                         <?php echo $anggaran; ?>
                     </a>
                 <?php }
-                if (empty($pendapatan)) {
+                $pendapatan_r = $row_tmdb['pendapatan'];
+                if (empty($pendapatan_r)) {
                 } else { ?>
                     <hr>
                     <a><b>Pendapatan:</b>
