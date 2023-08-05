@@ -1,11 +1,13 @@
 <?php
 include 'config/koneksi.php';
+include 'config/base_url.php';
+
 if (isset($_SESSION['status']) && ($_SESSION['status'] == "administrator_logedin" || $_SESSION['status'] == "manajemen_logedin")) {
     if ($_SESSION['level'] == "administrator") {
-        header("location: admin/");
+        header("location: " . $base_url . "/admin/");
         exit();
     } else if ($_SESSION['level'] == "manajemen") {
-        header("location: manajemen/");
+        header("location: " . $base_url . "/manajemen/");
         exit();
     }
 }
@@ -29,27 +31,29 @@ if (isset($_POST['submit'])) {
             $_SESSION['nama'] = $row['user_nama'];
             $_SESSION['username'] = $row['user_username'];
             $_SESSION['level'] = $row['user_level'];
+
             if ($row['user_level'] == "administrator") {
                 $_SESSION['status'] = "administrator_logedin";
-                header("location:admin/");
+                header("location: " . $base_url . "/admin/");
                 exit();
             } else if ($row['user_level'] == "manajemen") {
                 $_SESSION['status'] = "manajemen_logedin";
-                header("location:manajemen/");
+                header("location: " . $base_url . "/manajemen/");
                 exit();
             } else {
-                header("location:login.php?alert=gagal");
+                header("location: " . $base_url . "/login/login.php?alert=userLevel_notFound");
                 exit();
             }
         } else {
-            header("location:login.php?alert=gagal");
+            header("location: " . $base_url . "/login.php?alert=passwordSalah");
             exit();
         }
     } else {
-        header("location:login.php?alert=gagal");
+        header("location: " . $base_url . "/login.php?alert=userNotFound");
         exit();
     }
 }
+
 if (isset($_POST['remember'])) {
     $remember = true;
     setcookie("remember_me", "1", time() + (7 * 24 * 60 * 60), "/", "", true, true);
@@ -63,7 +67,9 @@ if (isset($_COOKIE['remember_me'])) {
     $remember = false;
 }
 ?>
+
 <?php include 'halaman/header.php'; ?>
+
 <div class="login-page bg-white">
     <div class="login-box">
         <div class="card">
@@ -101,8 +107,8 @@ if (isset($_COOKIE['remember_me'])) {
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" name="remember" <?php if ($remember)
-                                    echo "checked"; ?>>
+                                <input type="checkbox" id="remember" name="remember" 
+                                <?php if ($remember) echo "checked"; ?>>
                                 <label for="remember">
                                     Remember Me
                                 </label>
@@ -114,7 +120,7 @@ if (isset($_COOKIE['remember_me'])) {
                     </div>
                 </form>
                 <p class="mt-1">
-                    <a href="<?php echo $base_url; ?>/insert_email.php">I forgot my password</a>
+                    <a href="<?php echo $base_url; ?>/forgot_password.php">I forgot my password</a>
                 </p>
             </div>
         </div>
@@ -261,6 +267,7 @@ if (isset($_COOKIE['remember_me'])) {
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function () {
         const urlParams = new URLSearchParams(window.location.search);

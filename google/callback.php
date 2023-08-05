@@ -45,7 +45,7 @@ if (isset($_GET['code'])) {
         if ($result === false) {
             // Jika terjadi kesalahan saat meminta informasi pengguna
             $error = error_get_last();
-            header("Location:" . $base_url . "login.php?alert=failed_token&error_message=" . urlencode($error['message']));
+            header("Location:" . $base_url . "/login/login.php?alert=userNot_found&error_message=" . urlencode($error['message']));
             exit();
         }
 
@@ -81,23 +81,23 @@ if (isset($_GET['code'])) {
                     header("location: " . $base_url . "/manajemen/");
                     exit();
                 } else {
-                    header("location: " . $base_url . "login.php?alert=email_tidak_terdaftar");
+                    header("location: " . $base_url . "/login/login.php?alert=userLevel_notFound");
                     exit();
                 }
             } else {
-                header("location: " . $base_url . "login.php?alert=email_tidak_terdaftar");
+                header("location: " . $base_url . "/login/login.php?alert=userNotFound");
                 exit();
             }
         } else {
-            header("location: " . $base_url . "login.php?alert=email_tidak_terdaftar");
+            header("location: " . $base_url . "login/login.php?alert=emailNotFound");
             exit();
         }
     } else {
-        header("Location: " . $base_url . "login.php?alert=failed_token");
+        header("Location: " . $base_url . "/login/login.php?alert=accesTokenNotFound");
         exit();
     }
 } else {
-    header("Location: " . $base_url . "login.php?alert=invalid_response");
+    header("Location: " . $base_url . "/login/login.php?alert=codeNotFound");
     exit();
 }
 ?>
