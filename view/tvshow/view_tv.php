@@ -399,6 +399,8 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                                                     src="gambar/tv/<?php echo $row_tv['thumbnail']; ?>"
                                                     alt="<?php echo $row_tv['judul_tv_show']; ?>">
                                             <?php } else {
+                                                $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tv_tmdb_id'";
+                                                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                                 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                                 $url_poster = $row_tmdb['url_poster'];
                                                 ?>
