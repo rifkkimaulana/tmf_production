@@ -14,7 +14,6 @@ if (mysqli_num_rows($result_user) > 0) {
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
-            // Periksa kesesuaian password dan confirm_password menggunakan ===
             if ($password === $confirm_password) {
                 $row_user = mysqli_fetch_assoc($result_user);
 
