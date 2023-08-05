@@ -895,7 +895,7 @@ if (isset($_GET['id'])) {
                                 while ($row_episode = mysqli_fetch_assoc($result_episode)) {
                                     $episode = $row_episode['jumlah_episode'];
 
-                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $page_id . "&episode=" . $episode . "play=1";
+                                    $url = $base_url . "/dashboard.php" . "?page=" . $_GET['page'] . "&id=" . $page_id . "&episode=" . $episode . "&play=1";
                                     ?>
                                     <a href="<?php echo $url; ?>">
                                         <button type="button"
