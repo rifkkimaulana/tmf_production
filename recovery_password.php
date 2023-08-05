@@ -11,10 +11,10 @@ $result_user = mysqli_query($koneksi, $query_user);
 if (mysqli_num_rows($result_user) > 0) {
     if (isset($_POST['update'])) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
+            // Periksa kesesuaian password dan confirm_password menggunakan ===
             if ($password === $confirm_password) {
                 $row_user = mysqli_fetch_assoc($result_user);
 
@@ -41,6 +41,7 @@ if (mysqli_num_rows($result_user) > 0) {
     header("location: " . $base_url . "/login/index.php?alert=tokenExpired");
     exit();
 }
+
 ?>
 <div class="login-page ">
     <div class="login-box">
