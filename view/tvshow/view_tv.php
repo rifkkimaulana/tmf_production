@@ -226,12 +226,15 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                 <a><b>Pendapatan:</b>
                     <?php echo $pendapatan; ?>
                 </a>
-                <hr>
-                <b>ID IMDB:</b>
-                <a href="<?php echo $safelink . "https://www.imdb.com/title/" . $row_tmdb['imdb_id']; ?>"
-                    target="_blank">
-                    <?php echo $row_tmdb['imdb_id']; ?>
-                </a>
+                <?php if (empty($row_tmdb)) {
+                } else { ?>
+                    <hr>
+                    <b>ID IMDB:</b>
+                    <a href="<?php echo $safelink . "https://www.imdb.com/title/" . $row_tmdb['imdb_id']; ?>"
+                        target="_blank">
+                        <?php echo $row_tmdb['imdb_id']; ?>
+                    </a>
+                <?php } ?>
                 <?php if (empty($row_tmdb)) {
                 } else { ?>
                     <hr>
