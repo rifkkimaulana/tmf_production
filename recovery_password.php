@@ -1,6 +1,6 @@
 <?php
 include 'config/koneksi.php';
-include 'config/base_url.php';
+include 'halaman/header.php';
 
 $reset_token = $_GET['token'];
 $reset_token = mysqli_real_escape_string($koneksi, $reset_token);
@@ -40,8 +40,6 @@ if (mysqli_num_rows($result_user) > 0) {
     exit();
 }
 ?>
-
-<?php include 'halaman/header.php'; ?>
 <div class="login-page ">
     <div class="login-box">
         <div class="card">

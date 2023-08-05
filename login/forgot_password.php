@@ -1,6 +1,6 @@
 <?php
 include '../config/base_url.php';
-
+include '../halaman/header.php';
 function generateToken()
 {
     $token = bin2hex(random_bytes(8));
@@ -87,9 +87,6 @@ if (isset($_POST['submit'])) {
         exit();
     }
 }
-?>
-<?php
-include '../halaman/header.php';
 ?>
 
 <div class="login-page bg-white">

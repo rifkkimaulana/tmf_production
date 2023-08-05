@@ -1,7 +1,6 @@
 <?php
 include '../config/koneksi.php';
-include '../config/base_url.php';
-include 'halaman/header.php';
+include '../halaman/header.php';
 
 if (isset($_SESSION['status']) && ($_SESSION['status'] == "administrator_logedin" || $_SESSION['status'] == "manajemen_logedin")) {
     if ($_SESSION['level'] == "administrator") {
