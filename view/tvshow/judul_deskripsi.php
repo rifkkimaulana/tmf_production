@@ -1,9 +1,13 @@
 <!-- Kolom Judul & Deskripsi -->
 <div class="card-flat">
     <div class="card-header">
-        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
-            INFO PLAYER
-        </button>
+        <?php
+        if (isset($_GET['episode']) ? $_GET['episode'] : '') {
+            ?>
+            <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
+                INFO PLAYER
+            </button>
+        <?php } ?>
         <div class="float-right">
             <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>"><button
                     type="button" class="btn btn-sm btn-secondary">Trailer</button>
