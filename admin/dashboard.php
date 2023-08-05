@@ -1,4 +1,8 @@
 <?php
+include 'config/minify_function.php';
+ob_start();
+?>
+<?php
 include '../config/base_url.php';
 include '../config/koneksi.php';
 
@@ -234,3 +238,9 @@ if ($_SESSION['status'] != "administrator_logedin") {
 </body>
 
 </html>
+
+<?php
+$html = ob_get_clean();
+$minified_html = minify_html($html);
+echo $minified_html;
+?>
