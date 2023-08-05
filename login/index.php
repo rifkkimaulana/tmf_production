@@ -1,6 +1,7 @@
 <?php
 include '../config/koneksi.php';
 include '../config/base_url.php';
+include 'halaman/header.php';
 
 if (isset($_SESSION['status']) && ($_SESSION['status'] == "administrator_logedin" || $_SESSION['status'] == "manajemen_logedin")) {
     if ($_SESSION['level'] == "administrator") {
@@ -41,15 +42,15 @@ if (isset($_POST['submit'])) {
                 header("location: " . $base_url . "/manajemen/");
                 exit();
             } else {
-                header("location: " . $base_url . "/login/login.php?alert=userLevel_notFound");
+                header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
                 exit();
             }
         } else {
-            header("location: " . $base_url . "/login/login.php?alert=passwordSalah");
+            header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
             exit();
         }
     } else {
-        header("location: " . $base_url . "/login/login.php?alert=userNotFound");
+        header("location: " . $base_url . "/login/index.php?alert=userNotFound");
         exit();
     }
 }
@@ -67,8 +68,6 @@ if (isset($_COOKIE['remember_me'])) {
     $remember = false;
 }
 ?>
-
-<?php include 'halaman/header.php'; ?>
 
 <div class="login-page bg-white">
     <div class="login-box">
@@ -107,10 +106,9 @@ if (isset($_COOKIE['remember_me'])) {
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" name="remember" 
-                                <?php if ($remember) echo "checked"; ?>> <label for="remember">
-                                    Remember Me
-                                </label>
+                                <input type="checkbox" id="remember" name="remember" <?php if ($remember)
+                                    echo "checked"; ?>>
+                                <label for="remember">Remember Me</label>
                             </div>
                         </div>
                         <div class="col-4">

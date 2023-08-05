@@ -28,7 +28,7 @@ if (mysqli_num_rows($result_user) > 0) {
             $query = "UPDATE tb_users SET reset_token=NULL, user_password='$hashed_password' WHERE reset_token='$reset_token'";
             mysqli_query($koneksi, $query);
 
-            header("location: " . $base_url . "/login/login.php?alert=suksesUpdatePassword");
+            header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
             exit();
         } else {
             header("location: " . $base_url . "/recovery_password.php?alert=passwordMismatch");
@@ -36,7 +36,7 @@ if (mysqli_num_rows($result_user) > 0) {
         }
     }
 } else {
-    header("location: " . $base_url . "/login/login.php?alert=tokenExpired");
+    header("location: " . $base_url . "/login/index.php?alert=tokenExpired");
     exit();
 }
 ?>

@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 
         $koneksi->close();
 
-        header("location: " . $base_url . "/login/login.php?alert=sendSukses");
+        header("location: " . $base_url . "/login/index.php?alert=sendSukses");
         exit();
     } else {
         header("location: " . $base_url . "/login/forgot_password.php?alert=emailNotFound");
