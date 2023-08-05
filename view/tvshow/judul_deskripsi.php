@@ -120,7 +120,7 @@
                     $safelink = 'https://semawur.com/st/?api=f0ad0323a77b9ddc5189f885e8a3b150446d37ce&url=';
                     $judul_null = "";
                     $download_unik = rand(1000, 9999);
-                    $link_null = $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id . "&episode=" . $episode . "&play=" . $playValue . "&alert=link_download_found&id_download=" . $download_unik;
+                    $link_null = $base_url . "/dashboard.php?page=error_" . $donwload_unik;
 
                     ?>
                     <ul class="list-group" style="height: 300px; overflow: auto;">
