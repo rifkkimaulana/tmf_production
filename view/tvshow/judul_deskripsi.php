@@ -119,9 +119,15 @@
 
                     $safelink = 'https://semawur.com/st/?api=f0ad0323a77b9ddc5189f885e8a3b150446d37ce&url=';
                     $judul_null = "";
-                    $download_unik = rand(1000, 9999);
-                    $link_null = $base_url . "/dashboard.php?page=donwload_" . $download_unik;
 
+                    $links = array();
+                    for ($i = 1; $i <= 15; $i++) {
+                        $download_unik = uniqid() . "_" . mt_rand(1000, 9999);
+                        $link_null = $base_url . "/dashboard.php?page=donwload_" . $download_unik;
+                        $links[] = $link_null;
+                    }
+                    echo $link(1);
+                    echo $link(2);
                     ?>
                     <ul class="list-group" style="height: 300px; overflow: auto;">
                         <li class="list-group-item">Server 1 :
