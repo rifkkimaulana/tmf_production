@@ -232,15 +232,18 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     target="_blank">
                     <?php echo $row_tmdb['imdb_id']; ?>
                 </a>
-                <hr>
-                <b>ID TMDB:</b>
-                <a href="<?php echo $safelink . "https://www.themoviedb.org/tv/" . $row_tmdb['tmdb_id']; ?>"
-                    target="_blank">
-                    <?php echo $row_tmdb['tmdb_id']; ?> </a>
-                <hr>
-                <a><b>Jumlah Episode:</b>
-                    <?php echo $row_tmdb['jumlah_episode']; ?>
-                </a>
+                <?php if (empty($row_tmdb)) {
+                } else { ?>
+                    <hr>
+                    <b>ID TMDB:</b>
+                    <a href="<?php echo $safelink . "https://www.themoviedb.org/tv/" . $row_tmdb['tmdb_id']; ?>"
+                        target="_blank">
+                        <?php echo $row_tmdb['tmdb_id']; ?> </a>
+                    <hr>
+                    <a><b>Jumlah Episode:</b>
+                        <?php echo $row_tmdb['jumlah_episode']; ?>
+                    </a>
+                <?php } ?>
             </div>
 
             <!-- Form Komentar-->
