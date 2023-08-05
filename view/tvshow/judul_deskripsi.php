@@ -315,27 +315,7 @@
     $time_duration_seconds = $current_timestamp - $created_at_timestamp;
     $time_duration_formatted = gmdate("H:i:s", $time_duration_seconds);
 
-    function timeSinceUpload($timestamp)
-    {
-        $timeDiff = time() - strtotime($timestamp);
 
-        $intervals = array(
-            1 => array('tahun', 31556952),
-            $timeDiff < 31556952 => array('bulan', 2629746),
-            $timeDiff < 2629746 => array('minggu', 604800),
-            $timeDiff < 604800 => array('hari', 86400),
-            $timeDiff < 86400 => array('jam', 3600),
-            $timeDiff < 3600 => array('menit', 60),
-            $timeDiff < 60 => array('detik', 1)
-        );
-
-        foreach ($intervals as $interval => $value) {
-            if ($timeDiff >= $value[1]) {
-                $timeUnits = floor($timeDiff / $value[1]);
-                return $timeUnits . ' ' . $value[0] . ' yang lalu';
-            }
-        }
-    }
 
     $total_kunjungan = $row_kunjungan['total_kunjungan'];
     ?>
@@ -353,3 +333,21 @@
         <a class="card-link tmf_teks" id="showMoreLink" onclick="toggleDescription()">Lebih Banyak</a>
     <?php } ?>
 </div>
+<script>
+    var descriptionElement = document.getElementById("filmDescription");
+    var showMoreLink = document.getElementById("showMoreLink");
+    var toggleState = false;
+    var limitedDescription = "<?php echo $limited_description; ?>";
+    var fullDescription = "<?php echo $full_description; ?>";
+
+    function toggleDescription() {
+        toggleState = !toggleState;
+        if (toggleState) {
+            descriptionElement.innerHTML = fullDescription;
+            showMoreLink.innerHTML = "Sedikit";
+        } else {
+            descriptionElement.innerHTML = limitedDescription;
+            showMoreLink.innerHTML = "Lebih Banyak";
+        }
+    }
+</script>
