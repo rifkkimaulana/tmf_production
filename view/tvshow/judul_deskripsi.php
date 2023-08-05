@@ -126,8 +126,7 @@
                         $link_null = $base_url . "/dashboard.php?page=donwload_" . $download_unik;
                         $links[] = $link_null;
                     }
-                    echo $link(1);
-                    echo $link(2);
+
                     ?>
                     <ul class="list-group" style="height: 300px; overflow: auto;">
                         <li class="list-group-item">Server 1 :
@@ -137,7 +136,7 @@
                                 echo '<a href="' . $safelink . $row_download['link1'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link() . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
@@ -148,7 +147,7 @@
                                 echo '<a href="' . $safelink . $row_download['link2'] . '" class="float-right">Unduh</a>';
                             } else {
                                 echo $judul_null;
-                                echo '<a href="' . $safelink . $link_null . '" class="float-right">Unduh</a>';
+                                echo '<a href="' . $safelink . $link() . '" class="float-right">Unduh</a>';
                             }
                             ?>
                         </li>
