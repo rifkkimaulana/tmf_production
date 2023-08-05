@@ -64,7 +64,7 @@ if (isset($_COOKIE['remember_me'])) {
 }
 ?>
 <?php include 'halaman/header.php'; ?>
-<div class="card-flat">
+<div class="card-body">
     <div class="login-page">
         <div class="login-box">
             <div class="card card-outline card-primary">
