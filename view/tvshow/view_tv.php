@@ -28,7 +28,7 @@ if (mysqli_num_rows($result_episode) > 0) {
             <div class="card tmf_shadow bg-black">
                 <div class="embed-responsive embed-responsive-16by9">
                     <?php
-                    $playValue = isset($_GET['episode']) ? $_GET['episode'] : '';
+                    $playValue = isset($_GET['episode']) ? $_GET['episode'] : '1';
 
                     if (isset($_GET['episode']) ? $_GET['episode'] : '') {
 
@@ -123,6 +123,7 @@ if (mysqli_num_rows($result_episode) > 0) {
                     ?>
                     <div class="lewati-notification">
                         <div class="lewati-content">
+
                             <a href="<?php echo $base_url . "/dashboard.php?page=tv&id=" . $tv_tmdb_id . "&episode=" . $playValue . "&play=1"; ?>"
                                 class="btn btn-sm btn-dark">Lewati Trailer</a>
                         </div>
