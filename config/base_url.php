@@ -7,6 +7,4 @@ $host = $_SERVER['HTTP_HOST'];
 
 $base_url = $protocol . $host . $base_path;
 
-//echo $base_url;
-
 ?>
