@@ -1,4 +1,5 @@
 <?php
+include 'config/koneksi.php'; //koneksi tambahan untuk while
 $selected_genre = $_GET['f'];
 $query_film_tv = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                     FROM tb_film
@@ -34,18 +35,17 @@ $count = 0;
             <div class="row">
                 <?php
                 while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
-                    if (!empty($row_film_tv['judul'])) {
+                    $judul = $row_film_tv['judul'];
+                    $tmdb_id = $row_film_tv['tmdb_id'];
+                    $thumbnail = $row_film_tv['thumbnail'];
 
-                        $cek_id_tmdb = $row_film_tv['tmdb_id'];
-                        $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
-                        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tmdb_id;";
+                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                    $url_poster = $row_tmdb['url_poster'];
+                    $jumlah_episode = $row_tmdb['jumlah_episode'];
 
-                        $tmdb_id = $row_film_tv['tmdb_id'];
-                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                        $url_poster = $row_tmdb['url_poster'];
+                    if (!empty($judul)) {
 
                         $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
                         $genres = array();
@@ -63,35 +63,34 @@ $count = 0;
                         ?>
 
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                            <a href="dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $row_film_tv['tmdb_id']; ?>"
+                            <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($jumlah_episode === null || $jumlah_episode === '') ? 'movies' : 'tv'; ?>&id=<?php echo $tmdb_id; ?>"
                                 style="color: black;">
                                 <div class="thumbnail-container">
-                                    <?php if (!empty($row_film_tv['thumbnail'])) { ?>
+                                    <?php if (!empty($thumbnail)) { ?>
                                         <img class="img-fluid rounded img-landscape-zoom"
-                                            src="gambar/film/<?php echo $row_film_tv['thumbnail']; ?>"
-                                            alt="<?php echo $row_film_tv['judul']; ?>">
+                                            src="<?php echo $base_url; ?>/gambar/<?php echo ($jumlah_episode === null || $jumlah_episode === '') ? 'film' : 'tv'; ?>/<?php echo $thumbnail; ?>"
+                                            alt="<?php echo $judul; ?>">
                                     <?php } else {
                                         ?>
                                         <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                            alt="<?php echo $row_film_tv['judul']; ?>">
+                                            alt="<?php echo $judul; ?>">
                                     <?php } ?>
                                 </div>
                                 <div class="video-info">
                                     <strong>
-                                        <?php echo $row_film_tv['judul']; ?>
+                                        <?php echo $judul; ?>
                                     </strong>
                                     <?php foreach ($genres as $genre) { ?>
-                                        <?php
-                                        $slug_genre = strtolower(str_replace(' ', '-', $genre));
-                                        ?>
                                         <a style="font-size: 14px;"
-                                            href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                                            href="<?php echo $base_url; ?>/dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
                                             <?php echo $genre . ", "; ?>
                                         </a>
                                     <?php } ?>
 
                                     <p style="font-size: 14px;"><i class="fas fa-eye"></i>
-                                        <?php echo $row_film_tv['total_kunjungan']; ?> x ditonton
+                                        <small>
+                                            <?php echo $row_film_tv['total_kunjungan']; ?> x ditonton
+                                        </small>
                                     </p>
                                 </div>
                             </a>
