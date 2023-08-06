@@ -76,7 +76,7 @@
                                         <?php } ?>
                                         <small>
                                             <p style="font-size: 14px;"><i class="fas fa-eye"></i>
-                                                <?php echo $visite; ?> ditonton
+                                                <?php echo $visite; ?>x ditonton
                                             </p>
                                         </small>
                                     </a>

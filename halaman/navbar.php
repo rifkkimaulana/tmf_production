@@ -66,6 +66,12 @@
                     </div>
                 </div>
             </form>
+            <ul class="navbar-nav ml-auto">
+                <!-- Tambahkan menu login di kanan -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
