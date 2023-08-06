@@ -28,6 +28,18 @@ if (mysqli_num_rows($result_user) > 0) {
                 $query = "UPDATE tb_users SET reset_token=NULL, user_password='$hashed_password' WHERE reset_token='$reset_token'";
                 mysqli_query($koneksi, $query);
 
+                $username = $row_user['user_nama'];
+                $action = 'update password';
+                $description_log = 'berhasil membuat password baru';
+                $ip_address = $_SERVER['REMOTE_ADDR'];
+                $timestamp = date('Y-m-d H:i:s');
+                $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
+                    VALUES (?, ?, ?, ?, ?)";
+
+                $stmt = mysqli_prepare($koneksi, $query_log);
+                mysqli_stmt_bind_param($stmt, "sssss", $timestamp, $username, $action, $description_log, $ip_address);
+
+
                 header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
                 exit();
             } else {

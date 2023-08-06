@@ -9,6 +9,17 @@ function generateToken()
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
+    $username = $_POST['email'];
+
+    $action = 'forgot password';
+    $description_log = 'melakukan permintaan password baru';
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $timestamp = date('Y-m-d H:i:s');
+    $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
+                    VALUES (?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_prepare($koneksi, $query_log);
+    mysqli_stmt_bind_param($stmt, "sssss", $timestamp, $username, $action, $description_log, $ip_address);
 
     include '../config/koneksi.php';
     $email = mysqli_real_escape_string($koneksi, $email);
