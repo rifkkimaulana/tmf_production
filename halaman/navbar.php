@@ -69,12 +69,12 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="gambar/logo.png" class="user-image img-circle elevation-2" alt="User Image">
+                        <img src="gambar/user/user.png" class="user-image img-circle elevation-2" alt="User Image">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                         <li class="user-header bg-primary">
-                            <img src="gambar/logo.png" class="img-circle elevation-2" alt="User Image">
+                            <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
                             <p>
                                 Alexander Pierce - Web Developer
                                 <small>Member since Nov. 2012</small>
