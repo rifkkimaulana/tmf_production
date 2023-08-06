@@ -100,9 +100,7 @@
     });
 </script>
 <script>
-    // Fungsi untuk mendeteksi preferensi tema warna
     function detectColorScheme() {
-        // Cek apakah preferensi tema warna adalah dark
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.classList.add('dark-mode');
         } else {
@@ -110,10 +108,8 @@
         }
     }
 
-    // Panggil fungsi detectColorScheme untuk mendeteksi preferensi saat halaman dimuat
     detectColorScheme();
 
-    // Tambahkan event listener untuk memantau perubahan preferensi tema warna
     window.matchMedia('(prefers-color-scheme: dark)').addListener(detectColorScheme);
 </script>
 </body>
