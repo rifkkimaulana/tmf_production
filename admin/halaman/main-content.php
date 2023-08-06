@@ -95,7 +95,15 @@
                 }
             });
         </script>
-
+        <!-- Pesan Loading (ditampilkan saat halaman dimuat) -->
+        <div id="loadingMessage">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <span class="ml-2">Loading...</span>
+            </div>
+        </div>
         <script>
             // Fungsi untuk menampilkan pesan loading
             function showLoadingMessage() {
