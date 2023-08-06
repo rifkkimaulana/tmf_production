@@ -104,24 +104,14 @@
             </div>
         </div>
         <script>
-            // Fungsi untuk menampilkan pesan loading
-            function showLoadingMessage() {
-                $('#loadingMessage').show();
+            // Fungsi untuk menyembunyikan layar putih
+            function hideLoadingScreen() {
+                document.body.classList.remove('loading');
             }
 
-            // Fungsi untuk menyembunyikan pesan loading
-            function hideLoadingMessage() {
-                $('#loadingMessage').hide();
-            }
-
-            // Event untuk menampilkan pesan loading saat halaman dimuat
-            document.addEventListener('DOMContentLoaded', function () {
-                showLoadingMessage();
-            });
-
-            // Event 'load' berfungsi untuk menyembunyikan pesan loading setelah seluruh halaman selesai dimuat.
+            // Event 'load' berfungsi untuk menyembunyikan layar putih setelah seluruh halaman selesai dimuat.
             window.addEventListener('load', function () {
-                hideLoadingMessage();
+                hideLoadingScreen();
             });
         </script>
 
