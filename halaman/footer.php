@@ -27,9 +27,6 @@
     </div>
 </div>
 
-<!-- Hubungkan dengan jQuery dan AdminLTE JavaScript -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0-alpha/dist/js/adminlte.min.js"></script>
 
 <script>
     // Fungsi untuk menampilkan modal loading
@@ -53,7 +50,7 @@
         });
     });
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/plugins/jquery/jquery.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/dist/js/adminlte.min.js"></script>
