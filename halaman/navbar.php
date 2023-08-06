@@ -73,7 +73,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                        <li class="user-header bg-primary">
+                        <li class="user-header">
                             <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
                             <p>
                                 Alexander Pierce - Web Developer
