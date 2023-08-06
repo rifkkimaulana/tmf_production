@@ -39,7 +39,6 @@ $limitedGenres = array_slice($genres, 0, 9);
 
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/skins/skin-black.min.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/tmf_style.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/select2/css/select2.min.css">
     <style>
@@ -104,5 +103,5 @@ $limitedGenres = array_slice($genres, 0, 9);
     </style>
 </head>
 
-<body class=" hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav">
     <div class="wrapper">
