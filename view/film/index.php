@@ -1,6 +1,3 @@
-<?php
-
-?>
 <div class="col-md-9 tmf_production">
     <?php include 'view/genre_button.php'; ?>
     <div class="card-flat">
@@ -17,15 +14,16 @@
         $query_film = "SELECT thumbnail, judul_film, tmdb_id FROM tb_film ORDER BY created_at DESC";
         $result_film = mysqli_query($koneksi, $query_film);
 
-        $tmdb_id = $row_film['tmdb_id'];
-        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-        $url_poster = $row_tmdb['url_poster'];
-
         while ($row_film = mysqli_fetch_assoc($result_film)) {
+
+            $tmdb_id = $row_film['tmdb_id'];
             $judul_film = $row_film['judul_film'];
             $thumbnail = $row_film['thumbnail'];
+
+            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+            $url_poster = $row_tmdb['url_poster'];
 
             if (!empty($judul_film)) { ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
