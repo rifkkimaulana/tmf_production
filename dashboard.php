@@ -4,16 +4,18 @@
 ?>
 <?php include 'halaman/header.php'; ?>
 <?php include 'halaman/navbar.php'; ?>
-<div id="skeletonScreen">
-    <div class="container mt-5">
-        <div class="skeleton-header"></div>
-        <div class="skeleton-content"></div>
-        <div class="skeleton-content"></div>
-        <div class="skeleton-content"></div>
+
+
+<div class="content-wrapper" style="background-color: white;">
+    <div id="skeletonScreen">
+        <div class="container mt-5">
+            <div class="skeleton-header"></div>
+            <div class="skeleton-content"></div>
+            <div class="skeleton-content"></div>
+            <div class="skeleton-content"></div>
+        </div>
     </div>
-</div>
-<div id="content" style="display: none">
-    <div class="content-wrapper" style="background-color: white;">
+    <div id="content" style="display: none">
         <?php include 'halaman/main-content.php'; ?>
     </div>
 </div>
