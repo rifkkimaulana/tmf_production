@@ -26,8 +26,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Error: " . mysqli_error($koneksi);
     }
-    mysqli_stmt_close($stmt);
-    mysqli_close($koneksi);
 
     $email = mysqli_real_escape_string($koneksi, $email);
 

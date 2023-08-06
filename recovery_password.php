@@ -43,8 +43,6 @@ if (mysqli_num_rows($result_user) > 0) {
                 } else {
                     echo "Error: " . mysqli_error($koneksi);
                 }
-                mysqli_stmt_close($stmt);
-                mysqli_close($koneksi);
 
                 header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
                 exit();
