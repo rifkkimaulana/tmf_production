@@ -96,10 +96,10 @@
                             </li>
                             <li class="user-footer">
                                 <div class="float-left">
-                                    <a href="#" class="btn btn-default">Member Area</a>
+                                    <a href="#" class="btn btn-default btn-secondary">Member Area</a>
                                 </div>
                                 <div class="float-right">
-                                    <a href="#" class="btn btn-default">Logout</a>
+                                    <a href="#" class="btn btn-default btn-danger">Logout</a>
                                 </div>
                             </li>
                         </ul>
