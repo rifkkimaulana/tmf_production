@@ -5,8 +5,9 @@ $tmdb_id = $_GET['id'];
 $query_film = "SELECT * FROM tb_film WHERE tmdb_id = '$tmdb_id'";
 $result_film = mysqli_query($koneksi, $query_film);
 $row_film = mysqli_fetch_assoc($result_film);
+$judul_film = $row_film['judul_film'];
 $link = $row_film['link_trailer'];
-echo $link_trailer;
+echo $judul_film;
 $id_player = $row_film['player_id'];
 $id_download = $row_film['download_id'];
 
