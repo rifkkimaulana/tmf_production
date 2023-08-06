@@ -1,4 +1,5 @@
 <?php
+include 'config/koneksi.php';
 $tmdb_id = $_GET['id'];
 
 $query_film = "SELECT * FROM tb_film WHERE tmdb_id = '$tmdb_id'";
@@ -331,7 +332,7 @@ foreach ($pemain_ids as $pemain_id) {
             <div class="card-flat comment-form" style="margin-bottom: 5px;">
                 </br>
                 <h6>
-                    <?php echo "    " . $total_komentar; ?> Komentar
+                    <?php echo $total_komentar; ?> Komentar
                 </h6>
                 <form action="view/proses_komentar.php" method="POST">
                     <?php
