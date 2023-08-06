@@ -18,6 +18,8 @@ if ($_SESSION['status'] != "administrator_logedin") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="<?php echo $base_url; ?>/gambar/icon.png" type="image/png">
+
     <title>TMF PRODUCTION</title>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
