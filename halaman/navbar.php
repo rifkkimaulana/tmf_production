@@ -68,10 +68,12 @@
             </form>
             <div class="hide-on-large-screen">
                 <div class="col-12 mt-4">
-                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#userModal">MASUK
+                    <button href="<?php echo $base_url . "login/index.php" ?>" class="btn btn-success btn-block"
+                        data-toggle="modal">MASUK
                     </button>
 
-                    <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#userModal">DAFTAR
+                    <button href="<?php echo $base_url . "login/register.php" ?>" class="btn btn-danger btn-block"
+                        data-toggle="modal">DAFTAR
                     </button>
                 </div>
             </div>
@@ -96,26 +98,3 @@
         </div>
     </div>
 </nav>
-<!-- Modal -->
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="userModalLabel">Informasi Pengguna</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Isi konten modal disini -->
-                <p>Nama: John Doe</p>
-                <p>Email: johndoe@example.com</p>
-                <p>Role: Administrator</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <!-- Jika Anda ingin menambahkan tombol lain dalam modal, Anda bisa tambahkan di sini -->
-            </div>
-        </div>
-    </div>
-</div>
