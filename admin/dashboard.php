@@ -266,7 +266,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
             window.addEventListener('beforeunload', function () {
                 setTimeout(function () {
                     showLoadingModal();
-                }, 500); // 500 milliseconds (0.5 seconds) delay before showing the modal
+                }, 50); // 500 milliseconds (0.5 seconds) delay before showing the modal
             });
             window.addEventListener('load', function () {
                 hideLoadingModal();
