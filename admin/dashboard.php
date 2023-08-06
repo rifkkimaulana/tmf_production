@@ -246,6 +246,8 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
+        <button onclick="showLoadingModal()">Show Loading Modal</button>
+
         <script>
             function openSearchModal() {
                 $('#searchModal').modal('show');
