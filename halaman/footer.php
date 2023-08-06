@@ -26,28 +26,21 @@
     </div>
 </div>
 <script>
-    var modalShown = false; // Tambahkan variabel untuk menandai apakah modal sudah ditampilkan atau belum
-
-    // Function to show the loading modal
     function showLoadingModal() {
-        if (!modalShown) {
-            $('#loadingModal').modal('show');
-            modalShown = false;
-        }
+        $('#loadingModal').modal('show');
     }
-
-    // Function to hide the loading modal
     function hideLoadingModal() {
         $('#loadingModal').modal('hide');
     }
-
-    // Show the loading modal when the DOM content is loaded
     document.addEventListener('DOMContentLoaded', function () {
-        showLoadingModal();
+        hideLoadingModal(); // Hide the loading modal initially
     });
-
-    // Hide the loading modal when the page has completely loaded
-    $(window).on('load', function () {
+    window.addEventListener('beforeunload', function () {
+        setTimeout(function () {
+            showLoadingModal();
+        }, 100); // 500 milliseconds (0.5 seconds) delay before showing the modal
+    });
+    window.addEventListener('load', function () {
         hideLoadingModal();
     });
 </script>
