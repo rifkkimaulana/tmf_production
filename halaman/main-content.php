@@ -1,6 +1,3 @@
-<!-- Tombol untuk memicu modal -->
-<button type="button" class="btn btn-primary" onclick="showLoadingModal()">Tampilkan Loading</button>
-
 <!-- Modal -->
 <div id="loadingModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -18,22 +15,15 @@
     </div>
 </div>
 <script>
-    // Fungsi untuk menampilkan modal loading
-    function showLoadingModal() {
-        var loadingModal = document.getElementById('loadingModal');
-        loadingModal.style.display = 'block';
-
-        // Simulasikan proses halaman selama 2 detik (gantilah dengan proses yang sesuai pada halaman Anda)
-        setTimeout(function () {
-            hideLoadingModal(); // Panggil fungsi untuk menyembunyikan modal setelah selesai proses
-        }, 2000); // 2000 milidetik (2 detik) adalah waktu simulasi proses halaman
-    }
-
     // Fungsi untuk menyembunyikan modal loading
     function hideLoadingModal() {
-        var loadingModal = document.getElementById('loadingModal');
-        loadingModal.style.display = 'none';
+        $('#loadingModal').modal('hide');
     }
+
+    // Event listener untuk menyembunyikan modal ketika halaman selesai dimuat
+    $(window).on('load', function () {
+        hideLoadingModal();
+    });
 </script>
 <div class="container">
     <div class="row">
