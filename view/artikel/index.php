@@ -15,11 +15,6 @@
     <div class="card-flat hide-on-small-screen">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card-flat">
-                    <div class="card-header">
-                        <h5 class="card-title m-0">Cari Artikel</h5>
-                    </div>
-                </div>
                 <form action="dashboard.php" method="get">
                     <div class="form-group mt-3">
                         <div class="input-group">
