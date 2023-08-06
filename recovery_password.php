@@ -38,7 +38,13 @@ if (mysqli_num_rows($result_user) > 0) {
 
                 $stmt = mysqli_prepare($koneksi, $query_log);
                 mysqli_stmt_bind_param($stmt, "sssss", $timestamp, $username, $action, $description_log, $ip_address);
-
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Data kunjungan berhasil disimpan.";
+                } else {
+                    echo "Error: " . mysqli_error($koneksi);
+                }
+                mysqli_stmt_close($stmt);
+                mysqli_close($koneksi);
 
                 header("location: " . $base_url . "/login/index.php?alert=suksesUpdatePassword");
                 exit();

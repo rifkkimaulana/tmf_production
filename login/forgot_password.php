@@ -8,6 +8,7 @@ function generateToken()
 }
 
 if (isset($_POST['submit'])) {
+    include '../config/koneksi.php';
     $email = $_POST['email'];
     $username = $_POST['email'];
 
@@ -20,8 +21,14 @@ if (isset($_POST['submit'])) {
 
     $stmt = mysqli_prepare($koneksi, $query_log);
     mysqli_stmt_bind_param($stmt, "sssss", $timestamp, $username, $action, $description_log, $ip_address);
+    if (mysqli_stmt_execute($stmt)) {
+        echo "Data kunjungan berhasil disimpan.";
+    } else {
+        echo "Error: " . mysqli_error($koneksi);
+    }
+    mysqli_stmt_close($stmt);
+    mysqli_close($koneksi);
 
-    include '../config/koneksi.php';
     $email = mysqli_real_escape_string($koneksi, $email);
 
     $query = "SELECT * FROM tb_users WHERE email='$email'";
