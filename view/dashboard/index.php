@@ -49,8 +49,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                     $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                     $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                     $thumbnail = $row_tmdb['thumbnail'];
-                                    $judul = $row_tmdb['judul']
-                                        ?>
+                                    ?>
                                     <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $cek_id_tmdb ?>"
                                         style="color: black;">
                                         <?php if (!empty($thumbnail)) { ?>
