@@ -103,5 +103,5 @@ $limitedGenres = array_slice($genres, 0, 9);
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed skin-black">
+<body class="hold-transition layout-fixed skin-black">
     <div class="wrapper">
