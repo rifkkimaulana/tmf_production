@@ -5,7 +5,7 @@
 <?php include 'halaman/header.php'; ?>
 <?php include 'halaman/navbar.php'; ?>
 
-<div class="content-wrapper" style="background-color: white;">
+<div class="content-wrapper content" style="display: none;" style="background-color: white;">
     <div id="skeletonScreen">
         <div class="container mt-5">
             <div class="skeleton-header"></div>
