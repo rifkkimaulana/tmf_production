@@ -2,11 +2,11 @@
 include 'config/base_url.php';
 session_start();
 ?>
+
 <script>
     function sendPostData() {
         const data = {
-            username: '<?php session_start();
-            echo $_SESSION['username']; ?>',
+            username: '<?php echo $_SESSION['username']; ?>',
             action: 'logout',
             description_log: 'Menghentikan sesion.'
         };
@@ -36,12 +36,10 @@ session_start();
         sendPostData();
     });
 </script>
+
 <?php
 session_unset();
 session_destroy();
 
 setcookie("remember_me", "", time() - 3600, "/");
-
-//header("location: login/index.php");
-//exit();
 ?>
