@@ -42,26 +42,27 @@ if (isset($_POST['submit'])) {
 
             if ($row['user_level'] == "administrator") {
                 $_SESSION['status'] = "administrator_logedin";
-                header("location: " . $base_url . "/admin/");
                 $description_log = 'Berhasil di arahkan ke halaman admin.';
+                header("location: " . $base_url . "/admin/");
                 exit();
             } else if ($row['user_level'] == "manajemen") {
                 $_SESSION['status'] = "manajemen_logedin";
-                header("location: " . $base_url . "/manajemen/");
                 $description_log = 'Berhasil diarahkan ke halaman user.';
+                header("location: " . $base_url . "/manajemen/");
                 exit();
             } else {
+                $description_log = 'Gagal, Data pengguna tidak ditemukan.';
                 header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
                 exit();
             }
         } else {
-            header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
             $description_log = 'Gagal, password salah.';
+            header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
             exit();
         }
     } else {
-        header("location: " . $base_url . "/login/index.php?alert=userNotFound");
         $description_log = 'Gagal, Data pengguna tidak ditemukan.';
+        header("location: " . $base_url . "/login/index.php?alert=userNotFound");
         exit();
     }
 }
