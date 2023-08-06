@@ -253,6 +253,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#searchModalTv').modal('show');
             }
         </script>
+        <!-- Letakkan skrip modal loading sebelum elemen konten utama -->
         <script>
             function showLoadingModal() {
                 $('#loadingModal').modal('show');
@@ -262,20 +263,19 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#loadingModal').modal('hide');
             }
 
-            document.addEventListener('DOMContentLoaded', function () {
-                showLoadingModal(); // Show the loading modal when the page is loaded
-            });
+            // Tampilkan modal loading segera setelah elemen HTML untuk modal loading ada di halaman
+            showLoadingModal();
 
-            window.addEventListener('load', function () {
-                hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
-            });
+            // Setelah modal ditampilkan, sembunyikan modal setelah 1 detik
+            hideLoadingModalAfterDelay();
 
             function hideLoadingModalAfterDelay() {
                 setTimeout(function () {
                     hideLoadingModal();
-                }, 500); // 1000 milliseconds (1 detik)
+                }, 500); // 500 milliseconds (0.5 detik)
             }
         </script>
+
     </div>
 </body>
 
