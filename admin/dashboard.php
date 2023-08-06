@@ -46,6 +46,52 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <style>
+        #skeletonScreen {
+            display: block;
+        }
+
+        .skeleton-header,
+        .skeleton-content {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-content:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Animasi untuk skeleton gambar */
+        .skeleton-img {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+        }
+
+        .skeleton-img::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: pulse 1.5s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -58,7 +104,16 @@ if ($_SESSION['status'] != "administrator_logedin") {
         <div class="content-wrapper">
             <div class="content-header">
             </div>
-            <?php include_once('halaman/main-content.php'); ?>
+            <div id="skeletonScreen">
+                <div class="container mt-5">
+                    <div class="skeleton-content"></div>
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content"></div>
+                </div>
+            </div>
+            <div id="content" style="display: none">
+                <?php include_once('halaman/main-content.php'); ?>
+            </div>
         </div>
         <?php include_once('halaman/footer.php'); ?>
 
