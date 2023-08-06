@@ -100,6 +100,12 @@ $limitedGenres = array_slice($genres, 0, 9);
                 opacity: 1;
             }
         }
+
+        body {
+            background-color: black;
+            color: #00ff00;
+            /* Warna hijau terang (#00ff00) untuk teks */
+        }
     </style>
 </head>
 
