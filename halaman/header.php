@@ -2,7 +2,7 @@
 session_start();
 include 'config/base_url.php';
 include 'config/koneksi.php';
-include 'function.php';
+include 'config/function.php';
 
 $q_negara = "SELECT * FROM tb_negara";
 $r_negara = mysqli_query($koneksi, $q_negara);

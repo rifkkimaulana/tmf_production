@@ -519,7 +519,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                                     </a>
                                 </div>
                                 <div class="col-lg-8 col-sm-6 col-6">
-                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
+                                    <a href="dashboard.php?page=tv&id=<?php echo $tv_tmdb_id; ?>" style="color: black;">
                                         <strong>
                                             <?php echo $row_tv['judul_tv_show']; ?>
                                         </strong></br>
@@ -532,14 +532,6 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                                                 <?php echo $genres . ", "; ?>
                                             </a>
                                         <?php } ?>
-
-                                        <?php
-                                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
-                                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-                                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
-
-                                        $total_kunjungan = $row_kunjungan['total_kunjungan'];
-                                        ?>
                                         <p style="font-size: 14px;"><i class="fas fa-eye"></i>
                                             <?php echo $total_kunjungan; ?>
                                         </p>
