@@ -123,7 +123,7 @@
                                         class="btn btn-default btn-secondary">Member Area</a>
                                 </div>
                                 <div class="float-right">
-                                    <a href="<?php echo $base_url . "/login/register.php" ?>"
+                                    <a href="<?php echo $base_url . "/logout.php" ?>"
                                         class="btn btn-default btn-danger">Logout</a>
                                 </div>
                             </li>
