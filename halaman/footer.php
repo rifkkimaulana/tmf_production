@@ -28,24 +28,17 @@
     </div>
 </div>
 <script>
-    // Fungsi untuk menampilkan modal loading
     function showLoadingModal() {
         $('#loadingModal').modal('show');
     }
-
-    // Fungsi untuk menyembunyikan modal loading
     function hideLoadingModal() {
         $('#loadingModal').modal('hide');
     }
-
-    // Event untuk menampilkan modal loading saat halaman dimuat
     document.addEventListener('DOMContentLoaded', function () {
-        showLoadingModal(); // Menampilkan modal loading saat halaman dimuat
-
-        // Event 'load' berfungsi untuk menyembunyikan modal loading setelah seluruh konten (termasuk gambar) telah dimuat.
-        window.addEventListener('load', function () {
-            hideLoadingModal(); // Menyembunyikan modal loading setelah seluruh halaman selesai dimuat
-        });
+        showLoadingModal();
+    });
+    window.addEventListener('load', function () {
+        hideLoadingModal();
     });
 </script>
 
