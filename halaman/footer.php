@@ -13,7 +13,7 @@
 <!-- Modal Loading (sesuai contoh sebelumnya) -->
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="d-flex justify-content-center align-items-center">
