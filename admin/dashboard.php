@@ -95,7 +95,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
         .content {
             opacity: 0;
-            animation: fade 1s ease-in-out forwards;
+            animation: fade 0.5s ease-in-out forwards;
         }
 
         @keyframes fade {

@@ -89,7 +89,7 @@ $limitedGenres = array_slice($genres, 0, 9);
 
         .content {
             opacity: 0;
-            animation: fade 1s ease-in-out forwards;
+            animation: fade 0.5s ease-in-out forwards;
         }
 
         @keyframes fade {
