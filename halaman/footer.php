@@ -38,7 +38,9 @@
         hideLoadingModal(); // Hide the loading modal initially
     });
     window.addEventListener('beforeunload', function () {
-        showLoadingModal();
+        setTimeout(function () {
+            showLoadingModal();
+        }, 500); // 500 milliseconds (0.5 seconds) delay before showing the modal
     });
     window.addEventListener('load', function () {
         hideLoadingModal();
