@@ -74,7 +74,6 @@ foreach ($pemain_ids as $pemain_id) {
     $pemain[] = $row_pemain['nama_pemain'];
 }
 ?>
-
 <div class="col-md-9 tmf_production">
     <div class="row">
         <div class="col-lg-12">
@@ -157,6 +156,7 @@ foreach ($pemain_ids as $pemain_id) {
                         allowfullscreen>
                     </iframe>
                 </div>
+
                 <?php
                 if (strpos($link, 'autoplay=1') !== false) {
                     ?>
@@ -176,11 +176,11 @@ foreach ($pemain_ids as $pemain_id) {
                 <b>
                     Judul Movies:
                 </b>
-                <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>">
-                    <?php echo $row_tmdb['judul']; ?>
+                <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tmdb_id; ?>">
+                    <?php echo $judul_tmdb; ?>
                 </a>
                 <?php
-                if (empty($row_tv['genres'])) { ?>
+                if (empty($row_film['genres'])) { ?>
                     <hr>
                     <b>Genre:</b>
                     <?php foreach ($genres as $genres) { ?>
@@ -190,7 +190,7 @@ foreach ($pemain_ids as $pemain_id) {
                         <?php
                     }
                 }
-                if (empty($row_tv['negara_ids'])) {
+                if (empty($row_film['negara_ids'])) {
                 } else { ?>
                     <hr>
                     <b>Negara :</b>
