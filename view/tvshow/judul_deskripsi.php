@@ -333,21 +333,3 @@
         <a class="card-link tmf_teks" id="showMoreLink" onclick="toggleDescription()">Lebih Banyak</a>
     <?php } ?>
 </div>
-<script>
-    var descriptionElement = document.getElementById("filmDescription");
-    var showMoreLink = document.getElementById("showMoreLink");
-    var toggleState = false;
-    var limitedDescription = "<?php echo $limited_description; ?>";
-    var fullDescription = "<?php echo $full_description; ?>";
-
-    function toggleDescription() {
-        toggleState = !toggleState;
-        if (toggleState) {
-            descriptionElement.innerHTML = fullDescription;
-            showMoreLink.innerHTML = "Sedikit";
-        } else {
-            descriptionElement.innerHTML = limitedDescription;
-            showMoreLink.innerHTML = "Lebih Banyak";
-        }
-    }
-</script>
