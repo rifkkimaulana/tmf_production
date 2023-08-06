@@ -12,9 +12,9 @@ $query_film_tv = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film
 $result_film_tv = mysqli_query($koneksi, $query_film_tv);
 
 if (isset($_GET['search']) && !empty($_GET['search'])) {
-    include 'search_movies_tv';
+    include 'search_movies_tv.php';
 } else {
-    include 'all_movies_tv';
+    include 'all_movies_tv.php';
 } ?>
 
 <div class="col-md-3 tmf_production">
