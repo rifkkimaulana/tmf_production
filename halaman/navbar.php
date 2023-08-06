@@ -85,19 +85,31 @@
                 if (isset($_SESSION['nama'])) {
                     $namaUser = $_SESSION['nama'];
                     $levelUser = $_SESSION['level'];
+                    $query_user = "SELECT logo_user FROM tb_users WHERE user_nama = '$namaUser'";
+                    $result_user = mysqli_query($koneksi, $query_user);
+                    $row_user = mysqli_fetch_assoc($result_user);
+                    $fotoProfil = $row_user['logo_user'];
+
+                    if (!empty($fotoProfil)) {
+                        $fotoUrl = $base_url . '/gambar/user/' . $fotoProfil;
+                    } else {
+                        $fotoUrl = $base_url . '/gambar/user/user.png';
+                    }
                 } else {
-                    $namaUser = 'Guest';
+                    $namaUser = 'Pengunjung';
                     $levelUser = '';
                 }
+
                 ?>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img src="gambar/user/user.png" class="user-image img-circle elevation-2" alt="User Image">
+                            <img src="<?php echo $fotoUrl; ?>" class="user-image img-circle elevation-2"
+                                alt="User Image">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <li class="user-header">
-                                <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
+                                <img src="<?php echo $fotoUrl; ?>" class="img-circle elevation-2" alt="User Image">
                                 <p>
                                     <?php echo $namaUser; ?>
                                     <small>
