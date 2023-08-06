@@ -55,43 +55,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
-        <!-- Modal Loading (sesuai contoh sebelumnya) -->
-        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <span class="ml-2">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
-            function showLoadingModal() {
-                $('#loadingModal').modal('show');
-            }
-
-            function hideLoadingModal() {
-                $('#loadingModal').modal('hide');
-            }
-
-            document.addEventListener('DOMContentLoaded', function () {
-                hideLoadingModal(); // Hide the loading modal initially
-            });
-
-            window.addEventListener('beforeunload', function () {
-                showLoadingModal();
-            });
-
-            window.addEventListener('load', function () {
-                hideLoadingModal();
-            });
-        </script>
         <?php include_once('halaman/navbar.php'); ?>
         <?php include_once('halaman/sidebar.php'); ?>
 
@@ -267,6 +230,22 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
+        <!-- Modal Loading -->
+        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <span class="ml-2">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             function openSearchModal() {
                 $('#searchModal').modal('show');
@@ -276,6 +255,27 @@ if ($_SESSION['status'] != "administrator_logedin") {
             }
         </script>
     </div>
+    <script>
+        function showLoadingModal() {
+            $('#loadingModal').modal('show');
+        }
+
+        function hideLoadingModal() {
+            $('#loadingModal').modal('hide');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            hideLoadingModal(); // Hide the loading modal initially
+        });
+
+        window.addEventListener('beforeunload', function () {
+            showLoadingModal();
+        });
+
+        window.addEventListener('load', function () {
+            hideLoadingModal();
+        });
+    </script>
 </body>
 
 </html>
