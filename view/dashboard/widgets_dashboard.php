@@ -15,7 +15,7 @@
 
                         $tmdb_id = $row_film_tv['tmdb_id'];
                         $judul = $row_film_tv['judul'];
-                        $thumbnail = $row_film_tv['url_poster'];
+                        $thumbnail = $row_film_tv['thumbnail'];
 
                         $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tmdb_id;";
                         $result_tmdb = mysqli_query($koneksi, $query_tmdb);
@@ -25,8 +25,7 @@
                         }
 
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                        $url_poster = $row_tmdb['link_trailer'];
-                        echo $tmdb_id . $url_poster;
+                        $url_poster = $row_tmdb['url_poster'];
 
                         if (!empty($judul)) {
                             $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
@@ -43,14 +42,14 @@
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
                                     <?php if (!empty($thumbnail)) { ?>
-                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb ?>"
+                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id ?>"
                                             style="color: black;">
                                             <img class="img-fluid rounded img-landscape-zoom"
                                                 src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'film'; ?>/<?php echo $thumbnail; ?>"
                                                 alt="<?php echo $judul; ?>"></a>
                                     <?php } else {
                                         ?>
-                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb ?>"
+                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id ?>"
                                             style="color: black;">
                                             <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
                                                 alt="<?php echo $judul; ?>"></a>
@@ -58,7 +57,7 @@
 
                                 </div>
                                 <div class="col-lg-8 col-sm-6 col-6">
-                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo (strpos($row_film_tv['genre_ids'], ',') === false) ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb; ?>"
+                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo (strpos($row_film_tv['genre_ids'], ',') === false) ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id; ?>"
                                         style="color: black;">
                                         <strong>
                                             <?php echo $judul; ?>
