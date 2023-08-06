@@ -16,6 +16,13 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    $action = 'login';
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+
+    $query_log = "INSERT INTO tb_log_aplikasi (username, action, description, ip_address)
+                    VALUES ('$timestamp', $username, '$action', '$description_log', '$ip_address')";
+    $result_log = mysqli_query($koneksi, $query_log);
+
     $stmt = $koneksi->prepare("SELECT * FROM tb_users WHERE user_username=?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -35,10 +42,12 @@ if (isset($_POST['submit'])) {
             if ($row['user_level'] == "administrator") {
                 $_SESSION['status'] = "administrator_logedin";
                 header("location: " . $base_url . "/admin/");
+                $description_log = 'Berhasil di arahkan ke halaman admin.';
                 exit();
             } else if ($row['user_level'] == "manajemen") {
                 $_SESSION['status'] = "manajemen_logedin";
                 header("location: " . $base_url . "/manajemen/");
+                $description_log = 'Berhasil diarahkan ke halaman user.';
                 exit();
             } else {
                 header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
@@ -46,10 +55,12 @@ if (isset($_POST['submit'])) {
             }
         } else {
             header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
+            $description_log = 'Gagal, password salah.';
             exit();
         }
     } else {
         header("location: " . $base_url . "/login/index.php?alert=userNotFound");
+        $description_log = 'Gagal, Data pengguna tidak ditemukan.';
         exit();
     }
 }
