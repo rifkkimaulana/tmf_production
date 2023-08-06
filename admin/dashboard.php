@@ -253,6 +253,12 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#loadingModal').modal('hide');
             }
 
+            function hideLoadingModalAfterDelay() {
+                setTimeout(function () {
+                    hideLoadingModal();
+                }, 1000); // 1000 milliseconds (1 detik)
+            }
+
             document.addEventListener('DOMContentLoaded', function () {
                 hideLoadingModal(); // Hide the loading modal initially
             });
@@ -262,9 +268,10 @@ if ($_SESSION['status'] != "administrator_logedin") {
             });
 
             window.addEventListener('load', function () {
-                hideLoadingModal();
+                hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
             });
         </script>
+
         <script>
             function openSearchModal() {
                 $('#searchModal').modal('show');
