@@ -96,7 +96,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
             hideSkeletonScreen();
-        }, 3000);
+        }, 1000);
     });
 </script>
 </body>
