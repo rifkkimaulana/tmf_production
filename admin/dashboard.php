@@ -260,17 +260,31 @@ if ($_SESSION['status'] != "administrator_logedin") {
             }
 
             document.addEventListener('DOMContentLoaded', function () {
-                hideLoadingModal(); // Hide the loading modal initially
+                // Cek apakah modal sudah ditampilkan sebelumnya
+                var modalShown = sessionStorage.getItem('modalShown');
+
+                if (!modalShown) {
+                    // Jika modal belum ditampilkan sebelumnya, maka tampilkan modal
+                    showLoadingModal();
+
+                    // Set session storage untuk menandai bahwa modal sudah ditampilkan
+                    sessionStorage.setItem('modalShown', 'true');
+                } else {
+                    // Jika modal sudah ditampilkan sebelumnya, langsung sembunyikan modal
+                    hideLoadingModal();
+                }
             });
 
             window.addEventListener('beforeunload', function () {
-                showLoadingModal();
+                // Hapus session storage saat pengguna meninggalkan halaman
+                sessionStorage.removeItem('modalShown');
             });
 
             window.addEventListener('load', function () {
                 hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
             });
         </script>
+
 
         <script>
             function openSearchModal() {
