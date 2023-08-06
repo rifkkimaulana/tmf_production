@@ -46,7 +46,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -227,6 +226,30 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
+        <!-- Modal Information -->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Information Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This is an example of an information modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#infoModal">
+            Show Information Modal
+        </button>
+
         <!-- Modal Loading -->
         <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
             aria-hidden="true">
@@ -244,6 +267,27 @@ if ($_SESSION['status'] != "administrator_logedin") {
             </div>
         </div>
         <script>
+            function showLoadingModal() {
+                $('#loadingModal').modal('show');
+            }
+
+            function hideLoadingModal() {
+                $('#loadingModal').modal('hide');
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                hideLoadingModal(); // Hide the loading modal initially
+            });
+
+            window.addEventListener('beforeunload', function () {
+                showLoadingModal();
+            });
+
+            window.addEventListener('load', function () {
+                hideLoadingModal();
+            });
+        </script>
+        <script>
             function openSearchModal() {
                 $('#searchModal').modal('show');
             }
@@ -252,24 +296,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
             }
         </script>
     </div>
-    <script>
-        function showLoadingModal() {
-            $('#loadingModal').modal('show');
-        }
 
-        function hideLoadingModal() {
-            $('#loadingModal').modal('hide');
-        }
-
-
-        window.addEventListener('beforeunload', function () {
-            showLoadingModal();
-        });
-
-        window.addEventListener('load', function () {
-            hideLoadingModal();
-        });
-    </script>
 </body>
 
 </html>
