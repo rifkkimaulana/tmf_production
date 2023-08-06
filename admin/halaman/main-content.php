@@ -95,48 +95,7 @@
                 }
             });
         </script>
-        <!-- Modal Loading -->
-        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <span class="ml-2">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Hubungkan dengan jQuery dan AdminLTE JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.1/dist/js/adminlte.min.js"></script>
-
-        <script>
-            // Function to show the loading modal
-            function showLoadingModal() {
-                $('#loadingModal').modal('show');
-            }
-
-            // Function to hide the loading modal
-            function hideLoadingModal() {
-                $('#loadingModal').modal('hide');
-            }
-
-            // Show the loading modal when the DOM content is loaded
-            document.addEventListener('DOMContentLoaded', function () {
-                showLoadingModal();
-            });
-
-            // Hide the loading modal when the page has completely loaded
-            window.addEventListener('load', function () {
-                hideLoadingModal();
-            });
-        </script>
 
         <?php
         if (isset($_GET['page'])) {

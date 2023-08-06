@@ -289,3 +289,42 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
         </nav>
     </div>
 </aside>
+
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0-alpha/dist/js/adminlte.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Modal Loading (sesuai contoh sebelumnya) -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span class="ml-2">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showLoadingModal() {
+        $('#loadingModal').modal('show');
+    }
+    function hideLoadingModal() {
+        $('#loadingModal').modal('hide');
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        hideLoadingModal(); // Hide the loading modal initially
+    });
+    window.addEventListener('beforeunload', function () {
+        setTimeout(function () {
+            showLoadingModal();
+        }, 100); // 500 milliseconds (0.5 seconds) delay before showing the modal
+    });
+    window.addEventListener('load', function () {
+        hideLoadingModal();
+    });
+</script>
