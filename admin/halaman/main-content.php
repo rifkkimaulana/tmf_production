@@ -112,20 +112,29 @@
             </div>
         </div>
         <script>
+            var loadingModalShown = false; // Flag to check if the loading modal has been shown
+
             function showLoadingModal() {
                 $('#loadingModal').modal('show');
+                loadingModalShown = true;
             }
+
             function hideLoadingModal() {
                 $('#loadingModal').modal('hide');
             }
+
             document.addEventListener('DOMContentLoaded', function () {
-                hideLoadingModal();
+                hideLoadingModal(); // Hide the loading modal initially
             });
+
             window.addEventListener('beforeunload', function () {
-                setTimeout(function () {
-                    showLoadingModal();
-                }, 50); // 500 milliseconds (0.5 seconds) delay before showing the modal
+                if (!loadingModalShown) { // Show the modal only if it hasn't been shown before
+                    setTimeout(function () {
+                        showLoadingModal();
+                    }, 50); // 50 milliseconds delay before showing the modal
+                }
             });
+
             window.addEventListener('load', function () {
                 hideLoadingModal();
             });
