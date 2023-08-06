@@ -45,7 +45,6 @@ $limitedGenres = array_slice($genres, 0, 9);
 
     <script async="async" data-cfasync="false"
         src="//pl20262457.highcpmrevenuegate.com/b0ece0f17ce43fac83128654df865fe7/invoke.js"></script>
-    <div id="container-b0ece0f17ce43fac83128654df865fe7"></div>
 </head>
 
 <body class="hold-transition layout-top-nav text-sm skin-black">
