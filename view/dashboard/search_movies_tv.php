@@ -127,7 +127,7 @@ if (mysqli_num_rows($result_film_tv) == 0) { ?>
             <div class="tmf-card-terbaru ">
                 <h3>
                     Hasil Pencarian :
-                    <?php echo $_GET['search']; ?>
+                    <?php echo $judul; ?>
                     <span class="line"></span>
                 </h3>
             </div>
@@ -144,7 +144,7 @@ if (mysqli_num_rows($result_film_tv) == 0) { ?>
             <div class="tmf-card-terbaru ">
                 <h3>
                     Hasil Pencarian :
-                    <?php echo $_GET['search']; ?>
+                    <?php echo $judul; ?>
                     <span class="line"></span>
                 </h3>
             </div>
@@ -152,7 +152,9 @@ if (mysqli_num_rows($result_film_tv) == 0) { ?>
         <div class="row">
             <?php
             while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
-                if (!empty($row_film_tv['judul'])) {
+                $judul = $row_film_tv['judul'];
+
+                if (!empty($judul)) {
                     $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
                     $genres = array();
 
