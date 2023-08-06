@@ -17,6 +17,7 @@ $result_tv = mysqli_query($koneksi, $query_tv);
     </div>
     <div class="row">
         <?php
+        include 'config/koneksi.php'; //koneksi tambahan untuk while
         while ($row_film = mysqli_fetch_assoc($result_film)) {
             $judul_film = $row_film['judul_film'];
             $thumbnail_film = $row_film['thumbnail'];
