@@ -67,12 +67,14 @@
                 </div>
             </form>
             <div class="hide-on-large-screen">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown user-menu">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#userModal">Buka Modal
-                            User</button>
-                    </li>
-                </ul>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-8">
+                            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">Masuk
+                                / Daftar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="hide-on-small-screen">
                 <ul class="navbar-nav ml-auto">
