@@ -6,7 +6,6 @@ $kualitas_filter = isset($_GET['kualitas']) ? $_GET['kualitas'] : '';
 $negara_filter = isset($_GET['negara']) ? $_GET['negara'] : '';
 $tahun_filter = isset($_GET['tahun']) ? $_GET['tahun'] : '';
 
-
 if ($tipe === 'film') {
     $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film AS judul, tb_film.tmdb_id, tb_film.genre_ids, tb_film.negara_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                     FROM tb_film
