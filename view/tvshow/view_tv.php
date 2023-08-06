@@ -221,7 +221,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <hr>
                     <b>Genre:</b>
                     <?php foreach ($genres as $genres) { ?>
-                        <a href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
+                        <a href="<?php echo $base_url; ?>/dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
                             <?php echo $genres . ", "; ?>
                         </a>
                         <?php
@@ -232,7 +232,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <hr>
                     <b>Negara :</b>
                     <?php foreach ($negara as $negara) { ?>
-                        <a href="dashboard.php?page=negara&f=<?php echo urlencode($negara); ?>">
+                        <a href="<?php echo $base_url; ?>/dashboard.php?page=negara&f=<?php echo urlencode($negara); ?>">
                             <?php echo $negara . ", "; ?>
                         </a>
 
@@ -331,7 +331,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <hr>
                     <b>Kualitas :</b>
                     <?php foreach ($kualitas as $kualitas) { ?>
-                        <a href="dashboard.php?page=kualitas&f=<?php echo urlencode($kualitas); ?>">
+                        <a href="<?php echo $base_url; ?>/dashboard.php?page=kualitas&f=<?php echo urlencode($kualitas); ?>">
                             <?php echo $kualitas . ", "; ?>
                         </a>
 
@@ -343,7 +343,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <hr>
                     <b>Network :</b>
                     <?php foreach ($jaringan as $jaringan) { ?>
-                        <a href="dashboard.php?page=network&f=<?php echo urlencode($jaringan); ?>">
+                        <a href="<?php echo $base_url; ?>/dashboard.php?page=network&f=<?php echo urlencode($jaringan); ?>">
                             <?php echo $jaringan . ", "; ?>
                         </a>
 
@@ -355,7 +355,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                     <hr>
                     <b>Pemain & Crew :</b>
                     <?php foreach ($pemain as $pemain) { ?>
-                        <a href="dashboard.php?page=pemain&f=<?php echo urlencode($pemain); ?>">
+                        <a href="<?php echo $base_url; ?>/dashboard.php?page=pemain&f=<?php echo urlencode($pemain); ?>">
                             <?php echo $pemain . ", "; ?>
                         </a>
 
