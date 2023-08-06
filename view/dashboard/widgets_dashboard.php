@@ -42,14 +42,14 @@
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
                                     <?php if (!empty($thumbnail)) { ?>
-                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id ?>"
+                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $tmdb_id ?>"
                                             style="color: black;">
                                             <img class="img-fluid rounded img-landscape-zoom"
                                                 src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'film'; ?>/<?php echo $thumbnail; ?>"
                                                 alt="<?php echo $judul; ?>"></a>
                                     <?php } else {
                                         ?>
-                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id ?>"
+                                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $tmdb_id ?>"
                                             style="color: black;">
                                             <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
                                                 alt="<?php echo $judul; ?>"></a>
