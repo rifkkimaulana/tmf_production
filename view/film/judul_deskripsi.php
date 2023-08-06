@@ -3,7 +3,6 @@
         <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalNotifikasi">
             INFO PLAYER
         </button>
-
         <div class="float-right">
             <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tmdb_id; ?>"><button
                     type="button" class="btn btn-sm btn-secondary">Trailer</button>
@@ -284,7 +283,6 @@
             </div>
         </div>
     </div>
-
     <h4 class="tmf_production">
         <b>
             <?php echo $judul_film; ?>
@@ -298,10 +296,7 @@
     <p class="card-text" id="filmDescription">
         <?php echo $limited_description; ?>
     </p>
-
     <?php if (count($words) > 20) { ?>
         <a class="card-link tmf_teks" id="showMoreLink" onclick="toggleDescription()">Lebih Banyak</a>
     <?php } ?>
-
-
 </div>

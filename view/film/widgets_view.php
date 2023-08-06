@@ -8,9 +8,6 @@
                 </div>
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
-                    $query_film = "SELECT * FROM tb_film WHERE tmdb_id = '$filmId'";
-                    $result_film = mysqli_query($koneksi, $query_film);
-                    $row_film = mysqli_fetch_assoc($result_film);
                     $desired_genre_ids = $row_film['genre_ids'];
 
                     $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film, tb_film.tmdb_id, tb_film.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
@@ -22,7 +19,20 @@
 
                     $result_film = mysqli_query($koneksi, $query_film);
                     while ($row_film = mysqli_fetch_assoc($result_film)) {
-                        if (!empty($row_film['judul_film'])) {
+                        $judul_film = $row_film['judul_film'];
+                        $thumbnail = $row_film['thumbnail'];
+
+                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                        $url_poster = $row_tmdb['url_poster'];
+
+                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+                        $total_kunjungan = $row_kunjungan['total_kunjungan'];
+
+                        if (!empty($judul_film)) {
                             $genre_ids = array_filter(explode(',', $row_film['genre_ids']));
                             $genres = array();
 
@@ -34,23 +44,18 @@
                             }
                             ?>
                             <div class="row">
-                                <?php $tmdb_id = $row_film['tmdb_id']; ?>
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
-                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
+                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>"
+                                        style="color: black;">
                                         <div class="thumbnail-container">
-                                            <?php if (!empty($row_film['thumbnail'])) { ?>
+                                            <?php if (!empty($thumbnail)) { ?>
                                                 <img class="img-fluid rounded img-landscape-zoom"
-                                                    src="gambar/film/<?php echo $row_film['thumbnail']; ?>"
-                                                    alt="<?php echo $row_film['judul_film']; ?>">
+                                                    src="<?php echo $base_url; ?>/gambar/film/<?php echo $thumbnail; ?>"
+                                                    alt="<?php echo $judul_film; ?>">
                                             <?php } else {
-                                                $tmdb_id = $row_film['tmdb_id'];
-                                                $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                                                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                                                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                                                $url_poster = $row_tmdb['url_poster'];
                                                 ?>
                                                 <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                                    alt="<?php echo $row_film['judul_film']; ?>">
+                                                    alt="<?php echo $judul_film; ?>">
                                             <?php } ?>
                                         </div>
                                     </a>
@@ -58,25 +63,14 @@
                                 <div class="col-lg-8 col-sm-6 col-6">
                                     <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
                                         <strong>
-                                            <?php echo $row_film['judul_film']; ?>
+                                            <?php echo $judul_film; ?>
                                         </strong></br>
                                         <?php foreach ($genres as $genres) { ?>
-                                            <?php
-                                            $slug_genre = strtolower(str_replace(' ', '-', $genres));
-                                            ?>
                                             <a style="font-size: 14px;"
-                                                href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
+                                                href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
                                                 <?php echo $genres . ", "; ?>
                                             </a>
                                         <?php } ?>
-
-                                        <?php
-                                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
-                                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-                                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
-
-                                        $total_kunjungan = $row_kunjungan['total_kunjungan'];
-                                        ?>
                                         <p style="font-size: 14px;"><i class="fas fa-eye"></i>
                                             <?php echo $total_kunjungan; ?>
                                         </p>
