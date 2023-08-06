@@ -1,7 +1,8 @@
 <?php
 session_start();
-$username = $_SESSION['nama'];
+$username = $_SESSION['username'];
 $description_log = 'Menghentikan session.';
+$action = 'logout';
 include 'config/insert_log.php';
 
 session_unset();
