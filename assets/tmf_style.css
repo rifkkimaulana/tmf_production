@@ -183,14 +183,14 @@
   max-height: 200px;
   object-fit: cover;
 }
-@media (max-width: 767px) {
-  .user-menu img {
-    display: none;
-  }
-
-  .user-menu:before {
-    content: "Login"; /* Teks tombol login */
-    display: inline-block;
-    padding: 6px 12px;
-  }
+/* Gaya untuk pesan loading */
+#loadingMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 5px;
+  display: none; /* Sembunyikan pesan loading secara default */
 }

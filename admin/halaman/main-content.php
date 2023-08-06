@@ -95,46 +95,26 @@
                 }
             });
         </script>
-        <!-- Modal Loading (sesuai contoh sebelumnya) -->
-        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-label="loadingModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="spinner-border" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <span class="ml-2">Loading...</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <script>
-            var loadingModalShown = false; // Flag to check if the loading modal has been shown
-
-            function showLoadingModal() {
-                $('#modalGagal').modal('show');
-                loadingModalShown = true;
+            // Fungsi untuk menampilkan pesan loading
+            function showLoadingMessage() {
+                $('#loadingMessage').show();
             }
 
-            function hideLoadingModal() {
-                $('#modalGagal').modal('hide');
+            // Fungsi untuk menyembunyikan pesan loading
+            function hideLoadingMessage() {
+                $('#loadingMessage').hide();
             }
 
+            // Event untuk menampilkan pesan loading saat halaman dimuat
             document.addEventListener('DOMContentLoaded', function () {
-                hideLoadingModal(); // Hide the loading modal initially
+                showLoadingMessage();
             });
 
-            window.addEventListener('beforeunload', function () {
-                if (!loadingModalShown) { // Show the modal only if it hasn't been shown before
-                    setTimeout(function () {
-                        showLoadingModal();
-                    }, 50); // 50 milliseconds delay before showing the modal
-                }
-            });
-
+            // Event 'load' berfungsi untuk menyembunyikan pesan loading setelah seluruh halaman selesai dimuat.
             window.addEventListener('load', function () {
-                hideLoadingModal();
+                hideLoadingMessage();
             });
         </script>
 
