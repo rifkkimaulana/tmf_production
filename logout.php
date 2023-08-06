@@ -1,15 +1,14 @@
 <?php
 include 'config/base_url.php';
 session_start();
-echo $_SESSION['username'];
-$url = $base_url . "/config/insert_log.php";
 
+$url = $base_url . "/config/insert_log.php";
 $data = array(
     'username' => $_SESSION['username'],
     'action' => 'logout',
-    'description_log' => 'berhasil logout'
+    'description_log' => 'berhasil logout',
+    'ip_address' => $_SERVER['REMOTE_ADDR']
 );
-
 $options = array(
     'http' => array(
         'method' => 'POST',
@@ -17,10 +16,8 @@ $options = array(
         'content' => http_build_query($data)
     )
 );
-
 $context = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
-
 if ($result !== false) {
     echo "Permintaan POST otomatis berhasil dikirim.";
 } else {
@@ -31,4 +28,7 @@ session_unset();
 session_destroy();
 
 setcookie("remember_me", "", time() - 3600, "/");
+
+header("location: login/index.php");
+exit();
 ?>

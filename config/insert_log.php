@@ -3,9 +3,9 @@ include 'koneksi.php';
 $username = $_POST['username'];
 $action = $_POST['action'];
 $description_log = $_POST['description_log'];
+$ip_address = $_POST['ip_address'];
 
 $timestamp = date('Y-m-d H:i:s');
-$ip_address = $_SERVER['REMOTE_ADDR'];
 
 $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
                     VALUES (?, ?, ?, ?, ?)";
@@ -18,7 +18,6 @@ if (mysqli_stmt_execute($stmt)) {
 } else {
     echo "Error: " . mysqli_error($koneksi);
 }
-
 mysqli_stmt_close($stmt);
 mysqli_close($koneksi);
 
