@@ -11,7 +11,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>User ID</th>
+                                <th>User</th>
                                 <th>Action</th>
                                 <th>Description</th>
                                 <th>IP Address</th>
@@ -32,7 +32,7 @@
                                         <?php echo $d['timestamp']; ?>
                                     </td>
                                     <td>
-                                        <?php echo $d['user_id']; ?>
+                                        <?php echo $d['username']; ?>
                                     </td>
                                     <td>
                                         <?php echo $d['action']; ?>
