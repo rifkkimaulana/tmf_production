@@ -26,7 +26,7 @@
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['url_poster'];
 
-                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
+                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
                         $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
                         $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                         $visite = $row_kunjungan['total_kunjungan'];
