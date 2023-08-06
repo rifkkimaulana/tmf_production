@@ -88,19 +88,15 @@
 </script>
 
 <script>
-    // Fungsi untuk menyembunyikan skeleton screen dan menampilkan konten utama
     function hideSkeletonScreen() {
         document.getElementById("skeletonScreen").style.display = "none";
         document.getElementById("content").style.display = "block";
     }
 
-    // Menampilkan skeleton screen saat halaman dimuat
     document.addEventListener("DOMContentLoaded", function () {
-        // Simulasikan proses memuat data selama 2 detik (Anda bisa mengganti nilai timeout sesuai kebutuhan)
         setTimeout(function () {
-            // Setelah konten siap, sembunyikan skeleton screen dan tampilkan konten utama
             hideSkeletonScreen();
-        }, 2000); // 2000 milliseconds (2 detik)
+        }, 10000);
     });
 </script>
 </body>
