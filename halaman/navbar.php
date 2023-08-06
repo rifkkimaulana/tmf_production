@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-black">
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="<?php echo $base_url; ?>/dashboard.php?page=dashboard" class="navbar-brand">
             <span class="brand-text font-weight-light"><b>TMF</b>PRODUCTION</span>
