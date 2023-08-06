@@ -99,19 +99,6 @@
         }, 300);
     });
 </script>
-<script>
-    function detectColorScheme() {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-    }
-
-    detectColorScheme();
-
-    window.matchMedia('(prefers-color-scheme: dark)').addListener(detectColorScheme);
-</script>
 </body>
 
 </html>
