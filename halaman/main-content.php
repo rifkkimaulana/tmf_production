@@ -1,3 +1,6 @@
+<!-- Tombol untuk menguji modal -->
+<button type="button" class="btn btn-primary" id="testButton">Test Modal Loading</button>
+
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
