@@ -424,3 +424,4 @@ foreach ($pemain_ids as $pemain_id) {
         </div>
     </div>
 </div>
+<?php include 'widgets_view'; ?>
