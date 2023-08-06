@@ -211,18 +211,21 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
             <div class="card-flat">
                 <hr>
                 <b>
-                    Judul Film:
+                    Judul TV Show:
                 </b>
                 <a href="<?php echo $base_url . "/dashboard.php?page=" . $page . "&id=" . $tv_tmdb_id; ?>">
                     <?php echo $row_tmdb['judul']; ?>
                 </a>
-                <hr>
-                <b>Genre:</b>
-                <?php foreach ($genres as $genres) { ?>
-                    <a href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
-                        <?php echo $genres . ", "; ?>
-                    </a>
-                    <?php
+                <?php
+                if (empty($row_tv['genres'])) { ?>
+                    <hr>
+                    <b>Genre:</b>
+                    <?php foreach ($genres as $genres) { ?>
+                        <a href="dashboard.php?page=genre&f=<?php echo urlencode($genres); ?>">
+                            <?php echo $genres . ", "; ?>
+                        </a>
+                        <?php
+                    }
                 }
                 if (empty($row_tv['negara_ids'])) {
                 } else { ?>

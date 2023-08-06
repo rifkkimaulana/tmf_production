@@ -17,7 +17,6 @@ function formatCurrency($amount)
 function timeSinceUpload($timestamp)
 {
     $timeDiff = time() - strtotime($timestamp);
-
     $intervals = array(
         1 => array('tahun', 31556952),
         $timeDiff < 31556952 => array('bulan', 2629746),
@@ -35,7 +34,6 @@ function timeSinceUpload($timestamp)
         }
     }
 }
-
 function getGenreId($koneksi, $nama_genre)
 {
     $query_genre_id = "SELECT id FROM tb_genre WHERE nama_genre = '$nama_genre'";
@@ -60,7 +58,6 @@ function getKualitasId($koneksi, $nama_kualitas)
         return null;
     }
 }
-
 function getNegaraId($koneksi, $nama_negara)
 {
     $query_negara_id = "SELECT id FROM tb_negara WHERE nama_negara = '$nama_negara'";
@@ -73,7 +70,6 @@ function getNegaraId($koneksi, $nama_negara)
         return null;
     }
 }
-
 function getTahunId($koneksi, $nama_tahun)
 {
     $query_tahun_id = "SELECT id FROM tb_tahun WHERE tahun_rilis = '$nama_tahun'";
@@ -86,7 +82,6 @@ function getTahunId($koneksi, $nama_tahun)
         return null;
     }
 }
-
 function getNegaraIdByName($koneksi, $nama_negara)
 {
     $nama_negara = mysqli_real_escape_string($koneksi, $nama_negara);
@@ -102,5 +97,4 @@ function getNegaraIdByName($koneksi, $nama_negara)
         return null;
     }
 }
-
 ?>
