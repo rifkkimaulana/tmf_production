@@ -26,6 +26,12 @@
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['url_poster'];
 
+                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
+                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+                        $visite = $row_kunjungan['total_kunjungan'];
+
+
                         if (!empty($judul2)) {
 
                             $genre_ids = array_filter(explode(',', $row_tv2['genre_ids']));
@@ -70,7 +76,7 @@
                                         <?php } ?>
                                         <small>
                                             <p style="font-size: 14px;"><i class="fas fa-eye"></i>
-                                                <?php echo $total_kunjungan; ?>
+                                                <?php echo $visite; ?>
                                             </p>
                                         </small>
                                     </a>

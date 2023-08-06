@@ -42,10 +42,6 @@ $select_id_dbtmdb = $row_tmdb['tmdb_id'];
 $query_tmdb2 = "SELECT * FROM tb_tmdb WHERE tmdb_id = $select_id_dbtmdb;";
 $result_tmdb2 = mysqli_query($koneksi, $query_tmdb2);
 
-$query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tv_tmdb_id'";
-$result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-$row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
-
 $genre_ids = explode(",", $row_tv['genre_ids']);
 $genres = array();
 foreach ($genre_ids as $genre_id) {
