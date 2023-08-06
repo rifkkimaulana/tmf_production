@@ -113,12 +113,12 @@
             var loadingModalShown = false; // Flag to check if the loading modal has been shown
 
             function showLoadingModal() {
-                $('#loadingModal').modal('show');
+                $('#modalGagal').modal('show');
                 loadingModalShown = true;
             }
 
             function hideLoadingModal() {
-                $('#loadingModal').modal('hide');
+                $('#modalGagal').modal('hide');
             }
 
             document.addEventListener('DOMContentLoaded', function () {
