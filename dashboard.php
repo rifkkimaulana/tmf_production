@@ -6,7 +6,7 @@
 <?php include 'halaman/navbar.php'; ?>
 
 
-<div class="content-wrapper" style="background-color: white;">
+<div class="content-wrapper">
     <div id="skeletonScreen">
         <div class="container mt-5">
             <div class="skeleton-content"></div>
