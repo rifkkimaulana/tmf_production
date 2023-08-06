@@ -95,11 +95,11 @@
                     } else {
                         $fotoUrl = $base_url . '/gambar/user/user.png';
                     }
+
                 } else {
                     $namaUser = 'Pengunjung';
                     $levelUser = '';
                 }
-
                 ?>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
@@ -119,10 +119,12 @@
                             </li>
                             <li class="user-footer">
                                 <div class="float-left">
-                                    <a href="#" class="btn btn-default btn-secondary">Member Area</a>
+                                    <a href="<?php echo $base_url . "/login/index.php" ?>"
+                                        class="btn btn-default btn-secondary">Member Area</a>
                                 </div>
                                 <div class="float-right">
-                                    <a href="#" class="btn btn-default btn-danger">Logout</a>
+                                    <a href="<?php echo $base_url . "/login/register.php" ?>"
+                                        class="btn btn-default btn-danger">Logout</a>
                                 </div>
                             </li>
                         </ul>
