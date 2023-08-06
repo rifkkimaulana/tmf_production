@@ -29,12 +29,15 @@
 </div>
 <script>
     function showLoadingModal() {
-        $('#loadingModal').modal('hide');
-    }
-    function hideLoadingModal() {
         $('#loadingModal').modal('show');
     }
+    function hideLoadingModal() {
+        $('#loadingModal').modal('hide');
+    }
     document.addEventListener('DOMContentLoaded', function () {
+        hideLoadingModal(); // Hide the loading modal initially
+    });
+    window.addEventListener('beforeunload', function () {
         showLoadingModal();
     });
     window.addEventListener('load', function () {
