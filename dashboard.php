@@ -12,6 +12,7 @@
             <div class="skeleton-header"></div>
             <div class="skeleton-content"></div>
             <div class="skeleton-content"></div>
+            <div class="skeleton-img"></div>
             <div class="skeleton-content"></div>
         </div>
     </div>
