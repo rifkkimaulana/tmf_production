@@ -9,6 +9,9 @@
     <?php include 'halaman/main-content.php'; ?>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Tombol untuk memicu modal -->
+<button type="button" class="btn btn-primary" onclick="showLoadingModal()">Tampilkan Loading</button>
+
 <!-- Modal -->
 <div id="loadingModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
