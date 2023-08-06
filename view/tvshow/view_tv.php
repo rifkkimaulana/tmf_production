@@ -173,7 +173,9 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                         }
                     }
                     ?>
-
+                    <?php if (empty($link)) {
+                        $link = $row_play['link1'];
+                    } ?>
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
