@@ -68,21 +68,27 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
+        <!-- Hubungkan dengan jQuery dan Bootstrap JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
         <script>
             function showLoadingModal() {
                 $('#loadingModal').modal('show');
             }
+
             function hideLoadingModal() {
                 $('#loadingModal').modal('hide');
             }
+
             document.addEventListener('DOMContentLoaded', function () {
                 hideLoadingModal(); // Hide the loading modal initially
             });
+
             window.addEventListener('beforeunload', function () {
-                setTimeout(function () {
-                    showLoadingModal();
-                }, 100); // 500 milliseconds (0.5 seconds) delay before showing the modal
+                showLoadingModal();
             });
+
             window.addEventListener('load', function () {
                 hideLoadingModal();
             });
