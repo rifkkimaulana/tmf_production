@@ -68,8 +68,12 @@
             </form>
             <div class="hide-on-large-screen">
                 <div class="col-12 mt-4">
-                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">Masuk
-                        / Daftar</button>
+                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#userModal">Masuk
+                    </button>
+                </div>
+                <div class="col-12 mt-1">
+                    <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#userModal">Masuk
+                    </button>
                 </div>
             </div>
             <div class="hide-on-small-screen">
