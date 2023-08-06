@@ -91,7 +91,7 @@
                     $fotoProfil = $row_user['logo_user'];
 
                 } else {
-                    $namaUser = '';
+                    $namaUser = 'pengunjung';
                     $levelUser = '';
                 }
 
@@ -120,11 +120,11 @@
                             </li>
                             <li class="user-footer">
                                 <?php
-                                if (empty($namaUser)) {
+                                if ($namaUser === "pengunjung") {
                                     ?>
                                     <div class="float-right">
                                         <a href="<?php echo $base_url . "/login/index.php" ?>"
-                                            class="btn btn-default btn-secondary">Login / Daftar</a>
+                                            class="btn btn-default btn-primary">Login / Daftar</a>
                                     </div>
                                 <?php } else {
                                     ?>
