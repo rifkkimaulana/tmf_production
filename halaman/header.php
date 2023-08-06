@@ -73,7 +73,6 @@ $limitedGenres = array_slice($genres, 0, 9);
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
             animation: pulse 1.5s linear infinite;
         }
 
@@ -89,7 +88,7 @@ $limitedGenres = array_slice($genres, 0, 9);
 
         .content {
             opacity: 0;
-            animation: fade 0.5s ease-in-out forwards;
+            animation: fade 1s ease-in-out forwards;
         }
 
         @keyframes fade {
