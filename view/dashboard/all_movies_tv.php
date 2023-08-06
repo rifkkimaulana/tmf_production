@@ -81,7 +81,12 @@ $result_tv = mysqli_query($koneksi, $query_tv);
         while ($row_tv = mysqli_fetch_assoc($result_tv)) {
             $judul_tvShow = $row_tv['judul_tv_show'];
             $thumbnail_tv = $row_tv['thumbnail'];
-            $tmdb_idTv = $row_tv['judul_tv_show'];
+            $tmdb_idTv = $row_tv['tmdb_id'];
+
+            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_idTv'";
+            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+            $url_poster = $row_tmdb['url_poster'];
 
             $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_idTv'";
             $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
@@ -97,10 +102,7 @@ $result_tv = mysqli_query($koneksi, $query_tv);
                                     alt="<?php echo $judul_tvShow; ?>">
                             </a>
                         <?php } else {
-                            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_idTv'";
-                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                            $url_poster = $row_tmdb['url_poster'];
+
                             ?>
                             <a href="<?php echo $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tmdb_idTv; ?>">
                                 <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
