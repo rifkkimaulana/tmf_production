@@ -21,8 +21,12 @@ if (isset($_POST['submit'])) {
     $ip_address = $_SERVER['REMOTE_ADDR'];
 
     $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
-                    VALUES ('$timestamp', $username, 'login', '$description_log', '$ip_address')";
-    $result_log = mysqli_query($koneksi, $query_log);
+                    VALUES (?, ?, 'login', ?, ?)";
+
+    $stmt = mysqli_prepare($koneksi, $query_log);
+    mysqli_stmt_bind_param($stmt, "ssss", $timestamp, $username, $description_log, $ip_address);
+    mysqli_stmt_execute($stmt);
+
 
     $stmt = $koneksi->prepare("SELECT * FROM tb_users WHERE user_username=?");
     $stmt->bind_param("s", $username);
