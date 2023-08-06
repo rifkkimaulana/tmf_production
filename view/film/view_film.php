@@ -6,8 +6,6 @@ $query_film = "SELECT * FROM tb_film WHERE tmdb_id = '$tmdb_id'";
 $result_film = mysqli_query($koneksi, $query_film);
 $row_film = mysqli_fetch_assoc($result_film);
 $judul_film = $row_film['judul_film'];
-$link = $row_film['link_trailer'];
-echo $link;
 $id_player = $row_film['player_id'];
 $id_download = $row_film['download_id'];
 
@@ -15,6 +13,7 @@ $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = '$tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 $judul_tmdb = $row_tmdb['judul'];
+$link = $row_tmdb['link_trailer'];
 
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
 $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
