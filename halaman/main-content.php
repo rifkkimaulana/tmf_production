@@ -1,30 +1,35 @@
-<!-- Modal -->
-<div id="loadingModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <!-- Konten modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
-            <!-- Animasi loading -->
-            <div class="overlay">
-                <i class="fa fa-refresh fa-spin"></i>
-            </div>
-            <!-- Header modal -->
-            <div class="modal-header">
-                <h4 class="modal-title">Loading...</h4>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span class="ml-2">Loading...</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
+    // Fungsi untuk menampilkan modal loading
+    function showLoadingModal() {
+        $('#loadingModal').modal('show');
+    }
+
     // Fungsi untuk menyembunyikan modal loading
     function hideLoadingModal() {
         $('#loadingModal').modal('hide');
     }
 
-    // Event listener untuk menyembunyikan modal ketika halaman selesai dimuat
+    // Event untuk menampilkan modal loading saat halaman dimuat
     $(window).on('load', function () {
-        hideLoadingModal();
+        hideLoadingModal(); // Menyembunyikan modal loading setelah halaman selesai dimuat
     });
 </script>
+
 <div class="container">
     <div class="row">
         <?php
