@@ -2,7 +2,7 @@
 include 'config/base_url.php';
 session_start();
 $username = $_SESSION['username'];
-
+echo $username;
 $data = array(
     'username' => 'contoh_username',
     'action' => 'login',
@@ -27,6 +27,6 @@ session_destroy();
 
 setcookie("remember_me", "", time() - 3600, "/");
 
-header("location: login/index.php");
-exit();
+//header("location: login/index.php");
+//exit();
 ?>
