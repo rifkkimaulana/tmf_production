@@ -29,10 +29,10 @@
 </div>
 <script>
     function showLoadingModal() {
-        $('#loadingModal').modal('show');
+        $('#loadingModal').modal('hide');
     }
     function hideLoadingModal() {
-        $('#loadingModal').modal('hide');
+        $('#loadingModal').modal('show');
     }
     document.addEventListener('DOMContentLoaded', function () {
         showLoadingModal();
