@@ -282,24 +282,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
-        <button onclick="showLoadingModal()">Show Loading Modal</button>
-
-        <!-- Modal Loading -->
-        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <span class="ml-2">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script>
             function openSearchModal() {
                 $('#searchModal').modal('show');
@@ -308,29 +290,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#searchModalTv').modal('show');
             }
         </script>
-        <!-- Letakkan skrip modal loading sebelum elemen konten utama -->
-        <script>
-            function showLoadingModal() {
-                $('#loadingModal').modal('show');
-            }
-
-            function hideLoadingModal() {
-                $('#loadingModal').modal('hide');
-            }
-
-            // Tampilkan modal loading segera setelah elemen HTML untuk modal loading ada di halaman
-            showLoadingModal();
-
-            // Setelah modal ditampilkan, sembunyikan modal setelah 1 detik
-            hideLoadingModalAfterDelay();
-
-            function hideLoadingModalAfterDelay() {
-                setTimeout(function () {
-                    hideLoadingModal();
-                }, 500); // 500 milliseconds (0.5 detik)
-            }
-        </script>
-
     </div>
 </body>
 
