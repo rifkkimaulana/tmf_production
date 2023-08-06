@@ -49,17 +49,17 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                     $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
                                     $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                     $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-
+                                    $url_poster = $row_tmdb['url_poster'];
+                                    echo $url_poster;
                                     ?>
 
                                     <?php if (!empty($thumbnail)) { ?>
                                         <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb ?>"
                                             style="color: black;">
                                             <img class="img-fluid rounded img-landscape-zoom"
-                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>/<?php echo $thumbnail; ?>"
+                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'film'; ?>/<?php echo $thumbnail; ?>"
                                                 alt="<?php echo $judul; ?>"></a>
                                     <?php } else {
-                                        $url_poster = $row_tmdb['url_poster'];
                                         ?>
                                         <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb ?>"
                                             style="color: black;">
