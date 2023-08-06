@@ -100,31 +100,8 @@ $limitedGenres = array_slice($genres, 0, 9);
                 opacity: 1;
             }
         }
-
-        body {
-            background-color: #f2f2f2;
-            /* Warna latar belakang */
-            opacity: 1;
-            /* Nilai opasitas default (tidak meredup) */
-            transition: opacity 0.5s ease;
-            /* Animasi meredup */
-            position: relative;
-        }
     </style>
 </head>
 
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
-        <button id="toggleButton">Meredupkan Latar Belakang</button>
-
-        <script>
-            // Menggunakan JavaScript untuk mengatur opasitas saat tombol diklik
-            const bodyElement = document.body;
-            const toggleButton = document.getElementById('toggleButton');
-            let isBackgroundRedup = false;
-
-            toggleButton.addEventListener('click', () => {
-                isBackgroundRedup = !isBackgroundRedup;
-                bodyElement.style.opacity = isBackgroundRedup ? 0.5 : 1;
-            });
-        </script>
