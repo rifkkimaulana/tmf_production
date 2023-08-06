@@ -100,6 +100,7 @@
                 } else {
                     $fotoUrl = $base_url . '/gambar/user/user.png';
                 }
+
                 ?>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
