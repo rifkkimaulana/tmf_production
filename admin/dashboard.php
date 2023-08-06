@@ -46,7 +46,8 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-
+    <!-- Hubungkan dengan Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -68,8 +69,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
-        <!-- Hubungkan dengan jQuery dan Bootstrap JavaScript -->
-
         <script>
             function showLoadingModal() {
                 $('#loadingModal').modal('show');
