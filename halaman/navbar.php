@@ -69,19 +69,8 @@
             <div class="hide-on-large-screen">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
-                        <button class="nav-link dropdown-toggle btn btn-sm btn-success" type="button"
-                            data-toggle="dropdown">
-                            Login
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <li class="user-header">
-                                <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                        </ul>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#userModal">Buka Modal
+                            User</button>
                     </li>
                 </ul>
             </div>
@@ -106,3 +95,26 @@
         </div>
     </div>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Informasi Pengguna</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Isi konten modal disini -->
+                <p>Nama: John Doe</p>
+                <p>Email: johndoe@example.com</p>
+                <p>Role: Administrator</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <!-- Jika Anda ingin menambahkan tombol lain dalam modal, Anda bisa tambahkan di sini -->
+            </div>
+        </div>
+    </div>
+</div>
