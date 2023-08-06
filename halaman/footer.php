@@ -6,48 +6,6 @@
     </strong>
     All rights reserved.
 </footer>
-<!-- Modal Loading (sesuai contoh sebelumnya) -->
-<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="d-flex justify-content-center align-items-center">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <span class="ml-2">Loading...</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Hubungkan dengan jQuery dan Bootstrap JavaScript -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    function showLoadingModal() {
-        $('#loadingModal').modal('show');
-    }
-
-    function hideLoadingModal() {
-        $('#loadingModal').modal('hide');
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        hideLoadingModal(); // Hide the loading modal initially
-    });
-
-    window.addEventListener('beforeunload', function () {
-        showLoadingModal();
-    });
-
-    window.addEventListener('load', function () {
-        hideLoadingModal();
-    });
-</script>
-
 <script src="<?php echo $base_url; ?>/assets/plugins/jquery/jquery.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/dist/js/adminlte.min.js"></script>
@@ -127,6 +85,23 @@
             showMoreLink.innerHTML = "Lebih Banyak";
         }
     }
+</script>
+
+<script>
+    // Fungsi untuk menyembunyikan skeleton screen dan menampilkan konten utama
+    function hideSkeletonScreen() {
+        document.getElementById("skeletonScreen").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    }
+
+    // Menampilkan skeleton screen saat halaman dimuat
+    document.addEventListener("DOMContentLoaded", function () {
+        // Simulasikan proses memuat data selama 2 detik (Anda bisa mengganti nilai timeout sesuai kebutuhan)
+        setTimeout(function () {
+            // Setelah konten siap, sembunyikan skeleton screen dan tampilkan konten utama
+            hideSkeletonScreen();
+        }, 2000); // 2000 milliseconds (2 detik)
+    });
 </script>
 </body>
 

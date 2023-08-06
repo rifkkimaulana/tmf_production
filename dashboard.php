@@ -2,6 +2,14 @@
 //include 'config/minify_function.php';
 //ob_start();
 ?>
+<div id="skeletonScreen">
+    <div class="container mt-5">
+        <div class="skeleton-header"></div>
+        <div class="skeleton-content"></div>
+        <div class="skeleton-content"></div>
+        <div class="skeleton-content"></div>
+    </div>
+</div>
 <?php include 'halaman/header.php'; ?>
 <?php include 'halaman/navbar.php'; ?>
 
