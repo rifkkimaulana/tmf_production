@@ -67,13 +67,9 @@
                 </div>
             </form>
             <div class="hide-on-large-screen">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">Masuk
-                                / Daftar</button>
-                        </div>
-                    </div>
+                <div class="col-12 mt-2">
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">Masuk
+                        / Daftar</button>
                 </div>
             </div>
             <div class="hide-on-small-screen">
