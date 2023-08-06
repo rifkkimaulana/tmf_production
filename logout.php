@@ -8,6 +8,6 @@ session_destroy();
 
 setcookie("remember_me", "", time() - 3600, "/");
 
-header("location: login/index.php");
-exit();
+//header("location: login/index.php");
+//exit();
 ?>
