@@ -8,6 +8,13 @@ $row_film = mysqli_fetch_assoc($result_film);
 $judul_film = $row_film['judul_film'];
 $id_player = $row_film['player_id'];
 $id_download = $row_film['download_id'];
+$description = $row_film['deskripsi'];
+$words = explode(' ', $description);
+$limited_description = implode(' ', array_slice($words, 0, 20));
+$full_description = $description;
+$created_at_timestamp = strtotime($row_film['created_at']);
+$current_timestamp = time();
+$time_duration_seconds = $current_timestamp - $created_at_timestamp;
 
 $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = '$tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
@@ -31,6 +38,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row_jumlah_komentar = $result->fetch_assoc();
 $total_komentar = $row_jumlah_komentar['total_komentar'];
+
+$query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+$result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+$row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+$total_kunjungan = $row_kunjungan['total_kunjungan'];
 
 $genre_ids = explode(",", $row_film['genre_ids']);
 $genres = array();
