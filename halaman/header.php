@@ -30,6 +30,7 @@ $limitedGenres = array_slice($genres, 0, 9);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<?php echo $base_url; ?>/gambar/icon.png" type="image/png">
 
     <title>TMF Production | Dashboard</title>
 
