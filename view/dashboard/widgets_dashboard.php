@@ -38,7 +38,7 @@
                                 $genres[] = $row_genre['nama_genre'];
                             }
                             ?>
-
+                            <hr>
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
                                     <?php if (!empty($thumbnail)) { ?>
@@ -87,7 +87,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <hr>
                             <?php
                         }
                     }
