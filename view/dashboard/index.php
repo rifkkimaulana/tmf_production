@@ -30,7 +30,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                     while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
                         $judul = $row_film_tv['judul'];
                         $cek_id_tmdb = $row_film_tv['tmdb_id'];
-                        $thumbnail = $row_film_tv['url_poster'];
+                        $thumbnail = $row_film_tv['thumbnail'];
 
                         if (!empty($judul)) {
                             $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
