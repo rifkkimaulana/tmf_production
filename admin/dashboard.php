@@ -253,17 +253,17 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#loadingModal').modal('hide');
             }
 
+            // Menampilkan modal loading saat DOM selesai dimuat
             document.addEventListener('DOMContentLoaded', function () {
                 showLoadingModal(); // Show the loading modal when the page is loaded
-                hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
             });
 
-            function hideLoadingModalAfterDelay() {
-                setTimeout(function () {
-                    hideLoadingModal();
-                }, 1000); // 1000 milliseconds (1 detik)
-            }
+            // Menyembunyikan modal loading setelah seluruh halaman, termasuk sumber daya lain, selesai dimuat
+            window.addEventListener('load', function () {
+                hideLoadingModal(); // Hide the loading modal after the page is fully loaded
+            });
         </script>
+
 
 
         <script>
