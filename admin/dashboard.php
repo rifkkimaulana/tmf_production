@@ -95,13 +95,13 @@ if ($_SESSION['status'] != "administrator_logedin") {
             margin-bottom: 0;
         }
 
-        /* Efek Dissolve untuk Konten Utama */
+        /* Efek Fade untuk Konten Utama */
         .hidden {
             opacity: 0;
-            animation: dissolve 2s ease-in-out forwards;
+            animation: fade 2s ease-in-out forwards;
         }
 
-        @keyframes dissolve {
+        @keyframes fade {
             from {
                 opacity: 0;
             }
