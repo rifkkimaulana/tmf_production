@@ -19,8 +19,9 @@
                     while ($row_tv2 = mysqli_fetch_assoc($result_tv2)) {
                         $judul2 = $row_tv2['judul_tv_show'];
                         $thumbnail = $row_tv2['thumbnail'];
+                        $tmdb_id = $row_tv2['tmdb_id'];
 
-                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tv_tmdb_id'";
+                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
                         $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['url_poster'];
@@ -39,7 +40,7 @@
                             ?>
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
-                                    <a href="<?php $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tv_tmdb_id; ?>"
+                                    <a href="<?php $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tmdb_id; ?>"
                                         style="color: black;">
                                         <div class="thumbnail-container">
                                             <?php if (!empty($thumbnail)) { ?>
@@ -56,7 +57,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-8 col-sm-6 col-6">
-                                    <a href="<?php $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tv_tmdb_id; ?>"
+                                    <a href="<?php $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tmdb_id; ?>"
                                         style="color: black;">
                                         <strong>
                                             <?php echo $judul2; ?>
