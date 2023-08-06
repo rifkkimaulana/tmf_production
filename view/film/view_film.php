@@ -7,6 +7,7 @@ $result_film = mysqli_query($koneksi, $query_film);
 $row_film = mysqli_fetch_assoc($result_film);
 $judul_film = $row_film['judul_film'];
 $link = $row_film['link_trailer'];
+echo $link;
 $id_player = $row_film['player_id'];
 $id_download = $row_film['download_id'];
 
@@ -84,7 +85,6 @@ foreach ($pemain_ids as $pemain_id) {
                 <div class="embed-responsive embed-responsive-16by9">
                     <?php
                     $playValue = isset($_GET['play']) ? $_GET['play'] : '';
-
                     switch ($playValue) {
                         case 1:
                             $link = $row_play['link1'];
