@@ -253,38 +253,20 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#loadingModal').modal('hide');
             }
 
-            function hideLoadingModalAfterDelay() {
-                setTimeout(function () {
-                    hideLoadingModal();
-                }, 1000); // 1000 milliseconds (1 detik)
-            }
-
             document.addEventListener('DOMContentLoaded', function () {
-                // Cek apakah modal sudah ditampilkan sebelumnya
-                var modalShown = sessionStorage.getItem('modalShown');
-
-                if (!modalShown) {
-                    // Jika modal belum ditampilkan sebelumnya, maka tampilkan modal
-                    showLoadingModal();
-
-                    // Set session storage untuk menandai bahwa modal sudah ditampilkan
-                    sessionStorage.setItem('modalShown', 'true');
-                } else {
-                    // Jika modal sudah ditampilkan sebelumnya, langsung sembunyikan modal
-                    hideLoadingModal();
-                }
-            });
-
-            window.addEventListener('beforeunload', function () {
-                // Hapus session storage saat pengguna meninggalkan halaman
-                sessionStorage.removeItem('modalShown');
+                showLoadingModal(); // Show the loading modal when the page is loaded
             });
 
             window.addEventListener('load', function () {
                 hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
             });
-        </script>
 
+            function hideLoadingModalAfterDelay() {
+                setTimeout(function () {
+                    hideLoadingModal();
+                }, 1000); // 1000 milliseconds (1 detik)
+            }
+        </script>
 
         <script>
             function openSearchModal() {
