@@ -64,6 +64,9 @@ $result_tv = mysqli_query($koneksi, $query_tv);
                 </div>
             <?php }
         } ?>
+        <script async="async" data-cfasync="false"
+            src="//pl20262457.highcpmrevenuegate.com/b0ece0f17ce43fac83128654df865fe7/invoke.js"></script>
+        <div id="container-b0ece0f17ce43fac83128654df865fe7"></div>
     </div>
 
     <!-- TV SHOW TERBARU -->
@@ -126,5 +129,8 @@ $result_tv = mysqli_query($koneksi, $query_tv);
                 </div>
             <?php }
         } ?>
+        <script async="async" data-cfasync="false"
+            src="//pl20262457.highcpmrevenuegate.com/b0ece0f17ce43fac83128654df865fe7/invoke.js"></script>
+        <div id="container-b0ece0f17ce43fac83128654df865fe7"></div>
     </div>
 </div>
