@@ -95,12 +95,8 @@
                 }
             });
         </script>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0-alpha/dist/js/adminlte.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Modal Loading (sesuai contoh sebelumnya) -->
-        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-label="loadingModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
@@ -123,7 +119,7 @@
                 $('#loadingModal').modal('hide');
             }
             document.addEventListener('DOMContentLoaded', function () {
-                hideLoadingModal(); // Hide the loading modal initially
+                hideLoadingModal();
             });
             window.addEventListener('beforeunload', function () {
                 setTimeout(function () {
