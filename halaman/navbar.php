@@ -67,7 +67,7 @@
                 </div>
             </form>
             <div class="hide-on-large-screen">
-                <div class="col-12 mt-2">
+                <div class="col-12 mt-4">
                     <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">Masuk
                         / Daftar</button>
                 </div>
