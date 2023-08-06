@@ -93,6 +93,15 @@ if ($_SESSION['status'] != "administrator_logedin") {
             }
         }
 
+        .header,
+        .content,
+        .footer {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            margin-bottom: 10px;
+        }
+
         .content:last-child {
             margin-bottom: 0;
         }
@@ -100,15 +109,15 @@ if ($_SESSION['status'] != "administrator_logedin") {
         /* Efek Fade untuk Konten Utama */
         .hidden {
             opacity: 0;
-            animation: fade 5s ease-in-out forwards;
+            animation: fade 3s ease-in-out forwards;
         }
 
         @keyframes fade {
-            from {
+            0% {
                 opacity: 0;
             }
 
-            to {
+            100% {
                 opacity: 1;
             }
         }
