@@ -14,12 +14,12 @@
                         $tmdb_id = $row_film_tv['tmdb_id'];
                         $judul = $row_film_tv['judul'];
                         $thumbnail = $row_film_tv['thumbnail'];
-                        echo $tmdb_id;
+
                         $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tmdb_id;";
                         $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['url_poster'];
-
+                        echo $url_poster;
                         if (!empty($judul)) {
                             $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
                             $genres = array();
