@@ -7,7 +7,7 @@
                     </h3>
                     <p>
                         Mohon maaf halaman yang anda buka tidak ditemukan. Silahkan Hubungi admin atau <a
-                            href="<?php echo $baseURL; ?>">return to dashboard</a>
+                            href="<?php echo $base_url; ?>">return to dashboard</a>
                     </p>
                 </div>
             </div>
