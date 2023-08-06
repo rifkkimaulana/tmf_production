@@ -86,6 +86,21 @@ $limitedGenres = array_slice($genres, 0, 9);
                 transform: translateX(100%);
             }
         }
+
+        .content {
+            opacity: 0;
+            animation: fade 1s ease-in-out forwards;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
