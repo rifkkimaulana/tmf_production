@@ -172,7 +172,7 @@ foreach ($pemain_ids as $pemain_id) {
                 }
                 ?>
             </div>
-
+            <?php include 'judul_deskripsi.php'; ?>
             <div class="card-flat">
                 <hr>
                 <b>
