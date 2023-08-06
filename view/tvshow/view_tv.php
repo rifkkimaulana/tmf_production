@@ -376,7 +376,7 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
                 if (empty($row_tv['pemain_ids'])) {
                 } else { ?>
                     <hr>
-                    <b>Network :</b>
+                    <b>Pemain & Crew :</b>
                     <?php foreach ($pemain as $pemain) { ?>
                         <a href="dashboard.php?page=pemain&f=<?php echo urlencode($pemain); ?>">
                             <?php echo $pemain . ", "; ?>
