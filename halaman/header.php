@@ -42,6 +42,9 @@ $limitedGenres = array_slice($genres, 0, 9);
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/skins/skin-black.min.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/tmf_style.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/select2/css/select2.min.css">
+
+    <script async="async" data-cfasync="false"
+        src="//pl20262457.highcpmrevenuegate.com/b0ece0f17ce43fac83128654df865fe7/invoke.js"></script>
 </head>
 
 <body class="hold-transition layout-top-nav text-sm skin-black">
