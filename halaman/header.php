@@ -39,6 +39,7 @@ $limitedGenres = array_slice($genres, 0, 9);
 
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/skins/skin-white.min.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/tmf_style.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/select2/css/select2.min.css">
     <style>
@@ -99,12 +100,6 @@ $limitedGenres = array_slice($genres, 0, 9);
             100% {
                 opacity: 1;
             }
-        }
-
-        body {
-            background-color: black;
-            color: #00ff00;
-            /* Warna hijau terang (#00ff00) untuk teks */
         }
     </style>
 </head>
