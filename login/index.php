@@ -16,7 +16,6 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $description_log = 'Mencoba Login';
     $timestamp = date('Y-m-d H:i:s');
     $ip_address = $_SERVER['REMOTE_ADDR'];
 
