@@ -78,7 +78,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
             animation: pulse 1.5s linear infinite;
         }
 
