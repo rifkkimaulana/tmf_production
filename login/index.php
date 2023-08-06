@@ -16,17 +16,6 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $timestamp = date('Y-m-d H:i:s');
-    $ip_address = $_SERVER['REMOTE_ADDR'];
-
-    $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
-                    VALUES (?, ?, 'login', ?, ?)";
-
-    $stmt = mysqli_prepare($koneksi, $query_log);
-    mysqli_stmt_bind_param($stmt, "ssss", $timestamp, $username, $description_log, $ip_address);
-    mysqli_stmt_execute($stmt);
-
-
     $stmt = $koneksi->prepare("SELECT * FROM tb_users WHERE user_username=?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -46,25 +35,30 @@ if (isset($_POST['submit'])) {
             if ($row['user_level'] == "administrator") {
                 $_SESSION['status'] = "administrator_logedin";
                 $description_log = 'Berhasil di arahkan ke halaman admin.';
+                include '../config/insert_log.php';
                 header("location: " . $base_url . "/admin/");
                 exit();
             } else if ($row['user_level'] == "manajemen") {
                 $_SESSION['status'] = "manajemen_logedin";
                 $description_log = 'Berhasil diarahkan ke halaman user.';
+                include '../config/insert_log.php';
                 header("location: " . $base_url . "/manajemen/");
                 exit();
             } else {
                 $description_log = 'Gagal, Data pengguna tidak ditemukan.';
+                include '../config/insert_log.php';
                 header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
                 exit();
             }
         } else {
             $description_log = 'Gagal, password salah.';
+            include '../config/insert_log.php';
             header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
             exit();
         }
     } else {
         $description_log = 'Gagal, Data pengguna tidak ditemukan.';
+        include '../config/insert_log.php';
         header("location: " . $base_url . "/login/index.php?alert=userNotFound");
         exit();
     }
