@@ -6,7 +6,8 @@
     </strong>
     All rights reserved.
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0-alpha/dist/js/adminlte.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Tombol untuk menguji modal -->
 <button type="button" class="btn btn-primary" id="testButton">Test Modal Loading</button>
 
@@ -48,8 +49,7 @@
         });
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0-alpha/dist/js/adminlte.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="<?php echo $base_url; ?>/assets/plugins/jquery/jquery.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/dist/js/adminlte.min.js"></script>
