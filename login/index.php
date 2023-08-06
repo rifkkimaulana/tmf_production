@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $timestamp = date('Y-m-d H:i:s');
     $ip_address = $_SERVER['REMOTE_ADDR'];
 
-    $query_log = "INSERT INTO tb_log_aplikasi (timestamp, username, action, description, ip_address)
+    $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
                     VALUES ('$timestamp', $username, '$action', '$description_log', '$ip_address')";
     $result_log = mysqli_query($koneksi, $query_log);
 
