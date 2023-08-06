@@ -90,6 +90,26 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 transform: translateX(100%);
             }
         }
+
+        .content:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Efek Dissolve untuk Konten Utama */
+        .hidden {
+            opacity: 0;
+            animation: dissolve 2s ease-in-out forwards;
+        }
+
+        @keyframes dissolve {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
