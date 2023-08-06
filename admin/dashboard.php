@@ -78,7 +78,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
             left: 0;
             width: 100%;
             height: 100%;
-            animation: pulse 5s linear infinite;
+            animation: pulse 1.5s linear infinite;
         }
 
         @keyframes pulse {
@@ -98,7 +98,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
         /* Efek Fade untuk Konten Utama */
         .hidden {
             opacity: 0;
-            animation: fade 2s ease-in-out forwards;
+            animation: fade 5s ease-in-out forwards;
         }
 
         @keyframes fade {
