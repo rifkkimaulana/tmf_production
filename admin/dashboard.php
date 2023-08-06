@@ -48,7 +48,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini loading">
     <div class="wrapper">
         <?php include_once('halaman/navbar.php'); ?>
         <?php include_once('halaman/sidebar.php'); ?>

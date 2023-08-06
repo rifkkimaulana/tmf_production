@@ -183,14 +183,25 @@
   max-height: 200px;
   object-fit: cover;
 }
+/* Gaya untuk layar putih */
+body.loading::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 9999;
+  opacity: 1;
+}
+
 /* Gaya untuk pesan loading */
-#loadingMessage {
+.loading-message {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 5px;
-  display: none; /* Sembunyikan pesan loading secara default */
+  font-size: 20px;
 }
