@@ -94,6 +94,14 @@
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
+                            <li class="user-footer">
+                                <div class="float-left">
+                                    <a href="#" class="btn btn-default">Member Area</a>
+                                </div>
+                                <div class="float-right">
+                                    <a href="#" class="btn btn-default">Logout</a>
+                                </div>
+                            </li>
                         </ul>
                     </li>
                 </ul>
