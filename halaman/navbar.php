@@ -66,31 +66,43 @@
                     </div>
                 </div>
             </form>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown user-menu">
-                    <div class="hide-on-small-screen">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-
-                            <img src="gambar/user/user.png" class="user-image img-circle elevation-2" alt="User Image">
-                        </a>
-                    </div>
-                    <div class="hide-on-large-screen">
+            <div class="hide-on-large-screen">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown user-menu">
                         <button class="nav-link dropdown-toggle btn btn-sm btn-success" type="button"
                             data-toggle="dropdown">
                             Login
                         </button>
-                    </div>
-                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <li class="user-header">
-                            <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
-                            <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <li class="user-header">
+                                <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
+                                <p>
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2012</small>
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="hide-on-small-screen">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown user-menu">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <img src="gambar/user/user.png" class="user-image img-circle elevation-2" alt="User Image">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <li class="user-header">
+                                <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
+                                <p>
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2012</small>
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
