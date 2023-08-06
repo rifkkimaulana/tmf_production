@@ -7,6 +7,42 @@
     All rights reserved.
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Tombol untuk menguji modal -->
+<button type="button" class="btn btn-primary" id="testButton">Test Modal Loading</button>
+
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span class="ml-2">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Fungsi untuk menampilkan modal loading
+    function showLoadingModal() {
+        $('#loadingModal').modal('show');
+    }
+
+    // Fungsi untuk menyembunyikan modal loading
+    function hideLoadingModal() {
+        $('#loadingModal').modal('hide');
+    }
+
+    // Event untuk menampilkan modal loading saat halaman dimuat
+    $(window).on('load', function () {
+        hideLoadingModal(); // Menyembunyikan modal loading setelah halaman selesai dimuat
+    });
+</script>
+
 <script src="<?php echo $base_url; ?>/assets/plugins/jquery/jquery.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $base_url; ?>/assets/dist/js/adminlte.min.js"></script>
