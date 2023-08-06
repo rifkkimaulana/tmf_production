@@ -87,5 +87,20 @@ function getTahunId($koneksi, $nama_tahun)
     }
 }
 
+function getNegaraIdByName($koneksi, $nama_negara)
+{
+    $nama_negara = mysqli_real_escape_string($koneksi, $nama_negara);
+
+    $query_negara = "SELECT id FROM tb_negara WHERE nama_negara = '$nama_negara'";
+
+    $result_negara = mysqli_query($koneksi, $query_negara);
+
+    if ($result_negara && mysqli_num_rows($result_negara) > 0) {
+        $row_negara = mysqli_fetch_assoc($result_negara);
+        return $row_negara['id'];
+    } else {
+        return null;
+    }
+}
 
 ?>
