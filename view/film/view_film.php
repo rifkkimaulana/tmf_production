@@ -7,14 +7,14 @@ $result_film = mysqli_query($koneksi, $query_film);
 $row_film = mysqli_fetch_assoc($result_film);
 $judul_film = $row_film['judul_film'];
 $link = $row_film['link_trailer'];
-echo $judul_film;
 $id_player = $row_film['player_id'];
 $id_download = $row_film['download_id'];
 
-$query_tmdb = "SELECT link_trailer FROM tb_tmdb WHERE id = '$tmdb_id'";
+$query_tmdb = "SELECT * FROM tb_tmdb WHERE id = '$tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 $judul_tmdb = $row_tmdb['judul'];
+
 $tanggal_rilis = date("d F Y", strtotime($row_tmdb['tanggal_rilis']));
 $waktu_jalan = formatDuration($row_tmdb['waktu_jalan']);
 $anggaran = formatCurrency($row_tmdb['anggaran']);
