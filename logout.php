@@ -1,12 +1,11 @@
 <?php
 include 'config/base_url.php';
 session_start();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 ?>
 <script>
     function sendPostData() {
         const data = {
-            username: '<?php echo $username; ?>',
+            username: '<?php echo $_SESSION['username']; ?>',
             action: 'logout',
             description_log: 'Menghentikan sesion.'
         };
