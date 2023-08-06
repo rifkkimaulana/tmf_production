@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/u1588530/public_html/tv.arsprostudio.com/
+    - export DEPLOYPATH=/home/u1588530/public_html/tmf_production/
     - /bin/cp -R admin $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R config $DEPLOYPATH
