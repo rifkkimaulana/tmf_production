@@ -34,36 +34,36 @@ if (isset($_POST['submit'])) {
 
             if ($row['user_level'] == "administrator") {
                 $_SESSION['status'] = "administrator_logedin";
-                $description_log = 'Berhasil di arahkan ke halaman admin.';
-                $action = 'login';
-                include '../config/insert_log.php';
+                $username = $_SESSION['username'];
+                $keterangan = 'berhasil diarahkan ke halaman administrator';
+                include 'logs.php';
                 header("location: " . $base_url . "/admin/");
                 exit();
             } else if ($row['user_level'] == "manajemen") {
                 $_SESSION['status'] = "manajemen_logedin";
-                $description_log = 'Berhasil diarahkan ke halaman user.';
-                $action = 'login';
-                include '../config/insert_log.php';
+                $username = $_SESSION['username'];
+                $keterangan = 'berhasil diarahkan ke halaman manajemen';
+                include 'logs.php';
                 header("location: " . $base_url . "/manajemen/");
                 exit();
             } else {
-                $description_log = 'Gagal, Data pengguna tidak ditemukan.';
-                $action = 'login';
-                include '../config/insert_log.php';
+                $username = $email;
+                $keterangan = 'tidak memiliki akses _ usernotfound';
+                include 'logs.php';
                 header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
                 exit();
             }
         } else {
-            $description_log = 'Gagal, password salah.';
-            $action = 'login';
-            include '../config/insert_log.php';
+            $username = $email;
+            $keterangan = 'tidak memiliki akses _ invalidpassword';
+            include 'logs.php';
             header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
             exit();
         }
     } else {
-        $description_log = 'Gagal, Data pengguna tidak ditemukan.';
-        $action = 'login';
-        include '../config/insert_log.php';
+        $username = $email;
+        $keterangan = 'tidak memiliki akses _ usernotfound';
+        include 'logs.php';
         header("location: " . $base_url . "/login/index.php?alert=userNotFound");
         exit();
     }

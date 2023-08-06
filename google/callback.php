@@ -87,22 +87,37 @@ if (isset($_GET['code'])) {
                     header("location: " . $base_url . "/manajemen/");
                     exit();
                 } else {
+                    $username = $email;
+                    $keterangan = 'tidak memiliki akses _ usernotfound';
+                    include 'logs.php';
                     header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
                     exit();
                 }
             } else {
+                $username = $email;
+                $keterangan = 'tidak memiliki akses _ usernotfound';
+                include 'logs.php';
                 header("location: " . $base_url . "/login/index.php?alert=userNotFound");
                 exit();
             }
         } else {
+            $username = $email;
+            $keterangan = 'tidak memiliki akses _ usernotfound';
+            include 'logs.php';
             header("location: " . $base_url . "/login/index.php?alert=emailNotFound");
             exit();
         }
     } else {
+        $username = $email;
+        $keterangan = 'tidak memiliki akses _ error token';
+        include 'logs.php';
         header("Location: " . $base_url . "/login/index.php?alert=accesTokenNotFound");
         exit();
     }
 } else {
+    $username = $email;
+    $keterangan = 'tidak memiliki akses _ codeinvalid';
+    include 'logs.php';
     header("Location: " . $base_url . "/login/index.php?alert=codeNotFound");
     exit();
 }
