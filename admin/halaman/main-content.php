@@ -111,6 +111,8 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.1/dist/js/adminlte.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             var loadingModalShown = false; // Flag to check if the loading modal has been shown
 
