@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Tombol untuk menguji modal -->
 <button type="button" class="btn btn-primary" id="testButton">Test Modal Loading</button>
 
