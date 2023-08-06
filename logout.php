@@ -1,11 +1,8 @@
 <?php
 include 'config/base_url.php';
 session_start();
-$username = $_SESSION['username'];
-echo $username;
-
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 ?>
-
 <script>
     function sendPostData() {
         const data = {
@@ -14,7 +11,7 @@ echo $username;
             description_log: 'Menghentikan sesion.'
         };
 
-        const endpointUrl = '<?php echo $base_url . "config/insert_log.php"; ?>';
+        const endpointUrl = '<?php echo $base_url . "/config/insert_log.php"; ?>';
 
         // Konfigurasi untuk pengiriman data POST
         const requestOptions = {
