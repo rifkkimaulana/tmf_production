@@ -77,6 +77,7 @@ $result_tv = mysqli_query($koneksi, $query_tv);
     </div>
     <div class="row">
         <?php
+        include 'config/koneksi.php'; //koneksi tambahan untuk while
         while ($row_tv = mysqli_fetch_assoc($result_tv)) {
             $judul_tvShow = $row_tv['judul_tv_show'];
             $thumbnail_tv = $row_tv['thumbnail'];
