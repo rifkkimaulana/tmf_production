@@ -68,13 +68,14 @@
             </form>
             <div class="hide-on-large-screen">
                 <div class="col-12 mt-4">
-                    <button href="<?php echo $base_url . "login/index.php" ?>" class="btn btn-success btn-block"
-                        data-toggle="modal">MASUK
-                    </button>
-
-                    <button href="<?php echo $base_url . "login/register.php" ?>" class="btn btn-danger btn-block"
-                        data-toggle="modal">DAFTAR
-                    </button>
+                    <a href="<?php echo $base_url . "login/index.php" ?>">
+                        <button class="btn btn-success btn-sm btn-block" data-toggle="modal">MASUK
+                        </button>
+                    </a>
+                    <a href="<?php echo $base_url . "login/register.php" ?>">
+                        <button class="btn btn-danger btn-sm btn-block" data-toggle="modal">DAFTAR
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="hide-on-small-screen">
