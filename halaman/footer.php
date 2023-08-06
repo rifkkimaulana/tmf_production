@@ -38,14 +38,13 @@
         $('#loadingModal').modal('hide');
     }
 
-    // Event untuk menampilkan modal loading saat tombol diklik
-    $(document).ready(function () {
-        $('#testButton').on('click', function () {
-            showLoadingModal(); // Menampilkan modal loading saat tombol diklik
-            // Untuk simulasi, tambahkan jeda 2 detik sebelum menyembunyikan modal loading
-            setTimeout(function () {
-                hideLoadingModal(); // Menyembunyikan modal loading setelah 2 detik simulasi "memuat halaman"
-            }, 2000);
+    // Event untuk menampilkan modal loading saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function () {
+        showLoadingModal(); // Menampilkan modal loading saat halaman dimuat
+
+        // Event 'load' berfungsi untuk menyembunyikan modal loading setelah seluruh konten (termasuk gambar) telah dimuat.
+        window.addEventListener('load', function () {
+            hideLoadingModal(); // Menyembunyikan modal loading setelah seluruh halaman selesai dimuat
         });
     });
 </script>
