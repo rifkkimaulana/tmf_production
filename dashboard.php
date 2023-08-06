@@ -9,8 +9,6 @@
 <div class="content-wrapper" style="background-color: white;">
     <div id="skeletonScreen">
         <div class="container mt-5">
-            <div class="skeleton-header"></div>
-            <div class="skeleton-content"></div>
             <div class="skeleton-content"></div>
             <div class="skeleton-img"></div>
             <div class="skeleton-content"></div>
