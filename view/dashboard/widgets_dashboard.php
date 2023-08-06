@@ -11,6 +11,7 @@
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
                     while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
+                        include 'config/koneksi.php';
                         $tmdb_id = $row_film_tv['tmdb_id'];
                         $judul = $row_film_tv['judul'];
                         $thumbnail = $row_film_tv['thumbnail'];
