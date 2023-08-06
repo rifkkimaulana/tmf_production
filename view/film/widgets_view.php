@@ -10,6 +10,7 @@
                     <?php
                     include 'config/koneksi.php'; // Penambahan koneksi untuk while
                     $desired_genre_ids = $row_film['genre_ids'];
+                    echo $desired_genre_ids;
                     $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film, tb_film.tmdb_id, tb_film.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                                     FROM tb_film
                                     LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
