@@ -46,33 +46,10 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-    <style>
-        /* Gaya untuk layar putih */
-        body.loading::before {
-            content: "";
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            z-index: 9999;
-            opacity: 1;
-        }
 
-        /* Gaya untuk pesan loading */
-        .loading-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-        }
-    </style>
 </head>
 
-<body class="hold-transition sidebar-mini loading">
+<body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <?php include_once('halaman/navbar.php'); ?>
         <?php include_once('halaman/sidebar.php'); ?>

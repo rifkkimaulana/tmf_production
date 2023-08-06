@@ -95,25 +95,7 @@
                 }
             });
         </script>
-        <div class="loading-message">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <span class="ml-2">Loading...</span>
-            </div>
-        </div>
-        <script>
-            // Fungsi untuk menyembunyikan layar putih
-            function hideLoadingScreen() {
-                document.body.classList.remove('loading');
-            }
 
-            // Event 'load' berfungsi untuk menyembunyikan layar putih setelah seluruh halaman selesai dimuat.
-            window.addEventListener('load', function () {
-                hideLoadingScreen();
-            });
-        </script>
 
         <?php
         if (isset($_GET['page'])) {
