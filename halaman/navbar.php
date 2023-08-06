@@ -90,15 +90,15 @@
                     $row_user = mysqli_fetch_assoc($result_user);
                     $fotoProfil = $row_user['logo_user'];
 
-                    if (!empty($fotoProfil)) {
-                        $fotoUrl = $base_url . '/gambar/user/' . $fotoProfil;
-                    } else {
-                        $fotoUrl = $base_url . '/gambar/user/user.png';
-                    }
-
                 } else {
                     $namaUser = 'Pengunjung';
                     $levelUser = '';
+                }
+
+                if (!empty($fotoProfil)) {
+                    $fotoUrl = $base_url . '/gambar/user/' . $fotoProfil;
+                } else {
+                    $fotoUrl = $base_url . '/gambar/user/user.png';
                 }
                 ?>
                 <ul class="navbar-nav ml-auto">
@@ -118,14 +118,25 @@
                                 </p>
                             </li>
                             <li class="user-footer">
-                                <div class="float-left">
-                                    <a href="<?php echo $base_url . "/login/index.php" ?>"
-                                        class="btn btn-default btn-secondary">Member Area</a>
-                                </div>
-                                <div class="float-right">
-                                    <a href="<?php echo $base_url . "/logout.php" ?>"
-                                        class="btn btn-default btn-danger">Logout</a>
-                                </div>
+                                <?php
+                                if ($namaUser === "pengunjung") {
+                                    ?>
+                                    <div class="float-right">
+                                        <a href="<?php echo $base_url . "/login/index.php" ?>"
+                                            class="btn btn-default btn-secondary">Login / Daftar</a>
+                                    </div>
+                                <?php } else {
+                                    ?>
+                                    <div class="float-left">
+                                        <a href="<?php echo $base_url . "/login/index.php" ?>"
+                                            class="btn btn-default btn-secondary">Member Area</a>
+                                    </div>
+                                    <div class="float-right">
+                                        <a href="<?php echo $base_url . "/logout.php" ?>"
+                                            class="btn btn-default btn-danger">Logout</a>
+                                    </div>
+                                <?php } ?>
+
                             </li>
                         </ul>
                     </li>
