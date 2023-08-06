@@ -12,7 +12,7 @@
         <div class="skeleton-content"></div>
     </div>
 </div>
-<div class="content">
+<div id="content" style="display: none">
     <div class="content-wrapper" style="background-color: white;">
         <?php include 'halaman/main-content.php'; ?>
     </div>
