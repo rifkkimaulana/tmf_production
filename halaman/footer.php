@@ -62,6 +62,8 @@
         batalBtn.style.display = "none";
     });
 
+</script>
+<script>
     var descriptionElement = document.getElementById("filmDescription");
     var showMoreLink = document.getElementById("showMoreLink");
     var toggleState = false;
