@@ -231,3 +231,19 @@
     transform: translateX(100%);
   }
 }
+
+#skeletonScreen {
+  display: block;
+}
+
+.skeleton-header,
+.skeleton-content {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.skeleton-content:last-child {
+  margin-bottom: 0;
+}
