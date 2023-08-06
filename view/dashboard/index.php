@@ -40,37 +40,34 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                             }
                             ?>
                             <div class="row">
-                                <?php $tmdb_id = $row_film_tv['tmdb_id']; ?>
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
                                     <?php
                                     $cek_id_tmdb = $row_film_tv['tmdb_id'];
                                     $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
                                     $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                     $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                                    ?>
-                                    <a href="dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $row_film_tv['tmdb_id']; ?>"
+                                    $thumbnail = $row_film_tv['thumbnail'];
+                                    $judul = $row_film_tv['judul']
+                                        ?>
+                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $cek_id_tmdb ?>"
                                         style="color: black;">
-                                        <?php if (!empty($row_film_tv['thumbnail'])) { ?>
+                                        <?php if (!empty($thumbnail)) { ?>
                                             <img class="img-fluid rounded img-landscape-zoom"
-                                                src="gambar/film/<?php echo $row_film_tv['thumbnail']; ?>"
-                                                alt="<?php echo $row_film_tv['judul']; ?>">
+                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'film' : 'tv'; ?>/<?php echo $thumbnail; ?>"
+                                                alt="<?php echo $judul; ?>">
                                         <?php } else {
-                                            $tmdb_id = $row_film_tv['tmdb_id'];
-                                            $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-                                            $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                                            $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                             $url_poster = $row_tmdb['url_poster'];
                                             ?>
                                             <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                                alt="<?php echo $row_film_tv['judul']; ?>">
+                                                alt="<?php echo $judul; ?>">
                                         <?php } ?>
                                     </a>
                                 </div>
                                 <div class="col-lg-8 col-sm-6 col-6">
-                                    <a href="dashboard.php?page=<?php echo (strpos($row_film_tv['genre_ids'], ',') === false) ? 'tv' : 'movies'; ?>&id=<?php echo $tmdb_id; ?>"
+                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo (strpos($row_film_tv['genre_ids'], ',') === false) ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb; ?>"
                                         style="color: black;">
                                         <strong>
-                                            <?php echo $row_film_tv['judul']; ?>
+                                            <?php echo $judul; ?>
                                         </strong><br>
                                         <?php
                                         $genre_limit = 3;
@@ -79,7 +76,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                         foreach ($genres as $genre) {
                                             ?>
                                             <a style="font-size: 14px;"
-                                                href="dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
+                                                href="<?php echo $base_url; ?>/dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
                                                 <small>
                                                     <?php echo $genre . ", "; ?>
                                                 </small>
