@@ -17,6 +17,11 @@
 
                         $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tmdb_id;";
                         $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+
+                        if (!$result_tmdb) {
+                            die('Query Error: ' . mysqli_error($koneksi));
+                        }
+
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['link_trailer'];
                         echo $tmdb_id . $url_poster;
