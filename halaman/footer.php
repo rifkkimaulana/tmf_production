@@ -39,9 +39,15 @@
             }
         };
     }
+
     setInterval(reloadViewCount, 60000);
     document.addEventListener("DOMContentLoaded", function () {
-        var tmdb_id = <?php echo $tv_tmdb_id; ?>;
+        var tmdb_id = <?php if (empty($tv_tmdb_id)) {
+            echo $tmdb_id;
+        } else {
+            echo $tv_tmdb_id;
+        }
+        ?>;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "<?php echo $base_url; ?>/config/visit.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
