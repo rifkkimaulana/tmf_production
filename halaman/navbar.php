@@ -81,6 +81,15 @@
                 </div>
             </div>
             <div class="hide-on-small-screen">
+                <?php
+                if (isset($_SESSION['nama'])) {
+                    $namaUser = $_SESSION['nama'];
+                    $levelUser = $_SESSION['level'];
+                } else {
+                    $namaUser = 'Guest';
+                    $levelUser = '';
+                }
+                ?>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -90,8 +99,10 @@
                             <li class="user-header">
                                 <img src="gambar/user/user.png" class="img-circle elevation-2" alt="User Image">
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    <?php echo $namaUser; ?>
+                                    <small>
+                                        <?php echo $levelUser; ?>
+                                    </small>
                                 </p>
                             </li>
                             <li class="user-footer">
