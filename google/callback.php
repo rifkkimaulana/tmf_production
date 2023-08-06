@@ -74,10 +74,16 @@ if (isset($_GET['code'])) {
 
                 if ($level == "administrator") {
                     $_SESSION['status'] = "administrator_logedin";
+                    $username = $_SESSION['username'];
+                    $keterangan = 'berhasil login ke panel admin';
+                    include 'logs.php';
                     header("location: " . $base_url . "/admin/");
                     exit();
                 } else if ($level == "manajemen") {
                     $_SESSION['status'] = "manajemen_logedin";
+                    $username = $_SESSION['username'];
+                    $keterangan = 'berhasil login ke panel manajement';
+                    include 'logs.php';
                     header("location: " . $base_url . "/manajemen/");
                     exit();
                 } else {
