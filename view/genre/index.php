@@ -57,7 +57,7 @@ $count = 0;
                             $genres[] = $row_genre['nama_genre'];
                         }
 
-                        if ($count % 4 === 0 && $count > 0) {
+                        if ($count % 3 === 0 && $count > 0) {
                             echo '</div><div class="row">';
                         }
                         ?>
