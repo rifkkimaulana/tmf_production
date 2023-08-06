@@ -255,9 +255,6 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
             document.addEventListener('DOMContentLoaded', function () {
                 showLoadingModal(); // Show the loading modal when the page is loaded
-            });
-
-            window.addEventListener('load', function () {
                 hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
             });
 
@@ -267,6 +264,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 }, 1000); // 1000 milliseconds (1 detik)
             }
         </script>
+
 
         <script>
             function openSearchModal() {
