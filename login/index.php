@@ -47,21 +47,21 @@ if (isset($_POST['submit'])) {
                 header("location: " . $base_url . "/manajemen/");
                 exit();
             } else {
-                $username = $email;
+                $username = $_POST['username'];
                 $keterangan = 'tidak memiliki akses _ usernotfound';
                 include 'logs.php';
                 header("location: " . $base_url . "/login/index.php?alert=userLevel_notFound");
                 exit();
             }
         } else {
-            $username = $email;
+            $username = $_POST['username'];
             $keterangan = 'tidak memiliki akses _ invalidpassword';
             include 'logs.php';
             header("location: " . $base_url . "/login/index.php?alert=passwordSalah");
             exit();
         }
     } else {
-        $username = $email;
+        $username = $_POST['username'];
         $keterangan = 'tidak memiliki akses _ usernotfound';
         include 'logs.php';
         header("location: " . $base_url . "/login/index.php?alert=userNotFound");
