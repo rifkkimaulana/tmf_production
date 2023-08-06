@@ -30,6 +30,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                     while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
                         $judul = $row_film_tv['judul'];
                         $cek_id_tmdb = $row_film_tv['tmdb_id'];
+                        $thumbnail = $row_film_tv['url_poster'];
 
                         if (!empty($judul)) {
                             $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
@@ -48,9 +49,9 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                                     $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
                                     $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                     $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                                    $thumbnail = $row_tmdb['thumbnail'];
+
                                     ?>
-                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $cek_id_tmdb ?>"
+                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'movies'; ?>&id=<?php echo $cek_id_tmdb ?>"
                                         style="color: black;">
                                         <?php if (!empty($thumbnail)) { ?>
                                             <img class="img-fluid rounded img-landscape-zoom"
