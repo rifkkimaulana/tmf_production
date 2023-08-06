@@ -68,11 +68,11 @@
             </form>
             <div class="hide-on-large-screen">
                 <div class="col-12 mt-4">
-                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#userModal">Masuk
+                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#userModal">MASUK
                     </button>
                 </div>
-                <div class="col-12 mt-1">
-                    <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#userModal">Masuk
+                <div class="col-12">
+                    <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#userModal">DAFTAR
                     </button>
                 </div>
             </div>
