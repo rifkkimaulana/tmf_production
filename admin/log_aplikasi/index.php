@@ -15,6 +15,7 @@
                                 <th>Action</th>
                                 <th>Description</th>
                                 <th>IP Address</th>
+                                <th>Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,9 @@
                                     </td>
                                     <td>
                                         <?php echo $d['ip_address']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $d['timestamp']; ?>
                                     </td>
                                 </tr>
                                 <?php
