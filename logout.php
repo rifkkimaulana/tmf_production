@@ -1,43 +1,32 @@
 <?php
 include 'config/base_url.php';
 session_start();
-?>
+echo $_SESSION['username'];
+$url = $base_url . "/config/insert_log.php";
 
-<script>
-    function sendPostData() {
-        const data = {
-            username: 'asjodbfojabsdf',
-            action: 'logout',
-            description_log: 'Menghentikan sesion.'
-        };
+$data = array(
+    'username' => $_SESSION['username'],
+    'action' => 'logout',
+    'description_log' => 'berhasil logout'
+);
 
-        const endpointUrl = '<?php echo $base_url . "/config/insert_log.php"; ?>';
+$options = array(
+    'http' => array(
+        'method' => 'POST',
+        'header' => 'Content-type: application/x-www-form-urlencoded',
+        'content' => http_build_query($data)
+    )
+);
 
-        // Konfigurasi untuk pengiriman data POST
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
+$context = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
 
-        // Melakukan pengiriman POST menggunakan fetch API
-        fetch(endpointUrl, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Terjadi kesalahan:', error);
-            });
-    }
-    document.addEventListener("DOMContentLoaded", function () {
-        sendPostData();
-    });
-</script>
+if ($result !== false) {
+    echo "Permintaan POST otomatis berhasil dikirim.";
+} else {
+    echo "Terjadi kesalahan dalam mengirimkan permintaan POST otomatis.";
+}
 
-<?php
 session_unset();
 session_destroy();
 

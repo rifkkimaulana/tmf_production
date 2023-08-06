@@ -1,8 +1,8 @@
 <?php
 include 'koneksi.php';
-$username = 'abcd';
-$action = 'tesfd';
-$description_log = 'testfasdfa123124';
+$username = $_POST['username'];
+$action = $_POST['action'];
+$description_log = $_POST['description_log'];
 
 $timestamp = date('Y-m-d H:i:s');
 $ip_address = $_SERVER['REMOTE_ADDR'];
