@@ -42,66 +42,6 @@ $limitedGenres = array_slice($genres, 0, 9);
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/skins/skin-black.min.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/tmf_style.css">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/plugins/select2/css/select2.min.css">
-    <style>
-        #skeletonScreen {
-            display: block;
-        }
-
-        .skeleton-header,
-        .skeleton-content {
-            width: 100%;
-            height: 20px;
-            background-color: #f0f0f0;
-            margin-bottom: 10px;
-        }
-
-        .skeleton-content:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Animasi untuk skeleton gambar */
-        .skeleton-img {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            background-color: #f0f0f0;
-        }
-
-        .skeleton-img::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            animation: pulse 1.5s linear infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        .content {
-            opacity: 0;
-            animation: fade 1s ease-in-out forwards;
-        }
-
-        @keyframes fade {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 
 <body class="hold-transition layout-top-nav text-sm skin-black">
