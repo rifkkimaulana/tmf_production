@@ -12,7 +12,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     VALUES (?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($koneksi, $query_log);
-    mysqli_stmt_bind_param($stmt, "ssss", $timestamp, $username, $action, $description_log, $ip_address);
-    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_param($stmt, "sssss", $timestamp, $username, $action, $description_log, $ip_address);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "Data kunjungan berhasil disimpan.";
+    } else {
+        echo "Error: " . mysqli_error($koneksi);
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($koneksi);
 }
 ?>
