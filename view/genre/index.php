@@ -29,78 +29,75 @@ $count = 0;
             </h3>
         </div>
     </div>
-    <div class="row">
-        <div class="card-body">
-            <div class="row">
-                <?php
-                include 'config/koneksi.php'; //koneksi tambahan untuk while
-                while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
-                    $judul = $row_film_tv['judul'];
-                    $tmdb_id = $row_film_tv['tmdb_id'];
-                    $thumbnail = $row_film_tv['thumbnail'];
+    <div class="card-body">
+        <div class="row">
+            <?php
+            include 'config/koneksi.php'; //koneksi tambahan untuk while
+            while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
+                $judul = $row_film_tv['judul'];
+                $tmdb_id = $row_film_tv['tmdb_id'];
+                $thumbnail = $row_film_tv['thumbnail'];
 
-                    $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tmdb_id;";
-                    $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                    $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                    $url_poster = $row_tmdb['url_poster'];
-                    $jumlah_episode = $row_tmdb['jumlah_episode'];
+                $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $tmdb_id;";
+                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+                $url_poster = $row_tmdb['url_poster'];
+                $jumlah_episode = $row_tmdb['jumlah_episode'];
 
-                    if (!empty($judul)) {
+                if (!empty($judul)) {
 
-                        $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
-                        $genres = array();
+                    $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
+                    $genres = array();
 
-                        foreach ($genre_ids as $genre_id) {
-                            $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
-                            $result_genre = mysqli_query($koneksi, $query_genre);
-                            $row_genre = mysqli_fetch_assoc($result_genre);
-                            $genres[] = $row_genre['nama_genre'];
-                        }
-
-                        if ($count % 3 === 0 && $count > 0) {
-                            echo '</div><div class="row">';
-                        }
-                        ?>
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                            <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($jumlah_episode === null || $jumlah_episode === '') ? 'movies' : 'tv'; ?>&id=<?php echo $tmdb_id; ?>"
-                                style="color: black;">
-                                <div class="thumbnail-container">
-                                    <?php if (!empty($thumbnail)) { ?>
-                                        <img class="img-fluid rounded img-landscape-zoom"
-                                            src="<?php echo $base_url; ?>/gambar/<?php echo ($jumlah_episode === null || $jumlah_episode === '') ? 'film' : 'tv'; ?>/<?php echo $thumbnail; ?>"
-                                            alt="<?php echo $judul; ?>">
-                                    <?php } else {
-                                        ?>
-                                        <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                            alt="<?php echo $judul; ?>">
-                                    <?php } ?>
-                                </div>
-                                <div class="video-info">
-                                    <strong>
-                                        <?php echo $judul; ?>
-                                    </strong>
-                                    <?php foreach ($genres as $genre) { ?>
-                                        <a style="font-size: 14px;"
-                                            href="<?php echo $base_url; ?>/dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
-                                            <?php echo $genre . ", "; ?>
-                                        </a>
-                                    <?php } ?>
-
-                                    <p style="font-size: 14px;"><i class="fas fa-eye"></i>
-                                        <small>
-                                            <?php echo $row_film_tv['total_kunjungan']; ?> x ditonton
-                                        </small>
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                        <?php
-                        $count++;
+                    foreach ($genre_ids as $genre_id) {
+                        $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
+                        $result_genre = mysqli_query($koneksi, $query_genre);
+                        $row_genre = mysqli_fetch_assoc($result_genre);
+                        $genres[] = $row_genre['nama_genre'];
                     }
+
+                    if ($count % 4 === 0 && $count > 0) {
+                        echo '</div><div class="row">';
+                    }
+                    ?>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                        <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($jumlah_episode === null || $jumlah_episode === '') ? 'movies' : 'tv'; ?>&id=<?php echo $tmdb_id; ?>"
+                            style="color: black;">
+                            <div class="thumbnail-container">
+                                <?php if (!empty($thumbnail)) { ?>
+                                    <img class="img-fluid rounded img-landscape-zoom"
+                                        src="<?php echo $base_url; ?>/gambar/<?php echo ($jumlah_episode === null || $jumlah_episode === '') ? 'film' : 'tv'; ?>/<?php echo $thumbnail; ?>"
+                                        alt="<?php echo $judul; ?>">
+                                <?php } else {
+                                    ?>
+                                    <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
+                                        alt="<?php echo $judul; ?>">
+                                <?php } ?>
+                            </div>
+                            <div class="video-info">
+                                <strong>
+                                    <?php echo $judul; ?>
+                                </strong>
+                                <?php foreach ($genres as $genre) { ?>
+                                    <a style="font-size: 14px;"
+                                        href="<?php echo $base_url; ?>/dashboard.php?page=genre&f=<?php echo urlencode($genre); ?>">
+                                        <?php echo $genre . ", "; ?>
+                                    </a>
+                                <?php } ?>
+                                <small>
+                                    <p style="font-size: 14px;"><i class="fas fa-eye"></i>
+                                        <?php echo $row_film_tv['total_kunjungan']; ?> x ditonton
+                                    </p>
+                                </small>
+                            </div>
+                        </a>
+                    </div>
+                    <?php
+                    $count++;
                 }
-                ?>
-            </div>
+            }
+            ?>
         </div>
     </div>
 </div>
