@@ -49,29 +49,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
 </head>
 
 <body class="hold-transition sidebar-mini">
-    <script>
-        function showLoadingModal() {
-            $('#loadingModal').modal('show');
-        }
 
-        function hideLoadingModal() {
-            $('#loadingModal').modal('hide');
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            showLoadingModal(); // Show the loading modal when the page is loaded
-        });
-
-        window.addEventListener('load', function () {
-            hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
-        });
-
-        function hideLoadingModalAfterDelay() {
-            setTimeout(function () {
-                hideLoadingModal();
-            }, 1000); // 1000 milliseconds (1 detik)
-        }
-    </script>
     <div class="wrapper">
 
         <?php include_once('halaman/navbar.php'); ?>
@@ -275,8 +253,30 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 $('#searchModalTv').modal('show');
             }
         </script>
-    </div>
+        <script>
+            function showLoadingModal() {
+                $('#loadingModal').modal('show');
+            }
 
+            function hideLoadingModal() {
+                $('#loadingModal').modal('hide');
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                showLoadingModal(); // Show the loading modal when the page is loaded
+            });
+
+            window.addEventListener('load', function () {
+                hideLoadingModalAfterDelay(); // Hide the loading modal after 1 detik
+            });
+
+            function hideLoadingModalAfterDelay() {
+                setTimeout(function () {
+                    hideLoadingModal();
+                }, 500); // 1000 milliseconds (1 detik)
+            }
+        </script>
+    </div>
 </body>
 
 </html>
