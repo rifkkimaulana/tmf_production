@@ -93,14 +93,9 @@ if ($_SESSION['status'] != "administrator_logedin") {
             }
         }
 
-        .content:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Efek Fade untuk Konten Utama */
-        .hidden {
+        .content {
             opacity: 0;
-            animation: fade 50s ease-in-out forwards;
+            animation: fade 2s ease-in-out forwards;
         }
 
         @keyframes fade {
