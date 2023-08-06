@@ -7,10 +7,10 @@
     All rights reserved.
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Tombol untuk menguji modal -->
 <button type="button" class="btn btn-primary" id="testButton">Test Modal Loading</button>
 
+<!-- Modal Loading (sesuai contoh sebelumnya) -->
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -26,6 +26,11 @@
         </div>
     </div>
 </div>
+
+<!-- Hubungkan dengan jQuery dan AdminLTE JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0-alpha/dist/js/adminlte.min.js"></script>
+
 <script>
     // Fungsi untuk menampilkan modal loading
     function showLoadingModal() {
@@ -37,9 +42,15 @@
         $('#loadingModal').modal('hide');
     }
 
-    // Event untuk menampilkan modal loading saat halaman dimuat
-    $(window).on('load', function () {
-        hideLoadingModal(); // Menyembunyikan modal loading setelah halaman selesai dimuat
+    // Event untuk menampilkan modal loading saat tombol diklik
+    $(document).ready(function () {
+        $('#testButton').on('click', function () {
+            showLoadingModal(); // Menampilkan modal loading saat tombol diklik
+            // Untuk simulasi, tambahkan jeda 2 detik sebelum menyembunyikan modal loading
+            setTimeout(function () {
+                hideLoadingModal(); // Menyembunyikan modal loading setelah 2 detik simulasi "memuat halaman"
+            }, 2000);
+        });
     });
 </script>
 
