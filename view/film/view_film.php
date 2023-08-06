@@ -81,7 +81,7 @@ foreach ($pemain_ids as $pemain_id) {
             <div class="card tmf_shadow bg-black">
                 <div class="embed-responsive embed-responsive-16by9">
                     <?php
-                    $playValue = isset($_GET['play']) ? $_GET['play'] : '1';
+                    $playValue = isset($_GET['play']) ? $_GET['play'] : '';
 
                     switch ($playValue) {
                         case 1:
@@ -150,11 +150,6 @@ foreach ($pemain_ids as $pemain_id) {
                                 $link = "https://www.youtube.com/embed/" . $video_id . "?autoplay=1";
                             }
                             break;
-                    }
-                    ?>
-                    <?php
-                    if (empty($link)) {
-                        $link = $row_play['link1'];
                     }
                     ?>
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
