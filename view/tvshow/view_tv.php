@@ -5,6 +5,18 @@ $result_tv = mysqli_query($koneksi, $query_tv);
 $row_tv = mysqli_fetch_assoc($result_tv);
 $id_tv = $row_tv['id'];
 
+$desired_genre_ids = $row_tv['genre_ids'];
+
+$query_tv2 = "SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, 
+            SUM(tb_view.jumlah_lihat) AS total_kunjungan
+            FROM tb_tv_show
+            LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
+            WHERE tb_tv_show.genre_ids IN ($desired_genre_ids)
+            GROUP BY tb_tv_show.tmdb_id
+            ORDER BY total_kunjungan DESC";
+
+$result_tv2 = mysqli_query($koneksi, $query_tv2);
+
 $query_tmdb = "SELECT link_trailer FROM tb_tmdb WHERE id = '$tv_tmdb_id'";
 $result_tmdb = mysqli_query($koneksi, $query_tmdb);
 if (mysqli_num_rows($result_tmdb) > 0) {
@@ -458,93 +470,4 @@ $pendapatan = formatCurrency($row_tmdb['pendapatan']);
         </div>
     </div>
 </div>
-
-<div class="col-md-3 tmf_production ">
-    <div class="row">
-        <div class="col-lg-12">
-            <?php include 'button_small.php'; ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card-flat">
-                <div class="card-header">
-                    <h5 class="card-title m-0">TV SHOW Rekomendasi</h5>
-                </div>
-                <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
-                    <?php
-                    $desired_genre_ids = $row_tv['genre_ids'];
-
-                    $query_tv2 = "SELECT tb_tv_show.thumbnail, tb_tv_show.judul_tv_show, tb_tv_show.tmdb_id, tb_tv_show.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
-                                    FROM tb_tv_show
-                                    LEFT JOIN tb_view ON tb_tv_show.tmdb_id = tb_view.tmdb_id
-                                    WHERE tb_tv_show.genre_ids IN ($desired_genre_ids)
-                                    GROUP BY tb_tv_show.tmdb_id
-                                    ORDER BY total_kunjungan DESC";
-
-                    $result_tv2 = mysqli_query($koneksi, $query_tv2);
-                    if (!$result_tv2) {
-                        die("Query failed: " . mysqli_error($koneksi));
-                    }
-                    while ($row_tv = mysqli_fetch_assoc($result_tv2)) {
-
-                        if (!empty($row_tv['judul_tv_show'])) {
-                            $genre_ids = array_filter(explode(',', $row_tv['genre_ids']));
-                            $genres = array();
-
-                            foreach ($genre_ids as $genre_id) {
-                                $query_genre = "SELECT nama_genre FROM tb_genre WHERE id = '$genre_id'";
-                                $result_genre = mysqli_query($koneksi, $query_genre);
-                                $row_genre = mysqli_fetch_assoc($result_genre);
-                                $genres[] = $row_genre['nama_genre'];
-                            }
-                            ?>
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
-                                    <a href="<?php $base_url; ?>/dashboard.php?page=tv&id=<?php echo $tv_tmdb_id; ?>"
-                                        style="color: black;">
-                                        <div class="thumbnail-container">
-                                            <?php if (!empty($row_tv['thumbnail'])) { ?>
-                                                <img class="img-fluid rounded img-landscape-zoom"
-                                                    src="gambar/tv/<?php echo $row_tv['thumbnail']; ?>"
-                                                    alt="<?php echo $row_tv['judul_tv_show']; ?>">
-                                            <?php } else {
-                                                $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tv_tmdb_id'";
-                                                $result_tmdb = mysqli_query($koneksi, $query_tmdb);
-                                                $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                                                $url_poster = $row_tmdb['url_poster'];
-                                                ?>
-                                                <img class="img-fluid rounded img-landscape-zoom" src="<?php echo $url_poster; ?>"
-                                                    alt="<?php echo $row_tv['judul_tv_show']; ?>">
-                                            <?php } ?>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-8 col-sm-6 col-6">
-                                    <a href="dashboard.php?page=tv&id=<?php echo $tv_tmdb_id; ?>" style="color: black;">
-                                        <strong>
-                                            <?php echo $row_tv['judul_tv_show']; ?>
-                                        </strong></br>
-                                        <?php foreach ($genres as $genres) { ?>
-                                            <?php
-                                            $slug_genre = strtolower(str_replace(' ', '-', $genres));
-                                            ?>
-                                            <a style="font-size: 14px;"
-                                                href="dashboard.php?page=genre&f=<?php echo urlencode($slug_genre); ?>">
-                                                <?php echo $genres . ", "; ?>
-                                            </a>
-                                        <?php } ?>
-                                        <p style="font-size: 14px;"><i class="fas fa-eye"></i>
-                                            <?php echo $total_kunjungan; ?>
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <hr>
-                        <?php }
-                    } ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include 'widgets_view.php'; ?>
