@@ -226,29 +226,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 </div>
             </div>
         </div>
-        <!-- Modal Information -->
-        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="infoModalLabel">Information Modal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>This is an example of an information modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#infoModal">
-            Show Information Modal
-        </button>
+        <button onclick="showLoadingModal()">Show Loading Modal</button>
 
         <!-- Modal Loading -->
         <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
