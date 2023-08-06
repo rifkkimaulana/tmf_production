@@ -69,13 +69,13 @@
             <div class="hide-on-large-screen">
                 <div class="col-12 mt-4">
                     <a href="<?php echo $base_url . "login/index.php" ?>">
-                        <button class="btn btn-success btn-sm btn-block" data-toggle="modal"><b>MASUK</b>
+                        <button class="btn btn-success btn-block" data-toggle="modal"><b>MASUK</b>
                         </button>
                     </a>
                 </div>
                 <div class="col-12">
                     <a href="<?php echo $base_url . "login/register.php" ?>">
-                        <button class="btn btn-danger btn-sm btn-block" data-toggle="modal"><b>DAFTAR</b>
+                        <button class="btn btn-danger btn-block" data-toggle="modal"><b>DAFTAR</b>
                         </button>
                     </a>
                 </div>
