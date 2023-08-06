@@ -200,7 +200,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
             </div>
         </div>
         <!-- Search Modal TV-->
-        <div class="modal fade" id="searchModalTv" tabindex="-1" role="dialog">
+        <div class="modal" id="searchModalTv" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
