@@ -1,15 +1,5 @@
 <?php
-$tmdb_id = $row_film['tmdb_id'];
-$query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
-$result_tmdb = mysqli_query($koneksi, $query_tmdb);
-$row_tmdb = mysqli_fetch_assoc($result_tmdb);
-$url_poster = $row_tmdb['url_poster'];
 
-$query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
-$result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
-$row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
-
-$total_kunjungan = $row_kunjungan['total_kunjungan'];
 ?>
 <div class="col-md-9 tmf_production">
     <?php include 'view/genre_button.php'; ?>
@@ -24,6 +14,15 @@ $total_kunjungan = $row_kunjungan['total_kunjungan'];
     <div class="row">
         <?php
         include 'config/koneksi.php'; // Penambahan koneksi untuk while
+        $query_film = "SELECT thumbnail, judul_film, tmdb_id FROM tb_film ORDER BY created_at DESC";
+        $result_film = mysqli_query($koneksi, $query_film);
+
+        $tmdb_id = $row_film['tmdb_id'];
+        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+        $result_tmdb = mysqli_query($koneksi, $query_tmdb);
+        $row_tmdb = mysqli_fetch_assoc($result_tmdb);
+        $url_poster = $row_tmdb['url_poster'];
+
         while ($row_film = mysqli_fetch_assoc($result_film)) {
             $judul_film = $row_film['judul_film'];
             $thumbnail = $row_film['thumbnail'];
@@ -46,6 +45,10 @@ $total_kunjungan = $row_kunjungan['total_kunjungan'];
                         <?php } ?>
                     </div>
                     <?php
+                    $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                    $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                    $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+                    $total_kunjungan = $row_kunjungan['total_kunjungan'];
                     ?>
                     <div class="card-body">
                         <a class=" tmf_teks" href="dashboard.php?page=movies&id=<?php echo $row_film['tmdb_id']; ?>">
