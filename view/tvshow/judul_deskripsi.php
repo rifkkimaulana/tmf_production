@@ -98,7 +98,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="modalDownload" tabindex="-1" role="dialog" aria-labelledby="modalDownloadLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -115,7 +114,6 @@
                     $result_download = mysqli_query($koneksi, $query_download);
                     $row_download = mysqli_fetch_assoc($result_download);
 
-                    $safelink = 'https://semawur.com/st/?api=f0ad0323a77b9ddc5189f885e8a3b150446d37ce&url=';
                     $judul_null = "";
                     $download_unik = rand(1000, 9999);
                     $link_null = $base_url . "/dashboard.php?page=donwload_" . $download_unik;
@@ -292,7 +290,6 @@
             </div>
         </div>
     </div>
-
     <h4 class="tmf_production">
         <b>
             <?php echo $row_tv['judul_tv_show']; ?>
@@ -314,8 +311,6 @@
     $current_timestamp = time();
     $time_duration_seconds = $current_timestamp - $created_at_timestamp;
     $time_duration_formatted = gmdate("H:i:s", $time_duration_seconds);
-
-
 
     $total_kunjungan = $row_kunjungan['total_kunjungan'];
     ?>
