@@ -5,7 +5,8 @@ session_start();
 <script>
     function sendPostData() {
         const data = {
-            username: '<?php echo $_SESSION['username']; ?>',
+            username: '<?php session_start();
+            echo $_SESSION['username']; ?>',
             action: 'logout',
             description_log: 'Menghentikan sesion.'
         };
