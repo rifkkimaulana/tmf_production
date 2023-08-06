@@ -6,18 +6,17 @@
 <?php include 'halaman/navbar.php'; ?>
 
 
-<div class="content-wrapper">
-    <div id="skeletonScreen">
-        <div class="container mt-5">
-            <div class="skeleton-content"></div>
-            <div class="skeleton-img"></div>
-            <div class="skeleton-content"></div>
-        </div>
-    </div>
-    <div id="content" style="display: none">
-        <?php include 'halaman/main-content.php'; ?>
+<div id="skeletonScreen">
+    <div class="container mt-5">
+        <div class="skeleton-content"></div>
+        <div class="skeleton-img"></div>
+        <div class="skeleton-content"></div>
     </div>
 </div>
+<div id="content" style="display: none">
+    <?php include 'halaman/main-content.php'; ?>
+</div>
+
 <?php include 'halaman/footer.php'; ?>
 
 <?php
