@@ -71,8 +71,8 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="gambar/user/user.png" class="user-image img-circle elevation-2" alt="User Image">
                     </a>
-                    <button class="nav-link dropdown-toggle" type="button" data-toggle="dropdown">
-
+                    <button class="nav-link dropdown-toggle btn btn-sm btn-success" type="button"
+                        data-toggle="dropdown">
                         Login
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
