@@ -16,12 +16,12 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $action = 'login';
+    $description_log = 'Mencoba Login';
     $timestamp = date('Y-m-d H:i:s');
     $ip_address = $_SERVER['REMOTE_ADDR'];
 
     $query_log = "INSERT INTO tb_logs_aplikasi (timestamp, username, action, description, ip_address)
-                    VALUES ('$timestamp', $username, '$action', '$description_log', '$ip_address')";
+                    VALUES ('$timestamp', $username, 'login', '$description_log', '$ip_address')";
     $result_log = mysqli_query($koneksi, $query_log);
 
     $stmt = $koneksi->prepare("SELECT * FROM tb_users WHERE user_username=?");
