@@ -50,7 +50,7 @@
                     <a href="<?php echo $base_url; ?>/dashboard.php?page=artikel" class="nav-link">Artikel</a>
                 </li>
             </ul>
-            <form class="form-inline ml-0 ml-md-3" action="dashboard.php" method="GET">
+            <form class="form-inline ml-auto" action="dashboard.php" method="GET">
                 <input type="hidden" name="page" value="dashboard">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" name="search"
