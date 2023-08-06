@@ -101,12 +101,10 @@
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <span class="ml-2">Loading...</span>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
                         </div>
+                        <span class="ml-2">Loading...</span>
                     </div>
                 </div>
             </div>
