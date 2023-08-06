@@ -69,7 +69,7 @@
             <div class="hide-on-large-screen">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-6 col-md-8">
+                        <div class="col-12">
                             <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">Masuk
                                 / Daftar</button>
                         </div>
