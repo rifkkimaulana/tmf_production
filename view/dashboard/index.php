@@ -28,8 +28,10 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
                     while ($row_film_tv = mysqli_fetch_assoc($result_film_tv)) {
-                        if (!empty($row_film_tv['judul'])) {
+                        $judul = $row_film_tv['judul'];
+                        $cek_id_tmdb = $row_film_tv['tmdb_id'];
 
+                        if (!empty($judul)) {
                             $genre_ids = array_filter(explode(',', $row_film_tv['genre_ids']));
                             $genres = array();
 
@@ -43,18 +45,17 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
                                     <?php
-                                    $cek_id_tmdb = $row_film_tv['tmdb_id'];
                                     $query_tmdb = "SELECT * FROM tb_tmdb WHERE id = $cek_id_tmdb;";
                                     $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                                     $row_tmdb = mysqli_fetch_assoc($result_tmdb);
-                                    $thumbnail = $row_film_tv['thumbnail'];
-                                    $judul = $row_film_tv['judul']
+                                    $thumbnail = $row_tmdb['thumbnail'];
+                                    $judul = $row_tmdb['judul']
                                         ?>
                                     <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $cek_id_tmdb ?>"
                                         style="color: black;">
                                         <?php if (!empty($thumbnail)) { ?>
                                             <img class="img-fluid rounded img-landscape-zoom"
-                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'film' : 'tv'; ?>/<?php echo $thumbnail; ?>"
+                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>/<?php echo $thumbnail; ?>"
                                                 alt="<?php echo $judul; ?>">
                                         <?php } else {
                                             $url_poster = $row_tmdb['url_poster'];
