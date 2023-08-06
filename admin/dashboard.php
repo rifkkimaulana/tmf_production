@@ -78,7 +78,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
             left: 0;
             width: 100%;
             height: 100%;
-            animation: pulse 1.5s linear infinite;
+            animation: pulse 5s linear infinite;
         }
 
         @keyframes pulse {
