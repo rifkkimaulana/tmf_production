@@ -165,13 +165,45 @@ foreach ($pemain_ids as $pemain_id) {
                             break;
                     }
                     ?>
-                    <?php if (empty($link)) {
-                        $link = 'https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383';
+                    <?php if (empty($link)) { ?>
+                        <div id="video-container">
+                            <video id="vast-video" controls>
+                                <!-- Fallback video source if VAST fails -->
+                                <source src="fallback-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <?php
                     } ?>
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
                     </iframe>
+
+
+                    <script>
+                        // Replace this with your VAST XML URL
+                        const vastUrl = "https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383";
+
+                        // Get the video element
+                        const videoElement = document.getElementById("vast-video");
+
+                        // Load VAST XML and set video source if available
+                        fetch(vastUrl)
+                            .then(response => response.text())
+                            .then(data => {
+                                const parser = new DOMParser();
+                                const xmlDoc = parser.parseFromString(data, "text/xml");
+
+                                const mediaFile = xmlDoc.querySelector("MediaFile");
+                                if (mediaFile) {
+                                    const mediaUrl = mediaFile.textContent;
+                                    videoElement.src = mediaUrl;
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Failed to load VAST:", error);
+                            });
+                    </script>
                 </div>
 
                 <?php
