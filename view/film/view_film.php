@@ -174,6 +174,7 @@ foreach ($pemain_ids as $pemain_id) {
                         </div>
                         <?php
                     } ?>
+
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
@@ -181,12 +182,9 @@ foreach ($pemain_ids as $pemain_id) {
 
 
                     <script>
-                        // Replace this with your VAST XML URL
                         const vastUrl = "https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383";
-                        // Get the video element
                         const videoElement = document.getElementById("vast-video");
 
-                        // Load VAST XML and set video source if available
                         fetch(vastUrl)
                             .then(response => response.text())
                             .then(data => {
@@ -198,13 +196,22 @@ foreach ($pemain_ids as $pemain_id) {
                                     const mediaUrl = mediaFile.textContent;
                                     videoElement.src = mediaUrl;
 
-                                    // Play the video after setting the source
+                                    // Add click listener to video
+                                    videoElement.addEventListener("click", () => {
+                                        const clickThrough = xmlDoc.querySelector("ClickThrough");
+                                        if (clickThrough) {
+                                            const clickThroughUrl = clickThrough.textContent;
+                                            window.open(clickThroughUrl, "_blank");
+                                        }
+                                    });
+
                                     videoElement.play();
                                 }
                             })
                             .catch(error => {
                                 console.error("Failed to load VAST:", error);
                             });
+
                     </script>
                 </div>
 
