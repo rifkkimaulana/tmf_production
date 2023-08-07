@@ -165,6 +165,9 @@ foreach ($pemain_ids as $pemain_id) {
                             break;
                     }
                     ?>
+                    <?php if (empty($link)) {
+                        $link = 'https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383';
+                    } ?>
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
