@@ -166,15 +166,12 @@ foreach ($pemain_ids as $pemain_id) {
                     }
                     ?>
                     <?php if (empty($link)) { ?>
-                        <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
-                        <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
-
-                        <video id="vast-video" class="video-js vjs-default-skin" controls preload="auto" width="640"
-                            height="360">
-                            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a
-                                web browser that supports HTML5 video</p>
-                        </video>
-
+                        <div id="video-container">
+                            <video id="vast-video" controls>
+                                <!-- Fallback video source if VAST fails -->
+                                <source src="fallback-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
                         <?php
                     } ?>
 
@@ -188,10 +185,6 @@ foreach ($pemain_ids as $pemain_id) {
                         const vastUrl = "https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383";
                         const videoElement = document.getElementById("vast-video");
 
-                        // Inisialisasi pemutar video dengan Video.js
-                        const player = videojs(videoElement);
-
-                        // Ambil dan putar iklan video VAST
                         fetch(vastUrl)
                             .then(response => response.text())
                             .then(data => {
@@ -201,23 +194,25 @@ foreach ($pemain_ids as $pemain_id) {
                                 const mediaFile = xmlDoc.querySelector("MediaFile");
                                 if (mediaFile) {
                                     const mediaUrl = mediaFile.textContent;
+                                    videoElement.src = mediaUrl;
 
-                                    // Tambahkan iklan video ke pemutar
-                                    player.ads();
-                                    player.vast({
-                                        url: vastUrl
+                                    // Add click listener to video
+                                    videoElement.addEventListener("click", () => {
+                                        const clickThrough = xmlDoc.querySelector("ClickThrough");
+                                        if (clickThrough) {
+                                            const clickThroughUrl = clickThrough.textContent;
+                                            window.open(clickThroughUrl, "_blank");
+                                        }
                                     });
 
-                                    // Putar video utama
-                                    player.src(mediaUrl);
-                                    player.play();
+                                    videoElement.play();
                                 }
                             })
                             .catch(error => {
                                 console.error("Failed to load VAST:", error);
                             });
-                    </script>
 
+                    </script>
                 </div>
 
                 <?php
