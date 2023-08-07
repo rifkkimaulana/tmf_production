@@ -435,8 +435,5 @@ foreach ($pemain_ids as $pemain_id) {
             </div>
         </div>
     </div>
-    <script async="async" data-cfasync="false"
-        src="//pl20262457.highcpmrevenuegate.com/b0ece0f17ce43fac83128654df865fe7/invoke.js"></script>
-    <div id="container-b0ece0f17ce43fac83128654df865fe7"></div>
 </div>
 <?php include 'widgets_view.php'; ?>
