@@ -183,7 +183,6 @@ foreach ($pemain_ids as $pemain_id) {
                     <script>
                         // Replace this with your VAST XML URL
                         const vastUrl = "https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383";
-
                         // Get the video element
                         const videoElement = document.getElementById("vast-video");
 
@@ -198,6 +197,9 @@ foreach ($pemain_ids as $pemain_id) {
                                 if (mediaFile) {
                                     const mediaUrl = mediaFile.textContent;
                                     videoElement.src = mediaUrl;
+
+                                    // Play the video after setting the source
+                                    videoElement.play();
                                 }
                             })
                             .catch(error => {
