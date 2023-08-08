@@ -1,7 +1,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-8">
                 <?php if (empty($_GET['id'])) { ?>
                     <div class="card">
                         <div class="card-header">
@@ -66,7 +66,7 @@
                         echo '</div>';
                         ?>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">

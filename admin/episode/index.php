@@ -1,7 +1,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Episode - TV Show</h3>
@@ -23,7 +23,7 @@
                                     $query = "SELECT tb_episode_tv_show.id AS episode_id, tb_tv_show.judul_tv_show, tb_episode_tv_show.nama_episode, tb_episode_tv_show.jumlah_episode, tb_episode_tv_show.tv_show_id
                FROM tb_episode_tv_show
                LEFT JOIN tb_tv_show ON tb_episode_tv_show.tv_show_id = tb_tv_show.id 
-               ORDER BY tb_episode_tv_show.id ASC";
+               ORDER BY tb_episode_tv_show.id DESC";
 
                                     $result = mysqli_query($koneksi, $query);
                                     if (!$result) {
@@ -91,7 +91,6 @@
             "pageLength": 5
         });
 
-        // Event handler saat opsi tampilan berubah
         $('#selectLength').on('change', function () {
             table.page.len($(this).val()).draw();
         });
