@@ -21,7 +21,7 @@
                             <?php
                             include_once '../config/koneksi.php';
                             $no = 1;
-                            $data = mysqli_query($koneksi, "SELECT * FROM tb_logs_aplikasi ORDER BY id ASC");
+                            $data = mysqli_query($koneksi, "SELECT * FROM tb_logs_aplikasi ORDER BY id DESC");
                             while ($d = mysqli_fetch_assoc($data)) {
                                 ?>
                                 <tr>
