@@ -93,7 +93,7 @@ $(document).ready(function () {
 
 // Exclude index users
 $(document).ready(function () {
-  var table = $("#example2").DataTable({
+  var table = $("#tmf_datatable").DataTable({
     paging: true,
     lengthChange: true,
     searching: true,

@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="example2">
+                    <table class="table table-bordered table-striped" id="tmf_datatable">
                         <thead>
                             <tr>
                                 <th width="1%">NO</th>
@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            include("../config/koneksi.php");
+                            include_once '../config/koneksi.php';
 
                             $no = 1;
                             $data = mysqli_query($koneksi, "SELECT * FROM tb_users ORDER BY user_id DESC");
@@ -87,7 +87,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-</script>
