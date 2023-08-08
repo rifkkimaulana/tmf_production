@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -77,51 +74,6 @@ include '../config/koneksi.php';
                             </div>
                         </div>
                     </form>
-
-                    <script>
-                        $(document).ready(function () {
-                            var table = $('#example2').DataTable({
-                                "paging": true,
-                                "lengthChange": true,
-                                "searching": true,
-                                "ordering": true,
-                                "info": true,
-                                "autoWidth": false,
-                                "language": {
-                                    "lengthMenu": "_MENU_",
-                                    "zeroRecords": "No data found",
-                                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                                    "infoEmpty": "Showing 0 to 0 of 0 entries",
-                                    "infoFiltered": "(filtered from _MAX_ total entries)",
-                                    "search": "Cari:",
-                                    "paginate": {
-                                        "first": "Start",
-                                        "last": "End",
-                                        "next": "Next",
-                                        "previous": "Previous"
-                                    }
-                                },
-                                "lengthMenu": [5, 10, 50, 100],
-                                "pageLength": 5
-                            });
-
-                            $('#selectLength').on('change', function () {
-                                table.page.len($(this).val()).draw();
-                            });
-
-                            $('#checkAll').on('change', function () {
-                                $('input[name="selected_kategori_artikel[]"]').prop('checked', this.checked);
-                            });
-
-                            $('input[name="selected_kategori_artikel[]"]').on('change', function () {
-                                if ($('input[name="selected_kategori_artikel[]"]:checked').length === $('input[name="selected_kategori_artikel[]"]').length) {
-                                    $('#checkAll').prop('checked', true);
-                                } else {
-                                    $('#checkAll').prop('checked', false);
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>

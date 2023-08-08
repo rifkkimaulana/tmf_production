@@ -1,5 +1,4 @@
 <?php
-include '../config/base_url.php';
 $page = isset($_GET['page']) ? $_GET['page'] : '';
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">

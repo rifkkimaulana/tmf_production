@@ -68,35 +68,3 @@
         </div>
     </div>
 </section>
-<script>
-    $(document).ready(function () {
-        var table = $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "language": {
-                "lengthMenu": "_MENU_",
-                "zeroRecords": "Tidak ada data yang ditemukan",
-                "info": "Menampilkan _START_ hingga _END_ dari total _TOTAL_ entri",
-                "infoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
-                "infoFiltered": "(difilter dari total _MAX_ entri)",
-                "search": "Cari:",
-                "paginate": {
-                    "first": "Awal",
-                    "last": "Akhir",
-                    "next": "Berikutnya",
-                    "previous": "Sebelumnya"
-                }
-            },
-            "lengthMenu": [5, 10, 50, 100],
-            "pageLength": 5
-        });
-
-        $('#selectLength').on('change', function () {
-            table.page.len($(this).val()).draw();
-        });
-    });
-</script>
