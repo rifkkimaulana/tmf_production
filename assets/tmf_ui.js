@@ -153,6 +153,22 @@ $(document).ready(function () {
       $("#checkAll").prop("checked", false);
     }
   });
+
+  //for selected quality
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_quality[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_quality[]"]').on("change", function () {
+    if (
+      $('input[name="selected_quality[]"]:checked').length ===
+      $('input[name="selected_quality[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
 });
 
 //Dark Mode Script from button navbar admin
