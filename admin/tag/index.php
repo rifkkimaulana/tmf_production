@@ -35,7 +35,6 @@
                                     <i class="fas fa-trash"></i> Delete Tag
                                 </button>
                             </div>
-
                             <h3 class="card-title">Tags</h3>
                         </div>
                         <div class="card-body">
@@ -49,7 +48,6 @@
                                             <th style="width: 5%;">No</th>
                                             <th style="width: 30%;">Tag Name</th>
                                             <th style="width: 30%;">Slug</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,7 +55,6 @@
                                         $query = "SELECT * FROM tb_tag ORDER BY id DESC";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = 1;
-
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo "<tr>";
                                             echo '<td><input type="checkbox" name="selected_tag[]" value="' . $row['id'] . '"></td>';
@@ -68,7 +65,6 @@
                                             echo "</tr>";
                                             $no++;
                                         }
-
                                         mysqli_close($koneksi);
                                         ?>
                                     </tbody>
