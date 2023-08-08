@@ -9,6 +9,9 @@ include '../config/koneksi.php';
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah Film</h3>
+                            <a href="javascript:void(0);" onclick="openSearchModal();"
+                                class="btn-sm btn-primary ml-auto">
+                                Use TMDB id</a>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
@@ -36,8 +39,6 @@ include '../config/koneksi.php';
                                         Terbitkan
                                     </a>
                                 </h4>
-                                <a href="javascript:void(0);" onclick="openSearchModal();" class="btn-sm btn-primary">
-                                    Use TMDB id</a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
