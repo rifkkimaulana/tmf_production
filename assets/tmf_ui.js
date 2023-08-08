@@ -1,6 +1,85 @@
 // Exclude Episode
 
 // Exclude Dashboard admin
+$(document).ready(function () {
+  $("#tanggalPicker").datetimepicker({
+    format: "YYYY-MM-DD",
+  });
+});
+
+$(function () {
+  $(".datepicker").datepicker({
+    dateFormat: "yy-mm-dd",
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+  });
+});
+
+$(document).ready(function () {
+  $("#tanggal_rilis").datetimepicker({
+    format: "DD MMM YYYY",
+    icons: {
+      time: "fas fa-clock",
+      date: "fas fa-calendar-alt",
+      up: "fas fa-chevron-up",
+      down: "fas fa-chevron-down",
+      previous: "fas fa-chevron-left",
+      next: "fas fa-chevron-right",
+      today: "fas fa-calendar-check",
+      clear: "fas fa-trash",
+      close: "fas fa-times",
+    },
+  });
+
+  $("#tahun_rilis").datetimepicker({
+    format: "YYYY",
+    viewMode: "years",
+    icons: {
+      time: "fas fa-clock",
+      date: "fas fa-calendar-alt",
+      up: "fas fa-chevron-up",
+      down: "fas fa-chevron-down",
+      previous: "fas fa-chevron-left",
+      next: "fas fa-chevron-right",
+      today: "fas fa-calendar-check",
+      clear: "fas fa-trash",
+      close: "fas fa-times",
+    },
+  });
+});
+
+$(document).ready(function () {
+  $("#mulaiTanggalPicker").datetimepicker({
+    format: "YYYY-MM-DD",
+    icons: {
+      time: "fa fa-clock",
+      date: "fa fa-calendar",
+      up: "fa fa-chevron-up",
+      down: "fa fa-chevron-down",
+      previous: "fa fa-chevron-left",
+      next: "fa fa-chevron-right",
+      today: "fa fa-calendar-check-o",
+      clear: "fa fa-trash",
+      close: "fa fa-times",
+    },
+  });
+
+  $("#sampaiTanggalPicker").datetimepicker({
+    format: "YYYY-MM-DD",
+    icons: {
+      time: "fa fa-clock",
+      date: "fa fa-calendar",
+      up: "fa fa-chevron-up",
+      down: "fa fa-chevron-down",
+      previous: "fa fa-chevron-left",
+      next: "fa fa-chevron-right",
+      today: "fa fa-calendar-check-o",
+      clear: "fa fa-trash",
+      close: "fa fa-times",
+    },
+  });
+});
 
 // Exclude Create artikel admin
 
