@@ -4,7 +4,7 @@ include '../config/koneksi.php';
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Tambah Kategori Artikel</h3>
@@ -31,7 +31,7 @@ include '../config/koneksi.php';
                 </div>
             </div>
 
-            <div class="col-8">
+            <div class="col-lg-8">
                 <div class="card">
                     <form action="artikel/delete_kategori.php" method="post" id="form-kategori-artikel">
                         <div class="card-header">

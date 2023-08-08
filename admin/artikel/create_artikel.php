@@ -6,7 +6,7 @@ include '../config/koneksi.php';
     <div class="container-fluid">
         <form action="artikel/proses_create_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah Artikel</h3>
@@ -25,7 +25,7 @@ include '../config/koneksi.php';
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
