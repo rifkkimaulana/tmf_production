@@ -15,14 +15,13 @@
                                 <th>Action</th>
                                 <th>Description</th>
                                 <th>IP Address</th>
-                                <th>Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             include '../config/koneksi.php';
                             $no = 1;
-                            $data = mysqli_query($koneksi, "SELECT * FROM tb_logs_aplikasi ORDER BY timestamp DESC");
+                            $data = mysqli_query($koneksi, "SELECT * FROM tb_logs_aplikasi ORDER BY id DESC");
                             while ($d = mysqli_fetch_assoc($data)) {
                                 ?>
                                 <tr>
@@ -43,9 +42,6 @@
                                     </td>
                                     <td>
                                         <?php echo $d['ip_address']; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $d['timestamp']; ?>
                                     </td>
                                 </tr>
                                 <?php
