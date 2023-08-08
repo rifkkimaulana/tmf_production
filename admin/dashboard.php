@@ -127,9 +127,8 @@ if ($_SESSION['status'] != "administrator_logedin") {
                     <div class="skeleton-content"></div>
                 </div>
             </div>
-            <div id="content" style="display: none">
-                <?php include_once('halaman/main-content.php'); ?>
-            </div>
+            <?php include_once('halaman/main-content.php'); ?>
+
         </div>
         <?php include_once('halaman/footer.php'); ?>
 
