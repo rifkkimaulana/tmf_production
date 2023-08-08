@@ -185,6 +185,22 @@ $(document).ready(function () {
       $("#checkAll").prop("checked", false);
     }
   });
+
+  // for selected years
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_year[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_year[]"]').on("change", function () {
+    if (
+      $('input[name="selected_year[]"]:checked').length ===
+      $('input[name="selected_year[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
 });
 
 //Dark Mode Script from button navbar admin
