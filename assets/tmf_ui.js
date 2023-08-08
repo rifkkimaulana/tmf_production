@@ -475,7 +475,7 @@ for (var i = 0; i < checkboxes.length; i++) {
 
 updateSelectedCategories();
 
-let selectedTagsArray = [];
+//let selectedTagsArray = [];
 
 function addTag() {
   const inputElement = document.getElementById("tagInput");
