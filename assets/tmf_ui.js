@@ -201,6 +201,22 @@ $(document).ready(function () {
       $("#checkAll").prop("checked", false);
     }
   });
+
+  // for selected crew
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_player[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_player[]"]').on("change", function () {
+    if (
+      $('input[name="selected_player[]"]:checked').length ===
+      $('input[name="selected_player[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
 });
 
 //Dark Mode Script from button navbar admin
