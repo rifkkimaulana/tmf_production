@@ -342,3 +342,20 @@ document.addEventListener("DOMContentLoaded", function () {
     hideSkeletonScreen();
   }, 300);
 });
+
+// Preview add image
+function previewImage(event) {
+  const imagePreviewElement = document.getElementById("imagePreview");
+  const imageFile = event.target.files[0];
+  if (imageFile) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      imagePreviewElement.src = reader.result;
+    };
+    reader.readAsDataURL(imageFile);
+    imagePreviewElement.style.display = "block";
+  } else {
+    imagePreviewElement.src = "#";
+    imagePreviewElement.style.display = "none";
+  }
+}
