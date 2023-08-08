@@ -36,9 +36,8 @@ include '../config/koneksi.php';
                                         Terbitkan
                                     </a>
                                 </h4>
-                                <a href="javascript:void(0);" onclick="openSearchModal();">
-                                    <button class="btn-sm btn-primary"> Use TMDB id</button>
-                                </a>
+                                <a href="javascript:void(0);" onclick="openSearchModal();" class="btn-sm btn-primary">
+                                    Use TMDB id</a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
