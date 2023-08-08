@@ -143,7 +143,9 @@ if ($_SESSION['status'] != "administrator_logedin") {
             </div>
         </div>
         <?php include_once('halaman/footer.php'); ?>
+        <script src="<?php echo $base_url; ?>/assets/tmf_ui.js"></script>
     </div>
+
     <script>
         $(document).ready(function () {
             $("#tanggalPicker").datetimepicker({
@@ -257,7 +259,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
     <script src="<?php echo $base_url; ?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <link href="<?php echo $base_url; ?>/assets/summernote/summernote-bs4.css" rel="stylesheet">
     <script src="<?php echo $base_url; ?>/assets/summernote/summernote-bs4.min.js"></script>
-    <script src="<?php echo $base_url; ?>/assets/tmf_ui.js"></script>
+
 </body>
 
 </html>
