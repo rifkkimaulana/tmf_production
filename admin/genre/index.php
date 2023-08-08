@@ -29,7 +29,6 @@
             <div class="col-lg-8">
                 <div class="card">
                     <form action="genre/delete.php" method="post" id="form-genre">
-
                         <div class="card-header">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-danger" id="hapusGenreBtn">
@@ -39,10 +38,9 @@
 
                             <h3 class="card-title">Genre</h3>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="tmd_datatable" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">

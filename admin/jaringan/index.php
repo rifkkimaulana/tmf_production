@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -46,7 +43,7 @@ include '../config/koneksi.php';
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">
@@ -55,10 +52,8 @@ include '../config/koneksi.php';
                                             <th style="width: 5%;">No</th>
                                             <th style="width: 30%;">Nama Jaringan</th>
                                             <th style="width: 30%;">Slug</th>
-
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <?php
                                         $query = "SELECT * FROM tb_jaringan ORDER BY id DESC";
@@ -75,60 +70,13 @@ include '../config/koneksi.php';
                                             echo "</tr>";
                                             $no++;
                                         }
-
                                         mysqli_close($koneksi);
                                         ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </form>
-
-                    <script>
-                        $(document).ready(function () {
-                            var table = $('#example2').DataTable({
-                                "paging": true,
-                                "lengthChange": true,
-                                "searching": true,
-                                "ordering": true,
-                                "info": true,
-                                "autoWidth": false,
-                                "language": {
-                                    "lengthMenu": "_MENU_",
-                                    "zeroRecords": "Tidak ada data yang ditemukan",
-                                    "info": "Menampilkan _START_ hingga _END_ dari total _TOTAL_ entri",
-                                    "infoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
-                                    "infoFiltered": "(difilter dari total _MAX_ entri)",
-                                    "search": "Cari:",
-                                    "paginate": {
-                                        "first": "Awal",
-                                        "last": "Akhir",
-                                        "next": "Berikutnya",
-                                        "previous": "Sebelumnya"
-                                    }
-                                },
-                                "lengthMenu": [5, 10, 50, 100],
-                                "pageLength": 5
-                            });
-
-                            $('#selectLength').on('change', function () {
-                                table.page.len($(this).val()).draw();
-                            });
-
-                            $('#checkAll').on('change', function () {
-                                $('input[name="selected_network[]"]').prop('checked', this.checked);
-                            });
-
-                            $('input[name="selected_network[]"]').on('change', function () {
-                                if ($('input[name="selected_network[]"]:checked').length === $('input[name="selected_network[]"]').length) {
-                                    $('#checkAll').prop('checked', true);
-                                } else {
-                                    $('#checkAll').prop('checked', false);
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>

@@ -118,12 +118,11 @@ $(document).ready(function () {
     pageLength: 5,
   });
 
-  //Table Genre
-
   $("#selectLength").on("change", function () {
     table.page.len($(this).val()).draw();
   });
 
+  // for selected genre
   $("#checkAll").on("change", function () {
     $('input[name="selected_genre[]"]').prop("checked", this.checked);
   });
@@ -132,6 +131,22 @@ $(document).ready(function () {
     if (
       $('input[name="selected_genre[]"]:checked').length ===
       $('input[name="selected_genre[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
+
+  // for selected network
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_network[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_network[]"]').on("change", function () {
+    if (
+      $('input[name="selected_network[]"]:checked').length ===
+      $('input[name="selected_network[]"]').length
     ) {
       $("#checkAll").prop("checked", true);
     } else {
