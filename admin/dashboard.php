@@ -41,7 +41,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
     <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/dist/css/adminlte.min.css">
 
     <!-- Local .css style sheet-->
-    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/tmf_style.css">
+    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/tmf_admin.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
