@@ -224,7 +224,7 @@ if ($response !== false) {
                                     <?php echo $judul . " id: " . $tv_id; ?>
                                 </h3>
                                 <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_tvshow"
-                                    class="btn btn-primary">Add Manual</a>
+                                    class="btn btn-sm btn-primary">Add Manual</a>
                             </div>
                         </div>
                         <div class="card-body">

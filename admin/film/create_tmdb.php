@@ -186,7 +186,7 @@ if ($response !== false) {
                                     <?php echo $judul . " id: " . $id_film; ?>
                                 </h3>
                                 <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_film"
-                                    class="btn btn-primary">Add Manual</a>
+                                    class="btn btn-primary btn-sm">Add Manual</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -217,22 +217,21 @@ if ($response !== false) {
                                         Terbitkan
                                     </a>
                                 </h4>
-                                <a href="
                             </div>
                             <div id=" collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="statusFilm">Status</label>
-                                            <select class="form-control" id="statusFilm" name="statusFilm">
-                                                <option value="publik">Publik</option>
-                                                <option value="draf">Draf</option>
-                                                <option value="terbitkan">Terbitkan segera</option>
-                                            </select>
-                                        </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="statusFilm">Status</label>
+                                        <select class="form-control" id="statusFilm" name="statusFilm">
+                                            <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
+                                            <option value="terbitkan">Terbitkan segera</option>
+                                        </select>
                                     </div>
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                                </div>
                             </div>
                         </div>
                     </div>

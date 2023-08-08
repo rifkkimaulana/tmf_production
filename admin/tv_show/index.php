@@ -29,7 +29,8 @@ include '../config/koneksi.php';
                                FROM tb_tv_show
                                LEFT JOIN tb_genre ON FIND_IN_SET(tb_genre.id, tb_tv_show.genre_ids)
                                JOIN tb_tag ON tb_tv_show.tag_ids = tb_tag.id
-                               GROUP BY tb_tv_show.id";
+                               GROUP BY tb_tv_show.id
+                               ORDER BY tb_tv_show.id ASC";
 
 
                                     $result = mysqli_query($koneksi, $query);
