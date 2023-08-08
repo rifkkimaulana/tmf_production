@@ -47,13 +47,3 @@ document
   .addEventListener("click", toggleDarkMode);
 
 // Exclude skeleton ui for main content id
-function hideSkeletonScreen() {
-  document.getElementById("skeletonScreen").style.display = "none";
-  document.getElementById("content").style.display = "block";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-    hideSkeletonScreen();
-  }, 300);
-});
