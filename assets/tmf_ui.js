@@ -91,7 +91,7 @@ $(document).ready(function () {
 
 // Exclude update artikel admin
 
-// Exclude index users
+// Exclude index users - datatable standar
 $(document).ready(function () {
   var table = $("#tmf_datatable").DataTable({
     paging: true,
@@ -120,6 +120,21 @@ $(document).ready(function () {
 
   $("#selectLength").on("change", function () {
     table.page.len($(this).val()).draw();
+  });
+
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_genre[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_genre[]"]').on("change", function () {
+    if (
+      $('input[name="selected_genre[]"]:checked').length ===
+      $('input[name="selected_genre[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
   });
 });
 
