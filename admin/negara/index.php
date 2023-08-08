@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -32,20 +29,17 @@ include '../config/koneksi.php';
             <div class="col-lg-8">
                 <div class="card">
                     <form action="negara/delete.php" method="post" id="form-negara">
-
                         <div class="card-header">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-danger" id="deleteCountryBtn">
                                     <i class="fas fa-trash"></i> Hapus Negara
                                 </button>
                             </div>
-
                             <h3 class="card-title">Negara</h3>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">
@@ -54,10 +48,8 @@ include '../config/koneksi.php';
                                             <th style="width: 5%;">No</th>
                                             <th style="width: 30%;">Nama Negara</th>
                                             <th style="width: 30%;">Slug</th>
-
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <?php
                                         $query = "SELECT * FROM tb_negara ORDER BY id DESC";
@@ -81,54 +73,7 @@ include '../config/koneksi.php';
                                 </table>
                             </div>
                         </div>
-
                     </form>
-
-                    <script>
-                        $(document).ready(function () {
-                            var table = $('#example2').DataTable({
-                                "paging": true,
-                                "lengthChange": true,
-                                "searching": true,
-                                "ordering": true,
-                                "info": true,
-                                "autoWidth": false,
-                                "language": {
-                                    "lengthMenu": "_MENU_",
-                                    "zeroRecords": "Tidak ada data yang ditemukan",
-                                    "info": "Menampilkan _START_ hingga _END_ dari total _TOTAL_ entri",
-                                    "infoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
-                                    "infoFiltered": "(difilter dari total _MAX_ entri)",
-                                    "search": "Cari:",
-                                    "paginate": {
-                                        "first": "Awal",
-                                        "last": "Akhir",
-                                        "next": "Berikutnya",
-                                        "previous": "Sebelumnya"
-                                    }
-                                },
-                                "lengthMenu": [5, 10, 50, 100],
-                                "pageLength": 5
-                            });
-
-                            $('#selectLength').on('change', function () {
-                                table.page.len($(this).val()).draw();
-                            });
-
-                            $('#checkAll').on('change', function () {
-                                $('input[name="selected_country[]"]').prop('checked', this.checked);
-                            });
-
-                            $('input[name="selected_country[]"]').on('change', function () {
-                                if ($('input[name="selected_country[]"]:checked').length === $('input[name="selected_country[]"]').length) {
-                                    $('#checkAll').prop('checked', true);
-                                } else {
-                                    $('#checkAll').prop('checked', false);
-                                }
-                            });
-                        });
-                    </script>
-
                 </div>
             </div>
         </div>

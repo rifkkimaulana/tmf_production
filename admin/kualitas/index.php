@@ -49,7 +49,6 @@
                                             <th style="width: 5%;">No</th>
                                             <th style="width: 30%;">Nama Kualitas</th>
                                             <th style="width: 30%;">Slug</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>

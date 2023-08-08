@@ -169,6 +169,22 @@ $(document).ready(function () {
       $("#checkAll").prop("checked", false);
     }
   });
+
+  //for selected country
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_country[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_country[]"]').on("change", function () {
+    if (
+      $('input[name="selected_country[]"]:checked').length ===
+      $('input[name="selected_country[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
 });
 
 //Dark Mode Script from button navbar admin
