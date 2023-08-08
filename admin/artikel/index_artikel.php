@@ -181,6 +181,23 @@ if (isset($_GET['alert'])) {
     }
 }
 ?>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertParam = urlParams.get('alert');
+
+    if (alertParam === 'berhasil_diupdate') {
+        $('#successModal').modal('show');
+    }
+</script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get('page');
+    const alertParam = urlParams.get('alert');
+
+    if (alertParam === 'berhasil_ditambahkan' && pageParam === 'artikel') {
+        $('#successModal').modal('show');
+    }
+</script>
 
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
     aria-hidden="true">
@@ -202,14 +219,7 @@ if (isset($_GET['alert'])) {
     </div>
 </div>
 
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const alertParam = urlParams.get('alert');
 
-    if (alertParam === 'berhasil_diupdate') {
-        $('#successModal').modal('show');
-    }
-</script>
 
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
     aria-hidden="true">
@@ -230,13 +240,3 @@ if (isset($_GET['alert'])) {
         </div>
     </div>
 </div>
-
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageParam = urlParams.get('page');
-    const alertParam = urlParams.get('alert');
-
-    if (alertParam === 'berhasil_ditambahkan' && pageParam === 'artikel') {
-        $('#successModal').modal('show');
-    }
-</script>
