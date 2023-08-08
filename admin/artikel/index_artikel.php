@@ -102,6 +102,38 @@ include '../config/koneksi.php';
         });
     });
 </script>
+<?php
+if (isset($_GET['alert'])) {
+    if ($_GET['alert'] === 'berhasil_delete') {
+        echo '<script>$("#modalBerhasilDelete").modal("show");</script>';
+    } elseif ($_GET['alert'] === 'gagal_delete') {
+        echo '<script>$("#modalGagalDelete").modal("show");</script>';
+    }
+}
+?>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertParam = urlParams.get('alert');
+    const pageParam = urlParams.get('page');
+
+    if (alertParam === 'berhasil_diupdate' || (alertParam === 'berhasil_ditambahkan' && pageParam === 'artikel')) {
+        $('#successModal').modal('show');
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#modalKonfirmasiHapusArtikel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var artikelId = button.data('artikelid');
+            var judulArtikel = button.data('judulartikel');
+
+            $('#judulArtikelToDelete').text(judulArtikel);
+
+            var hapusArtikelLink = 'artikel/proses_delete_artikel.php?id=' + artikelId;
+            $('#hapusArtikelLink').attr('href', hapusArtikelLink);
+        });
+    });
+</script>
 <div class="modal fade" id="modalKonfirmasiHapusArtikel" tabindex="-1" role="dialog"
     aria-labelledby="modalKonfirmasiHapusArtikelLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -124,20 +156,6 @@ include '../config/koneksi.php';
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#modalKonfirmasiHapusArtikel').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var artikelId = button.data('artikelid');
-            var judulArtikel = button.data('judulartikel');
-
-            $('#judulArtikelToDelete').text(judulArtikel);
-
-            var hapusArtikelLink = 'artikel/proses_delete_artikel.php?id=' + artikelId;
-            $('#hapusArtikelLink').attr('href', hapusArtikelLink);
-        });
-    });
-</script>
 <div class="modal fade" id="modalBerhasilDelete">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -172,33 +190,6 @@ include '../config/koneksi.php';
     </div>
 </div>
 
-<?php
-if (isset($_GET['alert'])) {
-    if ($_GET['alert'] === 'berhasil_delete') {
-        echo '<script>$("#modalBerhasilDelete").modal("show");</script>';
-    } elseif ($_GET['alert'] === 'gagal_delete') {
-        echo '<script>$("#modalGagalDelete").modal("show");</script>';
-    }
-}
-?>
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const alertParam = urlParams.get('alert');
-
-    if (alertParam === 'berhasil_diupdate') {
-        $('#successModal').modal('show');
-    }
-</script>
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageParam = urlParams.get('page');
-    const alertParam = urlParams.get('alert');
-
-    if (alertParam === 'berhasil_ditambahkan' && pageParam === 'artikel') {
-        $('#successModal').modal('show');
-    }
-</script>
-
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -218,8 +209,6 @@ if (isset($_GET['alert'])) {
         </div>
     </div>
 </div>
-
-
 
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
     aria-hidden="true">
