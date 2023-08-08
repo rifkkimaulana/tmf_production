@@ -1,11 +1,11 @@
 <div class="card-body">
     <ul class="nav nav-tabs" id="pengaturan_tab_list">
         <li class="nav-item">
-            <a class="nav-link active" id="film-tab" data-toggle="pill" href="#pengaturan_film"
+            <a class="nav-link" id="film-tab" data-toggle="pill" href="#pengaturan_film"
                 aria-controls="pengaturan_film">Pengaturan TV Show</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="player-tab" data-toggle="pill" href="#pengaturan_player"
+            <a class="nav-link active" id="player-tab" data-toggle="pill" href="#pengaturan_player"
                 aria-controls="pengaturan_player">Pengaturan Player</a>
         </li>
         <li class="nav-item">

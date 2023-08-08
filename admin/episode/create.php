@@ -9,7 +9,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 30%;">Judul TV Show</th>
@@ -48,7 +48,6 @@
                 <?php } ?>
                 <form action="episode/proses_create.php" method="post" enctype="multipart/form-data">
                     <?php
-                    include '../config/koneksi.php';
                     if (isset($_GET['id'])) {
                         $id_tv_show = $_GET['id'];
                         $result = mysqli_query($koneksi, "SELECT id, judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
@@ -134,7 +133,6 @@
                                             <input type="number" class="form-control" id="jumlah_episode"
                                                 name="jumlah_episode" value="<?php echo $next_episode; ?>" required>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
