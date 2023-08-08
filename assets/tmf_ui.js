@@ -1,6 +1,6 @@
 // Exclude Episode
 $(document).ready(function () {
-  var table = $("#example2").DataTable({
+  var table = $("#table_episode").DataTable({
     paging: true,
     lengthChange: true,
     searching: true,
@@ -284,7 +284,7 @@ updateSelectedCategories();
 
 // Exclude index artikel admin
 $(document).ready(function () {
-  var table = $("#example2").DataTable({
+  var table = $("#table_artikel").DataTable({
     paging: true,
     lengthChange: true,
     searching: true,
@@ -316,7 +316,7 @@ $(document).ready(function () {
 
 // Exclude index Kategori Admin
 $(document).ready(function () {
-  var table = $("#example2").DataTable({
+  var table = $("#table_kategori").DataTable({
     paging: true,
     lengthChange: true,
     searching: true,
@@ -364,9 +364,9 @@ $(document).ready(function () {
   });
 });
 
-// Exclude index Tag artikel admin
+// Exclude index Tag artikel admin artikel
 $(document).ready(function () {
-  var table = $("#example2").DataTable({
+  var table = $("#table_tag").DataTable({
     paging: true,
     lengthChange: true,
     searching: true,

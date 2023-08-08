@@ -41,7 +41,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="table_tag" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">

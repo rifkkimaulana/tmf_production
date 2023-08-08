@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example2" class="table table-bordered table-striped">
+                            <table id="table_artikel" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center; width: 2%;">No</th>
