@@ -270,7 +270,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deskripsi = mysqli_real_escape_string($koneksi, $deskripsi);
     $status = $_POST['status'];
 
-    $targetDir = "../../gambar/film/";
+    $targetDir = "../../gambar/tv/";
 
     if (!file_exists($targetDir)) {
         mkdir($targetDir, 0755, true);
