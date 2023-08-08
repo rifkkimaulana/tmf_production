@@ -56,7 +56,7 @@ include '../config/koneksi.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM tb_tahun";
+                                        $query = "SELECT * FROM tb_tahun ORDER BY id ASC";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = 1;
 

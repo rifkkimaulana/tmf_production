@@ -61,7 +61,7 @@ include '../config/koneksi.php';
 
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM tb_jaringan";
+                                        $query = "SELECT * FROM tb_jaringan ORDER BY id ASC";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = 1;
 

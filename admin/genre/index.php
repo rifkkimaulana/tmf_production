@@ -60,7 +60,7 @@ include '../config/koneksi.php';
 
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM tb_genre";
+                                        $query = "SELECT * FROM tb_genre ORDER BY id ASC";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = 1;
 
