@@ -24,11 +24,11 @@
                                 <tbody>
                                     <?php
                                     $query = "SELECT tb_artikel.id, tb_artikel.judul_artikel, GROUP_CONCAT(tb_kategori_artikel.nama_kategori SEPARATOR ', ') AS kategori_artikel, tb_tag_artikel.nama_tag, tb_artikel.created_at
-                    FROM tb_artikel
-                    LEFT JOIN tb_kategori_artikel ON FIND_IN_SET(tb_kategori_artikel.id, tb_artikel.kategori_ids)
-                    JOIN tb_tag_artikel ON tb_artikel.tag_ids = tb_tag_artikel.id
-                    GROUP BY tb_artikel.id
-                    ORDER BY tb.artikel.id DESC";
+                                    FROM tb_artikel
+                                    LEFT JOIN tb_kategori_artikel ON FIND_IN_SET(tb_kategori_artikel.id, tb_artikel.kategori_ids)
+                                    JOIN tb_tag_artikel ON tb_artikel.tag_ids = tb_tag_artikel.id
+                                    GROUP BY tb_artikel.id
+                                    ORDER BY tb_artikel.id DESC";
 
                                     $result = mysqli_query($koneksi, $query);
                                     if (!$result) {
