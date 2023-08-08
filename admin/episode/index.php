@@ -23,7 +23,7 @@
                                     $query = "SELECT tb_episode_tv_show.id AS episode_id, tb_tv_show.judul_tv_show, tb_episode_tv_show.nama_episode, tb_episode_tv_show.jumlah_episode, tb_episode_tv_show.tv_show_id
                FROM tb_episode_tv_show
                LEFT JOIN tb_tv_show ON tb_episode_tv_show.tv_show_id = tb_tv_show.id 
-               ORDER BY tb_episode_tv_show.created_at DESC";
+               ORDER BY tb_episode_tv_show.id ASC";
 
                                     $result = mysqli_query($koneksi, $query);
                                     if (!$result) {
