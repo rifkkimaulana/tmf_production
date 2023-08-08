@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <form action="tv_show/proses_create.php" method="post" enctype="multipart/form-data">
@@ -209,20 +206,6 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .tag {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .tag i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedTagsArray = [];
 
@@ -336,20 +319,6 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .director {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .director i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedDirectorsArray = [];
 
@@ -461,22 +430,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .player {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .player i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedPemainArray = [];
 
@@ -584,22 +537,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .year {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .year i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedTahunArray = [];
 
@@ -708,22 +645,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .country {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .country i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedNegaraArray = [];
                                     function addCountry() {
@@ -832,22 +753,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .quality {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .quality i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedKualitasArray = [];
 
@@ -956,22 +861,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .jaringan {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .jaringan i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedJaringanArray = [];
 
@@ -1058,24 +947,6 @@ include '../config/koneksi.php';
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        function previewImage(event) {
-                            const imagePreviewElement = document.getElementById("imagePreview");
-                            const imageFile = event.target.files[0];
-                            if (imageFile) {
-                                const reader = new FileReader();
-                                reader.onload = function () {
-                                    imagePreviewElement.src = reader.result;
-                                }
-                                reader.readAsDataURL(imageFile);
-                                imagePreviewElement.style.display = "block";
-                            } else {
-                                imagePreviewElement.src = "#";
-                                imagePreviewElement.style.display = "none";
-                            }
-                        }
-                    </script>
                 </div>
             </div>
     </div>

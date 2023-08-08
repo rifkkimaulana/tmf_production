@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table_episode" class="table table-bordered table-striped">
+                            <table id="tmf_datatable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center; width: 2%;">No</th>
@@ -33,7 +33,7 @@
 
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
-                                        echo "<td>" . $nomorUrut . "</td>";
+                                        echo "<td>" . $nomorUrut++ . "</td>";
                                         echo "<td>" . $row['judul_tv_show'] . "</td>";
                                         echo "<td>" . $row['nama_episode'] . "</td>";
                                         echo "<td>" . $row['jumlah_episode'] . "</td>";
@@ -49,13 +49,11 @@
             </td>';
                                         echo "</tr>";
 
-                                        $nomorUrut++;
                                     }
 
                                     mysqli_free_result($result);
                                     ?>
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
@@ -64,32 +62,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    $(document).ready(function () {
-        var table = $("#example2").DataTable({
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            language: {
-                lengthMenu: "_MENU_",
-                zeroRecords: "No data found",
-                info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                infoEmpty: "Showing 0 to 0 of 0 entries",
-                infoFiltered: "(filtered from _MAX_ total entries)",
-                search: "Cari:",
-                paginate: {
-                    first: "Start",
-                    last: "End",
-                    next: "Next",
-                    previous: "Previous",
-                },
-            },
-            lengthMenu: [5, 10, 50, 100],
-            pageLength: 5,
-        });
-    });
-</script>
