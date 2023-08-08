@@ -8,6 +8,8 @@ include '../config/koneksi.php';
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Artikel</h3>
+                        <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_artikel"
+                            class="btn-primary btn-sm">Add Artikel</a>
                     </div>
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-striped">
@@ -27,7 +29,8 @@ include '../config/koneksi.php';
                     FROM tb_artikel
                     LEFT JOIN tb_kategori_artikel ON FIND_IN_SET(tb_kategori_artikel.id, tb_artikel.kategori_ids)
                     JOIN tb_tag_artikel ON tb_artikel.tag_ids = tb_tag_artikel.id
-                    GROUP BY tb_artikel.id";
+                    GROUP BY tb_artikel.id
+                    ORDER BY tb.artikel.id DESC";
 
                                 $result = mysqli_query($koneksi, $query);
                                 if (!$result) {
