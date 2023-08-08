@@ -10,41 +10,42 @@ include '../config/koneksi.php';
                         <h3 class="card-title">Film</h3>
                     </div>
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center; width: 2%;">No</th>
-                                    <th style="text-align: center; width: 30%;">Judul Film</th>
-                                    <th style="text-align: center; width: 20%;">Genre</th>
-                                    <th style="text-align: center; width: 20%;">Tag</th>
-                                    <th style="text-align: center; width: 15%;">Tanggal Rilis</th>
-                                    <th style="text-align: center; width: 13%;">Aksi</th>
+                        <div class="table-responsive">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; width: 2%;">No</th>
+                                        <th style="text-align: center; width: 30%;">Judul Film</th>
+                                        <th style="text-align: center; width: 20%;">Genre</th>
+                                        <th style="text-align: center; width: 20%;">Tag</th>
+                                        <th style="text-align: center; width: 15%;">Tanggal Rilis</th>
+                                        <th style="text-align: center; width: 13%;">Aksi</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $query = "SELECT tb_film.id, tb_film.judul_film, GROUP_CONCAT(tb_genre.nama_genre SEPARATOR ', ') AS genres, tb_tag.nama_tag, tb_film.created_at
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT tb_film.id, tb_film.judul_film, GROUP_CONCAT(tb_genre.nama_genre SEPARATOR ', ') AS genres, tb_tag.nama_tag, tb_film.created_at
                                             FROM tb_film
                                             LEFT JOIN tb_genre ON FIND_IN_SET(tb_genre.id, tb_film.genre_ids)
                                             JOIN tb_tag ON tb_film.tag_ids = tb_tag.id
                                             GROUP BY tb_film.id";
 
-                                $result = mysqli_query($koneksi, $query);
-                                if (!$result) {
-                                    die("Query gagal: " . mysqli_error($koneksi));
-                                }
+                                    $result = mysqli_query($koneksi, $query);
+                                    if (!$result) {
+                                        die("Query gagal: " . mysqli_error($koneksi));
+                                    }
 
-                                $nomorUrut = 1;
+                                    $nomorUrut = 1;
 
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $nomorUrut . "</td>";
-                                    echo "<td>" . $row['judul_film'] . "</td>";
-                                    echo "<td>" . $row['genres'] . "</td>";
-                                    echo "<td>" . $row['nama_tag'] . "</td>";
-                                    echo "<td>" . $row['created_at'] . "</td>";
-                                    echo '<td style="text-align: center;">
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $nomorUrut . "</td>";
+                                        echo "<td>" . $row['judul_film'] . "</td>";
+                                        echo "<td>" . $row['genres'] . "</td>";
+                                        echo "<td>" . $row['nama_tag'] . "</td>";
+                                        echo "<td>" . $row['created_at'] . "</td>";
+                                        echo '<td style="text-align: center;">
                       <a href="dashboard.php?page=update_film&id=' . $row['id'] . '" class="btn btn-sm btn-warning" title="Ubah">
                           <i class="fas fa-edit"></i>
                       </a>
@@ -53,15 +54,16 @@ include '../config/koneksi.php';
                     </a>
                     
                   </td>';
-                                    echo "</tr>";
+                                        echo "</tr>";
 
-                                    $nomorUrut++;
-                                }
+                                        $nomorUrut++;
+                                    }
 
-                                mysqli_free_result($result);
-                                ?>
-                            </tbody>
-                        </table>
+                                    mysqli_free_result($result);
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
