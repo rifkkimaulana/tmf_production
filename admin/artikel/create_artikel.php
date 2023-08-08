@@ -336,7 +336,7 @@ include '../config/koneksi.php';
     }
 
     .tag i {
-        margin - left: 5px;
+        margin-left: 5px;
         cursor: pointer;
     }
 </style>
