@@ -42,7 +42,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="tmf_genreTable" class="table table-bordered table-striped">
+                                <table id="tmd_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">
@@ -51,10 +51,8 @@
                                             <th style="width: 5%;">No</th>
                                             <th style="width: 30%;">Genre</th>
                                             <th style="width: 30%;">Slug</th>
-
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <?php
                                         $query = "SELECT * FROM tb_genre ORDER BY id DESC";
@@ -71,24 +69,13 @@
                                             echo "</tr>";
                                             $no++;
                                         }
-
                                         mysqli_close($koneksi);
                                         ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </form>
-
-
-
-                    <script>
-                        $(document).ready(function () {
-
-                        });
-                    </script>
-
                 </div>
             </div>
         </div>
