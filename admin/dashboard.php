@@ -107,6 +107,19 @@ if ($_SESSION['status'] != "administrator_logedin") {
                 opacity: 1;
             }
         }
+
+        .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+
+        .tag i {
+            margin-left: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -244,70 +257,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
             });
         </script>
 
-        <!-- Search Modal Film -->
-        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Search Modal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="searchForm" method="get" action="dashboard.php">
-                            <input type="hidden" name="page" value="add_film_tmdb">
-                            <div class="form-group">
-                                <label for="id_film">Silahkan masukan id film:</label>
-                                <input type="text" id="id_film" name="id_film" class="form-control"
-                                    placeholder="Enter your search term" required>
-                                <small class="text-muted">Isi dengan id film asli dari TMDB.</small>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search Modal TV-->
-        <div class="modal" id="searchModalTv" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Search Modal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="searchForm" method="get" action="dashboard.php">
-                            <input type="hidden" name="page" value="add_tv_show_tmdb">
-                            <div class="form-group">
-                                <label for="id_tv">Silahkan masukan id TV:</label>
-                                <input type="text" id="id_tv" name="id_tv" class="form-control"
-                                    placeholder="Enter your search term" required>
-                                <small class="text-muted">Isi dengan id TV asli dari TMDB.</small>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
-            function openSearchModal() {
-                $('#searchModal').modal('show');
-            }
-            function openSearchModalTv() {
-                $('#searchModalTv').modal('show');
-            }
-        </script>
+
     </div>
 </body>
 

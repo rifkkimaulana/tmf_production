@@ -402,8 +402,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uniqueName = $thumbnailLama;
     }
 
-
-
     $sql = "UPDATE tb_film 
             SET judul_film = '$judul_film', 
                 deskripsi = '$deskripsi', 

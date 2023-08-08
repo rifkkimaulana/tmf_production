@@ -53,12 +53,10 @@
 <script>
     var darkModeEnabled = false;
 
-    // Check if dark mode is already enabled
     if (localStorage.getItem('darkModeEnabled') === 'true') {
         darkModeEnabled = true;
     }
 
-    // Function to toggle dark mode
     function toggleDarkMode() {
         var icon = document.getElementById('dark-mode-icon');
         var body = document.body;
@@ -78,12 +76,9 @@
         }
     }
 
-    // Initialize dark mode state
     if (darkModeEnabled) {
         document.getElementById('dark-mode-icon').classList.add('fa-moon');
         document.body.classList.add('dark-mode');
     }
-
-    // Add event listener to toggle dark mode
     document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
 </script>

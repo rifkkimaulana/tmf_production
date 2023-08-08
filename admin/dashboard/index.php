@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
