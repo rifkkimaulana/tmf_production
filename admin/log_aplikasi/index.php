@@ -3,6 +3,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Log Aplikasi</h3>
+                <a href="#" class="btn-sm btn-danger"> Bersihkan Logs</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
