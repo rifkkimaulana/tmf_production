@@ -9,9 +9,9 @@ include '../config/koneksi.php';
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah Film</h3>
-                            <button href="javascript:void(0);" onclick="openSearchModal();"
+                            <a href="javascript:void(0);" onclick="openSearchModal();"
                                 class="btn-sm btn-primary float-right">
-                                Use TMDB id</button>
+                                Use TMDB id</a>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
