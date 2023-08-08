@@ -38,7 +38,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
     <div class="container-fluid">
         <form action="artikel/proses_update_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <input type="hidden" name="id_artikel" id="id_artikel" value="<?php echo $artikelId; ?>">
                         <div class="card-header">
@@ -73,7 +73,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">

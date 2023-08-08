@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -135,6 +132,7 @@ if (isset($_GET['alert'])) {
         });
     });
 </script>
+
 <div class="modal fade" id="modalKonfirmasiHapusArtikel" tabindex="-1" role="dialog"
     aria-labelledby="modalKonfirmasiHapusArtikelLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

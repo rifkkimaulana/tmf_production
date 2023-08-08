@@ -224,19 +224,6 @@ include '../config/koneksi.php';
         }
     }
 
-    .tag {
-        display: inline - block;
-        background - color: #f0f0f0;
-        padding: 5px 10px;
-        margin - right: 5px;
-        border - radius: 5px;
-    }
-
-    .tag i {
-        margin - left: 5px;
-        cursor: pointer;
-    }
-
     let selectedTagsArray = [];
 
     function addTag() {
@@ -339,3 +326,17 @@ include '../config/koneksi.php';
 
     updateSelectedCategories();
 </script>
+<style>
+    .tag {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        margin-right: 5px;
+        border-radius: 5px;
+    }
+
+    .tag i {
+        margin - left: 5px;
+        cursor: pointer;
+    }
+</style>
