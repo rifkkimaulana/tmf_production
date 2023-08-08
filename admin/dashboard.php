@@ -124,9 +124,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
 </head>
 
 <body class="hold-transition sidebar-mini">
-
     <div class="wrapper">
-
         <?php include_once('halaman/navbar.php'); ?>
         <?php include_once('halaman/sidebar.php'); ?>
 
@@ -259,6 +257,7 @@ if ($_SESSION['status'] != "administrator_logedin") {
 
 
     </div>
+    <script src="<?php echo $base_url; ?>/assets/tmf_ui.js"></script>
 </body>
 
 </html>
