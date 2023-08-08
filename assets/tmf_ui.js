@@ -217,6 +217,22 @@ $(document).ready(function () {
       $("#checkAll").prop("checked", false);
     }
   });
+
+  // for selected director
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_direksi[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_direksi[]"]').on("change", function () {
+    if (
+      $('input[name="selected_direksi[]"]:checked').length ===
+      $('input[name="selected_direksi[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
 });
 
 //Dark Mode Script from button navbar admin
