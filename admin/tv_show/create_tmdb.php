@@ -216,7 +216,7 @@ if ($response !== false) {
     <div class="container-fluid">
         <form action="tv_show/proses_create.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
@@ -245,7 +245,7 @@ if ($response !== false) {
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
