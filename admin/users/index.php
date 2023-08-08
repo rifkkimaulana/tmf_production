@@ -29,7 +29,7 @@
                             include("../config/koneksi.php");
 
                             $no = 1;
-                            $data = mysqli_query($koneksi, "SELECT * FROM tb_users ORDER BY id DESC");
+                            $data = mysqli_query($koneksi, "SELECT * FROM tb_users ORDER BY user_id DESC");
                             while ($d = mysqli_fetch_array($data)) {
                                 ?>
                                 <tr>
