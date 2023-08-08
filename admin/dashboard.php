@@ -118,14 +118,16 @@ if ($_SESSION['status'] != "administrator_logedin") {
         <?php include_once('halaman/sidebar.php'); ?>
 
         <div class="content-wrapper">
-            <div id="skeletonScreen mt-3">
+            <div class="content-header">
+            </div>
+            <div id="skeletonScreen">
                 <div class="container mt-5">
                     <div class="skeleton-content"></div>
                     <div class="skeleton-img"></div>
                     <div class="skeleton-content"></div>
                 </div>
             </div>
-            <div id="content" class="mt3" style="display: none">
+            <div id="content" style="display: none">
                 <?php include_once('halaman/main-content.php'); ?>
             </div>
         </div>
