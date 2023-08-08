@@ -29,7 +29,8 @@ include '../config/koneksi.php';
                                             FROM tb_film
                                             LEFT JOIN tb_genre ON FIND_IN_SET(tb_genre.id, tb_film.genre_ids)
                                             JOIN tb_tag ON tb_film.tag_ids = tb_tag.id
-                                            GROUP BY tb_film.id";
+                                            GROUP BY tb_film.id
+                                            ORDER BY tb_film.created_at ASC";
 
                                     $result = mysqli_query($koneksi, $query);
                                     if (!$result) {
