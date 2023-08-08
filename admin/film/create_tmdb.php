@@ -217,21 +217,22 @@ if ($response !== false) {
                                         Terbitkan
                                     </a>
                                 </h4>
+                                <a href="
                             </div>
-                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="statusFilm">Status</label>
-                                        <select class="form-control" id="statusFilm" name="statusFilm">
-                                            <option value="publik">Publik</option>
-                                            <option value="draf">Draf</option>
-                                            <option value="terbitkan">Terbitkan segera</option>
-                                        </select>
+                            <div id=" collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="statusFilm">Status</label>
+                                            <select class="form-control" id="statusFilm" name="statusFilm">
+                                                <option value="publik">Publik</option>
+                                                <option value="draf">Draf</option>
+                                                <option value="terbitkan">Terbitkan segera</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-right">Simpan</button>
-                                </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
