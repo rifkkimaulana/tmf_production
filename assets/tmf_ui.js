@@ -249,6 +249,52 @@ $(document).ready(function () {
       $("#checkAll").prop("checked", false);
     }
   });
+
+  // for summernote
+  $(".summernote").summernote({
+    height: 300,
+    toolbar: [
+      ["style", ["bold", "italic", "underline", "clear"]],
+      ["para", ["ul", "ol"]],
+      ["insert", ["link", "picture", "video"]],
+      ["view", ["fullscreen", "codeview"]],
+    ],
+  });
+
+  // for artikel kategori
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_kategori_artikel[]"]').prop(
+      "checked",
+      this.checked
+    );
+  });
+
+  $('input[name="selected_kategori_artikel[]"]').on("change", function () {
+    if (
+      $('input[name="selected_kategori_artikel[]"]:checked').length ===
+      $('input[name="selected_kategori_artikel[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
+
+  // for tag artikel
+  $("#checkAll").on("change", function () {
+    $('input[name="selected_tag_artikel[]"]').prop("checked", this.checked);
+  });
+
+  $('input[name="selected_tag_artikel[]"]').on("change", function () {
+    if (
+      $('input[name="selected_tag_artikel[]"]:checked').length ===
+      $('input[name="selected_tag_artikel[]"]').length
+    ) {
+      $("#checkAll").prop("checked", true);
+    } else {
+      $("#checkAll").prop("checked", false);
+    }
+  });
 });
 
 //Dark Mode Script from button navbar admin

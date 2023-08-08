@@ -27,7 +27,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-8">
                 <div class="card">
                     <form action="artikel/delete_kategori.php" method="post" id="form-kategori-artikel">
@@ -42,7 +41,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">
@@ -55,7 +54,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM tb_kategori_artikel";
+                                        $query = "SELECT * FROM tb_kategori_artikel ORDER BY id DESC";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -79,55 +78,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    $(document).ready(function () {
-        var table = $("#example2").DataTable({
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            language: {
-                lengthMenu: "_MENU_",
-                zeroRecords: "No data found",
-                info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                infoEmpty: "Showing 0 to 0 of 0 entries",
-                infoFiltered: "(filtered from _MAX_ total entries)",
-                search: "Cari:",
-                paginate: {
-                    first: "Start",
-                    last: "End",
-                    next: "Next",
-                    previous: "Previous",
-                },
-            },
-            lengthMenu: [5, 10, 50, 100],
-            pageLength: 5,
-        });
-
-        $("#selectLength").on("change", function () {
-            table.page.len($(this).val()).draw();
-        });
-
-        $("#checkAll").on("change", function () {
-            $('input[name="selected_kategori_artikel[]"]').prop(
-                "checked",
-                this.checked
-            );
-        });
-
-        $('input[name="selected_kategori_artikel[]"]').on("change", function () {
-            if (
-                $('input[name="selected_kategori_artikel[]"]:checked').length ===
-                $('input[name="selected_kategori_artikel[]"]').length
-            ) {
-                $("#checkAll").prop("checked", true);
-            } else {
-                $("#checkAll").prop("checked", false);
-            }
-        });
-    });
-
-</script>

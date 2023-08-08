@@ -1,11 +1,8 @@
 <?php
-include '../config/koneksi.php';
-
 $artikelId = $_GET['id'];
 
 $query = "SELECT judul_artikel, isi_artikel, kategori_ids, tag_ids, thumbnail, status FROM tb_artikel WHERE id = $artikelId";
 $result = mysqli_query($koneksi, $query);
-
 
 $row = mysqli_fetch_assoc($result);
 
@@ -274,34 +271,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
     </div>
 </section>
 
-<style>
-    .tag {
-        display: inline-block;
-        background-color: #f0f0f0;
-        padding: 5px 10px;
-        margin-right: 5px;
-        border-radius: 5px;
-    }
-
-    .tag i {
-        margin-left: 5px;
-        cursor: pointer;
-    }
-</style>
-
 <script>
-    $(document).ready(function () {
-        $(".summernote").summernote({
-            height: 300,
-            toolbar: [
-                ["style", ["bold", "italic", "underline", "clear"]],
-                ["para", ["ul", "ol"]],
-                ["insert", ["link", "picture", "video"]],
-                ["view", ["fullscreen", "codeview"]],
-            ],
-        });
-    });
-
     function addCategory() {
         let nama_kategori = document.getElementById("newCategoryInput").value;
 
@@ -396,6 +366,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
             inputElement.value = "";
         }
     }
+
     function removeTag(tagName) {
         const tagContainerElement = document.getElementById("tagList");
         const tags = tagContainerElement.getElementsByClassName("tag");
@@ -410,6 +381,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
         selectedTagsArray = selectedTagsArray.filter((tag) => tag !== tagName);
         updateSelectedTags();
     }
+
     function updateSelectedTags() {
         const selectedTagInput = document.getElementById("selectedTagInput");
         selectedTagInput.value = selectedTagsArray.join(",");
@@ -444,4 +416,5 @@ $kategoriNamesString = implode(', ', $kategoriNames);
             defaultImageElement.style.display = "block";
         }
     }
+
 </script>

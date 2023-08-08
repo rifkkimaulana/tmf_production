@@ -64,7 +64,6 @@
                                     die("Query gagal: " . mysqli_error($koneksi));
                                 }
                                 ?>
-
                                 <div class="card-body">
                                     <input type="hidden" name="selectedCategories" id="selectedCategoriesInput"
                                         value="">
@@ -73,11 +72,9 @@
                                             <?php
                                             $query = "SELECT id, nama_kategori FROM tb_kategori_artikel";
                                             $result = mysqli_query($koneksi, $query);
-
                                             if (!$result) {
                                                 die("Query gagal: " . mysqli_error($koneksi));
                                             }
-
                                             while ($row = mysqli_fetch_assoc($result)) {
                                                 $id_kategori = $row['id'];
                                                 $nama_kategori = $row['nama_kategori'];
@@ -116,7 +113,6 @@
                             <?php
                             $query_tag = "SELECT nama_tag FROM tb_tag_artikel";
                             $result_tag = mysqli_query($koneksi, $query_tag);
-
                             if (!$result_tag) {
                                 die("Query gagal: " . mysqli_error($koneksi));
                             }
@@ -155,7 +151,6 @@
                                             ?>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -190,17 +185,6 @@
 </section>
 
 <script>
-    $(document).ready(function () {
-        $(".summernote").summernote({
-            height: 300,
-            toolbar: [
-                ["style", ["bold", "italic", "underline", "clear"]],
-                ["para", ["ul", "ol"]],
-                ["insert", ["link", "picture", "video"]],
-                ["view", ["fullscreen", "codeview"]],
-            ],
-        });
-    });
     function previewImage(event) {
         const imagePreviewElement = document.getElementById("imagePreview");
         const imageFile = event.target.files[0];

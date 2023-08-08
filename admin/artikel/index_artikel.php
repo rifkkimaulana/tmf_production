@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example2" class="table table-bordered table-striped">
+                            <table id="tmf_datatable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center; width: 2%;">No</th>
@@ -34,9 +34,7 @@
                                     if (!$result) {
                                         die("Query gagal: " . mysqli_error($koneksi));
                                     }
-
                                     $nomorUrut = 1;
-
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         echo "<td>" . $nomorUrut . "</td>";
@@ -53,10 +51,8 @@
                                         </a>
                                         </td>';
                                         echo "</tr>";
-
                                         $nomorUrut++;
                                     }
-
                                     mysqli_free_result($result);
                                     ?>
                                 </tbody>
@@ -68,36 +64,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    $(document).ready(function () {
-        var table = $("#example2").DataTable({
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            language: {
-                lengthMenu: "_MENU_",
-                zeroRecords: "Tidak ada data yang ditemukan",
-                info: "Menampilkan _START_ hingga _END_ dari total _TOTAL_ entri",
-                infoEmpty: "Menampilkan 0 hingga 0 dari 0 entri",
-                infoFiltered: "(difilter dari total _MAX_ entri)",
-                search: "Cari:",
-                paginate: {
-                    first: "Awal",
-                    last: "Akhir",
-                    next: "Berikutnya",
-                    previous: "Sebelumnya",
-                },
-            },
-            lengthMenu: [5, 10, 50, 100],
-            pageLength: 5,
-        });
-
-        $("#selectLength").on("change", function () {
-            table.page.len($(this).val()).draw();
-        });
-    });
-</script>

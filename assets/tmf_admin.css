@@ -68,3 +68,68 @@
   margin-left: 5px;
   cursor: pointer;
 }
+
+.director {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.director i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.player {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.player i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.year {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.year i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.country {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.country i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.quality {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.quality i {
+  margin-left: 5px;
+  cursor: pointer;
+}

@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <form action="film/proses_create.php" method="post" enctype="multipart/form-data">
@@ -209,20 +206,7 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .tag {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
 
-                                        .tag i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedTagsArray = [];
 
@@ -337,20 +321,6 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .director {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .director i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedDirectorsArray = [];
 
@@ -463,21 +433,6 @@ include '../config/koneksi.php';
                                     </div>
                                 </div>
 
-                                <style>
-                                    .player {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .player i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedPemainArray = [];
 
@@ -585,21 +540,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .year {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .year i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
 
                                 <script>
                                     let selectedTahunArray = [];
@@ -710,21 +650,6 @@ include '../config/koneksi.php';
                                     </div>
                                 </div>
 
-                                <style>
-                                    .country {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .country i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedNegaraArray = [];
 
@@ -834,21 +759,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .quality {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .quality i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
 
                                 <script>
                                     let selectedKualitasArray = [];
