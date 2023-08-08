@@ -4,7 +4,8 @@
             <div class="card-header">
                 <h3 class="card-title">Data Pengguna</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah_pengguna_modal">
+                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+                        data-target="#tambah_pengguna_modal">
                         <i class="fas fa-plus"></i> Tambah Pengguna
                     </button>
                 </div>

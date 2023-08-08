@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Artikel</h3>
                         <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_artikel"
-                            class="btn-primary btn-sm">Add Artikel</a>
+                            class="btn-primary btn-sm float-right">Add Artikel</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
