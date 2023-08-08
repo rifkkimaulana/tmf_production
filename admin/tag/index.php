@@ -1,6 +1,3 @@
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -32,7 +29,6 @@ include '../config/koneksi.php';
             <div class="col-lg-8">
                 <div class="card">
                     <form action="tag/delete.php" method="post" id="form-tag">
-
                         <div class="card-header">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-danger" id="hapusTagBtn">
@@ -42,10 +38,9 @@ include '../config/koneksi.php';
 
                             <h3 class="card-title">Tags</h3>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 2%;">
@@ -57,7 +52,6 @@ include '../config/koneksi.php';
 
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <?php
                                         $query = "SELECT * FROM tb_tag ORDER BY id DESC";
@@ -81,53 +75,7 @@ include '../config/koneksi.php';
                                 </table>
                             </div>
                         </div>
-
                     </form>
-
-                    <script>
-                        $(document).ready(function () {
-                            var table = $('#example2').DataTable({
-                                "paging": true,
-                                "lengthChange": true,
-                                "searching": true,
-                                "ordering": true,
-                                "info": true,
-                                "autoWidth": false,
-                                "language": {
-                                    "lengthMenu": "_MENU_",
-                                    "zeroRecords": "No data found",
-                                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                                    "infoEmpty": "Showing 0 to 0 of 0 entries",
-                                    "infoFiltered": "(filtered from _MAX_ total entries)",
-                                    "search": "Search:",
-                                    "paginate": {
-                                        "first": "Start",
-                                        "last": "End",
-                                        "next": "Next",
-                                        "previous": "Previous"
-                                    }
-                                },
-                                "lengthMenu": [5, 10, 50, 100],
-                                "pageLength": 5
-                            });
-
-                            $('#selectLength').on('change', function () {
-                                table.page.len($(this).val()).draw();
-                            });
-
-                            $('#checkAll').on('change', function () {
-                                $('input[name="selected_tag[]"]').prop('checked', this.checked);
-                            });
-
-                            $('input[name="selected_tag[]"]').on('change', function () {
-                                if ($('input[name="selected_tag[]"]:checked').length === $('input[name="selected_tag[]"]').length) {
-                                    $('#checkAll').prop('checked', true);
-                                } else {
-                                    $('#checkAll').prop('checked', false);
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>
