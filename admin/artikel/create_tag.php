@@ -15,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_query($koneksi, $query);
 
     }
+    header("Location: ../../admin/dashboard.php?page=tag_artikel");
+    exit();
 }
 
 mysqli_close($koneksi);
