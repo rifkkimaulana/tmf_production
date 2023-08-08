@@ -93,7 +93,7 @@ $row_download = mysqli_fetch_assoc($result_download);
     <div class="container-fluid">
         <form action="film/proses_update.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah Film</h3>
@@ -118,7 +118,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
