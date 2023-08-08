@@ -10,7 +10,7 @@ include '../config/koneksi.php';
                         <div class="card-header">
                             <h3 class="card-title">Tambah Film</h3>
                             <a href="javascript:void(0);" onclick="openSearchModal();"
-                                class="btn-sm btn-primary ml-auto">
+                                class="btn-sm btn-primary float-right">
                                 Use TMDB id</a>
                         </div>
                         <div class="card-body">
