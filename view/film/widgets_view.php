@@ -8,11 +8,11 @@
                 </div>
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
-                    include 'config/koneksi.php'; // Penambahan koneksi untuk while
                     $query_film2 = "SELECT * FROM tb_film WHERE tmdb_id = '$tmdb_id'";
-                    $result_film2 = mysqli_query($koneksi, $query_film);
-                    $row_film2 = mysqli_fetch_assoc($result_film);
+                    $result_film2 = mysqli_query($koneksi, $query_film2);
+                    $row_film2 = mysqli_fetch_assoc($result_film2);
                     $desired_genre_ids = $row_film2['genre_ids'];
+                    echo $desired_genre_ids;
 
                     $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film, tb_film.tmdb_id, tb_film.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                                     FROM tb_film
@@ -22,6 +22,7 @@
                                     ORDER BY total_kunjungan DESC";
 
                     $result_film = mysqli_query($koneksi, $query_film);
+                    include 'config/koneksi.php'; // Penambahan koneksi untuk while
                     while ($row_film = mysqli_fetch_assoc($result_film)) {
                         $tmdb_id2 = $row_film2['tmdb_id'];
                         $judul_film = $row_film['judul_film'];
