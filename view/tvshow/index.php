@@ -10,6 +10,7 @@
     </div>
     <div class="row">
         <?php
+        include 'config/koneksi.php';
         $query_tv = "SELECT thumbnail, judul_tv_show, tmdb_id FROM tb_tv_show ORDER BY created_at DESC";
         $result_tv = mysqli_query($koneksi, $query_tv);
 
