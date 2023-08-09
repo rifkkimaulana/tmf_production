@@ -135,8 +135,8 @@ $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">
-                                            <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
                                             <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
