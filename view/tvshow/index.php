@@ -13,7 +13,6 @@
         include 'config/koneksi.php';
         $query_tv = "SELECT thumbnail, judul_tv_show, tmdb_id FROM tb_tv_show ORDER BY created_at DESC";
         $result_tv = mysqli_query($koneksi, $query_tv);
-
         while ($row_tv = mysqli_fetch_assoc($result_tv)) {
             if (!empty($row_tv['judul_tv_show'])) { ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
@@ -59,7 +58,6 @@
         } ?>
     </div>
 </div>
-
 
 <div class="col-md-3 tmf_production">
     <div class="row">
@@ -123,7 +121,6 @@
                                                 <?php echo $genres . ", "; ?>
                                             </a>
                                         <?php } ?>
-
                                         <?php
                                         $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
                                         $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
