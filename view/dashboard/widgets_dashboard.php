@@ -63,7 +63,7 @@
                                         <a href="<?php echo $base_url; ?>/dashboard.php?page=<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'movies' : 'tv'; ?>&id=<?php echo $tmdb_id ?>"
                                             style="color: black;">
                                             <img class="img-fluid rounded img-landscape-zoom"
-                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'tv' : 'film'; ?>/<?php echo $thumbnail; ?>"
+                                                src="gambar/<?php echo ($row_tmdb['jumlah_episode'] === null || $row_tmdb['jumlah_episode'] === '') ? 'film' : 'tv'; ?>/<?php echo $thumbnail; ?>"
                                                 alt="<?php echo $judul; ?>"></a>
                                     <?php } else {
                                         ?>
