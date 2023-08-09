@@ -15,7 +15,7 @@
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane fade show" id="pengaturan_film">
+        <div class="tab-pane fade" id="pengaturan_film">
             </br>
             <div class="form-group">
                 <input type="hidden" name="tmdb_id_post" id="tmdb_id_post" value="<?php echo $id_tmdb_post; ?>">
@@ -167,7 +167,7 @@
             </div>
         </div>
 
-        <div class="tab-pane fade active" id="pengaturan_player">
+        <div class="tab-pane fade show active" id="pengaturan_player">
             <div class="form-group">
                 </br>
                 <label for="notif_player">Pemberitahuan Playar:</label>
