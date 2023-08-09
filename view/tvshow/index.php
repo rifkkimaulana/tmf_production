@@ -125,10 +125,14 @@
                                         <?php } ?>
 
                                         <?php
+                                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                                        $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
+                                        $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
+
                                         $total_kunjungan = $row_kunjungan['total_kunjungan'];
                                         ?>
                                         <p style="font-size: 14px;"><i class="fas fa-eye"></i>
-                                            <?php echo $row_tv; ?>
+                                            <?php echo $total_kunjungan; ?>
                                         </p>
                                     </a>
                                 </div>
