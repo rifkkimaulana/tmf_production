@@ -21,7 +21,7 @@
                         <?php if (!empty($row_tv['thumbnail'])) { ?>
                             <a href="dashboard.php?page=tv&id=<?php echo $row_tv['tmdb_id']; ?>">
                                 <img class="img-fluid rounded img-landscape-zoom"
-                                    src="gambar/tv/<?php echo $row_film['thumbnail']; ?> "
+                                    src="gambar/tv/<?php echo $row_tv['thumbnail']; ?> "
                                     alt="<?php echo $row_tv['judul_tv_show']; ?>">
                             </a>
                         <?php } else {
