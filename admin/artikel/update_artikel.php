@@ -1,11 +1,8 @@
 <?php
-include '../config/koneksi.php';
-
 $artikelId = $_GET['id'];
 
 $query = "SELECT judul_artikel, isi_artikel, kategori_ids, tag_ids, thumbnail, status FROM tb_artikel WHERE id = $artikelId";
 $result = mysqli_query($koneksi, $query);
-
 
 $row = mysqli_fetch_assoc($result);
 
@@ -38,7 +35,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
     <div class="container-fluid">
         <form action="artikel/proses_update_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <input type="hidden" name="id_artikel" id="id_artikel" value="<?php echo $artikelId; ?>">
                         <div class="card-header">
@@ -55,25 +52,11 @@ $kategoriNamesString = implode(', ', $kategoriNames);
                                 <textarea class="form-control summernote" id="isi_artikel"
                                     name="isi_artikel"><?php echo $row['isi_artikel']; ?></textarea>
                             </div>
-                            <script>
-                                $(document).ready(function () {
-                                    $('.summernote').summernote({
-                                        height: 300,
-                                        toolbar: [
-                                            ['style', ['bold', 'italic', 'underline', 'clear']],
-                                            ['para', ['ul', 'ol']],
-                                            ['insert', ['link', 'picture', 'video']],
-                                            ['view', ['fullscreen', 'codeview']]
-                                        ]
-                                    });
-                                });
-                            </script>
-
                         </div>
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -290,32 +273,34 @@ $kategoriNamesString = implode(', ', $kategoriNames);
 
 <script>
     function addCategory() {
-        let nama_kategori = document.getElementById('newCategoryInput').value;
+        let nama_kategori = document.getElementById("newCategoryInput").value;
 
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    let categoryContainer = document.getElementById('categoryContainer');
+                    let categoryContainer = document.getElementById("categoryContainer");
                     categoryContainer.innerHTML = xhr.responseText;
 
-                    document.getElementById('newCategoryInput').value = '';
+                    document.getElementById("newCategoryInput").value = "";
                 } else {
-                    console.error('Gagal menambahkan kategori');
+                    console.error("Gagal menambahkan kategori");
                 }
             }
         };
 
         let data = "nama_kategori=" + encodeURIComponent(nama_kategori);
 
-        xhr.open('POST', 'artikel/proses_create_kategori.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.open("POST", "artikel/proses_create_kategori.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(data);
     }
 
     function updateSelectedCategories() {
-        var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]:checked');
+        var checkboxes = document.querySelectorAll(
+            '#categoryContainer input[type="checkbox"]:checked'
+        );
 
         var selectedCategoriesArray = [];
 
@@ -323,45 +308,34 @@ $kategoriNamesString = implode(', ', $kategoriNames);
             selectedCategoriesArray.push(checkboxes[i].value);
         }
 
-        var selectedCategoriesString = selectedCategoriesArray.join(',');
+        var selectedCategoriesString = selectedCategoriesArray.join(",");
 
-        document.getElementById('selectedCategoriesInput').value = selectedCategoriesString;
+        document.getElementById("selectedCategoriesInput").value =
+            selectedCategoriesString;
     }
 
-    var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]');
+    var checkboxes = document.querySelectorAll(
+        '#categoryContainer input[type="checkbox"]'
+    );
     for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener('change', updateSelectedCategories);
+        checkboxes[i].addEventListener("change", updateSelectedCategories);
     }
 
     updateSelectedCategories();
-</script>
-<style>
-    .tag {
-        display: inline-block;
-        background-color: #f0f0f0;
-        padding: 5px 10px;
-        margin-right: 5px;
-        border-radius: 5px;
-    }
 
-    .tag i {
-        margin-left: 5px;
-        cursor: pointer;
-    }
-</style>
-
-<script>
     let selectedTagsArray = [];
 
     function addTag() {
         const inputElement = document.getElementById("tagInput");
-        const tagNames = inputElement.value.split(',').map(tag => tag.trim());
+        const tagNames = inputElement.value.split(",").map((tag) => tag.trim());
 
         if (tagNames.length > 0 && tagNames[0] !== "") {
             const tagContainerElement = document.getElementById("tagList");
 
-            tagNames.forEach(tagName => {
-                const isTagExists = Array.from(tagContainerElement.children).some(tagElement => tagElement.textContent === tagName);
+            tagNames.forEach((tagName) => {
+                const isTagExists = Array.from(tagContainerElement.children).some(
+                    (tagElement) => tagElement.textContent === tagName
+                );
 
                 if (!isTagExists) {
                     const newTagElement = document.createElement("span");
@@ -372,7 +346,9 @@ $kategoriNamesString = implode(', ', $kategoriNames);
                     deleteIcon.classList.add("fas", "fa-times");
                     deleteIcon.addEventListener("click", function () {
                         tagContainerElement.removeChild(newTagElement);
-                        selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
+                        selectedTagsArray = selectedTagsArray.filter(
+                            (tag) => tag !== tagName
+                        );
                         updateSelectedTags();
                     });
 
@@ -390,6 +366,7 @@ $kategoriNamesString = implode(', ', $kategoriNames);
             inputElement.value = "";
         }
     }
+
     function removeTag(tagName) {
         const tagContainerElement = document.getElementById("tagList");
         const tags = tagContainerElement.getElementsByClassName("tag");
@@ -401,12 +378,13 @@ $kategoriNamesString = implode(', ', $kategoriNames);
             }
         }
 
-        selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
+        selectedTagsArray = selectedTagsArray.filter((tag) => tag !== tagName);
         updateSelectedTags();
     }
+
     function updateSelectedTags() {
         const selectedTagInput = document.getElementById("selectedTagInput");
-        selectedTagInput.value = selectedTagsArray.join(',');
+        selectedTagInput.value = selectedTagsArray.join(",");
     }
 
     function handleTagClick(tagName) {
@@ -416,7 +394,8 @@ $kategoriNamesString = implode(', ', $kategoriNames);
 
     function toggleSavedTags() {
         const savedDirectorList = document.getElementById("savedTagList");
-        savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
+        savedDirectorList.style.display =
+            savedDirectorList.style.display === "none" ? "block" : "none";
     }
 
     function previewImage(event) {
@@ -430,11 +409,12 @@ $kategoriNamesString = implode(', ', $kategoriNames);
                 imagePreviewElement.src = reader.result;
                 imagePreviewElement.style.display = "block";
                 defaultImageElement.style.display = "none";
-            }
+            };
             reader.readAsDataURL(imageFile);
         } else {
             imagePreviewElement.style.display = "none";
             defaultImageElement.style.display = "block";
         }
     }
+
 </script>

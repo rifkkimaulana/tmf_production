@@ -1,12 +1,8 @@
-<?php
-include '../config/koneksi.php';
-?>
-
 <section class="content">
     <div class="container-fluid">
         <form action="artikel/proses_create_artikel.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah Artikel</h3>
@@ -25,7 +21,7 @@ include '../config/koneksi.php';
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -68,7 +64,6 @@ include '../config/koneksi.php';
                                     die("Query gagal: " . mysqli_error($koneksi));
                                 }
                                 ?>
-
                                 <div class="card-body">
                                     <input type="hidden" name="selectedCategories" id="selectedCategoriesInput"
                                         value="">
@@ -77,11 +72,9 @@ include '../config/koneksi.php';
                                             <?php
                                             $query = "SELECT id, nama_kategori FROM tb_kategori_artikel";
                                             $result = mysqli_query($koneksi, $query);
-
                                             if (!$result) {
                                                 die("Query gagal: " . mysqli_error($koneksi));
                                             }
-
                                             while ($row = mysqli_fetch_assoc($result)) {
                                                 $id_kategori = $row['id'];
                                                 $nama_kategori = $row['nama_kategori'];
@@ -120,7 +113,6 @@ include '../config/koneksi.php';
                             <?php
                             $query_tag = "SELECT nama_tag FROM tb_tag_artikel";
                             $result_tag = mysqli_query($koneksi, $query_tag);
-
                             if (!$result_tag) {
                                 die("Query gagal: " . mysqli_error($koneksi));
                             }
@@ -159,7 +151,6 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -194,20 +185,6 @@ include '../config/koneksi.php';
 </section>
 
 <script>
-    $(document).ready(function () {
-        $('.summernote').summernote({
-            height: 300,
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['para', ['ul', 'ol']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        });
-    });
-</script>
-
-<script>
     function previewImage(event) {
         const imagePreviewElement = document.getElementById("imagePreview");
         const imageFile = event.target.files[0];
@@ -215,7 +192,7 @@ include '../config/koneksi.php';
             const reader = new FileReader();
             reader.onload = function () {
                 imagePreviewElement.src = reader.result;
-            }
+            };
             reader.readAsDataURL(imageFile);
             imagePreviewElement.style.display = "block";
         } else {
@@ -224,30 +201,19 @@ include '../config/koneksi.php';
         }
     }
 
-    .tag {
-        display: inline - block;
-        background - color: #f0f0f0;
-        padding: 5px 10px;
-        margin - right: 5px;
-        border - radius: 5px;
-    }
-
-    .tag i {
-        margin - left: 5px;
-        cursor: pointer;
-    }
-
     let selectedTagsArray = [];
 
     function addTag() {
         const inputElement = document.getElementById("tagInput");
-        const tagNames = inputElement.value.split(',').map(tag => tag.trim());
+        const tagNames = inputElement.value.split(",").map((tag) => tag.trim());
 
         if (tagNames.length > 0 && tagNames[0] !== "") {
             const tagContainerElement = document.getElementById("tagList");
 
-            tagNames.forEach(tagName => {
-                const isTagExists = Array.from(tagContainerElement.children).some(tagElement => tagElement.textContent === tagName);
+            tagNames.forEach((tagName) => {
+                const isTagExists = Array.from(tagContainerElement.children).some(
+                    (tagElement) => tagElement.textContent === tagName
+                );
 
                 if (!isTagExists) {
                     const newTagElement = document.createElement("span");
@@ -258,7 +224,9 @@ include '../config/koneksi.php';
                     deleteIcon.classList.add("fas", "fa-times");
                     deleteIcon.addEventListener("click", function () {
                         tagContainerElement.removeChild(newTagElement);
-                        selectedTagsArray = selectedTagsArray.filter(tag => tag !== tagName);
+                        selectedTagsArray = selectedTagsArray.filter(
+                            (tag) => tag !== tagName
+                        );
                         updateSelectedTags();
                     });
 
@@ -279,7 +247,7 @@ include '../config/koneksi.php';
 
     function updateSelectedTags() {
         const selectedTagInput = document.getElementById("selectedTagInput");
-        selectedTagInput.value = selectedTagsArray.join(',');
+        selectedTagInput.value = selectedTagsArray.join(",");
     }
 
     function handleTagClick(tagName) {
@@ -289,37 +257,40 @@ include '../config/koneksi.php';
 
     function toggleSavedTags() {
         const savedDirectorList = document.getElementById("savedTagList");
-        savedDirectorList.style.display = savedDirectorList.style.display === "none" ? "block" : "none";
+        savedDirectorList.style.display =
+            savedDirectorList.style.display === "none" ? "block" : "none";
     }
 
     function addCategory() {
-        let nama_kategori = document.getElementById('newCategoryInput').value;
+        let nama_kategori = document.getElementById("newCategoryInput").value;
 
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    let categoryContainer = document.getElementById('categoryContainer');
+                    let categoryContainer = document.getElementById("categoryContainer");
                     categoryContainer.innerHTML = xhr.responseText;
-                    document.getElementById('newCategoryInput').value = '';
+                    document.getElementById("newCategoryInput").value = "";
 
                     updateSelectedCategories();
                 } else {
-                    console.error('Gagal menambahkan kategori');
+                    console.error("Gagal menambahkan kategori");
                 }
             }
         };
 
         let data = "nama_kategori=" + encodeURIComponent(nama_kategori);
 
-        xhr.open('POST', 'artikel/proses_create_kategori.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.open("POST", "artikel/proses_create_kategori.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(data);
     }
 
     function updateSelectedCategories() {
-        var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]:checked');
+        var checkboxes = document.querySelectorAll(
+            '#categoryContainer input[type="checkbox"]:checked'
+        );
 
         var selectedCategoriesArray = [];
 
@@ -327,14 +298,17 @@ include '../config/koneksi.php';
             selectedCategoriesArray.push(checkboxes[i].value);
         }
 
-        var selectedCategoriesString = selectedCategoriesArray.join(',');
+        var selectedCategoriesString = selectedCategoriesArray.join(",");
 
-        document.getElementById('selectedCategoriesInput').value = selectedCategoriesString;
+        document.getElementById("selectedCategoriesInput").value =
+            selectedCategoriesString;
     }
 
-    var checkboxes = document.querySelectorAll('#categoryContainer input[type="checkbox"]');
+    var checkboxes = document.querySelectorAll(
+        '#categoryContainer input[type="checkbox"]'
+    );
     for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener('change', updateSelectedCategories);
+        checkboxes[i].addEventListener("change", updateSelectedCategories);
     }
 
     updateSelectedCategories();

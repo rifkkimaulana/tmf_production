@@ -93,7 +93,7 @@ $row_download = mysqli_fetch_assoc($result_download);
     <div class="container-fluid">
         <form action="film/proses_update.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah Film</h3>
@@ -118,7 +118,7 @@ $row_download = mysqli_fetch_assoc($result_download);
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -330,20 +330,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .tag {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .tag i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedTagsArray = [];
 
@@ -492,20 +478,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .director {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .director i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedDirectorsArray = [];
 
@@ -652,22 +624,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .player {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .player i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedPemainArray = [];
 
@@ -809,22 +765,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .year {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .year i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedTahunArray = [];
 
@@ -970,22 +910,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .country {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .country i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedNegaraArray = [];
 
@@ -1129,22 +1053,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .quality {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .quality i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedKualitasArray = [];
 
@@ -1243,24 +1151,6 @@ $row_download = mysqli_fetch_assoc($result_download);
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        function previewImage(event) {
-                            const imagePreviewElement = document.getElementById("imagePreview");
-                            const imageFile = event.target.files[0];
-                            if (imageFile) {
-                                const reader = new FileReader();
-                                reader.onload = function () {
-                                    imagePreviewElement.src = reader.result;
-                                }
-                                reader.readAsDataURL(imageFile);
-                                imagePreviewElement.style.display = "block";
-                            } else {
-                                imagePreviewElement.src = "#";
-                                imagePreviewElement.style.display = "none";
-                            }
-                        }
-                    </script>
                 </div>
             </div>
     </div>

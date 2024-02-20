@@ -8,11 +8,11 @@
                 </div>
                 <div class="card-body" style="max-height: 1000px; overflow-y: auto;">
                     <?php
-                    include 'config/koneksi.php'; // Penambahan koneksi untuk while
-                    $query_film = "SELECT * FROM tb_film WHERE tmdb_id = '$tmdb_id'";
-                    $result_film = mysqli_query($koneksi, $query_film);
-                    $row_film = mysqli_fetch_assoc($result_film);
-                    $desired_genre_ids = $row_film['genre_ids'];
+                    $query_film2 = "SELECT * FROM tb_film WHERE tmdb_id = '$tmdb_id'";
+                    $result_film2 = mysqli_query($koneksi, $query_film2);
+                    $row_film2 = mysqli_fetch_assoc($result_film2);
+                    $desired_genre_ids = $row_film2['genre_ids'];
+
                     $query_film = "SELECT tb_film.thumbnail, tb_film.judul_film, tb_film.tmdb_id, tb_film.genre_ids, SUM(tb_view.jumlah_lihat) AS total_kunjungan
                                     FROM tb_film
                                     LEFT JOIN tb_view ON tb_film.tmdb_id = tb_view.tmdb_id
@@ -21,16 +21,18 @@
                                     ORDER BY total_kunjungan DESC";
 
                     $result_film = mysqli_query($koneksi, $query_film);
+                    include 'config/koneksi.php'; // Penambahan koneksi untuk while
                     while ($row_film = mysqli_fetch_assoc($result_film)) {
+                        $tmdb_id2 = $row_film['tmdb_id'];
                         $judul_film = $row_film['judul_film'];
                         $thumbnail = $row_film['thumbnail'];
 
-                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id'";
+                        $query_tmdb = "SELECT url_poster FROM tb_tmdb WHERE id = '$tmdb_id2'";
                         $result_tmdb = mysqli_query($koneksi, $query_tmdb);
                         $row_tmdb = mysqli_fetch_assoc($result_tmdb);
                         $url_poster = $row_tmdb['url_poster'];
 
-                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id'";
+                        $query_kunjungan = "SELECT SUM(jumlah_lihat) AS total_kunjungan FROM tb_view WHERE tmdb_id = '$tmdb_id2'";
                         $result_kunjungan = mysqli_query($koneksi, $query_kunjungan);
                         $row_kunjungan = mysqli_fetch_assoc($result_kunjungan);
                         $total_kunjungan = $row_kunjungan['total_kunjungan'];
@@ -48,7 +50,7 @@
                             ?>
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-6 tmf_teks">
-                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>"
+                                    <a href="<?php echo $base_url; ?>/dashboard.php?page=movies&id=<?php echo $tmdb_id2; ?>"
                                         style="color: black;">
                                         <div class="thumbnail-container">
                                             <?php if (!empty($thumbnail)) { ?>
@@ -64,7 +66,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-8 col-sm-6 col-6">
-                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id; ?>" style="color: black;">
+                                    <a href="dashboard.php?page=movies&id=<?php echo $tmdb_id2; ?>" style="color: black;">
                                         <strong>
                                             <?php echo $judul_film; ?>
                                         </strong></br>

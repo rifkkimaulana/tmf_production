@@ -1,9 +1,9 @@
 <?php
 
 $host = 'localhost';
-$database = 'u1588530_tmf';
-$username = 'u1588530_tmf_admin';
-$password = 'Refasta2019';
+$database = 'tmf_movies';
+$username = 'root';
+$password = '';
 
 $koneksi = mysqli_connect($host, $username, $password, $database);
 

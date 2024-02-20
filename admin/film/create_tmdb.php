@@ -1,13 +1,7 @@
 <?php
-include '../config/koneksi.php';
-
 $id_film = $_GET['id_film'];
 
-
-$api_key = '28f59279215bfffc21257db6c0f7bff5';
 $movie_id = $id_film;
-
-$base_url_tmdb = "https://api.themoviedb.org/3";
 $endpoint = "/movie/{$movie_id}";
 $query_string = "?api_key={$api_key}&append_to_response=videos";
 
@@ -178,7 +172,7 @@ if ($response !== false) {
     <div class="container-fluid">
         <form action="film/proses_create.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
@@ -186,7 +180,7 @@ if ($response !== false) {
                                     <?php echo $judul . " id: " . $id_film; ?>
                                 </h3>
                                 <a href="<?php echo $base_url; ?>/admin/dashboard.php?page=add_film"
-                                    class="btn btn-primary">Add Manual</a>
+                                    class="btn btn-primary btn-sm">Add Manual</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -208,7 +202,7 @@ if ($response !== false) {
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -218,7 +212,7 @@ if ($response !== false) {
                                     </a>
                                 </h4>
                             </div>
-                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div id=" collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="statusFilm">Status</label>
@@ -248,7 +242,6 @@ if ($response !== false) {
                                 <?php
                                 $query = "SELECT id, nama_genre FROM tb_genre";
                                 $result = mysqli_query($koneksi, $query);
-
                                 ?>
 
                                 <div class="card-body">
@@ -392,20 +385,6 @@ if ($response !== false) {
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .tag {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .tag i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedTagsArray = [];
 
@@ -522,20 +501,6 @@ if ($response !== false) {
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .director {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .director i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedDirectorsArray = [];
 
@@ -649,22 +614,6 @@ if ($response !== false) {
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .player {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .player i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedPemainArray = [];
 
@@ -773,22 +722,6 @@ if ($response !== false) {
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .year {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .year i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedTahunArray = [];
 
@@ -898,22 +831,6 @@ if ($response !== false) {
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .country {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .country i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedNegaraArray = [];
 
@@ -1023,22 +940,6 @@ if ($response !== false) {
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .quality {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .quality i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedKualitasArray = [];
 
@@ -1124,24 +1025,6 @@ if ($response !== false) {
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        function previewImage(event) {
-                            const imagePreviewElement = document.getElementById("imagePreview");
-                            const imageFile = event.target.files[0];
-                            if (imageFile) {
-                                const reader = new FileReader();
-                                reader.onload = function () {
-                                    imagePreviewElement.src = reader.result;
-                                }
-                                reader.readAsDataURL(imageFile);
-                                imagePreviewElement.style.display = "block";
-                            } else {
-                                imagePreviewElement.src = "#";
-                                imagePreviewElement.style.display = "none";
-                            }
-                        }
-                    </script>
                 </div>
             </div>
     </div>

@@ -1,5 +1,4 @@
 <?php
-include '../config/koneksi.php';
 $idtvshow = $_GET['id'];
 $result = mysqli_query($koneksi, "SELECT judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
  WHERE id = $idtvshow");
@@ -91,15 +90,11 @@ $result_tmdb = mysqli_query($koneksi, "SELECT judul, bahasa, tagline, rating_mpa
 $row_tmdb = mysqli_fetch_assoc($result_tmdb);
 
 ?>
-
-<?php
-include '../config/koneksi.php';
-?>
 <section class="content">
     <div class="container-fluid">
         <form action="tv_show/proses_update.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tambah TV Show</h3>
@@ -125,7 +120,7 @@ include '../config/koneksi.php';
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -140,8 +135,8 @@ include '../config/koneksi.php';
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">
-                                            <option value="draf">Draf</option>
                                             <option value="publik">Publik</option>
+                                            <option value="draf">Draf</option>
                                             <option value="terbitkan">Terbitkan segera</option>
                                         </select>
                                     </div>
@@ -337,20 +332,6 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .tag {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .tag i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedTagsArray = [];
 
@@ -492,20 +473,6 @@ include '../config/koneksi.php';
                                             ?>
                                         </div>
                                     </div>
-                                    <style>
-                                        .director {
-                                            display: inline-block;
-                                            background-color: #f0f0f0;
-                                            padding: 5px 10px;
-                                            margin-right: 5px;
-                                            border-radius: 5px;
-                                        }
-
-                                        .director i {
-                                            margin-left: 5px;
-                                            cursor: pointer;
-                                        }
-                                    </style>
                                     <script>
                                         let selectedDirectorsArray = [];
 
@@ -647,22 +614,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .player {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .player i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedPemainArray = [];
 
@@ -799,21 +750,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-                                <style>
-                                    .year {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .year i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedTahunArray = [];
 
@@ -958,22 +894,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .country {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .country i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedNegaraArray = [];
 
@@ -1117,22 +1037,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .quality {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .quality i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedKualitasArray = [];
 
@@ -1270,22 +1174,6 @@ include '../config/koneksi.php';
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .jaringan {
-                                        display: inline-block;
-                                        background-color: #f0f0f0;
-                                        padding: 5px 10px;
-                                        margin-right: 5px;
-                                        border-radius: 5px;
-                                    }
-
-                                    .jaringan i {
-                                        margin-left: 5px;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
                                 <script>
                                     let selectedJaringanArray = [];
 
@@ -1356,7 +1244,6 @@ include '../config/koneksi.php';
                                         savedJaringanList.style.display = savedJaringanList.style.display === "none" ? "block" : "none";
                                     }
                                 </script>
-
                             </div>
                         </div>
                     </div>
@@ -1385,24 +1272,6 @@ include '../config/koneksi.php';
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        function previewImage(event) {
-                            const imagePreviewElement = document.getElementById("imagePreview");
-                            const imageFile = event.target.files[0];
-                            if (imageFile) {
-                                const reader = new FileReader();
-                                reader.onload = function () {
-                                    imagePreviewElement.src = reader.result;
-                                }
-                                reader.readAsDataURL(imageFile);
-                                imagePreviewElement.style.display = "block";
-                            } else {
-                                imagePreviewElement.src = "#";
-                                imagePreviewElement.style.display = "none";
-                            }
-                        }
-                    </script>
                 </div>
             </div>
     </div>

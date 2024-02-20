@@ -165,10 +165,54 @@ foreach ($pemain_ids as $pemain_id) {
                             break;
                     }
                     ?>
+                    <?php if (empty($link)) { ?>
+                        <div id="video-container">
+                            <video id="vast-video" controls>
+                                <!-- Fallback video source if VAST fails -->
+                                <source src="fallback-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <?php
+                    } ?>
+
                     <iframe src="<?php echo $link; ?>" title="TMF PRODUCTION PLAYER" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
                     </iframe>
+
+
+                    <script>
+                        const vastUrl = "https://www.videosprofitnetwork.com/watch.xml?key=655ac36b288e194c0ba9af285874b383";
+                        const videoElement = document.getElementById("vast-video");
+
+                        fetch(vastUrl)
+                            .then(response => response.text())
+                            .then(data => {
+                                const parser = new DOMParser();
+                                const xmlDoc = parser.parseFromString(data, "text/xml");
+
+                                const mediaFile = xmlDoc.querySelector("MediaFile");
+                                if (mediaFile) {
+                                    const mediaUrl = mediaFile.textContent;
+                                    videoElement.src = mediaUrl;
+
+                                    // Add click listener to video
+                                    videoElement.addEventListener("click", () => {
+                                        const clickThrough = xmlDoc.querySelector("ClickThrough");
+                                        if (clickThrough) {
+                                            const clickThroughUrl = clickThrough.textContent;
+                                            window.open(clickThroughUrl, "_blank");
+                                        }
+                                    });
+
+                                    videoElement.play();
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Failed to load VAST:", error);
+                            });
+
+                    </script>
                 </div>
 
                 <?php

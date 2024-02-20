@@ -1,7 +1,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-8">
                 <?php if (empty($_GET['id'])) { ?>
                     <div class="card">
                         <div class="card-header">
@@ -9,7 +9,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="tmf_datatable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 30%;">Judul TV Show</th>
@@ -18,7 +18,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT id, judul_tv_show FROM tb_tv_show";
+                                        $query = "SELECT id, judul_tv_show FROM tb_tv_show ORDER BY id DESC";
                                         $result = mysqli_query($koneksi, $query);
 
                                         if (!$result) {
@@ -48,7 +48,6 @@
                 <?php } ?>
                 <form action="episode/proses_create.php" method="post" enctype="multipart/form-data">
                     <?php
-                    include '../config/koneksi.php';
                     if (isset($_GET['id'])) {
                         $id_tv_show = $_GET['id'];
                         $result = mysqli_query($koneksi, "SELECT id, judul_tv_show, deskripsi, status, genre_ids, tag_ids, direktur_ids, pemain_ids, tahun_ids, negara_ids, kualitas_ids, jaringan_ids, thumbnail, tmdb_id,  created_at, updated_at FROM tb_tv_show
@@ -66,7 +65,7 @@
                         echo '</div>';
                         ?>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -134,7 +133,6 @@
                                             <input type="number" class="form-control" id="jumlah_episode"
                                                 name="jumlah_episode" value="<?php echo $next_episode; ?>" required>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -147,32 +145,3 @@
     </div>
 </section>
 </form>
-
-<script>
-    $(document).ready(function () {
-        var table = $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "language": {
-                "lengthMenu": "_MENU_",
-                "zeroRecords": "No data found",
-                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                "infoEmpty": "Showing 0 to 0 of 0 entries",
-                "infoFiltered": "(filtered from _MAX_ total entries)",
-                "search": "Cari:",
-                "paginate": {
-                    "first": "Start",
-                    "last": "End",
-                    "next": "Next",
-                    "previous": "Previous"
-                }
-            },
-            "lengthMenu": [5, 10, 50, 100],
-            "pageLength": 5
-        });
-    });
-</script>

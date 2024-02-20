@@ -1,11 +1,11 @@
 <div class="card-body">
     <ul class="nav nav-tabs" id="pengaturan_tab_list">
         <li class="nav-item">
-            <a class="nav-link active" id="film-tab" data-toggle="pill" href="#pengaturan_film"
+            <a class="nav-link" id="film-tab" data-toggle="pill" href="#pengaturan_film"
                 aria-controls="pengaturan_film">Pengaturan TV Show</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="player-tab" data-toggle="pill" href="#pengaturan_player"
+            <a class="nav-link active" id="player-tab" data-toggle="pill" href="#pengaturan_player"
                 aria-controls="pengaturan_player">Pengaturan Player</a>
         </li>
         <li class="nav-item">
@@ -15,7 +15,7 @@
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane fade show active" id="pengaturan_film">
+        <div class="tab-pane fade" id="pengaturan_film">
             </br>
             <div class="form-group">
                 <input type="hidden" name="tmdb_id_post" id="tmdb_id_post" value="<?php echo $id_tmdb_post; ?>">
@@ -167,7 +167,7 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="pengaturan_player">
+        <div class="tab-pane fade show active" id="pengaturan_player">
             <div class="form-group">
                 </br>
                 <label for="notif_player">Pemberitahuan Playar:</label>

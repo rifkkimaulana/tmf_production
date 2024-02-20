@@ -1,0 +1,135 @@
+#skeletonScreen {
+  display: block;
+}
+
+.skeleton-header,
+.skeleton-content {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.skeleton-content:last-child {
+  margin-bottom: 0;
+}
+
+.skeleton-img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-color: #f0f0f0;
+}
+
+.skeleton-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: pulse 1.5s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.content {
+  opacity: 0;
+  animation: fade 0.5s ease-in-out forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.tag i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.director {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.director i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.player {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.player i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.year {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.year i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.country {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.country i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.quality {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.quality i {
+  margin-left: 5px;
+  cursor: pointer;
+}

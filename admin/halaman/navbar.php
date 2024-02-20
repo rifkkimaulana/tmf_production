@@ -1,4 +1,3 @@
-<?php include '../config/base_url.php'; ?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -48,41 +47,3 @@
 
     </ul>
 </nav>
-
-<script>
-    var darkModeEnabled = false;
-
-    // Check if dark mode is already enabled
-    if (localStorage.getItem('darkModeEnabled') === 'true') {
-        darkModeEnabled = true;
-    }
-
-    // Function to toggle dark mode
-    function toggleDarkMode() {
-        var icon = document.getElementById('dark-mode-icon');
-        var body = document.body;
-
-        if (darkModeEnabled) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-            body.classList.remove('dark-mode');
-            localStorage.setItem('darkModeEnabled', 'false');
-            darkModeEnabled = false;
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-            body.classList.add('dark-mode');
-            localStorage.setItem('darkModeEnabled', 'true');
-            darkModeEnabled = true;
-        }
-    }
-
-    // Initialize dark mode state
-    if (darkModeEnabled) {
-        document.getElementById('dark-mode-icon').classList.add('fa-moon');
-        document.body.classList.add('dark-mode');
-    }
-
-    // Add event listener to toggle dark mode
-    document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
-</script>

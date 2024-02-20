@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO tb_kategori_artikel (nama_kategori, slug_kategori) VALUES ('$nama_kategori', '$slug_kategori')";
         $result = mysqli_query($koneksi, $query);
     }
+    header("Location: ../../admin/dashboard.php?page=kategori_artikel");
+    exit();
 }
 
 mysqli_close($koneksi);
