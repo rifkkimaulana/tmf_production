@@ -14,3 +14,4 @@ deployment:
     - /bin/cp index.php $DEPLOYPATH
     - /bin/cp logout.php $DEPLOYPATH
     - /bin/cp recovery_password.php $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
